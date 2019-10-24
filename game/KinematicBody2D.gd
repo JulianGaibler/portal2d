@@ -17,6 +17,11 @@ var linear_vel = Vector2()
 # cache the sprite here for fast access (we will set scale to flip it often)
 onready var sprite = $Sprite
 
+func _unhandled_input(event):
+    if event is InputEventMouseButton:
+        if event.pressed and event.button_index == BUTTON_LEFT:
+            print(get_global_mouse_position ( ))
+
 
 func _physics_process(delta):
 
