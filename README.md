@@ -3,10 +3,4 @@
 ## Attention
 Currently the game only runs with Godot v3.2-alpha3
 
-#### Description
-
-Portal2D ist ein 2D remake des Spieleklassikers Portal und dessen Nachfolger Portal2.
-In dem Spiel löst man Rätsel mithilfe von Portalen. Es gibt verschiedene Objekte mit
-denen man interagieren kann wie einen Cube, Pressure Buttons, Excursion Funnels und Aerial Faith Plates.
-
-Wir benutzen die Godot Game Engine welche auf allen Systemen läuft und die Spieleentwicklung stark vereinfacht.
+[![](https://img.shields.io/badge/click%20here%20for-concept-blue)](https://gitlab.beuth-hochschule.de/s77611/portal2d/blob/master/concept/concept.md)
