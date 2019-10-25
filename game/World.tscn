@@ -1,7 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
-[ext_resource path="res://bendy.png" type="Texture" id=2]
 [ext_resource path="res://p2_tileset.tres" type="TileSet" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -13,7 +11,6 @@ position = Vector2( 90, 110 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 position = Vector2( 730, 410 )
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -24,7 +21,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 scale = Vector2( 0.239216, 0.239216 )
-texture = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 260, 40 )
