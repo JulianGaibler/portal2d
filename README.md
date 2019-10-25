@@ -1,6 +1,9 @@
 # Portal2D
 
-#### Beschreibung
+## Attention
+Currently the game only runs with Godot v3.2-alpha3
+
+#### Description
 
 Portal2D ist ein 2D remake des Spieleklassikers Portal und dessen Nachfolger Portal2.
 In dem Spiel löst man Rätsel mithilfe von Portalen. Es gibt verschiedene Objekte mit

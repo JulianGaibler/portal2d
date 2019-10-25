@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=4 format=2]
 
-[ext_resource path="res://white.jpg" type="Texture" id=1]
-[ext_resource path="res://dark.jpg" type="Texture" id=2]
+[ext_resource path="res://tileset/white.jpg" type="Texture" id=1]
+[ext_resource path="res://tileset/dark.jpg" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )

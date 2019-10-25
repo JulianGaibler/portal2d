@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dark.jpg-963ff72e1a49f995d26bfff3a20dc6ae.stex"
+path="res://.import/dark.jpg-8ab4deeac1a5d8ad1d7d67c31ebee50c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dark.jpg"
-dest_files=[ "res://.import/dark.jpg-963ff72e1a49f995d26bfff3a20dc6ae.stex" ]
+source_file="res://tileset/dark.jpg"
+dest_files=[ "res://.import/dark.jpg-8ab4deeac1a5d8ad1d7d67c31ebee50c.stex" ]
 
 [params]
 
