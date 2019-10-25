@@ -20,10 +20,10 @@ static func shape_to_polygon(shape_rid: RID): # -> PoolVector2Array
 		
 		Physics2DServer.SHAPE_RECTANGLE:
 			polygon = PoolVector2Array([
-				Vector2(-shape_data.x, -shape_data.y),
 				Vector2(-shape_data.x, shape_data.y),
+				Vector2(-shape_data.x, -shape_data.y),
 				Vector2(shape_data.x, -shape_data.y),
-				Vector2(shape_data.x, shape_data.y),	
+				Vector2(shape_data.x, shape_data.y),
 			])
 			
 		Physics2DServer.SHAPE_CONVEX_POLYGON, Physics2DServer.SHAPE_CUSTOM:

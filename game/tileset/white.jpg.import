@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white.jpg-afd06776b19dcf4ec678e8144cec4d34.stex"
+path="res://.import/white.jpg-02ac01214b373bba3af9cf8d72523189.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://white.jpg"
-dest_files=[ "res://.import/white.jpg-afd06776b19dcf4ec678e8144cec4d34.stex" ]
+source_file="res://tileset/white.jpg"
+dest_files=[ "res://.import/white.jpg-02ac01214b373bba3af9cf8d72523189.stex" ]
 
 [params]
 

@@ -17,5 +17,17 @@ func calculate_polygon():
 			if (polygon == null): continue
 			polygon = PolygonUtils.transform_polygon(polygon, shape_tf * overlapped_body_tf)
 			polygons.append(polygon)
-			
-	return polygons
+	
+
+	var csRID = get_node("CollisionShape2D").shape.get_rid()
+	var outerAreaShape = PolygonUtils.shape_to_polygon(csRID)
+	
+	outerAreaShape = PolygonUtils.transform_polygon(outerAreaShape, get_node("CollisionShape2D").global_transform)
+	
+	var new_polygons = []
+	
+	for polygon in polygons:
+		for new_polygon in Geometry.intersect_polygons_2d(polygon, outerAreaShape):
+			new_polygons.append(new_polygon)
+	
+	return new_polygons

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bendy.png-c7323ed5cab6338fabb8383da6740cde.stex"
+path="res://.import/bendy.png-9af0097abd49df025c5de3c847d2d14a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bendy.png"
-dest_files=[ "res://.import/bendy.png-c7323ed5cab6338fabb8383da6740cde.stex" ]
+source_file="res://player/bendy.png"
+dest_files=[ "res://.import/bendy.png-9af0097abd49df025c5de3c847d2d14a.stex" ]
 
 [params]
 

@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://KinematicBody2D.gd"
+"path": "res://player/Player.gd"
 }, {
 "base": "Reference",
 "class": "PolygonUtils",
@@ -62,6 +62,15 @@ mouse_click_left={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="base layer"
+2d_physics/layer_2="floor layer"
+2d_physics/layer_3="blue outer layer"
+2d_physics/layer_4="orange outer  layer"
+2d_physics/layer_5="blue inner layer"
+2d_physics/layer_6="orange inner layer"
 
 [rendering]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
-[ext_resource path="res://bendy.png" type="Texture" id=2]
+[ext_resource path="res://player/Player.gd" type="Script" id=1]
+[ext_resource path="res://player/bendy.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.1837
@@ -9,6 +9,8 @@ height = 104.904
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( -0.50004, 0 )
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
