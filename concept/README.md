@@ -16,13 +16,15 @@ denen man interagieren kann wie einen Cube, Pressure Buttons, Excursion Funnels 
 * Oskar Schachtschneider
 
 
-
 #### 🖥 Technisches
 
-* **Godot** Spieleengine
+* **Godot 3.2** Spieleengine
 * Godot Scriptsprache (GDScript)
 * Zielplattformen: **Linux**, **MacOS**, **Windows**
 
+Für die Entwicklungsumgebung benutzen wir die Spiel-Engine Godot welches mit einem eingebauten Editor kommt und viele nützliche Tools mitbringt. Um sounds für das Game zu erstellen benutzen wir ein Mikrofon und werden die Geräusche mit FL-Studio und Audacity nachbearbeiten. Die Assets oder Sprites werden vorgezeichnet und anschließend Digitalisiert.
 
+#### 🔗 Links
 
-Für die Entwicklungsumgebung benutzen wir das Programm Godot welches mit einem eingebauten Editor kommt und viele nützliche Tools mitbringt. Um sounds für das Game zu erstellen benutzen wir ein Mikrofon und werden die Geräusche mit FL-Studio und Audacity nachbearbeiten. Die Assets oder Sprites werden vorgezeichnet und anschließend Digitalisiert.
+[Link zum Trello-Board](https://www.google.com)
+[Link zum Slack-Channel](https://beuth-projekt-ws19.slack.com/messages/CPDPXGGKF/)
