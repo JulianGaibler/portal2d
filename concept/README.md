@@ -5,7 +5,7 @@ In dem Spiel löst man Rätsel mithilfe von Portalen. Es gibt verschiedene Objek
 denen man interagieren kann wie einen Cube, Pressure Buttons, Excursion Funnels und Aerial Faith Plates.
 </p>
 
-
+![alt text](https://gitlab.beuth-hochschule.de/s77611/portal2d/raw/master/concept/first-concept.jpg)
 
 #### 🎓 Gruppe
 
@@ -26,5 +26,5 @@ Für die Entwicklungsumgebung benutzen wir die Spiel-Engine Godot welches mit ei
 
 #### 🔗 Links
 
-[Link zum Trello-Board](https://www.google.com)
-[Link zum Slack-Channel](https://beuth-projekt-ws19.slack.com/messages/CPDPXGGKF/)
+* [Link zum Trello-Board](https://www.google.com)
+* [Link zum Slack-Channel](https://beuth-projekt-ws19.slack.com/messages/CPDPXGGKF/)

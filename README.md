@@ -6,9 +6,9 @@ Current Engine version is: [Godot v3.2-alpha3](https://downloads.tuxfamily.org/g
 
 #### Links
 
-[Link zum Trello-Board](https://www.google.com)
-[Link zum Slack-Channel](https://beuth-projekt-ws19.slack.com/messages/CPDPXGGKF/)
-[Link zu Gitmoji](https://gitmoji.carloscuesta.me/)
+* [Link zum Trello-Board](https://www.google.com)
+* [Link zum Slack-Channel](https://beuth-projekt-ws19.slack.com/messages/CPDPXGGKF/)
+* [Link zu Gitmoji](https://gitmoji.carloscuesta.me/)
 
 #### Concept
 
