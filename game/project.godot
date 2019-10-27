@@ -30,6 +30,10 @@ config/name="p2d_test"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PortalManager="*res://PortalManager.gd"
+
 [input]
 
 move_up={
