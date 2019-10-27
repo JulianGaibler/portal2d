@@ -15,6 +15,7 @@ var collider_polygons = []
 var outer_area
 var inner_area
 
+
 func _ready():
 	
 	outer_area = get_node("OuterArea")
