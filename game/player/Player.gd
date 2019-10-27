@@ -3,11 +3,11 @@ extends KinematicBody2D
 class_name Player
 
 
-const GRAVITY_VEC = Vector2(0, 900)
+const GRAVITY_VEC = Vector2(0, 5000)
 const FLOOR_NORMAL = Vector2(0, -1)
 const SLOPE_SLIDE_STOP = 25.0
-const WALK_SPEED = 250 # pixels/sec
-const JUMP_SPEED = 480
+const WALK_SPEED = 50 # pixels/sec
+const JUMP_SPEED = 1500
 const SIDING_CHANGE_SPEED = 10
 
 
@@ -39,12 +39,20 @@ func _physics_process(delta):
     # Horizontal movement
     var target_speed = 0
     if Input.is_action_pressed("move_left"):
-        target_speed -= 1
+        if !target_speed == -WALK_SPEED:
+            target_speed -= 25
     if Input.is_action_pressed("move_right"):
-        target_speed += 1
+        if !target_speed == WALK_SPEED:
+            target_speed += 25
+    
+    if abs(target_speed) > WALK_SPEED:
+        if target_speed < 0:
+            target_speed = -WALK_SPEED
+        else:
+            target_speed = WALK_SPEED
 
     target_speed *= WALK_SPEED
-    linear_vel.x = lerp(linear_vel.x, target_speed, 0.1)
+    linear_vel.x = lerp(linear_vel.x, target_speed, 0.3)
 
     # Jumping
     if on_floor and Input.is_action_just_pressed("move_jump"):
