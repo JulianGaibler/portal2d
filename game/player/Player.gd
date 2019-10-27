@@ -3,11 +3,11 @@ extends KinematicBody2D
 class_name Player
 
 
-const GRAVITY_VEC = Vector2(0, 5000)
+const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2(0, -1)
 const SLOPE_SLIDE_STOP = 25.0
-const WALK_SPEED = 50 # pixels/sec
-const JUMP_SPEED = 1500
+const WALK_SPEED = 25 # pixels/sec
+const JUMP_SPEED = 750
 const SIDING_CHANGE_SPEED = 10
 
 

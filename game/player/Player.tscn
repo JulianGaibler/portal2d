@@ -4,22 +4,19 @@
 [ext_resource path="res://player/bendy.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 30.1837
-height = 104.904
+radius = 30.0
+height = 105.0
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
-position = Vector2( -0.50004, 0 )
 collision_layer = 3
 collision_mask = 3
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.0548706, 0.326385 )
+position = Vector2( 0, -82.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -82.5 )
 scale = Vector2( 0.239216, 0.239216 )
 texture = ExtResource( 2 )
