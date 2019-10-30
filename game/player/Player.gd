@@ -7,13 +7,13 @@ const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2(0, -1)
 const SLOPE_SLIDE_STOP = 25.0
 const WALK_SPEED = 25 # pixels/sec
-const JUMP_SPEED = 750
+const JUMP_SPEED = 650
 const SIDING_CHANGE_SPEED = 10
 
 signal fired_blue_portal
 signal fired_orange_portal
 
-var linear_vel = Vector2()
+var linear_velocity = Vector2()
 
 
 # cache the sprite here for fast access (we will set scale to flip it often)
@@ -57,9 +57,9 @@ func _physics_process(delta):
     ### MOVEMENT ###
 
     # Apply gravity
-    linear_vel += delta * GRAVITY_VEC
+    linear_velocity += delta * GRAVITY_VEC
     # Move and slide
-    linear_vel = move_and_slide(linear_vel, FLOOR_NORMAL, SLOPE_SLIDE_STOP)
+    linear_velocity = move_and_slide(linear_velocity, FLOOR_NORMAL, SLOPE_SLIDE_STOP)
     # Detect if we are on floor - only works if called *after* move_and_slide
     var on_floor = is_on_floor()
 
@@ -81,10 +81,11 @@ func _physics_process(delta):
             target_speed = WALK_SPEED
 
     target_speed *= WALK_SPEED
-    linear_vel.x = lerp(linear_vel.x, target_speed, 0.3)
+    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.3 if on_floor else 0.1))
+
+    rotate(lerp(rotation, 0, (0.1 if on_floor else 0.05)) - rotation)
 
     # Jumping
     if on_floor and Input.is_action_just_pressed("move_jump"):
-        linear_vel.y = -JUMP_SPEED
-    
+        linear_velocity.y = -JUMP_SPEED
 
