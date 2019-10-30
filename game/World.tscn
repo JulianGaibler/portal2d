@@ -1,42 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://camera/Player_Camera.gd" type="Script" id=3]
-[ext_resource path="res://effects/OrangePortalHitEffect.tscn" type="PackedScene" id=6]
-[ext_resource path="res://effects/BluePortalHitEffect.tscn" type="PackedScene" id=7]
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends Node2D
-
-export var blue_portal_hit_effect: PackedScene
-export var orange_portal_hit_effect: PackedScene
-    
-func generate_blue_hit_effect(hit_position: Vector2) ->void:
-    var temp = blue_portal_hit_effect.instance()
-    add_child(temp)
-    temp.position = hit_position
-
-func generate_orange_hit_effect(hit_position: Vector2) ->void:
-    var temp = orange_portal_hit_effect.instance()
-    add_child(temp)
-    temp.position = hit_position
-
-func _on_Player_fired_blue_portal(hit_position: Vector2):
-    generate_blue_hit_effect(hit_position)
-
-
-func _on_Player_fired_orange_portal(hit_position: Vector2):
-    generate_orange_hit_effect(hit_position)
-"
+[ext_resource path="res://test-elements/cube/Cube.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 256 )
 
 [node name="World" type="Node2D"]
-script = SubResource( 2 )
-blue_portal_hit_effect = ExtResource( 7 )
-orange_portal_hit_effect = ExtResource( 6 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -69,3 +41,6 @@ drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
 script = ExtResource( 3 )
+
+[node name="Cube" parent="." instance=ExtResource( 4 )]
+position = Vector2( 384, 448 )
