@@ -10,50 +10,10 @@ const WALK_SPEED = 25 # pixels/sec
 const JUMP_SPEED = 650
 const SIDING_CHANGE_SPEED = 10
 
-signal fired_blue_portal
-signal fired_orange_portal
-
 var linear_velocity = Vector2()
-
-
-# cache the sprite here for fast access (we will set scale to flip it often)
-onready var sprite = $Sprite
-onready var pointer := $Pointer
-onready var ray:=$Pointer/RayCast2D
-
-func rotate_portalgun(point_direction: Vector2)->void:
-    # used to rotate the portalgun (with y offset of 40 around moving player)
-    
-    # get player position
-    var player_pos = get_position()
-    # calculate the distance between x of player and x of mouse aim
-    var x_dist =  player_pos.x - point_direction.x 
-    # calculate the distance between y of player and y of mouse aim
-    var y_dist =  player_pos.y - point_direction.y 
-    # we need to add around 95 pixels to the y value because the position of the
-    # player is measured at the bottom
-    y_dist = y_dist - 95
-    
-    # calculate the arc tan from the distances
-    # using atan2 since it does not allow division by 0
-    var temp = rad2deg(atan2(y_dist, x_dist)) - 180
-    pointer.rotation_degrees = temp 
-
-func _unhandled_input(event):
-    # handling if the portal gun is shot
-    if event.is_action_pressed("shoot_blue_portal") and ray.is_colliding():
-        emit_signal("fired_blue_portal", ray.get_collision_point())
-    if event.is_action_pressed("shoot_orange_portal") and ray.is_colliding():
-        emit_signal("fired_orange_portal", ray.get_collision_point())
 
 func _physics_process(delta):
 
-    ### Portal Gun
-    # rotation around player
-    rotate_portalgun(get_global_mouse_position())
-
-
-    
     ### MOVEMENT ###
 
     # Apply gravity
