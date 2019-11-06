@@ -50,12 +50,18 @@ func _physics_process(delta):
             target_speed = WALK_SPEED
 
     target_speed *= WALK_SPEED
-    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.3 if on_floor else 0.1))
+    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.3 if on_floor else 0.025))
 
     # Jumping
     if on_floor and Input.is_action_just_pressed("move_jump"):
         linear_velocity.y = -JUMP_SPEED
 
-    # Rotating (WIP)
-    # rotate(lerp(rotation, 0, (0.1 if on_floor else 0.05)) - rotation)
-
+    # Rotating
+    if (rotation_degrees == 0):
+        pass
+    elif (rotation_degrees < 1 && rotation_degrees > -1):
+        rotate(-rotation)
+    else:
+        var x = min(linear_velocity.x, 2500)/2500
+        var y = 0.147 - 0.177*x + 0.057*pow(x,2)
+        rotate(lerp(0, -rotation, y))

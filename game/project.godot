@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "PolygonUtils",
 "language": "GDScript",
 "path": "res://utils/PolygonUtils.gd"
+}, {
+"base": "Reference",
+"class": "PortalUtils",
+"language": "GDScript",
+"path": "res://utils/PortalUtils.gd"
 } ]
 _global_script_class_icons={
 "Matrix2D": "",
 "Player": "",
-"PolygonUtils": ""
+"PolygonUtils": "",
+"PortalUtils": ""
 }
 
 [application]

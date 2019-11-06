@@ -1,13 +1,54 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://portal/OuterArea.gd" type="Script" id=1]
 [ext_resource path="res://portal/Portal.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 80, 128 )
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+# Returns all overlapping bodies within the area
+# as an array of polygons positioned in world space.
+func calculate_polygon():
+    var polygons = []
+    
+    for overlapped_body in get_overlapping_bodies():
+        if !(overlapped_body is StaticBody2D): continue
+        if overlapped_body.name == \"PortalLine\": continue
+        var overlapped_body_rid = overlapped_body.get_rid()
+        var overlapped_body_shapes_count = Physics2DServer.body_get_shape_count (overlapped_body_rid)
+        var overlapped_body_tf = overlapped_body.global_transform
+        
+        for i in range(overlapped_body_shapes_count):
+            var shapeRID = Physics2DServer.body_get_shape(overlapped_body_rid, i)
+            var shape_tf = Physics2DServer.body_get_shape_transform(overlapped_body_rid, i)
+            var polygon = PolygonUtils.shape_to_polygon(shapeRID)
+            if (polygon == null): continue
+            polygon = PolygonUtils.transform_polygon(polygon, shape_tf * overlapped_body_tf)
+            polygons.append(polygon)
+    
+
+    var csRID = get_node(\"CollisionShape2D\").shape.get_rid()
+    var outerAreaShape = PolygonUtils.shape_to_polygon(csRID)
+    
+    outerAreaShape = PolygonUtils.transform_polygon(outerAreaShape, get_node(\"CollisionShape2D\").global_transform)
+    
+    var new_polygons = []
+    
+    for polygon in polygons:
+        for new_polygon in Geometry.intersect_polygons_2d(polygon, outerAreaShape):
+            new_polygons.append(new_polygon)
+    
+    return new_polygons
+"
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 48, 128 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 113, 304 )
+
+[sub_resource type="SegmentShape2D" id=4]
+a = Vector2( 0, -128 )
+b = Vector2( 0, 128 )
 
 [node name="Portal" type="Node2D"]
 script = ExtResource( 2 )
@@ -17,11 +58,11 @@ position = Vector2( -32, 0 )
 monitorable = false
 collision_layer = 0
 collision_mask = 48
-script = ExtResource( 1 )
+script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InnerArea"]
 position = Vector2( 64, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="OuterArea" type="Area2D" parent="."]
 monitorable = false
@@ -30,13 +71,19 @@ collision_mask = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterArea"]
 position = Vector2( 111, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="ScanArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScanArea"]
 position = Vector2( 111, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
+
+[node name="PortalLine" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalLine"]
+shape = SubResource( 4 )
