@@ -8,6 +8,19 @@ static func transform_polygon(polygon: PoolVector2Array, tf: Transform2D) -> Poo
         newVec.set(i, tf.xform(polygon[i]))
     return newVec
 
+static func rotate_polygon(polygon: PoolVector2Array, rad: float) -> PoolVector2Array:
+    var newVec = PoolVector2Array()
+    newVec.resize(polygon.size())
+    for i in range(0, polygon.size()):
+        newVec.set(i, polygon[i].rotated(rad))
+    return newVec
+
+static func transform_polygon_mat(polygon: PoolVector2Array, mat: Matrix2D) -> PoolVector2Array:
+    var newVec = PoolVector2Array()
+    newVec.resize(polygon.size())
+    for i in range(0, polygon.size()):
+        newVec.set(i, mat.multiply_vec(polygon[i]))
+    return newVec
 
 # Converts shapes into polygons
 # (Everything besides rectangles and polygons will return null)

@@ -32,3 +32,11 @@ func multiply_num(scalar: float):
 
 func print() -> String:
     return "{ {%2.2f, %2.2f} {%2.2f, %2.2f} }" % [self.x.x, self.x.y, self.y.x, self.y.y]
+
+func toTransform2D() -> Transform2D:
+    var tf = Transform2D()
+    tf.x.x = x.x
+    tf.x.y = y.x
+    tf.y.x = x.y
+    tf.y.y = y.y
+    return tf
