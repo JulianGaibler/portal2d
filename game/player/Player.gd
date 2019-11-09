@@ -111,4 +111,5 @@ func hold_object(collider):
     
 func release_object():
     held_object.gravity_scale = 1
+    held_object.linear_velocity = linear_velocity
     held_object = null
