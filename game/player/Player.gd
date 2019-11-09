@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 class_name Player
 
+const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
 const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2.UP
@@ -11,8 +12,24 @@ const SIDING_CHANGE_SPEED = 10
 var PUSH = 1000
 
 var linear_velocity = Vector2()
+var held_object = null
 
 func _physics_process(delta):
+
+
+    if held_object:
+        var origin = global_position
+        origin.y -= 90
+        var direction = (get_global_mouse_position() - origin).normalized()
+        var to = origin + (direction * 150)
+
+        var dist = held_object.global_transform.origin.distance_to(to)
+        if dist > 200: release_object()
+        else:
+            held_object.linear_velocity = linear_velocity
+            held_object.apply_central_impulse((to - held_object.global_transform.origin).normalized() * to.distance_to(held_object.global_transform.origin) * 150)
+            
+            
 
     ## Movement ##
     
@@ -65,3 +82,33 @@ func _physics_process(delta):
         var x = min(linear_velocity.x, 2500)/2500
         var y = 0.147 - 0.177*x + 0.057*pow(x,2)
         rotate(lerp(0, -rotation, y))
+
+func _process(delta):
+    update()
+
+func _input(event):
+    if Input.is_action_just_pressed("interact"):
+        # If the player is already holding something, they let it go
+        if held_object != null:
+            release_object()
+            return
+        # The players root is at their feet, so let's lift it to the center
+        var origin = global_position
+        origin.y -= 90
+        # Normalized direction vector from the player to the mouse pointer
+        var direction = (get_global_mouse_position() - origin).normalized()
+        
+        # Raycast 200 pixel from the player to the mouse pointer
+        var space_state = get_world_2d().direct_space_state
+        var result = space_state.intersect_ray(origin, origin + (direction * 200), [self], BinaryLayers.FLOOR | BinaryLayers.INTERACTION)
+        if !result.empty():
+            if result.collider.is_in_group("can-press"): result.collider.press()
+            elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
+
+func hold_object(collider):
+    held_object = collider
+    held_object.gravity_scale = 0
+    
+func release_object():
+    held_object.gravity_scale = 1
+    held_object = null

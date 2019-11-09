@@ -1,28 +1,77 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://test-elements/pedestal-button/pedestal-button.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/pedestal-button/PedestalButton.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "press-button"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ButtonSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2.6, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -80 ), Vector2( -1.291, -78.157 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "release-button"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ButtonSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Vector2( -1.291, -78.157 ), Vector2( 0, -80 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 12, 44 )
 
-[node name="PedestalButton" type="StaticBody2D"]
+[node name="PedestalButton" type="StaticBody2D" groups=[
+"can-press",
+]]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -80 )
+shape = SubResource( 1 )
+
+[node name="PedestalColliderButton" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="ButtonSprite" type="Sprite" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PedestalColliderButton"]
+anims/press-button = SubResource( 3 )
+anims/release-button = SubResource( 4 )
+
+[node name="ButtonSprite" type="Sprite" parent="PedestalColliderButton"]
 position = Vector2( 0, -80 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 128 )
 
-[node name="PedestalSprite" type="Sprite" parent="."]
+[node name="PedestalSprite" type="Sprite" parent="PedestalColliderButton"]
 position = Vector2( 0, -48 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 128, 256, 384 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PedestalColliderButton"]
 position = Vector2( 0, -44 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
