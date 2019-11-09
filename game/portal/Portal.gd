@@ -39,7 +39,10 @@ var direction_vec
 var transfomration_matrix
 
 
-func _ready():
+func initiate(type, orientation):
+    self.type = type
+    self.orientation = orientation
+    
     normal_vec = Vector2.RIGHT.rotated(global_rotation)
     direction_vec = (Vector2.UP if orientation == PortalOrientation.UP else Vector2.DOWN).rotated(global_rotation)
     
@@ -54,13 +57,8 @@ func _ready():
     inner_area.connect("body_entered", self, "enter_inner_area")
     outer_area.connect("body_entered", self, "enter_outer_area")
 
-# BEGIN #
-# Everything in here has to be placed in _ready() once portals
-# are only created by the portal-gun or portal-spawners
-var worked = false
-func _process(delta):
-    if (worked): return
-    worked = true
+    yield( get_tree(), "idle_frame" )
+    yield( get_tree(), "idle_frame" )
 
     # Bring polygons from world space into local space and varve out hole for portal
     for polygon in calculate_polygon():
@@ -69,7 +67,7 @@ func _process(delta):
             collider_polygons.append(new_polygon)
             
     PortalManager.register_portal(self)
-# END #
+
 
 func link_portal(new_portal):
     reset_portal()
