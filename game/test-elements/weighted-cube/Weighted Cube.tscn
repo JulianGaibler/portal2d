@@ -2,19 +2,20 @@
 
 [ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=1]
 
-[sub_resource type="PhysicsMaterial" id=2]
+[sub_resource type="PhysicsMaterial" id=3]
 friction = 0.75
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
 [node name="Weighted Cube" type="RigidBody2D" groups=[
+"can-pickup",
 "dynamic-prop",
 ]]
 collision_layer = 2
 collision_mask = 2
 mass = 25.0
-physics_material_override = SubResource( 2 )
+physics_material_override = SubResource( 3 )
 
 [node name="CubeSprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
@@ -23,4 +24,4 @@ region_enabled = true
 region_rect = Rect2( 8, 8, 320, 320 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
