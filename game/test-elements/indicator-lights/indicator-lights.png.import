@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cube-sprite.png-7d7070262a2abee27b1812128709fe5b.stex"
+path="res://.import/indicator-lights.png-59b8ed386d6bc334527786caec954859.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test-elements/cube/cube-sprite.png"
-dest_files=[ "res://.import/cube-sprite.png-7d7070262a2abee27b1812128709fe5b.stex" ]
+source_file="res://test-elements/indicator-lights/indicator-lights.png"
+dest_files=[ "res://.import/indicator-lights.png-59b8ed386d6bc334527786caec954859.stex" ]
 
 [params]
 

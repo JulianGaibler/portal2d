@@ -112,7 +112,7 @@ shoot_orange_portal={
 2d_physics/layer_4="orange outer  layer"
 2d_physics/layer_5="blue inner layer"
 2d_physics/layer_6="orange inner layer"
-2d_physics/layer_7="player"
+2d_physics/layer_7="interaction"
 
 [physics]
 
