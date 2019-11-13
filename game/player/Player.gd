@@ -4,6 +4,14 @@ class_name Player
 
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
+# portal gun node detection
+onready var portalgun := $PortalGun
+onready var ray := $PortalGun/RayCast2D
+
+signal fired_blue_portal
+signal fired_orange_portal
+
+
 const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2.UP
 const WALK_SPEED = 25 # pixels/sec
@@ -16,6 +24,9 @@ var held_object = null
 
 func _physics_process(delta):
 
+    if portalgun != null:
+        # rotate the portal gun
+        rotate_portalgun(get_global_mouse_position())
 
     if held_object:
         var origin = global_position
@@ -104,6 +115,39 @@ func _input(event):
         if !result.empty():
             if result.collider.is_in_group("can-press"): result.collider.press()
             elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
+
+
+# handling input for shooting
+func _unhandled_input(event):
+    # handling if the portal gun is shot
+    if event.is_action_pressed("shoot_blue_portal") and ray.is_colliding():
+        # var white_layer_normal = ray.get_collision_normal()
+        emit_signal("fired_blue_portal", ray.get_collision_point())
+        print("blue")
+        
+    if event.is_action_pressed("shoot_orange_portal") and ray.is_colliding():
+        # var white_layer_normal = ray.get_collision_normal()
+        emit_signal("fired_orange_portal", ray.get_collision_point())
+        print("red")
+
+
+func rotate_portalgun(point_direction: Vector2)->void:
+    # used to rotate the portalgun (with y offset of 40 around moving player)
+    
+    # get player position
+    var player_pos = get_position()
+    # calculate the distance between x of player and x of mouse aim
+    var x_dist =  player_pos.x - point_direction.x 
+    # calculate the distance between y of player and y of mouse aim
+    var y_dist =  player_pos.y - point_direction.y 
+    # we need to add around 95 pixels to the y value because the position of the
+    # player is measured at the bottom
+    y_dist = y_dist - 95
+    
+    # calculate the arc tan from the distances
+    # using atan2 since it does not allow division by 0
+    var temp = rad2deg(atan2(y_dist, x_dist)) - 180
+    portalgun.rotation_degrees = temp 
 
 func hold_object(collider):
     held_object = collider
