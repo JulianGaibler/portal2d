@@ -9,7 +9,7 @@ func register_portal(new_portal):
             if (blue_portal != null): blue_portal.close_portal()
             blue_portal = new_portal
         1:
-            if (orange_portal != null): blue_portal.close_portal()
+            if (orange_portal != null): orange_portal.close_portal()
             orange_portal = new_portal
     if (blue_portal != null): blue_portal.link_portal(orange_portal)
     if (orange_portal != null): orange_portal.link_portal(blue_portal)

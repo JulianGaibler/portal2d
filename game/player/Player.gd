@@ -4,6 +4,14 @@ class_name Player
 
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
+# portal gun node detection
+onready var portalgun := $PortalGun
+onready var ray := $PortalGun/RayCast2D
+
+signal fired_blue_portal
+signal fired_orange_portal
+
+
 const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2.UP
 const WALK_SPEED = 25 # pixels/sec
@@ -14,8 +22,14 @@ var PUSH = 1000
 var linear_velocity = Vector2()
 var held_object = null
 
+# portalgun orientation in degree
+var deg = 0
+
 func _physics_process(delta):
 
+    if portalgun != null:
+        # rotate the portal gun
+        deg = rotate_portalgun(get_global_mouse_position())
 
     if held_object:
         var origin = global_position
@@ -104,6 +118,52 @@ func _input(event):
         if !result.empty():
             if result.collider.is_in_group("can-press"): result.collider.press()
             elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
+
+
+# handling input for shooting
+func _unhandled_input(event):
+    
+    # getting the object of the white layer to check if we hit it
+    var whitelayer = get_node("../WhiteLayer")
+    
+    # this is needed to keep the collision with other objects and make it only possible
+    # to hit the whitelayer in a direct way
+    
+    # handling if the portal gun is shot
+    if event.is_action_pressed("shoot_blue_portal") and ray.is_colliding():
+        # we check if we only hit the white layer while keeping the collision with other objects
+        if (whitelayer == ray.get_collider()):
+            # getting the normal (pointing away from the white layer) for portal rotaion
+            var white_layer_normal = ray.get_collision_normal()
+            # emitting signal to let everyone know we shot a portal and give them the collision point
+            emit_signal("fired_blue_portal", ray.get_collision_point(), white_layer_normal, deg)
+            
+            
+    if event.is_action_pressed("shoot_orange_portal") and ray.is_colliding():
+        # we check if we only hit the white layer while keeping the collision with other objects
+        if (whitelayer == ray.get_collider()):
+            # getting the normal (pointing away from the white layer) for portal rotaion
+            var white_layer_normal = ray.get_collision_normal()
+            # emitting signal to let everyone know we shot a portal and give them the collision point
+            emit_signal("fired_orange_portal", ray.get_collision_point(), white_layer_normal, deg)
+
+# used to rotate the portalgun (with y offset of 40 around moving player)
+func rotate_portalgun(point_direction: Vector2)->float:
+    # get player position
+    var player_pos = get_position()
+    # calculate the distance between x of player and x of mouse aim
+    var x_dist =  player_pos.x - point_direction.x 
+    # calculate the distance between y of player and y of mouse aim
+    var y_dist =  player_pos.y - point_direction.y 
+    # we need to add around 95 pixels to the y value because the position of the
+    # player is measured at the bottom
+    y_dist = y_dist - 95
+    
+    # calculate the arc tan from the distances
+    # using atan2 since it does not allow division by 0
+    var temp = rad2deg(atan2(y_dist, x_dist)) - 180
+    portalgun.rotation_degrees = temp
+    return temp
 
 func hold_object(collider):
     held_object = collider
