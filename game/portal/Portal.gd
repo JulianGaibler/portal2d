@@ -192,12 +192,19 @@ func teleport_vector(position, direction):
 
 
 func close_portal():
-    for body in outer_area.get_overlapping_bodies(): leave_outer_area(body)
+    reset_portal()
+    outer_area.disconnect("body_exited", self, "leave_outer_area")
+    inner_area.disconnect("body_exited", self, "leave_inner_area")
+    inner_area.disconnect("body_entered", self, "enter_inner_area")
+    outer_area.disconnect("body_entered", self, "enter_outer_area")
     for body in inner_area.get_overlapping_bodies(): leave_inner_area(body)
+    for body in outer_area.get_overlapping_bodies(): leave_outer_area(body)
     get_parent().remove_child(self)
 
 
 func reset_portal():
+    for collider in physics_shadows.values():
+        remove_child(collider[1])
     transfomration_matrix = null
     if (static_collider != null):
         remove_child(static_collider)
