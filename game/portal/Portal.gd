@@ -30,7 +30,8 @@ var collider_polygons = []
 # Reference areas around the portal
 var outer_area
 var inner_area
-var scan_area
+var scan_area_front
+var scan_area_back
 # Normal vector of this portal, pointing away from the entrance in global space
 var normal_vec
 # Direction Vector of the portal, pointing where up is in global space
@@ -49,7 +50,8 @@ func initiate(type, orientation):
     
     outer_area = get_node("OuterArea")
     inner_area = get_node("InnerArea")
-    scan_area = get_node("ScanArea")
+    scan_area_front = get_node("ScanAreaFront")
+    scan_area_back = get_node("ScanAreaBack")
     
     # This will let portal-aware raycasts know they collided with a portal
     get_node("PortalLine").set_meta("isPortal",1)
@@ -66,7 +68,7 @@ func initiate(type, orientation):
 
     # Get all static colliders within ScanArea as polygons,
     # put them into local coordinates and carve a hole for the portal
-    for polygon in calculate_polygon():
+    for polygon in calculate_polygon(scan_area_front):
         var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
         for new_polygon in Geometry.clip_polygons_2d(polygon2, portal_hole): #clip_polygons_2d
             collider_polygons.append(new_polygon)
@@ -88,6 +90,11 @@ func link_portal(new_portal):
     transfomration_matrix = to.inverse().multiply_mat(from)
 
     var carved_polygons = [] + collider_polygons
+
+    for polygon in calculate_polygon(scan_area_back):
+        var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
+        for new_polygon in Geometry.clip_polygons_2d(polygon2, portal_hole): #clip_polygons_2d
+            carved_polygons.append(new_polygon)
 
     # In addition to the local colliders that are copied in front of our portal, we also want to take
     # those from the other portal and place them behind ours in order to avoid collision glitches.
@@ -114,7 +121,9 @@ func link_portal(new_portal):
     
     # The enter/exit-signals of players or objects have been ignored so far,
     # that's why we need to call the signal-handlers manually.
-    for body in outer_area.get_overlapping_bodies(): enter_outer_area(body)
+    for body in outer_area.get_overlapping_bodies():
+        enter_outer_area(body)
+        if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
     for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
 
 func _draw():
@@ -216,14 +225,10 @@ func enter_outer_area(body):
     if body.is_in_group("physics-shadow"): return
     match type:
         PortalType.BLUE_PORTAL:
-            body.set_collision_layer_bit(Layers.BLUE_INNER, true)
             body.set_collision_layer_bit(Layers.BLUE_OUTER, true)
-            body.set_collision_mask_bit(Layers.BLUE_INNER, true)
             body.set_collision_mask_bit(Layers.BLUE_OUTER, true)
         PortalType.ORANGE_PORTAL:
-            body.set_collision_layer_bit(Layers.ORANGE_INNER, true)
             body.set_collision_layer_bit(Layers.ORANGE_OUTER, true)
-            body.set_collision_mask_bit(Layers.ORANGE_INNER, true)
             body.set_collision_mask_bit(Layers.ORANGE_OUTER, true)
 
 
@@ -232,14 +237,10 @@ func leave_outer_area(body):
     if body.is_in_group("physics-shadow"): return
     match type:
         PortalType.BLUE_PORTAL:
-            body.set_collision_layer_bit(Layers.BLUE_INNER, false)
             body.set_collision_layer_bit(Layers.BLUE_OUTER, false)
-            body.set_collision_mask_bit(Layers.BLUE_INNER, false)
             body.set_collision_mask_bit(Layers.BLUE_OUTER, false)
         PortalType.ORANGE_PORTAL:
-            body.set_collision_layer_bit(Layers.ORANGE_INNER, false)
             body.set_collision_layer_bit(Layers.ORANGE_OUTER, false)
-            body.set_collision_mask_bit(Layers.ORANGE_INNER, false)
             body.set_collision_mask_bit(Layers.ORANGE_OUTER, false)
 
 
@@ -247,6 +248,13 @@ func enter_inner_area(body):
     if (linked_portal == null): return
     if body.is_in_group("physics-shadow"): return
     add_shadow_body(body)
+    match type:
+        PortalType.BLUE_PORTAL:
+            body.set_collision_layer_bit(Layers.BLUE_INNER, true)
+            body.set_collision_mask_bit(Layers.BLUE_INNER, true)
+        PortalType.ORANGE_PORTAL:
+            body.set_collision_layer_bit(Layers.ORANGE_INNER, true)
+            body.set_collision_mask_bit(Layers.ORANGE_INNER, true)
     body.set_collision_layer_bit(Layers.FLOOR, false)
     body.set_collision_mask_bit(Layers.FLOOR, false)
 
@@ -257,12 +265,18 @@ func leave_inner_area(body):
     remove_shadow_body(body)
     match type:
         PortalType.BLUE_PORTAL:
+            body.set_collision_layer_bit(Layers.BLUE_INNER, false)
+            body.set_collision_mask_bit(Layers.BLUE_INNER, false)
+        PortalType.ORANGE_PORTAL:
+            body.set_collision_layer_bit(Layers.ORANGE_INNER, false)
+            body.set_collision_mask_bit(Layers.ORANGE_INNER, false)
+    match type:
+        PortalType.BLUE_PORTAL:
             if body.get_collision_layer_bit(Layers.ORANGE_INNER): return
         PortalType.ORANGE_PORTAL:
             if body.get_collision_layer_bit(Layers.BLUE_INNER): return
     body.set_collision_layer_bit(Layers.FLOOR, true)
     body.set_collision_mask_bit(Layers.FLOOR, true)
-
 
 #### Inner Body Management ####
 ##
@@ -301,7 +315,7 @@ func remove_shadow_body(body):
 
 # Scans the Area around the portal for static colliders and converts them into polygons
 # IMPORTANT: PolygonUtils.transform_polygon can only handle some shapes and will ignore others.
-func calculate_polygon():
+func calculate_polygon(scan_area):
     var polygons = []
     
     for overlapped_body in scan_area.get_overlapping_bodies():

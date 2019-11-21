@@ -2,7 +2,7 @@
 
 [ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=1]
 
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -12,10 +12,10 @@ extents = Vector2( 40, 40 )
 "can-pickup",
 "dynamic-prop",
 ]]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 66
+collision_mask = 66
 mass = 25.0
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 1 )
 
 [node name="CubeSprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
