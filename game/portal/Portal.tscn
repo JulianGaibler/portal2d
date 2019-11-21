@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://portal/Portal.gd" type="Script" id=2]
 
@@ -44,9 +44,12 @@ func calculate_polygon():
 extents = Vector2( 48, 128 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 113, 304 )
+extents = Vector2( 112, 304 )
 
-[sub_resource type="SegmentShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 304 )
+
+[sub_resource type="SegmentShape2D" id=5]
 a = Vector2( 0, -128 )
 b = Vector2( 0, 128 )
 
@@ -57,7 +60,7 @@ script = ExtResource( 2 )
 position = Vector2( -32, 0 )
 monitorable = false
 collision_layer = 0
-collision_mask = 48
+collision_mask = 12
 script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InnerArea"]
@@ -73,17 +76,25 @@ collision_mask = 50
 position = Vector2( 111, 0 )
 shape = SubResource( 3 )
 
-[node name="ScanArea" type="Area2D" parent="."]
+[node name="ScanAreaFront" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanArea"]
-position = Vector2( 111, 0 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanAreaFront"]
+position = Vector2( 112, 0 )
 shape = SubResource( 3 )
+
+[node name="ScanAreaBack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanAreaBack"]
+position = Vector2( -16, 0 )
+shape = SubResource( 4 )
 
 [node name="PortalLine" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortalLine"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )

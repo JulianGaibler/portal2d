@@ -97,9 +97,6 @@ func _physics_process(delta):
         var y = 0.147 - 0.177*x + 0.057*pow(x,2)
         rotate(lerp(0, -rotation, y))
 
-func _process(delta):
-    update()
-
 func _input(event):
     if Input.is_action_just_pressed("interact"):
         # If the player is already holding something, they let it go

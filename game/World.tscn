@@ -9,16 +9,16 @@
 [ext_resource path="res://hit-effects/BlueHitEffect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://hit-effects/OrangeHitEffect.tscn" type="PackedScene" id=9]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 256 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.3944, 160.141 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 352, 32.351 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32.2858, 160 )
 
 [node name="World" type="Node2D"]
@@ -63,7 +63,7 @@ one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( 414.947, -64 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="WhiteLayer" type="StaticBody2D" parent="."]
 collision_layer = 128
@@ -71,14 +71,14 @@ collision_mask = 128
 
 [node name="Layer3" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 480.745, -31.2802 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Layer2" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 992, 544 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Layer1" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 96, 352 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 [connection signal="fired_blue_portal" from="Player" to="." method="_on_Player_fired_blue_portal"]
 [connection signal="fired_orange_portal" from="Player" to="." method="_on_Player_fired_orange_portal"]
