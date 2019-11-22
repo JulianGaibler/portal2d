@@ -10,6 +10,7 @@ onready var ray := $PortalGun/RayCast2D
 
 signal fired_blue_portal
 signal fired_orange_portal
+signal camera_fired_portal
 
 
 const GRAVITY_VEC = Vector2(0, 2500)
@@ -134,6 +135,7 @@ func _unhandled_input(event):
             var white_layer_normal = ray.get_collision_normal()
             # emitting signal to let everyone know we shot a portal and give them the collision point
             emit_signal("fired_blue_portal", ray.get_collision_point(), white_layer_normal, deg)
+            emit_signal("camera_fired_portal")
             
             
     if event.is_action_pressed("shoot_orange_portal") and ray.is_colliding():
@@ -143,6 +145,7 @@ func _unhandled_input(event):
             var white_layer_normal = ray.get_collision_normal()
             # emitting signal to let everyone know we shot a portal and give them the collision point
             emit_signal("fired_orange_portal", ray.get_collision_point(), white_layer_normal, deg)
+            emit_signal("camera_fired_portal")
 
 # used to rotate the portalgun (with y offset of 40 around moving player)
 func rotate_portalgun(point_direction: Vector2)->float:
