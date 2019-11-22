@@ -1,36 +1,36 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
-[ext_resource path="res://camera/Player_Camera.gd" type="Script" id=3]
+[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://hit-effects/BlueHitEffect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hit-effects/OrangeHitEffect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=4]
-[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World.gd" type="Script" id=7]
-[ext_resource path="res://hit-effects/BlueHitEffect.tscn" type="PackedScene" id=8]
-[ext_resource path="res://hit-effects/OrangeHitEffect.tscn" type="PackedScene" id=9]
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 96, 256 )
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://camera/Player_Camera.gd" type="Script" id=6]
+[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://tileset/tiles.tres" type="TileSet" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.3944, 160.141 )
+extents = Vector2( 96, 256 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 352, 32.351 )
+extents = Vector2( 31.3944, 160.141 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 352, 32.351 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32.2858, 160 )
 
 [node name="World" type="Node2D"]
-script = ExtResource( 7 )
-blue_hit_effect = ExtResource( 8 )
-orange_hit_effect = ExtResource( 9 )
+script = ExtResource( 1 )
+blue_hit_effect = ExtResource( 2 )
+orange_hit_effect = ExtResource( 3 )
 
 [node name="Weighted Cube" parent="." instance=ExtResource( 4 )]
 position = Vector2( 320, 448 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 512 )
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 512.238, 512.238 )
 
 [node name="Player_Camera" type="Camera2D" parent="Player"]
 position = Vector2( -0.606995, -96 )
@@ -40,14 +40,14 @@ drag_margin_left = 0.5
 drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 
-[node name="PortalGun" parent="Player" instance=ExtResource( 6 )]
+[node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 10.9393, -96.3289 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 2 )
+tile_set = ExtResource( 8 )
 cell_quadrant_size = 64
 format = 1
 tile_data = PoolIntArray( -327675, 1, 0, -327674, 1, 0, -327673, 1, 0, -262139, 1, 0, -262138, 1, 0, -262137, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 0, 0, -131067, 1, 0, -131066, 1, 0, -131065, 0, 0, -65531, 1, 0, -65530, 1, 0, -65529, 0, 0, 5, 1, 0, 6, 1, 0, 7, 0, 0, 65541, 1, 0, 65542, 1, 0, 65543, 0, 0, 196601, 1, 0, 196602, 1, 0, 196603, 1, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 262137, 1, 0, 262138, 1, 0, 262139, 1, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 0, 0, 327673, 1, 0, 327674, 1, 0, 327675, 1, 0, 327676, 1, 0, 327677, 1, 0, 327678, 1, 0, 327679, 1, 0, 262144, 1, 0, 262145, 0, 0, 262170, 1, 0, 262171, 1, 0, 262172, 1, 0, 393209, 1, 0, 393210, 1, 0, 393211, 1, 0, 393212, 1, 0, 393213, 1, 0, 393214, 1, 0, 393215, 1, 0, 327680, 1, 0, 327681, 0, 0, 327706, 1, 0, 327707, 1, 0, 327708, 1, 0, 458745, 1, 0, 458746, 1, 0, 458747, 1, 0, 458748, 1, 0, 458749, 1, 0, 458750, 1, 0, 458751, 1, 0, 393216, 1, 0, 393217, 0, 0, 393242, 1, 0, 393243, 1, 0, 393244, 1, 0, 524281, 1, 0, 524282, 1, 0, 524283, 1, 0, 524284, 1, 0, 524285, 1, 0, 524286, 1, 0, 524287, 1, 0, 458752, 1, 0, 458753, 0, 0, 458772, 1, 0, 458773, 1, 0, 458774, 1, 0, 458775, 1, 0, 458776, 1, 0, 458777, 1, 0, 458778, 1, 0, 458779, 1, 0, 458780, 1, 0, 589817, 1, 0, 589818, 1, 0, 589819, 1, 0, 589820, 1, 0, 589821, 1, 0, 589822, 1, 0, 589823, 1, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 1, 0, 524310, 1, 0, 524311, 1, 0, 524312, 1, 0, 524313, 1, 0, 524314, 1, 0, 524315, 1, 0, 524316, 1, 0, 655353, 1, 0, 655354, 1, 0, 655355, 1, 0, 655356, 1, 0, 655357, 1, 0, 655358, 1, 0, 655359, 1, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589835, 1, 0, 589836, 1, 0, 589837, 1, 0, 589838, 1, 0, 589839, 1, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 589844, 1, 0, 589845, 1, 0, 589846, 1, 0, 589847, 1, 0, 589848, 1, 0, 589849, 1, 0, 589850, 1, 0, 589851, 1, 0, 589852, 1, 0, 720889, 1, 0, 720890, 1, 0, 720891, 1, 0, 720892, 1, 0, 720893, 1, 0, 720894, 1, 0, 720895, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655380, 1, 0, 655381, 1, 0, 655382, 1, 0, 655383, 1, 0, 655384, 1, 0, 655385, 1, 0, 655386, 1, 0, 655387, 1, 0, 655388, 1, 0, 786425, 1, 0, 786426, 1, 0, 786427, 1, 0, 786428, 1, 0, 786429, 1, 0, 786430, 1, 0, 786431, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 720917, 1, 0, 720918, 1, 0, 720919, 1, 0, 720920, 1, 0, 720921, 1, 0, 720922, 1, 0, 720923, 1, 0, 720924, 1, 0, 851961, 1, 0, 851962, 1, 0, 851963, 1, 0, 851964, 1, 0, 851965, 1, 0, 851966, 1, 0, 851967, 1, 0, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 786436, 1, 0, 786437, 1, 0, 786438, 1, 0, 786439, 1, 0, 786440, 1, 0, 786441, 1, 0, 786442, 1, 0, 786443, 1, 0, 786444, 1, 0, 786445, 1, 0, 786446, 1, 0, 786447, 1, 0, 786448, 1, 0, 786449, 1, 0, 786450, 1, 0, 786451, 1, 0, 786452, 1, 0, 786453, 1, 0, 786454, 1, 0, 786455, 1, 0, 786456, 1, 0, 786457, 1, 0, 786458, 1, 0, 786459, 1, 0, 786460, 1, 0 )
@@ -63,7 +63,7 @@ one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( 414.947, -64 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="WhiteLayer" type="StaticBody2D" parent="."]
 collision_layer = 128
@@ -71,14 +71,14 @@ collision_mask = 128
 
 [node name="Layer3" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 480.745, -31.2802 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Layer2" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 992, 544 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Layer1" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 96, 352 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 [connection signal="fired_blue_portal" from="Player" to="." method="_on_Player_fired_blue_portal"]
 [connection signal="fired_orange_portal" from="Player" to="." method="_on_Player_fired_orange_portal"]

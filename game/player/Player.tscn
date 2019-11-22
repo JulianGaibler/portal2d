@@ -1,11 +1,245 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
-[ext_resource path="res://player/bendy.png" type="Texture" id=2]
+[ext_resource path="res://player/body.png" type="Texture" id=2]
+[ext_resource path="res://player/leg.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 32.0
-height = 114.0
+radius = 30.7677
+height = 111.108
+
+[sub_resource type="Animation" id=2]
+resource_name = "Falling"
+length = 0.5
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.24, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -106 ), Vector2( 0, -120 ), Vector2( 0, -106 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/leg_left:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.09, 0.18, 0.18, 0.3, 0.42, 0.497737 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -50, 300 ), Vector2( -50, 250 ), Vector2( -50, 280 ), Vector2( -50, 270 ), Vector2( -50, 255 ), Vector2( -50, 281.346 ), Vector2( -50, 300 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/leg_right:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.09, 0.18, 0.3, 0.42, 0.497737 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 50, 300 ), Vector2( 50, 180 ), Vector2( 50, 260 ), Vector2( 50, 270 ), Vector2( 50, 260 ), Vector2( 50, 300 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.24, 0.48 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -106 ), Vector2( 0, -130 ), Vector2( 0, -106 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/leg_left:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.24, 0.48 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -50, 300 ), Vector2( -50, 180 ), Vector2( -50, 300 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/leg_right:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.24, 0.48 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 50, 300 ), Vector2( 50, 180 ), Vector2( 50, 300 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.5
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.24, 0.48 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -106 ), Vector2( 0, -106 ), Vector2( 0, -106 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.24, 0.48 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.24, 0.48 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 0.3, 0.25 ), Vector2( 0.25, 0.25 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -106 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/leg_left:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.09, 0.21, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -50, 300 ), Vector2( -50, 248 ), Vector2( -50, 300 ), Vector2( -50, 300 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/leg_right:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.000945341, 0.09, 0.21, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 50, 300 ), Vector2( 50, 300 ), Vector2( 50, 248 ), Vector2( 50, 300 ) ]
+}
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "Player",
@@ -13,15 +247,33 @@ height = 114.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -174.036, -188.401 ]
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -89 )
+position = Vector2( -0.291992, -86.6653 )
 shape = SubResource( 1 )
 __meta__ = {
 "_editor_description_": "collision for player"
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -89 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Setup"
+anims/Falling = SubResource( 2 )
+anims/Jumping = SubResource( 3 )
+anims/Setup = SubResource( 4 )
+anims/Walking = SubResource( 5 )
+
+[node name="body" type="Sprite" parent="."]
+position = Vector2( 0, -106 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+
+[node name="leg_left" type="Sprite" parent="body"]
+position = Vector2( -50, 300 )
+texture = ExtResource( 3 )
+
+[node name="leg_right" type="Sprite" parent="body"]
+position = Vector2( 50, 300 )
+texture = ExtResource( 3 )
