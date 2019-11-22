@@ -20,7 +20,7 @@ func generate_blue_hit_effect(hit_position: Vector2) ->void:
     temp.position = hit_position
 
 func spawn_blue_portal(hit_position: Vector2, normal: Vector2, deg: float)->void:
-    print(deg)
+    print(hit_position)
     # setting the default to down because the degree we need to check is way smaller
     # since it does not cross the 0 threshold
     var orientation = PortalOrientation.DOWN
@@ -38,7 +38,8 @@ func spawn_blue_portal(hit_position: Vector2, normal: Vector2, deg: float)->void
 
 func _on_Player_fired_blue_portal(hit_position: Vector2, normal: Vector2, deg: float):
     generate_blue_hit_effect(hit_position)
-    spawn_blue_portal(hit_position, normal, deg * -1)
+    if can_place_portal(hit_position, normal):
+        spawn_blue_portal(hit_position, normal, deg * -1)
 
 # ------- ORANGE PORTAL -------
 # generate the hit effect and create the portals
@@ -60,6 +61,30 @@ func spawn_orange_portal(hit_position: Vector2, normal: Vector2, deg: float)->vo
     var type = PortalType.ORANGE_PORTAL
     instance.initiate(type, orientation)
 
+func can_place_portal(hit_position: Vector2, normal: Vector2)->bool:
+    # calculating the degree in rad 
+    var rad = atan2(normal.y, normal.x)
+    # creating 2 points apart each other (upper and lower boundaries)
+    # rotating the so the align with the portal and match the outter points
+    var point1 = Vector2(0, 100).rotated(rad)
+    var point2 = Vector2(0, -100).rotated(rad)
+    # calculating the outter points
+    var upper_end_point = hit_position + point1
+    var lower_end_point = hit_position + point2
+    # getting the 2d world
+    var space_state = get_world_2d().direct_space_state    
+    # calculating if one of the points is colliding with the world where it should not
+    var collision1 = space_state.intersect_point(upper_end_point)
+    var collision2 = space_state.intersect_point(lower_end_point)
+    
+    if (len(collision1) == 0 and len(collision2) == 0):
+         return true
+    else:
+         return false
+    
+    
+
 func _on_Player_fired_orange_portal(hit_position: Vector2, normal: Vector2, deg: float):
     generate_orange_hit_effect(hit_position)
-    spawn_orange_portal(hit_position, normal, deg * -1)
+    if can_place_portal(hit_position, normal):
+        spawn_orange_portal(hit_position, normal, deg * -1)
