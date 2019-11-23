@@ -25,13 +25,20 @@ var target_zoom = 2.5
 # Zoom Speed
 const ZOOM_SPEED = 10
 
+# Player Object to connect signals on
+onready var Player = get_tree().get_root().get_node("World").get_node("Player")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     self.smoothing_enabled = true
     self.smoothing_speed = 1
     set_zoom(Vector2 (target_zoom, target_zoom))
-    self.position = Vector2 (0,0)
-    pass # Replace with function body.
+    self.position = Vector2 (0,0)  
+    
+    if(Player != null):
+        Player.connect("camera_fired_portal", self, "shake_PortalShot")
+    
+    pass # Replace with function body.    
     
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):    
@@ -84,6 +91,13 @@ func shaking_behaviour(delta):
     if _shake_timer <= 0:
         _shake_timer = 0
         set_offset(get_offset() - _last_shake_offset)
+
+func shake_Earthquake():
+    shake_camera(SHAKE_DURATION_EARTHQUAKE, SHAKE_FREQUENCY_EARTHQUAKE, SHAKE_AMPLITUDE_EARTHQUAKE)
+    
+func shake_PortalShot():
+    print("Poralshot signal detected")
+    shake_camera(SHAKE_DURATION_PORTALSHOT, SHAKE_FREQUENCY_PORTALSHOT, SHAKE_AMPLITUDE_PORTALSHOT)
 
 # Triggers the Camera Shake behaviour by setting the Shake_Timer and other shaking related values
 func shake_camera(duration, frequency, amplitude):
