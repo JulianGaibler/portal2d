@@ -26,10 +26,10 @@ script = ExtResource( 7 )
 blue_hit_effect = ExtResource( 8 )
 orange_hit_effect = ExtResource( 9 )
 
-[node name="Weighted Cube" parent="." instance=ExtResource( 4 )]
+[node name="Weighted Cube" parent="." instance=ExtResource( 1 )]
 position = Vector2( 338, 472 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 517, 496 )
 
 [node name="Player_Camera" type="Camera2D" parent="Player"]
