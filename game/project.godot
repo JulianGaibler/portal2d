@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "FizzleRigidBody2D",
+"language": "GDScript",
+"path": "res://classes/FizzleRigidBody2D.gd"
+}, {
 "base": "Reference",
 "class": "Matrix2D",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://utils/PortalUtils.gd"
 } ]
 _global_script_class_icons={
+"FizzleRigidBody2D": "",
 "Matrix2D": "",
 "Player": "",
 "PolygonUtils": "",

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/indicator-lights.png-59b8ed386d6bc334527786caec954859.stex"
+path="res://.import/window-sticker.png-98e1a4beb040a8dfdb1c9055a3b2d4c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test-elements/indicator-lights/indicator-lights.png"
-dest_files=[ "res://.import/indicator-lights.png-59b8ed386d6bc334527786caec954859.stex" ]
+source_file="res://test-elements/window/window-sticker.png"
+dest_files=[ "res://.import/window-sticker.png-98e1a4beb040a8dfdb1c9055a3b2d4c4.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/indicator-sign.png-0e6509ce87f0acc046e32516775697fb.stex"
+path="res://.import/indicator-lights-strip-on.png-ca9efa62ce1891de8027826ae9b50c63.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test-elements/indicator-sign/indicator-sign.png"
-dest_files=[ "res://.import/indicator-sign.png-0e6509ce87f0acc046e32516775697fb.stex" ]
+source_file="res://test-elements/indicator-lights/indicator-lights-strip-on.png"
+dest_files=[ "res://.import/indicator-lights-strip-on.png-ca9efa62ce1891de8027826ae9b50c63.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

@@ -1,0 +1,267 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test-elements/testchamber-sign/testchamber-sign.png" type="Texture" id=2]
+[ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-progress.png" type="Texture" id=3]
+[ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-numbers.png" type="Texture" id=4]
+[ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-icons.png" type="Texture" id=5]
+[ext_resource path="res://fonts/Mark-Bold.tres" type="DynamicFont" id=6]
+[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=3]
+resource_name = "BindPose"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("testchamber-sign:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 768, 1536 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay/Number:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Overlay/Progress:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Overlay/Icons:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "flicker-on"
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("testchamber-sign:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.4, 0.75, 0.8, 1.65, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 768, 1536 ), Rect2( 2304, 0, 768, 1536 ), Rect2( 1536, 0, 768, 1536 ), Rect2( 2304, 0, 768, 1536 ), Rect2( 768, 0, 768, 1536 ), Rect2( 1536, 0, 768, 1536 ), Rect2( 2304, 0, 768, 1536 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay/Number:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.75, 0.8, 1.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Overlay/Progress:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Overlay/Icons:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="TestchamberSign" type="Node2D"]
+z_index = -1
+script = ExtResource( 7 )
+
+[node name="testchamber-sign" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 2304, 0, 768, 1536 )
+
+[node name="Overlay" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.85098 )
+
+[node name="Number" type="Node2D" parent="Overlay"]
+
+[node name="First" type="Sprite" parent="Overlay/Number"]
+position = Vector2( -48, -160 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 576 )
+
+[node name="Second" type="Sprite" parent="Overlay/Number"]
+position = Vector2( 0, -160 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 576 )
+
+[node name="Progress" type="Node2D" parent="Overlay"]
+visible = false
+
+[node name="Bar" type="Sprite" parent="Overlay/Progress"]
+position = Vector2( -56, 26 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 48 )
+
+[node name="Text" type="RichTextLabel" parent="Overlay/Progress"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -56.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/normal_font = ExtResource( 6 )
+text = "01/02"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="Node2D" parent="Overlay"]
+modulate = Color( 1, 1, 1, 0.901961 )
+position = Vector2( -56.5, 79.5 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="testchamber-sign-icon01" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon02" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 117, 0 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 112, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon03" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 234, 0 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 560, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon04" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 351, 0 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 896, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon05" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 468, 0 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 448, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon06" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, 117 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 224, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon07" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 117, 117 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 672, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon08" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 234, 117 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 784, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon09" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 351, 117 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 336, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="testchamber-sign-icon10" type="Sprite" parent="Overlay/Icons"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 468, 117 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 1568, 0, 112, 112 )
+region_filter_clip = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BindPose = SubResource( 3 )
+anims/flicker-on = SubResource( 2 )

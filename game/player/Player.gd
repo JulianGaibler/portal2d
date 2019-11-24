@@ -168,8 +168,10 @@ func rotate_portalgun(point_direction: Vector2)->float:
 func hold_object(collider):
     held_object = collider
     held_object.gravity_scale = 0
+    held_object.connect("fizzled", self, "release_object")
     
 func release_object():
+    held_object.disconnect("fizzled", self, "release_object")
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null

@@ -1,12 +1,23 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://test-elements/cube-dropper/cube-dropper.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.gd" type="Script" id=2]
 
-[node name="CubeDropper" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 56, 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 56, 8 )
+
+[node name="CubeDropper" type="StaticBody2D"]
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 2 )
 
 [node name="DropperBackSprite" type="Sprite" parent="."]
 position = Vector2( 0, 96 )
 scale = Vector2( 0.25, 0.25 )
+z_index = 2
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 768, 1024, 768 )
@@ -14,6 +25,7 @@ region_rect = Rect2( 0, 768, 1024, 768 )
 [node name="DropperFrontSprite" type="Sprite" parent="."]
 position = Vector2( 0, 96 )
 scale = Vector2( 0.25, 0.25 )
+z_index = 2
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1024, 768 )
@@ -21,6 +33,36 @@ region_rect = Rect2( 0, 0, 1024, 768 )
 [node name="LightSprite" type="Sprite" parent="."]
 position = Vector2( 0, 56 )
 scale = Vector2( 0.25, 0.25 )
+z_index = 2
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 1536, 1024, 64 )
+
+[node name="CollisionPolygonLeft" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -104, 1, -104, 56, -96, 56, -88, 88, -88, 184, -56, 184, -56, 0 )
+
+[node name="CollisionPolygonRight" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 104, 0, 104, 56, 96, 56, 88, 88, 88, 184, 56, 184, 56, 0 )
+
+[node name="BottomCollider" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2( 0, 172 )
+collision_layer = 14
+collision_mask = 14
+
+[node name="CollisionShapeBottom" type="CollisionShape2D" parent="BottomCollider"]
+shape = SubResource( 1 )
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, 160 )
+collision_layer = 14
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 2 )
+
+[node name="SpawnPoint" type="Position2D" parent="."]
+position = Vector2( 0, 40 )
