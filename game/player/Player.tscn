@@ -8,7 +8,7 @@ radius = 32.0
 height = 114.0
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
-"Player",
+"player",
 ]]
 collision_layer = 2
 collision_mask = 2

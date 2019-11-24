@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://test-elements/window/window.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 8 )
+
+[node name="Window" type="StaticBody2D"]
+collision_layer = 14
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="window" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )

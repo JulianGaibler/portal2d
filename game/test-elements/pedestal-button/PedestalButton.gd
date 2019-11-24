@@ -4,6 +4,7 @@ onready var anim = get_node("PedestalColliderButton/AnimationPlayer")
 var timer
 
 signal pressed
+signal released
 
 func _ready():
     timer = Timer.new()
@@ -19,3 +20,4 @@ func press():
 
 func release():
     anim.play("release-button")
+    emit_signal("released")

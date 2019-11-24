@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/indicator-signs.png-bc57ada963d1f9e9ec5033dfe7db0762.stex"
+path="res://.import/indicator-lights-corner-on.png-367079e9cf64bc7513c32dc1aad38e4b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test-elements/indicator-panel/indicator-signs.png"
-dest_files=[ "res://.import/indicator-signs.png-bc57ada963d1f9e9ec5033dfe7db0762.stex" ]
+source_file="res://test-elements/indicator-lights/indicator-lights-corner-on.png"
+dest_files=[ "res://.import/indicator-lights-corner-on.png-367079e9cf64bc7513c32dc1aad38e4b.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
