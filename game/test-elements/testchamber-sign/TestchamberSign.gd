@@ -3,7 +3,24 @@ extends Node2D
 const NUMBER_DISTANCE = 192
 const PROGRESS_DISTANCE = 8
 const ICONS_DISTANCE = 112
-const ICONS_ORDER = [0,1,5,8,4,2,6,7,3,9]
+enum SIGN_TYPES {
+    cube_drop = 0,
+    cube_bonk = 1,
+    laser_cube = 2,
+    laser_power = 3,
+    portal_fling = 4,
+    portal_fling_2 = 5,
+    drink_water = 6,
+    goop = 7,
+    Turrets = 8,
+    bridge_block = 9,
+    turret_burn = 10,
+    button_stand = 11,
+    cube_button = 12,
+    tbeams = 13,
+    plate_fling = 14,
+    bridges = 15,
+}
 
 onready var animation_player := $AnimationPlayer
 onready var number1 := $Overlay/Number/First
@@ -12,11 +29,11 @@ onready var progress_bar := $Overlay/Progress/Bar
 onready var progress_text := $Overlay/Progress/Text
 onready var icons_node := $Overlay/Icons
 
-
 export(bool) var start_on = true
 export(int) var number = 0
 export(int) var max_number = 19
-export(int, FLAGS, "Cube Dropper", "Cube Hit Head", "Laser Redirect", "Laser Reciever", "Portal Jump", "Portal Fling", "No Drinking Water", "Toxic Water", "Turrets", "Turret behind Wall", "Burn Turret with Laser", "Player on Button", "Cube on Button", "Player through Funnel", "Catapult", "Light Bridge") var sign_bitflag = 0
+export(Array, SIGN_TYPES) var icons_type
+export(Array, bool) var icons_on
 
 func _ready():
     # Number
@@ -31,16 +48,13 @@ func _ready():
     progress_text.text = "%02d / %02d"%[number, max_number]
     progress_bar.region_rect.size.x = PROGRESS_DISTANCE * (0 if number < 0 else number)
     # Icons
-    var sign_array = []
-    for i in range(16):
-        var bit_flag = 1 << i
-        if sign_bitflag & bit_flag != 0:
-            sign_array.push_back(i)
     
-    for i in range(min(10, sign_array.size())):
-        var child = icons_node.get_child(ICONS_ORDER[i])
-        child.modulate = Color.white
-        child.region_rect.position.x = sign_array[i] * ICONS_DISTANCE
+    for i in range(icons_type.size()):
+        var child = icons_node.get_child(i)
+        if icons_on[i]:
+             child.modulate = Color.white
+        child.region_rect.position.x = icons_type[i] * ICONS_DISTANCE
+
 
     if start_on:
         turn_on()

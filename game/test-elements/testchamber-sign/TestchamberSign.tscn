@@ -7,7 +7,7 @@
 [ext_resource path="res://fonts/Mark-Bold.tres" type="DynamicFont" id=6]
 [ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.gd" type="Script" id=7]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "BindPose"
 length = 3.0
 step = 0.05
@@ -145,7 +145,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 192, 576 )
 
 [node name="Progress" type="Node2D" parent="Overlay"]
-visible = false
 
 [node name="Bar" type="Sprite" parent="Overlay/Progress"]
 position = Vector2( -56, 26 )
@@ -263,5 +262,5 @@ region_rect = Rect2( 1568, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BindPose = SubResource( 3 )
+anims/BindPose = SubResource( 1 )
 anims/flicker-on = SubResource( 2 )
