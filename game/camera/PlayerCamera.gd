@@ -90,11 +90,10 @@ func shaking_behaviour(delta):
         _shake_timer = 0
         set_offset(get_offset() - _last_shake_offset)
 
-func shake_Earthquake():
+func shake_earthquake():
     shake_camera(SHAKE_DURATION_EARTHQUAKE, SHAKE_FREQUENCY_EARTHQUAKE, SHAKE_AMPLITUDE_EARTHQUAKE)
     
-func shake_PortalShot():
-    print("Poralshot signal detected")
+func shake_portalshot():
     shake_camera(SHAKE_DURATION_PORTALSHOT, SHAKE_FREQUENCY_PORTALSHOT, SHAKE_AMPLITUDE_PORTALSHOT)
 
 # Triggers the Camera Shake behaviour by setting the Shake_Timer and other shaking related values

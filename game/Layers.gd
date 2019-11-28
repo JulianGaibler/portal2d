@@ -6,6 +6,7 @@ enum Layers {
     BLUE_INNER = 4,
     ORANGE_INNER = 5,
     INTERACTION = 6,
+    WHITE = 7,
 }
 
 enum BinaryLayers {
@@ -16,4 +17,5 @@ enum BinaryLayers {
     BLUE_INNER = 16,
     ORANGE_INNER = 32,
     INTERACTION = 64,    
+    WHITE = 128,
 }

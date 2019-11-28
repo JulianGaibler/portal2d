@@ -6,12 +6,6 @@ const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
 # portal gun node detection
 onready var portalgun := $PortalGun
-onready var ray := $PortalGun/RayCast2D
-
-signal fired_blue_portal
-signal fired_orange_portal
-signal camera_fired_portal
-
 
 const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2.UP
@@ -120,32 +114,12 @@ func _input(event):
 
 # handling input for shooting
 func _unhandled_input(event):
-    
-    # getting the object of the white layer to check if we hit it
-    var whitelayer = get_node("../WhiteLayer")
-    
-    # this is needed to keep the collision with other objects and make it only possible
-    # to hit the whitelayer in a direct way
-    
     # handling if the portal gun is shot
-    if event.is_action_pressed("shoot_blue_portal") and ray.is_colliding():
-        # we check if we only hit the white layer while keeping the collision with other objects
-        if (whitelayer == ray.get_collider()):
-            # getting the normal (pointing away from the white layer) for portal rotaion
-            var white_layer_normal = ray.get_collision_normal()
-            # emitting signal to let everyone know we shot a portal and give them the collision point
-            emit_signal("fired_blue_portal", ray.get_collision_point(), white_layer_normal, deg)
-            emit_signal("camera_fired_portal")
-            
-            
-    if event.is_action_pressed("shoot_orange_portal") and ray.is_colliding():
-        # we check if we only hit the white layer while keeping the collision with other objects
-        if (whitelayer == ray.get_collider()):
-            # getting the normal (pointing away from the white layer) for portal rotaion
-            var white_layer_normal = ray.get_collision_normal()
-            # emitting signal to let everyone know we shot a portal and give them the collision point
-            emit_signal("fired_orange_portal", ray.get_collision_point(), white_layer_normal, deg)
-            emit_signal("camera_fired_portal")
+    if event.is_action_pressed("shoot_blue_portal"):
+        portalgun.primary_fire()
+    
+    if event.is_action_pressed("shoot_orange_portal"):
+        portalgun.secondary_fire()
 
 # used to rotate the portalgun (with y offset of 40 around moving player)
 func rotate_portalgun(point_direction: Vector2)->float:

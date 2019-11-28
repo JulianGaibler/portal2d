@@ -1,13 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
-[ext_resource path="res://camera/Player_Camera.gd" type="Script" id=3]
+[ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=3]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World.gd" type="Script" id=7]
-[ext_resource path="res://hit-effects/BlueHitEffect.tscn" type="PackedScene" id=8]
-[ext_resource path="res://hit-effects/OrangeHitEffect.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 256 )
@@ -22,17 +19,14 @@ extents = Vector2( 352, 32.351 )
 extents = Vector2( 32.2683, 159.984 )
 
 [node name="World" type="Node2D"]
-script = ExtResource( 7 )
-blue_hit_effect = ExtResource( 8 )
-orange_hit_effect = ExtResource( 9 )
 
 [node name="Weighted Cube" parent="." instance=ExtResource( 1 )]
 position = Vector2( 338, 472 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 517, 496 )
+position = Vector2( 560, 496 )
 
-[node name="Player_Camera" type="Camera2D" parent="Player"]
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
 position = Vector2( -0.606995, -96 )
 current = true
 process_mode = 0
@@ -43,7 +37,7 @@ drag_margin_bottom = 0.5
 script = ExtResource( 3 )
 
 [node name="PortalGun" parent="Player" instance=ExtResource( 5 )]
-position = Vector2( 10.9393, -96.3289 )
+position = Vector2( 0, -80 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -79,5 +73,3 @@ shape = SubResource( 3 )
 [node name="Layer1" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 95.9678, 352 )
 shape = SubResource( 4 )
-[connection signal="fired_blue_portal" from="Player" to="." method="_on_Player_fired_blue_portal"]
-[connection signal="fired_orange_portal" from="Player" to="." method="_on_Player_fired_orange_portal"]
