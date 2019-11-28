@@ -33,7 +33,6 @@ func _ready():
     self.smoothing_enabled = true
     self.smoothing_speed = 1
     set_zoom(Vector2 (target_zoom, target_zoom))
-    self.position = Vector2 (0,0)  
     
     if(Player != null):
         Player.connect("camera_fired_portal", self, "shake_PortalShot")
@@ -85,7 +84,6 @@ func shaking_behaviour(delta):
         var new_offset = Vector2(x_component, y_component)
         set_offset(get_offset() - _last_shake_offset + new_offset)
         _last_shake_offset = new_offset
-        self.position = new_offset
     # Reset the offset when we're done shaking.
     _shake_timer = _shake_timer - delta
     if _shake_timer <= 0:
