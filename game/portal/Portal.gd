@@ -143,22 +143,24 @@ func link_portal(new_portal):
 #    draw_circle((Vector2(0,-1) if orientation == PortalOrientation.UP else Vector2(0,1)) * 128, 5, (Color.blue if type == PortalType.BLUE_PORTAL else Color.orange))
 
 
+func update_physics_shadow(collider):
+    var rotation = collider[0].global_transform.get_rotation()
+    # Transform position
+    var po = collider[0].global_position - global_position
+    var new_pos = linked_portal.global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.normal_vec))
+    collider[1].global_transform = Transform2D()
+    collider[1].global_transform.origin = new_pos
+    
+    var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.normal_vec))
+    collider[1].rotate(a1)
+
 func _physics_process(delta):
     if (linked_portal == null): return
     
     # Physics shadows are the copied colliders of dynamic-props or the player.
     # Their positions needs to be updated with every physics-update
     for collider in physics_shadows.values():
-        var rotation = collider[0].global_transform.get_rotation()
-        
-        # Transform position
-        var po = collider[0].global_position - global_position
-        var new_pos = linked_portal.global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.normal_vec))
-        collider[1].global_transform = Transform2D()
-        collider[1].global_transform.origin = new_pos
-        
-        var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.normal_vec))
-        collider[1].rotate(a1)
+        update_physics_shadow(collider)
     
     var overlapped_bodies = inner_area.get_overlapping_bodies()
     if (overlapped_bodies.size() < 1): return
@@ -316,7 +318,9 @@ func add_shadow_body(body):
             PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
         body.add_collision_exception_with(collider)
         add_child(collider)
-        physics_shadows[body.get_rid()] = [body, collider]
+        var c = [body, collider]
+        physics_shadows[body.get_rid()] = c
+        update_physics_shadow(c)
 
 # Removed physics-shadows from physics_shadows list
 func remove_shadow_body(body):
