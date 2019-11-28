@@ -10,8 +10,9 @@ enum PortalOrientation {UP = 0, DOWN = 1}
 #### Constants ####
 ##
 # This is the hole that gets cut into the geometry
-const portal_hole = PoolVector2Array([Vector2(-96, 128), Vector2(-96, -128), Vector2(1, -128), Vector2(1, 128)])
-
+const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, 128), Vector2(-96, -128), Vector2(1, -128), Vector2(1, 128)])
+const PORTAL_COLOR_BLUE = Color("079be1")
+const PORTAL_COLOR_ORANGE = Color("ff7d17")
 
 ## Exported Variabled ##
 ##
@@ -28,10 +29,12 @@ var linked_portal = null
 # Polygons from ScanArea in world-space with carved out hole for portal
 var collider_polygons = []
 # Reference areas around the portal
-var outer_area
-var inner_area
-var scan_area_front
-var scan_area_back
+onready var animation_player := $AnimationPlayer
+onready var color_node := $ColorNode
+onready var outer_area := $OuterArea
+onready var inner_area := $InnerArea
+onready var scan_area_front := $ScanAreaFront
+onready var scan_area_back := $ScanAreaBack
 # Normal vector of this portal, pointing away from the entrance in global space
 var normal_vec
 # Direction Vector of the portal, pointing where up is in global space
@@ -39,22 +42,26 @@ var direction_vec
 # Basis transformation matrix from this to the linked portal
 var transfomration_matrix
 
+func _ready():
+    animation_player.play("closed_portal")
+
 # This function has to be called after the portal has been placed in the world
 func initiate(type, orientation):
     self.type = type
     self.orientation = orientation
     
+    match type:
+        PortalType.BLUE_PORTAL: color_node.modulate = PORTAL_COLOR_BLUE
+        PortalType.ORANGE_PORTAL: color_node.modulate = PORTAL_COLOR_ORANGE
+    
+    animation_player.play("open_portal")
+    
     # Calculate direction- and normal-vector
     normal_vec = Vector2.RIGHT.rotated(global_rotation)
     direction_vec = (Vector2.UP if orientation == PortalOrientation.UP else Vector2.DOWN).rotated(global_rotation)
     
-    outer_area = get_node("OuterArea")
-    inner_area = get_node("InnerArea")
-    scan_area_front = get_node("ScanAreaFront")
-    scan_area_back = get_node("ScanAreaBack")
-    
     # This will let portal-aware raycasts know they collided with a portal
-    get_node("PortalLine").set_meta("isPortal",1)
+    $PortalLine.set_meta("isPortal",1)
     
     # Hook up signals from the trigger-areas with functions
     outer_area.connect("body_exited", self, "leave_outer_area")
@@ -70,7 +77,7 @@ func initiate(type, orientation):
     # put them into local coordinates and carve a hole for the portal
     for polygon in calculate_polygon(scan_area_front):
         var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-        for new_polygon in Geometry.clip_polygons_2d(polygon2, portal_hole): #clip_polygons_2d
+        for new_polygon in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT): #clip_polygons_2d
             collider_polygons.append(new_polygon)
     
     # Register newly created portal with the PortalManager
@@ -93,7 +100,7 @@ func link_portal(new_portal):
 
     for polygon in calculate_polygon(scan_area_back):
         var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-        for new_polygon in Geometry.clip_polygons_2d(polygon2, portal_hole): #clip_polygons_2d
+        for new_polygon in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT): #clip_polygons_2d
             carved_polygons.append(new_polygon)
 
     # In addition to the local colliders that are copied in front of our portal, we also want to take
@@ -126,14 +133,14 @@ func link_portal(new_portal):
         if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
     for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
 
-func _draw():
-    draw_line(Vector2(0,0), Vector2(1,0) * 64, Color.white)
-    
-    var nr = Vector2(1,0).rotated(deg2rad(90))
-    draw_line(nr * 128, nr * -128, Color.white)
-    
-    draw_circle(Vector2(0,0), 10, (Color.blue if type == PortalType.BLUE_PORTAL else Color.orange))
-    draw_circle((Vector2(0,-1) if orientation == PortalOrientation.UP else Vector2(0,1)) * 128, 5, (Color.blue if type == PortalType.BLUE_PORTAL else Color.orange))
+#func _draw():
+#    draw_line(Vector2(0,0), Vector2(1,0) * 64, Color.white)
+#
+#    var nr = Vector2(1,0).rotated(deg2rad(90))
+#    draw_line(nr * 128, nr * -128, Color.white)
+#
+#    draw_circle(Vector2(0,0), 10, (Color.blue if type == PortalType.BLUE_PORTAL else Color.orange))
+#    draw_circle((Vector2(0,-1) if orientation == PortalOrientation.UP else Vector2(0,1)) * 128, 5, (Color.blue if type == PortalType.BLUE_PORTAL else Color.orange))
 
 
 func _physics_process(delta):
@@ -208,8 +215,9 @@ func close_portal():
     outer_area.disconnect("body_entered", self, "enter_outer_area")
     for body in inner_area.get_overlapping_bodies(): leave_inner_area(body)
     for body in outer_area.get_overlapping_bodies(): leave_outer_area(body)
+    animation_player.play("close_portal")
+    yield(get_tree().create_timer(0.5), "timeout")
     get_parent().remove_child(self)
-
 
 func reset_portal():
     for collider in physics_shadows.values():
@@ -286,11 +294,17 @@ func add_shadow_body(body):
     if body.is_in_group("physics-shadow"): return
     
     var shapes = []
+    var sprites = []
     for child in body.get_children():
         if (child is CollisionShape2D):
             shapes.append(child.duplicate())
+        if (child is Sprite):
+            sprites.append(child.duplicate())
     if (shapes.size() > 0):
-        var collider = create_kinematic_collider(shapes)        
+        var collider = create_kinematic_collider(shapes)
+        collider.z_index = -1
+        for sprite in sprites:
+            collider.add_child(sprite)
         collider.set_script(preload("res://portal/PhysicsShadow.gd"))
         collider.parent = body
         collider.matrix = transfomration_matrix
