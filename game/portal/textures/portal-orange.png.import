@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/portal-orange.png-1aeb0d288d6869acff4090a556c23662.image"
+
+[deps]
+
+source_file="res://portal/textures/portal-orange.png"
+dest_files=[ "res://.import/portal-orange.png-1aeb0d288d6869acff4090a556c23662.image" ]
+
+[params]
+
