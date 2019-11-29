@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/particles-white.png-8a2511c774f5d22d7c1b3037e7ebf938.image"
+
+[deps]
+
+source_file="res://portal/textures/particles-white.png"
+dest_files=[ "res://.import/particles-white.png-8a2511c774f5d22d7c1b3037e7ebf938.image" ]
+
+[params]
+

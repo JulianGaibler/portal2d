@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://particles/portal/PortalParticles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://portal/Portal.gd" type="Script" id=2]
+[ext_resource path="res://textures/white.png" type="Texture" id=3]
+[ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
@@ -58,95 +60,95 @@ b = Vector2( 0, 128 )
 resource_name = "BindPose"
 length = 0.1
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("ColorNode/ColorRect:rect_size:y")
+tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 256, -0.599909, -0.701569, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("ColorNode/ColorRect:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -128, -0.602215, -1.90172, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorNode/ColorRect:rect_size:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "points": PoolRealArray( 4, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-
-[sub_resource type="Animation" id=9]
-resource_name = "close_portal"
-length = 0.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("ColorNode/ColorRect:rect_size:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 256, -0.599909, -0.701569, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("ColorNode/ColorRect:rect_position:y")
+tracks/1/path = NodePath("ColorNode/ColorRect:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -128, -0.602215, -1.90172, 0.25, 0 ),
+"points": PoolRealArray( 256, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorNode/ColorRect:rect_size:x")
+tracks/2/path = NodePath("ColorNode/ColorRect:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 4, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "closed_portal"
-length = 0.1
+[sub_resource type="Animation" id=15]
+resource_name = "close_portal"
+length = 0.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("ColorNode/ColorRect:rect_size:y")
+tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray(  ),
-"times": PoolRealArray(  )
+"points": PoolRealArray( 4, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("ColorNode/ColorRect:rect_position:y")
+tracks/1/path = NodePath("ColorNode/ColorRect:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray(  ),
-"times": PoolRealArray(  )
+"points": PoolRealArray( 256, -0.45388, 2.2558, 0.25, 0, 256, -0.45388, 2.2558, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorNode/ColorRect:rect_size:x")
+tracks/2/path = NodePath("ColorNode/ColorRect:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "closed_portal"
+length = 0.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorNode/ColorRect:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 256, -0.45388, 2.2558, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorNode/ColorRect:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -156,37 +158,37 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=14]
 resource_name = "open_portal"
 length = 0.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("ColorNode/ColorRect:rect_size:y")
+tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 256, -0.599909, -0.701569, 0.25, 0 ),
+"points": PoolRealArray( 4, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("ColorNode/ColorRect:rect_position:y")
+tracks/1/path = NodePath("ColorNode/ColorRect:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -128, -0.602215, -1.90172, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 256, -0.45388, 2.2558, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorNode/ColorRect:rect_size:x")
+tracks/2/path = NodePath("ColorNode/ColorRect:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 4, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 
@@ -242,24 +244,22 @@ shape = SubResource( 5 )
 
 [node name="ColorNode" type="Node2D" parent="."]
 modulate = Color( 0.352941, 0.584314, 0.909804, 1 )
+material = ExtResource( 4 )
 position = Vector2( -0.5, 0 )
 
 [node name="Particles" parent="ColorNode" instance=ExtResource( 1 )]
 position = Vector2( 17.5, 0 )
 z_index = -1
 
-[node name="ColorRect" type="ColorRect" parent="ColorNode"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -128.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ColorRect" type="Sprite" parent="ColorNode"]
+use_parent_material = true
+position = Vector2( 2, 0 )
+scale = Vector2( 4, 256 )
+texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
 anims/BindPose = SubResource( 7 )
-anims/close_portal = SubResource( 9 )
-anims/closed_portal = SubResource( 10 )
-anims/open_portal = SubResource( 8 )
+anims/close_portal = SubResource( 15 )
+anims/closed_portal = SubResource( 16 )
+anims/open_portal = SubResource( 14 )

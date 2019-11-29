@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/particles-orange.png-ab5c2ac384fd4b1b2cd00ea7f7939895.image"
+
+[deps]
+
+source_file="res://portal/textures/particles-orange.png"
+dest_files=[ "res://.import/particles-orange.png-ab5c2ac384fd4b1b2cd00ea7f7939895.image" ]
+
+[params]
+

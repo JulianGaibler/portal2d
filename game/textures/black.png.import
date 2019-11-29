@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/black.png-0262b92e70cb3a77f5677abea62f4776.image"
+
+[deps]
+
+source_file="res://textures/black.png"
+dest_files=[ "res://.import/black.png-0262b92e70cb3a77f5677abea62f4776.image" ]
+
+[params]
+
