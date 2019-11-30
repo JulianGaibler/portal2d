@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://shader/fizzler/fizzler.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/u_resolution = Vector2( 10, 1 )
+shader_param/background = Color( 0.0666667, 0.282353, 0.356863, 1 )
+shader_param/foreground = Color( 0.435294, 0.913725, 1, 1 )
+shader_param/OCTAVES = 4
