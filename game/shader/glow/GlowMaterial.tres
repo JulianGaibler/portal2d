@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/bright_amount = 0.75
+shader_param/bright_amount = 1.4

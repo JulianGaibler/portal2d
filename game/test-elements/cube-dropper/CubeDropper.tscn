@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://test-elements/cube-dropper/cube-dropper.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/cube-dropper/CubeDropper.gd" type="Script" id=2]
+[ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 56, 4 )
@@ -31,6 +32,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1024, 768 )
 
 [node name="LightSprite" type="Sprite" parent="."]
+material = ExtResource( 3 )
 position = Vector2( 0, 56 )
 scale = Vector2( 0.25, 0.25 )
 z_index = 2
