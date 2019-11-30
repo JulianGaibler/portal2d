@@ -2,7 +2,7 @@
 
 #### Engine
 
-Current Engine version is: [Godot v3.2-alpha3](https://downloads.tuxfamily.org/godotengine/3.2/alpha3/)
+Current Engine version is: [Godot v3.2-beta2](https://downloads.tuxfamily.org/godotengine/3.2/beta2/)
 
 #### Links
 
