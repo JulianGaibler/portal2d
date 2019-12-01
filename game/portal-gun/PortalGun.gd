@@ -29,7 +29,7 @@ func spawn_portal(hit_position: Vector2, normal: Vector2, deg: float, type):
     get_tree().get_root().add_child(instance)
     var orientation = PortalOrientation.UP
     # getting the correct orientation
-    if deg < 90 and deg > -90:
+    if (deg < 90 and deg > 0) or (deg > -180 and deg < -90):
         orientation = PortalOrientation.DOWN
     instance.position = hit_position
     # rotating the portal to fit the white layer
