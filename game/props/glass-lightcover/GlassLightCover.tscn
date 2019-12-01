@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://props/glass-lightcover/glass-lightcover.png" type="Texture" id=1]
+[ext_resource path="res://textures/tall-light.png" type="Texture" id=2]
+
+
+[node name="GlassLightCover" type="Light2D"]
+position = Vector2( 32, 128 )
+z_index = -9
+texture = ExtResource( 2 )
+color = Color( 1, 1, 1, 0.784314 )
+
+[node name="glass-lightcover" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
