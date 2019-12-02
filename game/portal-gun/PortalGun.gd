@@ -21,7 +21,6 @@ func shoot_portal(type):
     var hit = space_state.intersect_ray(active_end.global_position, active_end.global_position + (direction * 3000), [parent], BinaryLayers.FLOOR | BinaryLayers.WHITE)
     if hit.empty(): return
     var can_place = can_place_portal(hit.position, hit.normal)
-    print(can_place)
     if (can_place):
         var deg = rad2deg(Vector2.RIGHT.angle_to(direction))
         # if we can place the portal adjust the position
@@ -31,7 +30,6 @@ func shoot_portal(type):
 func move_portal(hit_position, p2, p1, normal, steps):
     # first check if can place the portal now
     var can_place = can_place_portal(hit_position, normal)
-    print(can_place)
     # this function is recursive and tries to find the local minimum
     # it jump for $steps steps into the direction where the other point hits
     # cancel statement
