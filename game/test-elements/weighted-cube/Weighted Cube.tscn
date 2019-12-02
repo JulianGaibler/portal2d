@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://test-elements/weighted-cube/Weighted Cube.gd" type="Script" id=1]
-[ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=2]
+[ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/weighted-cube/Weighted Cube.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
@@ -10,20 +10,20 @@ friction = 0.75
 extents = Vector2( 40, 40 )
 
 [node name="Weighted Cube" type="RigidBody2D" groups=[
-"dynamic-prop",
 "can-fizzle",
 "can-pickup",
+"dynamic-prop",
 ]]
 collision_layer = 66
 collision_mask = 66
 mass = 25.0
 physics_material_override = SubResource( 1 )
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="CubeSprite" type="Sprite" parent="."]
 use_parent_material = true
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 8, 8, 320, 320 )
 

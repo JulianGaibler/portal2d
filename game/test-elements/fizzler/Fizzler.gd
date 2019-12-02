@@ -10,7 +10,7 @@ func _ready():
     
     shader_sprite.material = shader_sprite.material.duplicate()
     var res = shader_sprite.material.get_shader_param("u_resolution")
-#    res.y /= scale.y
+    res.y /= scale.y
     shader_sprite.material.set_shader_param("u_resolution", res)
 
 func enter_inner_area(body):
