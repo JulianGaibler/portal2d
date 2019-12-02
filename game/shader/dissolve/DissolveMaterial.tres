@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://shader/dissolve/shader.png" type="Texture" id=2]
+[ext_resource path="res://shader/dissolve/shader.png" type="Texture" id=1]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -33,4 +33,4 @@ shader = SubResource( 1 )
 shader_param/Clip = 0.3
 shader_param/EdgeThickness = 0.1
 shader_param/EdgeColor = Color( 0, 0, 0, 1 )
-shader_param/Mask = ExtResource( 2 )
+shader_param/Mask = ExtResource( 1 )
