@@ -3,23 +3,23 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=3]
-[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=4]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
-[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=7]
-[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=8]
+[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=8]
 [ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=9]
-[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=10]
+[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=11]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=12]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=13]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=14]
-[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=15]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=15]
 [ext_resource path="res://classes/TextureToggle.gd" type="Script" id=16]
 [ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=17]
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=18]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 64 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -31,13 +31,13 @@ extents = Vector2( 576, 32.351 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32.2683, 128 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32.2683, 128 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 288, 32.351 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 160, 32.351 )
 
 [node name="World" type="Node2D"]
@@ -78,7 +78,7 @@ drag_margin_right = 0.5
 drag_margin_bottom = 0.5
 script = ExtResource( 3 )
 
-[node name="PortalGun" parent="Player" instance=ExtResource( 4 )]
+[node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 0, -80 )
 scale = Vector2( 0.2, 0.2 )
 
@@ -98,9 +98,11 @@ one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( -320, 128 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
-[node name="WhiteLayer" type="StaticBody2D" parent="."]
+[node name="WhiteLayer" type="StaticBody2D" parent="." groups=[
+"white_layer",
+]]
 visible = false
 z_index = 11
 collision_layer = 128
@@ -124,17 +126,17 @@ shape = SubResource( 4 )
 
 [node name="Layer6" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( -672, -64 )
-shape = SubResource( 8 )
+shape = SubResource( 5 )
 
 [node name="Layer4" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 1056, 544 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Layer5" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 1184, 32 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
-[node name="CubeDropper" parent="." instance=ExtResource( 7 )]
+[node name="CubeDropper" parent="." instance=ExtResource( 15 )]
 position = Vector2( 384, -192 )
 auto_drop = true
 object = ExtResource( 5 )
@@ -142,7 +144,7 @@ auto_respawn = true
 
 [node name="Fizzler" type="Node2D" parent="."]
 
-[node name="Fizzler" parent="Fizzler" instance=ExtResource( 8 )]
+[node name="Fizzler" parent="Fizzler" instance=ExtResource( 4 )]
 position = Vector2( 800, 352 )
 scale = Vector2( 1, 1.08 )
 
@@ -157,14 +159,14 @@ rotation = -3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 9 )
 
-[node name="TestchamberSign" parent="." instance=ExtResource( 10 )]
+[node name="TestchamberSign" parent="." instance=ExtResource( 8 )]
 position = Vector2( -128, 336 )
 number = -1
 max_number = 100
 icons_type = [ 0, 1 ]
 icons_on = [ true, true ]
 
-[node name="PedestalButton" parent="." instance=ExtResource( 15 )]
+[node name="PedestalButton" parent="." instance=ExtResource( 10 )]
 position = Vector2( -304, 64 )
 scale = Vector2( -1, 1 )
 
@@ -230,6 +232,6 @@ texture_on = ExtResource( 14 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.65098, 0.65098, 0.65098, 1 )
-[connection signal="pressed" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_on"]
 [connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]
+[connection signal="pressed" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_on"]
 [connection signal="released" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_off"]
