@@ -4,59 +4,22 @@
 [ext_resource path="res://portal/Portal.gd" type="Script" id=2]
 [ext_resource path="res://textures/white.png" type="Texture" id=3]
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=4]
+[ext_resource path="res://textures/tall-light.png" type="Texture" id=5]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Area2D
-
-# Returns all overlapping bodies within the area
-# as an array of polygons positioned in world space.
-func calculate_polygon():
-    var polygons = []
-    
-    for overlapped_body in get_overlapping_bodies():
-        if !(overlapped_body is StaticBody2D): continue
-        if overlapped_body.name == \"PortalLine\": continue
-        var overlapped_body_rid = overlapped_body.get_rid()
-        var overlapped_body_shapes_count = Physics2DServer.body_get_shape_count (overlapped_body_rid)
-        var overlapped_body_tf = overlapped_body.global_transform
-        
-        for i in range(overlapped_body_shapes_count):
-            var shapeRID = Physics2DServer.body_get_shape(overlapped_body_rid, i)
-            var shape_tf = Physics2DServer.body_get_shape_transform(overlapped_body_rid, i)
-            var polygon = PolygonUtils.shape_to_polygon(shapeRID)
-            if (polygon == null): continue
-            polygon = PolygonUtils.transform_polygon(polygon, shape_tf * overlapped_body_tf)
-            polygons.append(polygon)
-    
-
-    var csRID = get_node(\"CollisionShape2D\").shape.get_rid()
-    var outerAreaShape = PolygonUtils.shape_to_polygon(csRID)
-    
-    outerAreaShape = PolygonUtils.transform_polygon(outerAreaShape, get_node(\"CollisionShape2D\").global_transform)
-    
-    var new_polygons = []
-    
-    for polygon in polygons:
-        for new_polygon in Geometry.intersect_polygons_2d(polygon, outerAreaShape):
-            new_polygons.append(new_polygon)
-    
-    return new_polygons
-"
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 128 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 112, 304 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 128, 304 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 304 )
 
-[sub_resource type="SegmentShape2D" id=5]
+[sub_resource type="SegmentShape2D" id=4]
 a = Vector2( 0, -128 )
 b = Vector2( 0, 128 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "BindPose"
 length = 0.1
 tracks/0/type = "bezier"
@@ -89,8 +52,28 @@ tracks/2/keys = {
 "points": PoolRealArray( 2, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorNode/Light2D:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("ColorNode/Light2D:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1 )
+}
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=6]
 resource_name = "close_portal"
 length = 0.5
 tracks/0/type = "bezier"
@@ -123,8 +106,28 @@ tracks/2/keys = {
 "points": PoolRealArray( 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorNode/Light2D:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("ColorNode/Light2D:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0, 0.02, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=7]
 resource_name = "closed_portal"
 length = 0.1
 tracks/0/type = "bezier"
@@ -157,8 +160,28 @@ tracks/2/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorNode/Light2D:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("ColorNode/Light2D:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=8]
 resource_name = "open_portal"
 length = 0.5
 tracks/0/type = "bezier"
@@ -191,56 +214,86 @@ tracks/2/keys = {
 "points": PoolRealArray( 2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorNode/Light2D:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("ColorNode/Light2D:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.25, -0.468123, -0.00206879, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
 
 [node name="Portal" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="InnerArea" type="Area2D" parent="."]
 visible = false
-position = Vector2( -32, 0 )
+position = Vector2( 32, 0 )
 monitorable = false
 collision_layer = 0
 collision_mask = 12
-script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="InnerAreaCollisionShape2D" type="CollisionShape2D" parent="InnerArea"]
-position = Vector2( 64, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="OuterArea" type="Area2D" parent="."]
 visible = false
+position = Vector2( 128, 0 )
 monitorable = false
 collision_layer = 0
 collision_mask = 50
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterArea"]
-position = Vector2( 111, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="ScanAreaFront" type="Area2D" parent="."]
 visible = false
+position = Vector2( 128, 0 )
 collision_layer = 0
 collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScanAreaFront"]
-position = Vector2( 112, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="ScanAreaBack" type="Area2D" parent="."]
 visible = false
+position = Vector2( -16, 0 )
 collision_layer = 0
 collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScanAreaBack"]
-position = Vector2( -16, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="PortalLine" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortalLine"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="ColorNode" type="Node2D" parent="."]
 modulate = Color( 0.352941, 0.584314, 0.909804, 1 )
@@ -253,13 +306,19 @@ z_index = -1
 
 [node name="ColorRect" type="Sprite" parent="ColorNode"]
 use_parent_material = true
-position = Vector2( 2, 0 )
-scale = Vector2( 4, 256 )
+scale = Vector2( 1e-05, 256 )
 texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="ColorNode"]
+position = Vector2( 3.5, 0 )
+scale = Vector2( 1e-05, 0.25 )
+texture = ExtResource( 5 )
+mode = 2
+shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/BindPose = SubResource( 7 )
-anims/close_portal = SubResource( 15 )
-anims/closed_portal = SubResource( 16 )
-anims/open_portal = SubResource( 14 )
+anims/BindPose = SubResource( 5 )
+anims/close_portal = SubResource( 6 )
+anims/closed_portal = SubResource( 7 )
+anims/open_portal = SubResource( 8 )

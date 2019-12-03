@@ -77,8 +77,7 @@ func initiate(type, orientation):
     # put them into local coordinates and carve a hole for the portal
     for polygon in calculate_polygon(scan_area_front):
         var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-        for new_polygon in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT): #clip_polygons_2d
-            collider_polygons.append(new_polygon)
+        collider_polygons.append(polygon2)
     
     # Register newly created portal with the PortalManager
     PortalManager.register_portal(self)
@@ -98,22 +97,36 @@ func link_portal(new_portal):
 
     var carved_polygons = [] + collider_polygons
 
+    var other_cutout = PoolVector2Array()
+    other_cutout.resize(PORTAL_CUTOUT.size())
+    for i in range(0, PORTAL_CUTOUT.size()):
+        var new_pos = to_local(linked_portal.global_position) + (transfomration_matrix.multiply_vec(PORTAL_CUTOUT[i]))
+        other_cutout.set(i, new_pos)
+
     for polygon in calculate_polygon(scan_area_back):
         var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-        for new_polygon in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT): #clip_polygons_2d
-            carved_polygons.append(new_polygon)
+        for new_polygon1 in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT):
+            carved_polygons.append(new_polygon1)
 
     # In addition to the local colliders that are copied in front of our portal, we also want to take
     # those from the other portal and place them behind ours in order to avoid collision glitches.
     for polygon in linked_portal.collider_polygons:
-        var newVec = PoolVector2Array()
-        newVec.resize(polygon.size())
+        var polygon2 = PoolVector2Array()
+        polygon2.resize(polygon.size())
         for i in range(0, polygon.size()):
             var new_pos = polygon[i].bounce(Vector2.RIGHT)
             if (orientation != linked_portal.orientation):
                 new_pos = new_pos.bounce(Vector2.UP)
-            newVec.set(i, new_pos)
-        carved_polygons.append(newVec)
+            polygon2.set(i, new_pos)
+        carved_polygons.append(polygon2)
+
+    var polygon_new = []
+
+    for polygon in carved_polygons:
+        for new_polygon2 in Geometry.clip_polygons_2d(polygon, other_cutout):
+            polygon_new.append(new_polygon2)
+            
+    carved_polygons = polygon_new
 
     # Create new static collider from our polygons
     var collider = create_static_collider(carved_polygons)
@@ -134,6 +147,9 @@ func link_portal(new_portal):
     for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
 
 #func _draw():
+#    for i in range(4):
+#        draw_line(PORTAL_CUTOUT[i], PORTAL_CUTOUT[(i+1)%4], Color.white)
+#
 #    draw_line(Vector2(0,0), Vector2(1,0) * 64, Color.white)
 #
 #    var nr = Vector2(1,0).rotated(deg2rad(90))
