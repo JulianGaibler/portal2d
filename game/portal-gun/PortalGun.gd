@@ -85,36 +85,36 @@ func check_and_correct_placement(hit: Dictionary, type):
 
     # Checks if the start end end of the portal are the in the air.
     # If that's the case the method tries to move to portal according to dist_top and dist_btm
-    var moved_portal = probe_for_air(space_state, moved_position, hit.normal, normal_up, dist_top, dist_btm)
-    if moved_portal == null: return null
-    moved_position = moved_portal
+    var moved_portal1 = probe_for_air(space_state, moved_position, hit.normal, normal_up, dist_top, -1)
+    if moved_portal1 == null:
+        var moved_portal2 = probe_for_air(space_state, moved_position, hit.normal, normal_up, dist_btm, 1)
+        if moved_portal2 == null: return null
+        else: moved_position = moved_portal2
+    else:
+        moved_position = moved_portal1
     
     return moved_position
 
 
-func probe_for_air(space_state, position, normal, normal_up, dist_top, dist_btm):
+func probe_for_air(space_state, position, normal, normal_up, dist, direction):
     var start = position + (normal * 0.5)
     var moved_by = 0
 
     while true:
         var end_top = start + (normal_up * moved_by) + (normal_up * (PORTAL_HEIGHT))
         var top = space_state.intersect_ray(end_top, end_top + (normal * -1), [], BinaryLayers.FLOOR)
-        if top.empty() or !top.collider.is_in_group("white_layer"):
-            dist_btm -= probing_space
-            if dist_btm - PORTAL_HEIGHT < 0: return null
-            moved_by -= probing_space
+        var end_btm = start + (normal_up * moved_by) + (-normal_up * (PORTAL_HEIGHT))
+        var btm = space_state.intersect_ray(end_btm, end_btm + (normal * -1), [], BinaryLayers.FLOOR)
+        if top.empty() or !top.collider.is_in_group("white_layer") or btm.empty() or !btm.collider.is_in_group("white_layer"):
+            dist -= probing_space
+            if dist - PORTAL_HEIGHT < 0: return null
+            moved_by += probing_space * direction
             continue
         break
 
-    while true:
-        var end_btm = start + (normal_up * moved_by) + (-normal_up * (PORTAL_HEIGHT))
-        var btm = space_state.intersect_ray(end_btm, end_btm + (normal * -1), [], BinaryLayers.FLOOR)
-        if btm.empty() or !btm.collider.is_in_group("white_layer"):
-            dist_top -= probing_space
-            if dist_top - PORTAL_HEIGHT < 0: return null
-            moved_by += probing_space
-            continue
-        break
+    print("moved_by: ", moved_by)
+        
+    print("moved_by: ", moved_by)
     
     return position + (normal_up * moved_by)
 
