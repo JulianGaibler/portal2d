@@ -8,7 +8,7 @@ enum Layers {
     INTERACTION = 6,
     WHITE = 7,
     BLUE_PORTAL = 8,
-    ORANGE_PORTAL = 8,
+    ORANGE_PORTAL = 9,
 }
 
 enum BinaryLayers {
