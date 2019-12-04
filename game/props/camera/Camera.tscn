@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=1]
-[ext_resource path="res://test-elements/camera/camera.png" type="Texture" id=2]
-[ext_resource path="res://test-elements/camera/Camera.gd" type="Script" id=3]
+[ext_resource path="res://props/camera/camera.png" type="Texture" id=2]
+[ext_resource path="res://props/camera/Camera.gd" type="Script" id=3]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 744.097
+[sub_resource type="CircleShape2D" id=1]
+radius = 1516.26
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 92.0
@@ -19,7 +19,7 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -40, 44 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="CameraSprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://test-elements/radio/Radio.gd" type="Script" id=2]
-[ext_resource path="res://test-elements/radio/radio.png" type="Texture" id=3]
+[ext_resource path="res://props/radio/radio.png" type="Texture" id=1]
+[ext_resource path="res://props/radio/Radio.gd" type="Script" id=2]
 
 [node name="Radio" type="RigidBody2D" groups=[
 "can-fizzle",
@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 use_parent_material = true
 position = Vector2( 0, -46 )
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 256, 384 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
