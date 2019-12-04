@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://textures/white.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/testchamber-sign/testchamber-sign.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-progress.png" type="Texture" id=3]
 [ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-numbers.png" type="Texture" id=4]
@@ -264,3 +265,12 @@ region_filter_clip = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BindPose = SubResource( 1 )
 anims/flicker-on = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 1.90735e-05, 0.277405 )
+scale = Vector2( 185.187, 375.476 )
+texture = ExtResource( 1 )
+color = Color( 1, 1, 1, 0.333333 )
+mode = 2
+range_z_min = -1
+range_z_max = -1
