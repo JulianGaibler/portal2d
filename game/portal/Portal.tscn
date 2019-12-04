@@ -7,17 +7,17 @@
 [ext_resource path="res://textures/tall-light.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 48, 128 )
+extents = Vector2( 48, 112 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 128, 304 )
+extents = Vector2( 128, 272 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 304 )
+extents = Vector2( 16, 272 )
 
 [sub_resource type="SegmentShape2D" id=4]
-a = Vector2( 0, -128 )
-b = Vector2( 0, 128 )
+a = Vector2( 0, -112 )
+b = Vector2( 0, 112 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "BindPose"
@@ -39,7 +39,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 256, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 224, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
@@ -60,7 +60,7 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
 "points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1 )
+"times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("ColorNode/Light2D:scale:y")
@@ -93,7 +93,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 256, -0.45388, 2.2558, 0.25, 0, 256, -0.45388, 2.2558, 0.25, 0 ),
+"points": PoolRealArray( 224, -0.45388, 2.2558, 0.25, 0, 224, -0.45388, 2.2558, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/2/type = "bezier"
@@ -147,7 +147,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 256, -0.45388, 2.2558, 0.25, 0 ),
+"points": PoolRealArray( 224, -0.45388, 2.2558, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
@@ -201,7 +201,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 256, -0.45388, 2.2558, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 224, -0.45388, 2.2558, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/2/type = "bezier"
@@ -239,7 +239,6 @@ tracks/4/keys = {
 script = ExtResource( 2 )
 
 [node name="InnerArea" type="Area2D" parent="."]
-visible = false
 position = Vector2( 32, 0 )
 monitorable = false
 collision_layer = 0
@@ -289,11 +288,21 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="PortalLine" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 128
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortalLine"]
 shape = SubResource( 4 )
+
+[node name="DetectionArea" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Area2D" type="Area2D" parent="DetectionArea"]
+
+[node name="InnerAreaCollisionShape2D2" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2( 32, 0 )
+shape = SubResource( 1 )
 
 [node name="ColorNode" type="Node2D" parent="."]
 modulate = Color( 0.352941, 0.584314, 0.909804, 1 )
@@ -306,12 +315,13 @@ z_index = -1
 
 [node name="ColorRect" type="Sprite" parent="ColorNode"]
 use_parent_material = true
-scale = Vector2( 1e-05, 256 )
+position = Vector2( 2, 0 )
+scale = Vector2( 4, 224 )
 texture = ExtResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="ColorNode"]
 position = Vector2( 3.5, 0 )
-scale = Vector2( 1e-05, 0.25 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 5 )
 mode = 2
 shadow_enabled = true
