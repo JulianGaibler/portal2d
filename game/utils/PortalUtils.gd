@@ -1,5 +1,7 @@
 class_name PortalUtils
 
+const BinaryLayers = preload("res://Layers.gd").BinaryLayers
+
 # This is a wrapper for the intersect_ray function of Physics2DDirectSpaceState with portal awareness.
 # If a ray intersects with a portal, it will be recast on the other one. Hence an array of intersections is retunred.
 # Note: The field 'from' will be added to each intersection, so that we know the origin of the subsequent casts.
@@ -9,7 +11,7 @@ static func intersect_ray(space_state: Physics2DDirectSpaceState, from: Vector2,
 
     while true:
         # Cast a ray
-        var r = space_state.intersect_ray(from, to, exclude, collision_layer, collide_with_bodies, collide_with_areas)
+        var r = space_state.intersect_ray(from, to, exclude, collision_layer | BinaryLayers.WHITE, collide_with_bodies, collide_with_areas)
         # If the ray did not hit anything: break
         if r.empty(): break
         # Add from (because you won't know it with portals)
@@ -17,7 +19,7 @@ static func intersect_ray(space_state: Physics2DDirectSpaceState, from: Vector2,
         # append result to array
         results.append(r)
         # If this collision did not hit a portal break
-        if !r.collider.has_meta("isPortal"): break
+        if !r.collider.has_meta("portal_type"): break
         # Otherwise, transform from and to and do it again
         else:
             # Transforming

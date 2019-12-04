@@ -135,6 +135,8 @@ shoot_orange_portal={
 2d_physics/layer_6="orange inner layer"
 2d_physics/layer_7="interaction"
 2d_physics/layer_8="white layer"
+2d_physics/layer_9="blue portal area"
+2d_physics/layer_10="orange portal area"
 
 [physics]
 

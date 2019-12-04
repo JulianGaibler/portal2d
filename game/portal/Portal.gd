@@ -10,7 +10,8 @@ enum PortalOrientation {UP = 0, DOWN = 1}
 #### Constants ####
 ##
 # This is the hole that gets cut into the geometry
-const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, 128), Vector2(-96, -128), Vector2(1, -128), Vector2(1, 128)])
+const PORTAL_HEIGHT = 112
+const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, PORTAL_HEIGHT), Vector2(-96, -PORTAL_HEIGHT), Vector2(1, -PORTAL_HEIGHT), Vector2(1, PORTAL_HEIGHT)])
 const PORTAL_COLOR_BLUE = Color("079be1")
 const PORTAL_COLOR_ORANGE = Color("ff7d17")
 
@@ -61,7 +62,13 @@ func initiate(type, orientation):
     direction_vec = (Vector2.UP if orientation == PortalOrientation.UP else Vector2.DOWN).rotated(global_rotation)
     
     # This will let portal-aware raycasts know they collided with a portal
-    $PortalLine.set_meta("isPortal",1)
+    $PortalLine.set_meta("portal_type",type)
+    
+    match type:
+        PortalType.BLUE_PORTAL:
+            $DetectionArea.set_collision_layer_bit(Layers.BLUE_PORTAL, true)
+        PortalType.ORANGE_PORTAL:
+            $DetectionArea.set_collision_layer_bit(Layers.ORANGE_PORTAL, true)
     
     # Hook up signals from the trigger-areas with functions
     outer_area.connect("body_exited", self, "leave_outer_area")
@@ -226,13 +233,13 @@ func teleport_vector(position, direction):
 
 
 func close_portal():
-    reset_portal()
     outer_area.disconnect("body_exited", self, "leave_outer_area")
     inner_area.disconnect("body_exited", self, "leave_inner_area")
     inner_area.disconnect("body_entered", self, "enter_inner_area")
     outer_area.disconnect("body_entered", self, "enter_outer_area")
     for body in inner_area.get_overlapping_bodies(): leave_inner_area(body)
     for body in outer_area.get_overlapping_bodies(): leave_outer_area(body)
+    reset_portal()
     animation_player.play("close_portal")
     yield(get_tree().create_timer(0.5), "timeout")
     get_parent().remove_child(self)
