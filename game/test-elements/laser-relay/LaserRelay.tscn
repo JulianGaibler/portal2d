@@ -1,0 +1,203 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test-elements/laser-relay/laser-relay.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/laser-relay/LaserRelay.gd" type="Script" id=2]
+[ext_resource path="res://test-elements/laser-relay/laser-light.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 23.0217
+
+[sub_resource type="Animation" id=2]
+resource_name = "BindPost"
+length = 0.4
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Rotor:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.75 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "rotating"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.75 ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Rotor:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 0, 90, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "rotating_end"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.75, 0.0 ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Rotor:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, 0, 0, 0.399848, 24.0429, 90, -0.5, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "rotating_start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.75 ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Rotor:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, 0, 0, 0.5, 0, 90, -0.49988, -30.0009, 0, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+
+[node name="LaserRelay" type="Area2D"]
+z_index = -2
+z_as_relative = false
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource( 2 )
+
+[node name="Base" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 512 )
+
+[node name="Rotor" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 512, 384, 384 )
+
+[node name="Relay" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+z_index = 2
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 512, 256, 256 )
+
+[node name="LaserDetection" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 3 )
+energy = 0.75
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BindPost = SubResource( 2 )
+anims/rotating = SubResource( 9 )
+anims/rotating_end = SubResource( 20 )
+anims/rotating_start = SubResource( 21 )

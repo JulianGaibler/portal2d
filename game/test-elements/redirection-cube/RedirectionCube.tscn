@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://test-elements/redirection-cube/reflection-cube.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/redirection-cube/RedirectionCube.gd" type="Script" id=2]
+[ext_resource path="res://test-elements/redirection-cube/reflection-cube-lens.png" type="Texture" id=3]
+[ext_resource path="res://classes/LaserEmitting.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.75
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40, 40 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 41, 41 )
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+vec2 barrelDistortion(vec2 uv) {   
+    float distortion = 0.1;
+    float r = uv.x*uv.x + uv.y*uv.y;
+    uv *= 1.6 + distortion * r + distortion * r * r;
+    return uv;
+}
+
+void fragment() {
+    float alpha = texture(TEXTURE, UV).a;
+    
+    if (alpha < 0.5) {
+        COLOR = vec4(0,0,0,0)
+    } else {
+        vec2 uv = UV;
+        uv = uv * 2.0 - 1.0;
+        uv = barrelDistortion(uv);
+        uv = 0.5 * (uv * 0.5 + 1.0);
+        
+        COLOR = textureLod(SCREEN_TEXTURE, (SCREEN_UV * uv)/UV, 0.0);
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+
+[node name="RedirectionCube" type="RigidBody2D" groups=[
+"can-fizzle",
+"can-pickup",
+"dynamic-prop",
+]]
+collision_layer = 66
+collision_mask = 66
+mass = 25.0
+physics_material_override = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="LaserDetection" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserDetection"]
+shape = SubResource( 3 )
+
+[node name="LensSprite" type="Sprite" parent="."]
+material = SubResource( 5 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+region_rect = Rect2( 8, 368, 216, 216 )
+
+[node name="CubeSprite" type="Sprite" parent="."]
+use_parent_material = true
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 16, 16, 352, 352 )
+
+[node name="Emitter" type="Node2D" parent="."]
+script = ExtResource( 4 )
+activated = false
