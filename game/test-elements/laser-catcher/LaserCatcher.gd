@@ -12,9 +12,6 @@ func _ready():
     laser_detection.connect("body_entered", self, "enter_area")
 
 
-func _physics_process(delta):
-    print(laser_detection.get_overlapping_bodies())
-
 func leave_area(body):
     lasers_in_area -= 1
     if lasers_in_area == 0:

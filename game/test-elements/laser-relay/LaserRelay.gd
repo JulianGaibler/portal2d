@@ -25,14 +25,12 @@ func _process(delta):
         timeout = null
         match action:
             actions.ON:
-                print("ON - ", lasers_in_area)
                 if lasers_in_area < 1 || active: return
                 emit_signal("activated")
                 active = true
                 animation_player.play("rotating_start")
                 animation_player.queue("rotating")
             actions.OFF:
-                print("OFF - ", lasers_in_area)
                 if lasers_in_area > 0 || !active: return
                 emit_signal("deactivated")
                 active = false

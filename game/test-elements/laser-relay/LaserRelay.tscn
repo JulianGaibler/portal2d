@@ -46,7 +46,7 @@ tracks/2/keys = {
 "values": [ 0.75 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "rotating"
 length = 1.5
 loop = true
@@ -72,7 +72,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.75 ]
+"values": [ 0.5 ]
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("Rotor:rotation_degrees")
@@ -85,7 +85,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1.5 )
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=4]
 resource_name = "rotating_end"
 length = 1.5
 tracks/0/type = "value"
@@ -110,7 +110,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.75, 0.0 ]
+"values": [ 0.5, 0.0 ]
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("Rotor:rotation_degrees")
@@ -123,7 +123,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1.5 )
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=5]
 resource_name = "rotating_start"
 length = 1.5
 tracks/0/type = "value"
@@ -148,7 +148,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.75 ]
+"values": [ 0.0, 0.5 ]
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("Rotor:rotation_degrees")
@@ -192,12 +192,12 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
 texture = ExtResource( 3 )
-energy = 0.75
+energy = 0.0
+mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BindPost = SubResource( 2 )
-anims/rotating = SubResource( 9 )
-anims/rotating_end = SubResource( 20 )
-anims/rotating_start = SubResource( 21 )
+anims/rotating = SubResource( 3 )
+anims/rotating_end = SubResource( 4 )
+anims/rotating_start = SubResource( 5 )
