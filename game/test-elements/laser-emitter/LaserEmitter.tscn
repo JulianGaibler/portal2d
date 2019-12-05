@@ -17,7 +17,7 @@ visible = false
 position = Vector2( -32, 0 )
 shape = SubResource( 1 )
 
-[node name="laser-emitter" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
