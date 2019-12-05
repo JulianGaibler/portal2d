@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BridgeEmitting",
+"language": "GDScript",
+"path": "res://classes/BridgeEmitting.gd"
+}, {
 "base": "RigidBody2D",
 "class": "FizzleRigidBody2D",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://utils/PortalUtils.gd"
 } ]
 _global_script_class_icons={
+"BridgeEmitting": "",
 "FizzleRigidBody2D": "",
 "LaserEmitting": "",
 "Matrix2D": "",
