@@ -15,4 +15,5 @@ func _ready():
 func activate():
     var instance = Portal.instance()
     add_child(instance)
+    instance.position += Vector2.RIGHT
     instance.initiate(type, orientation)

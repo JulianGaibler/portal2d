@@ -19,12 +19,11 @@ extents = Vector2( 16, 272 )
 a = Vector2( 0, -112 )
 b = Vector2( 0, 112 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 4 )
 shader_param/bright_amount = 2.5
 
-[sub_resource type="Animation" id=5]
-resource_name = "BindPose"
+[sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
@@ -77,8 +76,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "close_portal"
+[sub_resource type="Animation" id=7]
 length = 0.3
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
@@ -131,8 +129,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "closed_portal"
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
@@ -185,8 +182,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "open_portal"
+[sub_resource type="Animation" id=9]
 length = 0.5
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("ColorNode/ColorRect:scale:x")
@@ -293,7 +289,7 @@ __meta__ = {
 shape = SubResource( 3 )
 
 [node name="PortalLine" type="StaticBody2D" parent="."]
-visible = false
+position = Vector2( 0.1, 0 )
 collision_layer = 128
 collision_mask = 128
 
@@ -313,7 +309,7 @@ shape = SubResource( 1 )
 
 [node name="ColorNode" type="Node2D" parent="."]
 modulate = Color( 0.352941, 0.584314, 0.909804, 1 )
-material = SubResource( 9 )
+material = SubResource( 5 )
 position = Vector2( -0.5, 0 )
 
 [node name="Particles" parent="ColorNode" instance=ExtResource( 1 )]
@@ -337,7 +333,7 @@ shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/BindPose = SubResource( 5 )
-anims/close_portal = SubResource( 6 )
-anims/closed_portal = SubResource( 7 )
-anims/open_portal = SubResource( 8 )
+anims/BindPose = SubResource( 6 )
+anims/close_portal = SubResource( 7 )
+anims/closed_portal = SubResource( 8 )
+anims/open_portal = SubResource( 9 )

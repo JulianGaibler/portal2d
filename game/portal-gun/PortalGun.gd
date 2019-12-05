@@ -111,10 +111,6 @@ func probe_for_air(space_state, position, normal, normal_up, dist, direction):
             moved_by += probing_space * direction
             continue
         break
-
-    print("moved_by: ", moved_by)
-        
-    print("moved_by: ", moved_by)
     
     return position + (normal_up * moved_by)
 

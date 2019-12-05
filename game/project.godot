@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/FizzleRigidBody2D.gd"
 }, {
+"base": "Node2D",
+"class": "LaserEmitting",
+"language": "GDScript",
+"path": "res://classes/LaserEmitting.gd"
+}, {
 "base": "Reference",
 "class": "Matrix2D",
 "language": "GDScript",
@@ -36,6 +41,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "FizzleRigidBody2D": "",
+"LaserEmitting": "",
 "Matrix2D": "",
 "Player": "",
 "PolygonUtils": "",
@@ -46,6 +52,7 @@ _global_script_class_icons={
 
 config/name="p2d_test"
 run/main_scene="res://World.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -137,6 +144,7 @@ shoot_orange_portal={
 2d_physics/layer_8="white layer"
 2d_physics/layer_9="blue portal area"
 2d_physics/layer_10="orange portal area"
+2d_physics/layer_11="laser"
 
 [physics]
 
