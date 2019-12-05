@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://test-elements/light-bridge-emitter/light-bridge-emitter.png" type="Texture" id=1]
+[ext_resource path="res://classes/BridgeEmitting.gd" type="Script" id=2]
+[ext_resource path="res://test-elements/light-bridge-emitter/LightBridgeEmitter.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.0
+
+[node name="LightBridgeEmitter" type="StaticBody2D"]
+collision_layer = 15
+collision_mask = 15
+script = ExtResource( 3 )
+
+[node name="Emitter" type="Node2D" parent="."]
+position = Vector2( 7, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 16, 0 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
