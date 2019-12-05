@@ -331,7 +331,7 @@ func leave_inner_area(body):
 
 # This function adds clones of dynamic-props to the physics_shadows list
 func add_shadow_body(body):
-    if body.is_in_group("physics-shadow"): return
+    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
     
     var shapes = []
     var sprites = []
@@ -362,7 +362,7 @@ func add_shadow_body(body):
 
 # Removed physics-shadows from physics_shadows list
 func remove_shadow_body(body):
-    if body.is_in_group("physics-shadow"): return
+    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
     var collider = physics_shadows[body.get_rid()][1]
     body.remove_collision_exception_with(collider)
     remove_child(collider)
