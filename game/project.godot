@@ -58,7 +58,6 @@ _global_script_class_icons={
 
 config/name="p2d_test"
 run/main_scene="res://World.tscn"
-boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -67,6 +66,7 @@ PortalManager="*res://PortalManager.gd"
 
 [display]
 
+mouse_cursor/custom_image="res://textures/crosshair.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -110,13 +110,11 @@ interact={
 zoom_out={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":true,"command":true,"pressed":false,"scancode":45,"unicode":0,"echo":false,"script":null)
  ]
 }
 zoom_in={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":true,"command":true,"pressed":false,"scancode":43,"unicode":0,"echo":false,"script":null)
  ]
 }
 shake_camera_portalshot={
@@ -150,9 +148,6 @@ shoot_orange_portal={
 2d_physics/layer_6="orange inner layer"
 2d_physics/layer_7="interaction"
 2d_physics/layer_8="white layer"
-2d_physics/layer_9="blue portal area"
-2d_physics/layer_10="orange portal area"
-2d_physics/layer_11="laser"
 
 [physics]
 

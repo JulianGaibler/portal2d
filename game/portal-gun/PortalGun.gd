@@ -9,7 +9,7 @@ const probing_space = 10
 
 onready var active_end := $ActiveEnd
 
-func primary_fire():
+func primary_fire():#
     shoot_portal(PortalType.BLUE_PORTAL)
 
 func secondary_fire():
@@ -26,6 +26,7 @@ func shoot_portal(type):
     if (corrected_position != null):
         var deg = rad2deg(Vector2.RIGHT.angle_to(direction))
         # if we can place the portal adjust the position
+        print(corrected_position)
         spawn_portal(corrected_position, hit.normal, deg, type)
 
 
