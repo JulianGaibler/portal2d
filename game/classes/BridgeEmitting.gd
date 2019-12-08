@@ -14,13 +14,14 @@ onready var parent := get_parent()
 
 func activate():
     activated = true
+    test_vec = Vector2.ZERO
 
 func deactivate():
     activated = false
     if first_bridge != null:
         var l = first_bridge
         first_bridge = null
-        l.queue_free()
+        l.delete_now()
 
 func _physics_process(delta):
     if !activated: return
@@ -40,20 +41,22 @@ func _physics_process(delta):
     if compare_vec.distance_to(test_vec) < 12: return
     else: test_vec = compare_vec
         
-    var parent = self
+    var root = get_tree().get_root()
+    var parent = root
     var new_first = null
     
     for hit in results:
         var bridge = LightBridge.instance()
         parent.add_child(bridge)
-        if parent == self: new_first = bridge
+        if parent == root: new_first = bridge
+        else: parent.child_bridge = bridge
         parent = bridge
-        var to = to_local(hit.from) + (hit.normal * 10000) if hit.empty else to_local(hit.position)
-        bridge.set_line(to_local(hit.from), to)
+        var length = 10000 if hit.empty else hit.position.distance_to(hit.from)
+        bridge.set_line(hit.from, (hit.position - hit.from).normalized(), length)
         
     if first_bridge != null:
         var l = first_bridge
         first_bridge = new_first
-        l.queue_free()
+        l.delete_now()
     else:
         first_bridge = new_first

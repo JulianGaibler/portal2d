@@ -28,3 +28,7 @@ width = 16.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 2 )
 texture_mode = 2
+
+[node name="BodyArea" type="Area2D" parent="."]
+collision_layer = 14
+collision_mask = 14
