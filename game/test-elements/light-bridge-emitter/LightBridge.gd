@@ -16,10 +16,3 @@ func set_line(from: Vector2, to: Vector2):
     shape.b = to
     
     shape_owner_add_shape(owner, shape)
-
-func _draw():
-    if shape != null:
-        draw_rect ( Rect2(-shape.extents/2, shape.extents), Color.red, false )
-    
-func _process(delta):
-    update()

@@ -31,6 +31,6 @@ func _process(delta):
     if !fizzled: return
     fizzle_time += delta
     if fizzle_time > FIZZLE_DURATION:
-        free()
+        queue_free()
     else:
         self.get_material().set_shader_param("Clip", fizzle_time / FIZZLE_DURATION)

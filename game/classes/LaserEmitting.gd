@@ -20,7 +20,7 @@ func deactivate():
     if first_laser != null:
         var l = first_laser
         first_laser = null
-        l.free()
+        l.queue_free()
 
 func _physics_process(delta):
     if !activated: return
@@ -52,6 +52,6 @@ func _physics_process(delta):
     if first_laser != null:
         var l = first_laser
         first_laser = new_first
-        l.free()
+        l.queue_free()
     else:
         first_laser = new_first

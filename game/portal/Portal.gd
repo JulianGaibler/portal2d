@@ -255,16 +255,16 @@ func close_portal():
     reset_portal()
     animation_player.play("close_portal")
     yield(get_tree().create_timer(0.5), "timeout")
-    free()
+    queue_free()
 
 func reset_portal():
     for collider in physics_shadows.values():
         remove_child(collider[1])
-        collider[1].free()
+        collider[1].queue_free()
     transfomration_matrix = null
     if (static_collider != null):
         remove_child(static_collider)
-        static_collider.free()
+        static_collider.queue_free()
     static_collider = null
 
 
@@ -366,7 +366,7 @@ func remove_shadow_body(body):
     var collider = physics_shadows[body.get_rid()][1]
     body.remove_collision_exception_with(collider)
     remove_child(collider)
-    collider.free()
+    collider.queue_free()
     physics_shadows.erase(body.get_rid())
 
 

@@ -20,7 +20,7 @@ func deactivate():
     if first_bridge != null:
         var l = first_bridge
         first_bridge = null
-        l.free()
+        l.queue_free()
 
 func _physics_process(delta):
     if !activated: return
@@ -54,6 +54,6 @@ func _physics_process(delta):
     if first_bridge != null:
         var l = first_bridge
         first_bridge = new_first
-        l.free()
+        l.queue_free()
     else:
         first_bridge = new_first
