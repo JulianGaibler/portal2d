@@ -20,7 +20,7 @@ func shoot_portal(type):
     var direction = (active_end.global_position - global_position).normalized()
     var space_state = get_world_2d().direct_space_state
     var exclude = get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("portal-ignore")
-    var hit = space_state.intersect_ray(active_end.global_position, active_end.global_position + (direction * 3000), exclude, BinaryLayers.FLOOR)
+    var hit = space_state.intersect_ray(global_position, global_position + (direction * 3000), exclude, BinaryLayers.FLOOR)
     if hit.empty(): return
     var corrected_position = check_and_correct_placement(hit, type, exclude)
     if (corrected_position != null):
