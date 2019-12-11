@@ -18,6 +18,10 @@ var DURATION = duration
 var WAIT_DURATION = wait_duration
 var waypoint_index = 1
 
+func _ready():
+    if is_active:
+        start()
+
 func start():
     is_active = true
     var waypoints = get_node(positions).get_children()
