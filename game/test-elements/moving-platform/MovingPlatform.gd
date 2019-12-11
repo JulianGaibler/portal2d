@@ -10,7 +10,7 @@ export(bool) var is_active = false
 export(bool) var loop = false
 export var duration = 3
 export var wait_duration = 1
-export (NodePath) var positions = NodePath()
+export (NodePath) var positions_points = NodePath()
 onready var TweenNode = get_node("Tween")
 onready var DurationTimer = get_node("Timer")
 
@@ -24,8 +24,8 @@ func _ready():
 
 func start():
     is_active = true
-    var waypoints = get_node(positions).get_children()
-    positions = []
+    var waypoints = get_node(positions_points).get_children()
+    var positions = []
     for i in range(len(waypoints) + 1):
         if i == 0:
             positions.append(position)
@@ -63,7 +63,6 @@ func _on_PedestalButton_pressed():
         is_active = true
         start()
     else:
-        print("STOP!")
         is_active = false
         stop()
         
