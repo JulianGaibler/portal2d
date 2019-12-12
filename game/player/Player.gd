@@ -8,7 +8,6 @@ const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 onready var portalgun := $PortalGun
 onready var ray := $PortalGun/RayCast2D
 
-onready var body =  get_node("AnimationPlayer")
 
 signal fired_blue_portal
 signal fired_orange_portal
@@ -72,11 +71,9 @@ func _physics_process(delta):
     if Input.is_action_pressed("move_left"):
         if !target_speed == -WALK_SPEED:
             target_speed -= 25
-            body.play("Walking")
     if Input.is_action_pressed("move_right"):
         if !target_speed == WALK_SPEED:
             target_speed += 25
-            body.play("Walking")
     
     if abs(target_speed) > WALK_SPEED:
         if target_speed < 0:
@@ -90,7 +87,6 @@ func _physics_process(delta):
     # Jumping
     if on_floor and Input.is_action_just_pressed("move_jump"):
         linear_velocity.y = -JUMP_SPEED
-        body.play("Jumping")
 
     # Rotating
     if (rotation_degrees == 0):
