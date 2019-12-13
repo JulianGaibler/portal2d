@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://shader/tractor/tractor-beam.shader" type="Shader" id=1]
+[ext_resource path="res://test-elements/excursion-funnel-emitter/ExcursionFunnel.gd" type="Script" id=2]
+[ext_resource path="res://shader/tractor/tractor-lines.jpg" type="Texture" id=3]
+[ext_resource path="res://shader/tractor/tractor-helix_1.jpg" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/color_low = Color( 0.435294, 0.478431, 0.913725, 1 )
+shader_param/color_high = Color( 0.141176, 0.658824, 1, 1 )
+shader_param/width = 1.0
+shader_param/speed = 1.0
+shader_param/up = true
+shader_param/helix_texture = ExtResource( 4 )
+shader_param/lines_texture = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/color_low = Color( 0.435294, 0.478431, 0.913725, 1 )
+shader_param/color_high = Color( 0.141176, 0.658824, 1, 1 )
+shader_param/width = 1.0
+shader_param/speed = 1.0
+shader_param/up = false
+shader_param/helix_texture = ExtResource( 4 )
+shader_param/lines_texture = ExtResource( 3 )
+
+[node name="ExcursionFunnel" type="Node2D"]
+z_index = 13
+z_as_relative = false
+script = ExtResource( 2 )
+
+[node name="LowerArea" type="Area2D" parent="." groups=[
+"excursion-funnel",
+"portal-ignore",
+]]
+z_index = -1
+z_as_relative = false
+space_override = 3
+gravity_vec = Vector2( 0, 0 )
+gravity = 400.0
+linear_damp = 1.0
+priority = 2.0
+collision_layer = 14
+collision_mask = 14
+
+[node name="UpperArea" type="Area2D" parent="." groups=[
+"excursion-funnel",
+"portal-ignore",
+]]
+z_index = -1
+z_as_relative = false
+space_override = 3
+gravity_vec = Vector2( 0, 0 )
+gravity = 400.0
+linear_damp = 1.0
+priority = 2.0
+collision_layer = 14
+collision_mask = 14
+
+[node name="CenterArea" type="Area2D" parent="." groups=[
+"excursion-funnel",
+"portal-ignore",
+]]
+z_index = -1
+z_as_relative = false
+space_override = 3
+gravity_vec = Vector2( 0, 0 )
+gravity = 700.0
+linear_damp = 7.5
+priority = 6.0
+collision_layer = 14
+collision_mask = 14
+
+[node name="VisualLineFront" type="Line2D" parent="."]
+material = SubResource( 1 )
+z_index = 3
+z_as_relative = false
+width = 240.0
+default_color = Color( 1, 1, 1, 1 )
+texture_mode = 2
+
+[node name="VisualLineBack" type="Line2D" parent="."]
+material = SubResource( 2 )
+z_index = -3
+z_as_relative = false
+width = 240.0
+default_color = Color( 1, 1, 1, 0.666667 )
+texture_mode = 2
