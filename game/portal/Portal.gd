@@ -52,7 +52,7 @@ func _ready():
     animation_player.play("closed_portal")
 
 # This function has to be called after the portal has been placed in the world
-func initiate(type, orientation):
+func initiate(type, orientation, fixed = false):
     self.type = type
     self.orientation = orientation
     
@@ -92,7 +92,7 @@ func initiate(type, orientation):
         collider_polygons.append(polygon2)
     
     # Register newly created portal with the PortalManager
-    PortalManager.register_portal(self)
+    PortalManager.register_portal(self, fixed)
 
 # This function get's called by the PortalManager to link or unlink the portal
 func link_portal(new_portal):

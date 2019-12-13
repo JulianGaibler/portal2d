@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 // Gonkee's water shader for Godot 3 - full tutorial https://youtu.be/uhMAHpV_cDg
@@ -69,7 +69,7 @@ void fragment(){
 }"
 
 [resource]
-shader = SubResource( 8 )
+shader = SubResource( 1 )
 shader_param/blue_tint = Color( 0.2, 0.380392, 0.00392157, 1 )
 shader_param/sprite_scale = Vector2( 5, 5 )
 shader_param/scale_x = 1.0

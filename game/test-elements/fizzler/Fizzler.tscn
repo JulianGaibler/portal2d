@@ -4,7 +4,6 @@
 [ext_resource path="res://textures/white.png" type="Texture" id=2]
 [ext_resource path="res://shader/fizzler/FizzlerMaterial.tres" type="Material" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.499992, 0.5 )
 
@@ -24,3 +23,13 @@ material = ExtResource( 3 )
 position = Vector2( -2.47955e-05, 0 )
 scale = Vector2( 7.99995, 272 )
 texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+position = Vector2( -2.47955e-05, 0 )
+scale = Vector2( 7.99995, 272 )
+shape = SubResource( 1 )
