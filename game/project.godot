@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://classes/FizzleRigidBody2D.gd"
 }, {
 "base": "Node2D",
+"class": "FunnelEmitting",
+"language": "GDScript",
+"path": "res://classes/FunnelEmitting.gd"
+}, {
+"base": "Node2D",
 "class": "LaserEmitting",
 "language": "GDScript",
 "path": "res://classes/LaserEmitting.gd"
@@ -47,6 +52,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BridgeEmitting": "",
 "FizzleRigidBody2D": "",
+"FunnelEmitting": "",
 "LaserEmitting": "",
 "Matrix2D": "",
 "Player": "",

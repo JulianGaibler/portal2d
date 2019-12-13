@@ -7,7 +7,6 @@ const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 # portal gun node detection
 onready var portalgun := $PortalGun
 
-const GRAVITY_VEC = Vector2(0, 2500)
 const FLOOR_NORMAL = Vector2.UP
 const WALK_SPEED = 25 # pixels/sec
 const JUMP_SPEED = 650
@@ -21,6 +20,13 @@ var held_object = null
 var deg = 0
 
 func _physics_process(delta):
+
+    var direct_state = Physics2DServer.body_get_direct_state(get_rid())
+    var gravity_vec = direct_state.total_gravity * 2.0
+    var gravity_n = gravity_vec.normalized()
+    
+    var linear_damp = 1.0 - delta * direct_state.total_linear_damp
+    if linear_damp < 0: linear_damp = 0
 
     if portalgun != null:
         # rotate the portal gun
@@ -43,9 +49,11 @@ func _physics_process(delta):
     ## Movement ##
     
     # Apply gravity
-    linear_velocity += delta * GRAVITY_VEC
+    linear_velocity += delta * gravity_vec
+    # Apply linear damp
+    linear_velocity *= linear_damp
     # Move and slide
-    linear_velocity = move_and_slide(linear_velocity, FLOOR_NORMAL, false, 4, 0.785398, false)
+    linear_velocity = move_and_slide(linear_velocity, -gravity_n, false, 4, 0.785398, false)
 
     ## Physics ##
 
@@ -59,6 +67,9 @@ func _physics_process(delta):
     var on_floor = is_on_floor()
 
     ## Control ##
+
+
+    linear_velocity = linear_velocity.rotated(FLOOR_NORMAL.angle_to(-gravity_n))
 
     # Horizontal movement
     var target_speed = 0
@@ -81,6 +92,8 @@ func _physics_process(delta):
     # Jumping
     if on_floor and Input.is_action_just_pressed("move_jump"):
         linear_velocity.y = -JUMP_SPEED
+
+    linear_velocity = linear_velocity.rotated(-FLOOR_NORMAL.angle_to(-gravity_n))
 
     # Rotating
     if (rotation_degrees == 0):
