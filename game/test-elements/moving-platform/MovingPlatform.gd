@@ -87,3 +87,10 @@ func activate():
 
 func _on_Timer_timeout(positions):
     next_move(positions)
+
+
+func _on_PedestalButton_pressed():
+    if not is_active:
+        start()
+    else:
+        stop()
