@@ -61,6 +61,15 @@ func initiate(type, orientation, fixed = false):
         PortalType.ORANGE_PORTAL: color_node.modulate = PORTAL_COLOR_ORANGE
     
     animation_player.play("open_portal")
+
+    var audio_streams = [
+    "res://sounds/portal/background-drone1.wav",
+    "res://sounds/portal/background-drone2.wav",
+    "res://sounds/portal/background-drone3.wav"]
+    
+    randomize()
+    var stream = load(audio_streams[randi()%audio_streams.size()])
+    $Sound.set_stream(stream)
     
     # Calculate direction- and normal-vector
     normal_vec = Vector2.RIGHT.rotated(global_rotation)

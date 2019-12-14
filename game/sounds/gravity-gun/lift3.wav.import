@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/lift3.wav-f54ba1103094aa5f6ce94698e903fba9.sample"
+
+[deps]
+
+source_file="res://sounds/gravity-gun/lift3.wav"
+dest_files=[ "res://.import/lift3.wav-f54ba1103094aa5f6ce94698e903fba9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

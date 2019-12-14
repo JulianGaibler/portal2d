@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/gun2.wav-ebdc8f6beb75b9de2e87d8a3198da6c3.sample"
+
+[deps]
+
+source_file="res://sounds/portal-gun/gun2.wav"
+dest_files=[ "res://.import/gun2.wav-ebdc8f6beb75b9de2e87d8a3198da6c3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

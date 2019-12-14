@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/transition2.wav-a4aa90e00101c69a9301be84ff2c6ee2.sample"
+
+[deps]
+
+source_file="res://sounds/portal/transition2.wav"
+dest_files=[ "res://.import/transition2.wav-a4aa90e00101c69a9301be84ff2c6ee2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
