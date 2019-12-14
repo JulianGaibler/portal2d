@@ -1,27 +1,28 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sounds/background/background-drone-ambient.wav" type="AudioStream" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=3]
-[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://test-elements/portal-spawner/PortalSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
-[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=7]
-[ext_resource path="res://test-elements/portal-spawner/PortalSpawner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=9]
-[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=10]
+[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=10]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=11]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=12]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=13]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=14]
-[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=15]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=15]
 [ext_resource path="res://classes/TextureToggle.gd" type="Script" id=16]
 [ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=17]
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=18]
-[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=19]
-[ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=20]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=21]
+[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=19]
+[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=20]
+[ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=21]
 [ext_resource path="res://textures/light.png" type="Texture" id=22]
+[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 32 )
@@ -49,6 +50,11 @@ extents = Vector2( 160, 32.351 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 6 )
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="WorldEnvironment"]
+stream = ExtResource( 1 )
+volume_db = -5.0
+autoplay = true
+
 [node name="TileMapBackground" type="TileMap" parent="."]
 modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
 scale = Vector2( 0.5, 0.5 )
@@ -69,7 +75,7 @@ cell_quadrant_size = 64
 format = 1
 tile_data = PoolIntArray( -720908, 5, 0, -720904, 5, 0, -720900, 6, 0, -720898, 8, 0, -786430, 6, 0, -786428, 5, 0, -786424, 6, 0, -786422, 8, 0, -786421, 5, 0, -786417, 6, 0, -786415, 5, 0, -786411, 5, 0, -655362, 8, 0, -720886, 8, 0, -589828, 8, 0, -589827, 6, 0, -589825, 8, 0, -655352, 8, 0, -655351, 6, 0, -655345, 6, 0, -524292, 8, 0, -524289, 8, 0, -589816, 8, 0, -458764, 6, 0, -458762, 8, 0, -458761, 8, 0, -458760, 6, 0, -458758, 0, 0, -458754, 6, 0, -524284, 1, 0, -524282, 2, 0, -524280, 8, 0, -524279, 8, 0, -524278, 6, 0, -524276, 8, 0, -524275, 8, 0, -524274, 6, 0, -524272, 6, 0, -524270, 6, 0, -524268, 8, 0, -524267, 5, 0, -393226, 6, 0, -458744, 6, 0, -458740, 8, 0, -458739, 8, 0, -458732, 8, 0, -327692, 6, 0, -327688, 2, 0, -327682, 2, 0, -393210, 3, 0, -393209, 3, 0, -393206, 6, 0, -393204, 5, 0, -393200, 8, 0, -393199, 8, 0, -393198, 8, 0, -393197, 6, 0, -327680, 3, 0, -327674, 3, 0, -327673, 3, 0, -327672, 3, 0, -327671, 3, 0, -327664, 8, 0, -327663, 8, 0, -327662, 8, 0, -196620, 8, 0, -196619, 8, 0, -196610, 19, 0, -196609, 19, 2, -262144, 3, 0, -262140, 19, 0, -262139, 19, 1, -262138, 19, 1, -262137, 19, 2, -262128, 6, 0, -262126, 8, 0, -262125, 8, 0, -262124, 8, 0, -262123, 8, 0, -262122, 8, 0, -262121, 8, 0, -262120, 8, 0, -131084, 1, 0, -196590, 8, 0, -196589, 6, 0, -196587, 8, 0, -196586, 8, 0, -196585, 8, 0, -196584, 8, 0, -131061, 6, 0, -131059, 8, 0, -131056, 8, 0, -131055, 8, 0, -131054, 8, 0, -131051, 6, 0, -131049, 8, 0, -131048, 8, 0, -65523, 8, 0, -65520, 3, 0, -65519, 4, 0, -65518, 3, 0, -65517, 4, 0, -65516, 3, 0, -65513, 8, 0, -65512, 8, 0, 11, 8, 0, 12, 8, 0, 13, 8, 0, 16, 4, 0, 17, 3, 0, 18, 4, 0, 19, 3, 0, 20, 4, 0, 21, 6, 0, 23, 8, 0, 24, 8, 0, 131060, 8, 0, 131061, 8, 0, 131062, 5, 0, 131066, 6, 0, 65547, 6, 0, 65559, 8, 0, 65560, 8, 0, 196596, 8, 0, 196597, 8, 0, 131093, 8, 0, 131094, 8, 0, 131095, 6, 0, 262132, 6, 0, 196629, 8, 0, 196630, 8, 0, 262165, 6, 0, 262167, 6, 0, 393204, 8, 0, 393205, 8, 0, 393206, 6, 0, 393208, 1, 0, 458740, 8, 0, 458741, 8, 0, 393237, 5, 0, 524276, 5, 0, 524300, 0, 0, 524304, 3, 0, 524305, 4, 0, 524306, 3, 0, 524307, 4, 0, 524308, 3, 0, 655352, 2, 0, 655354, 2, 0, 655356, 0, 0, 589824, 2, 0, 589826, 2, 0, 589828, 3, 0, 589829, 4, 0, 589830, 3, 0, 589831, 4, 0, 589832, 3, 0, 589833, 4, 0, 589834, 2, 0, 589840, 4, 0, 589841, 3, 0, 589842, 4, 0, 589843, 3, 0, 589844, 4, 0, 655364, 4, 0, 655365, 3, 0, 655366, 4, 0, 655367, 3, 0, 655368, 4, 0, 655369, 3, 0, 655376, 8, 0, 655377, 5, 0, 655381, 8, 0, 655382, 8, 0, 655383, 8, 0, 655384, 8, 0, 786420, 6, 0, 786422, 8, 0, 786423, 8, 0, 786424, 0, 0, 720896, 0, 0, 720900, 0, 0, 720904, 0, 0, 720912, 8, 0, 720917, 6, 0, 720919, 6, 0, 851958, 8, 0, 851959, 8, 0, 786444, 6, 0, 786446, 8, 0, 786447, 8, 0, 786448, 8, 0, 917492, 8, 0, 917493, 8, 0, 917494, 6, 0, 917500, 2, 0, 917502, 2, 0, 851982, 6, 0, 851984, 8, 0, 851989, 6, 0, 851991, 6, 0, 983028, 8, 0, 983029, 8, 0, 917516, 8, 0, 917517, 8, 0, 917520, 8, 0, 917521, 8, 0, 917522, 8, 0, 917523, 8, 0, 917524, 8, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 21 )]
+[node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 560, 496 )
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
@@ -82,7 +88,7 @@ drag_margin_right = 0.5
 drag_margin_bottom = 0.5
 script = ExtResource( 3 )
 
-[node name="PortalGun" parent="Player" instance=ExtResource( 19 )]
+[node name="PortalGun" parent="Player" instance=ExtResource( 10 )]
 position = Vector2( 0, -80 )
 scale = Vector2( 0.2, 0.2 )
 
@@ -132,7 +138,7 @@ shape = SubResource( 6 )
 position = Vector2( 1184, 32 )
 shape = SubResource( 7 )
 
-[node name="CubeDropper" parent="." instance=ExtResource( 10 )]
+[node name="CubeDropper" parent="." instance=ExtResource( 15 )]
 position = Vector2( 384, -192 )
 auto_drop = true
 object = ExtResource( 5 )
@@ -140,7 +146,7 @@ auto_respawn = true
 
 [node name="Fizzler" type="Node2D" parent="."]
 
-[node name="Fizzler" parent="Fizzler" instance=ExtResource( 7 )]
+[node name="Fizzler" parent="Fizzler" instance=ExtResource( 23 )]
 position = Vector2( 800, 352 )
 scale = Vector2( 1, 1.08 )
 
@@ -155,14 +161,14 @@ rotation = -3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 9 )
 
-[node name="TestchamberSign" parent="." instance=ExtResource( 15 )]
+[node name="TestchamberSign" parent="." instance=ExtResource( 19 )]
 position = Vector2( -128, 336 )
 number = -1
 max_number = 100
 icons_type = [ 0, 1 ]
 icons_on = [ true, true ]
 
-[node name="PedestalButton" parent="." instance=ExtResource( 1 )]
+[node name="PedestalButton" parent="." instance=ExtResource( 20 )]
 position = Vector2( -304, 64 )
 scale = Vector2( -1, 1 )
 
@@ -229,32 +235,32 @@ texture_on = ExtResource( 14 )
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
 
-[node name="Camera" parent="." instance=ExtResource( 4 )]
+[node name="Camera" parent="." instance=ExtResource( 8 )]
 position = Vector2( 896, -96 )
 scale = Vector2( -1, 1 )
 
-[node name="Camera2" parent="." instance=ExtResource( 4 )]
+[node name="Camera2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 704, 112 )
 
-[node name="PortalSpawner" parent="." instance=ExtResource( 8 )]
+[node name="PortalSpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( -640, -96 )
 start_activated = true
 type = 1
 
 [node name="Lights" type="Node2D" parent="."]
 
-[node name="GlassLightCover" parent="Lights" instance=ExtResource( 20 )]
+[node name="GlassLightCover" parent="Lights" instance=ExtResource( 21 )]
 position = Vector2( -352, 448 )
 
-[node name="GlassLightCover2" parent="Lights" instance=ExtResource( 20 )]
+[node name="GlassLightCover2" parent="Lights" instance=ExtResource( 21 )]
 position = Vector2( -256, -224 )
 rotation = 1.5708
 
-[node name="GlassLightCover4" parent="Lights" instance=ExtResource( 20 )]
+[node name="GlassLightCover4" parent="Lights" instance=ExtResource( 21 )]
 position = Vector2( 1088, 224 )
 rotation = 1.5708
 
-[node name="GlassLightCover6" parent="Lights" instance=ExtResource( 20 )]
+[node name="GlassLightCover6" parent="Lights" instance=ExtResource( 21 )]
 position = Vector2( 640, -224 )
 rotation = 1.5708
 

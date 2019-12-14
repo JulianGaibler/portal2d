@@ -343,4 +343,4 @@ anims/open_portal = SubResource( 9 )
 stream = ExtResource( 1 )
 volume_db = -15.0
 autoplay = true
-bus = "Reverb"
+bus = "Panning"

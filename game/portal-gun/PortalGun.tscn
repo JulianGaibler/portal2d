@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://portal-gun/portal-gun.png" type="Texture" id=1]
 [ext_resource path="res://portal-gun/PortalGun.gd" type="Script" id=2]
+[ext_resource path="res://sounds/portal-gun/gun1.wav" type="AudioStream" id=3]
 
 [node name="PortalGun" type="Node2D"]
 position = Vector2( -1.10803, -1.10803 )
@@ -13,3 +14,7 @@ texture = ExtResource( 1 )
 
 [node name="ActiveEnd" type="Position2D" parent="."]
 position = Vector2( 401.108, 1.10803 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "Reverb"

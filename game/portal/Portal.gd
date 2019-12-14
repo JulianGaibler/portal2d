@@ -48,6 +48,12 @@ var direction_vec
 # Basis transformation matrix from this to the linked portal
 var transfomration_matrix
 
+const audio_streams = [
+    "res://sounds/portal/background-drone1.wav",
+    "res://sounds/portal/background-drone2.wav",
+    "res://sounds/portal/background-drone3.wav"
+    ]
+
 func _ready():
     animation_player.play("closed_portal")
 
@@ -62,11 +68,6 @@ func initiate(type, orientation, fixed = false):
     
     animation_player.play("open_portal")
 
-    var audio_streams = [
-    "res://sounds/portal/background-drone1.wav",
-    "res://sounds/portal/background-drone2.wav",
-    "res://sounds/portal/background-drone3.wav"]
-    
     randomize()
     var stream = load(audio_streams[randi()%audio_streams.size()])
     $Sound.set_stream(stream)

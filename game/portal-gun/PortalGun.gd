@@ -7,16 +7,32 @@ const PORTAL_HEIGHT = preload("res://portal/Portal.gd").PORTAL_HEIGHT
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 const probing_space = 10
 
+const audio_streams = [
+    "res://sounds/portal-gun/gun1.wav",
+    "res://sounds/portal-gun/gun2.wav",
+    "res://sounds/portal-gun/gun3.wav",
+    "res://sounds/portal-gun/gun4.wav",
+    "res://sounds/portal-gun/gun5.wav"
+    ]
+
 onready var active_end := $ActiveEnd
+
+func play_sound():
+    randomize()
+    var stream = load(audio_streams[randi()%audio_streams.size()])
+    $Sound.set_stream(stream)
+    $Sound.play()
 
 func primary_fire():
     shoot_portal(PortalType.BLUE_PORTAL)
+    play_sound()
 
 func secondary_fire():
     shoot_portal(PortalType.ORANGE_PORTAL)
-
+    play_sound()
 
 func shoot_portal(type):
+    
     var direction = (active_end.global_position - global_position).normalized()
     var space_state = get_world_2d().direct_space_state
     var exclude = get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("portal-ignore")
