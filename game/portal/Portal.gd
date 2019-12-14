@@ -48,10 +48,15 @@ var direction_vec
 # Basis transformation matrix from this to the linked portal
 var transfomration_matrix
 
-const audio_streams = [
+const ambient_audio_streams = [
     "res://sounds/portal/background-drone1.wav",
     "res://sounds/portal/background-drone2.wav",
     "res://sounds/portal/background-drone3.wav"
+    ]
+
+const transition_audio_streams = [
+    "res://sounds/portal/transition1.wav",
+    "res://sounds/portal/transition2.wav"
     ]
 
 func _ready():
@@ -67,10 +72,8 @@ func initiate(type, orientation, fixed = false):
         PortalType.ORANGE_PORTAL: color_node.modulate = PORTAL_COLOR_ORANGE
     
     animation_player.play("open_portal")
-
-    randomize()
-    var stream = load(audio_streams[randi()%audio_streams.size()])
-    $Sound.set_stream(stream)
+    
+    play_ambient_sound()
     
     # Calculate direction- and normal-vector
     normal_vec = Vector2.RIGHT.rotated(global_rotation)
@@ -103,6 +106,17 @@ func initiate(type, orientation, fixed = false):
     
     # Register newly created portal with the PortalManager
     PortalManager.register_portal(self, fixed)
+
+func play_ambient_sound():
+    randomize()
+    var stream = load(ambient_audio_streams[randi()%ambient_audio_streams.size()])
+    $AmbientSound.set_stream(stream)
+
+func play_transition_sound():
+    randomize()
+    var stream = load(transition_audio_streams[randi()%transition_audio_streams.size()])
+    $TransitionSound.set_stream(stream)
+    $TransitionSound.play()
 
 # This function get's called by the PortalManager to link or unlink the portal
 func link_portal(new_portal):
@@ -222,6 +236,8 @@ func _physics_process(delta):
 
 
 func teleport(body):
+    play_transition_sound()
+    
     var body_rotation = body.global_transform.get_rotation()
     var transformed = teleport_vector(body.global_position, body.linear_velocity)
 

@@ -76,6 +76,19 @@ PortalManager="*res://PortalManager.gd"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[importer_defaults]
+
+wav={
+"compress/mode": 0,
+"edit/loop": false,
+"edit/normalize": false,
+"edit/trim": false,
+"force/8_bit": false,
+"force/max_rate": false,
+"force/max_rate_hz": 44100,
+"force/mono": false
+}
+
 [input]
 
 move_up={
