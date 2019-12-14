@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=1]
+[ext_resource path="res://props/camera/camera.png" type="Texture" id=2]
+[ext_resource path="res://props/camera/Camera.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 1516.26
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 92.0
+height = 88.0
+
+[node name="Camera" type="Area2D"]
+collision_layer = 0
+collision_mask = 14
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -40, 44 )
+shape = SubResource( 1 )
+
+[node name="CameraSprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+offset = Vector2( -104, 56 )
+region_enabled = true
+region_rect = Rect2( 168, 0, 208, 320 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="CameraSprite"]
+position = Vector2( -160, 176 )
+rotation = -1.5708
+z_index = -1
+collision_layer = 14
+collision_mask = 0
+
+[node name="BodySprite" type="Sprite" parent="CameraSprite/StaticBody2D"]
+texture = ExtResource( 2 )
+offset = Vector2( -32, -4 )
+region_enabled = true
+region_rect = Rect2( 120, 368, 256, 200 )
+
+[node name="LensSprite" type="Sprite" parent="CameraSprite/StaticBody2D/BodySprite"]
+material = ExtResource( 1 )
+position = Vector2( -160, -4 )
+z_index = -1
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 416, 24, 104 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSprite/StaticBody2D"]
+visible = false
+position = Vector2( -36, -4 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]

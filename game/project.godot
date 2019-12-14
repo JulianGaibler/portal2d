@@ -9,6 +9,26 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BridgeEmitting",
+"language": "GDScript",
+"path": "res://classes/BridgeEmitting.gd"
+}, {
+"base": "RigidBody2D",
+"class": "FizzleRigidBody2D",
+"language": "GDScript",
+"path": "res://classes/FizzleRigidBody2D.gd"
+}, {
+"base": "Node2D",
+"class": "FunnelEmitting",
+"language": "GDScript",
+"path": "res://classes/FunnelEmitting.gd"
+}, {
+"base": "Node2D",
+"class": "LaserEmitting",
+"language": "GDScript",
+"path": "res://classes/LaserEmitting.gd"
+}, {
 "base": "Reference",
 "class": "Matrix2D",
 "language": "GDScript",
@@ -30,6 +50,10 @@ _global_script_classes=[ {
 "path": "res://utils/PortalUtils.gd"
 } ]
 _global_script_class_icons={
+"BridgeEmitting": "",
+"FizzleRigidBody2D": "",
+"FunnelEmitting": "",
+"LaserEmitting": "",
 "Matrix2D": "",
 "Player": "",
 "PolygonUtils": "",
@@ -40,6 +64,7 @@ _global_script_class_icons={
 
 config/name="p2d_test"
 run/main_scene="res://World.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -91,11 +116,13 @@ interact={
 zoom_out={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":true,"command":true,"pressed":false,"scancode":45,"unicode":0,"echo":false,"script":null)
  ]
 }
 zoom_in={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":true,"command":true,"pressed":false,"scancode":43,"unicode":0,"echo":false,"script":null)
  ]
 }
 shake_camera_portalshot={
@@ -129,6 +156,9 @@ shoot_orange_portal={
 2d_physics/layer_6="orange inner layer"
 2d_physics/layer_7="interaction"
 2d_physics/layer_8="white layer"
+2d_physics/layer_9="blue portal area"
+2d_physics/layer_10="orange portal area"
+2d_physics/layer_11="laser"
 
 [physics]
 

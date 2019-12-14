@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://shader/goo/Goo.tres" type="Material" id=1]
+[ext_resource path="res://textures/white.png" type="Texture" id=2]
+[ext_resource path="res://test-elements/toxic-goo/ToxicGoo.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 50 )
+
+[node name="ToxicGoo" type="Area2D"]
+collision_layer = 0
+collision_mask = 14
+script = ExtResource( 3 )
+
+[node name="GooSprite" type="Sprite" parent="."]
+material = ExtResource( 1 )
+scale = Vector2( 100, 100 )
+z_index = 10
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource( 1 )

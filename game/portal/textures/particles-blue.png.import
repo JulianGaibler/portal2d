@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/particles-blue.png-336de191660a47c4fb4669878cd2ddd0.image"
+
+[deps]
+
+source_file="res://portal/textures/particles-blue.png"
+dest_files=[ "res://.import/particles-blue.png-336de191660a47c4fb4669878cd2ddd0.image" ]
+
+[params]
+

@@ -1,0 +1,834 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://test-elements/panel/panel.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/panel/Panel.gd" type="Script" id=2]
+[ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 2.41463, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -65, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 50.7763, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -21.4803, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -56.7862, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -80.7272, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 40, -0.512723, -5.43435, 0.512723, 5.43435 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.42, -0.0769501, 85.7395, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.76, -0.0769501, 85, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -40, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=4]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -42.8754, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -17.2933, -0.25, 0, 0.25, 0, 8.71933, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -51.8976, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 123.679, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -11.65, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=5]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -41.6952, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -11.9797, -0.25, 0, 0.25, 0, 14.1953, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -17.9532, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 126.347, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -54.6952, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -97.4223, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -44.0564, -0.25, 0, 0.25, 0, -17.5477, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90.4201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 131.365, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -80.3595, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=7]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 12.05, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.518827, 0.965635, -38.2976, -0.25, 0, 0.25, 0, -12.4427, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 73.9014, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.5013, 1.43437, 0.5013, -1.43437, 86.4454, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -134.068, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=8]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.636637, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 7.18512, -0.25, 0, 0.25, 0, -18.9891, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 13.8385, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -2.21769, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -19.414, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=9]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -6.32032, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 9.76098, -0.25, 0, 0.25, 0, -16.3944, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 15.3912, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 29.7614, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -48.6902, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=10]
+length = 1.1
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -45.4782, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -0.461913, -0.25, 0, 0.25, 0, -27.0911, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 106.385, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 6.87961, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -67.3783, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=11]
+length = 1.1
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -43.5569, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -26.0687, -0.25, 0, 0.25, 0, -52.4077, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 127.492, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 38.2129, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -96.0497, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=12]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.469749, 0.0786219, 0.469749, -0.0786219, 17.4187, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.823814, -0.271191, 0.823814, 0.271191, -43.1266, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.704624, -0.965635, 0.704624, 0.965635, 79.643, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 84.2916, -0.270837, -0.525902, 0.270837, 0.525902 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -138.191, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=13]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -74.8171, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 16.6708, -0.25, 0, 0.25, 0, 10.8, -0.32, 0.864091, 0.249998, -0.675065 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 86.4573, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -16.025, -0.2, -0.0168276, 0.25, 0.0210345, -3.6592, -0.23, -0.0351236, 0.25, 0.0381778 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -18.8042, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=14]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -5.20739, -0.106467, 1.78495, 0.106467, -1.78495, -9.39881, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -14.8307, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelArm1/PanelArm2/PanelArm3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -46.5999, -0.114385, 7.51098, 0.114385, -7.51098, -63.6698, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelArm1/PanelArm2/PanelArm3/PanelArm4:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 88.0329, -0.127501, -29.5621, 0.127501, 29.5621, 160.632, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelArm1:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -33.0661, -0.0889393, 14.2492, 0.0889393, -14.2492, -72.7579, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[node name="Panel" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="PanelArm1" type="Sprite" parent="."]
+position = Vector2( 2, 34 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+offset = Vector2( 68, 168 )
+region_enabled = true
+region_rect = Rect2( 8, 264, 392, 432 )
+__meta__ = {
+"_edit_ik_": true,
+"_edit_lock_": true
+}
+
+[node name="PanelArm2" type="Sprite" parent="PanelArm1"]
+position = Vector2( 144, 264 )
+z_index = 2
+texture = ExtResource( 1 )
+offset = Vector2( 48, 40 )
+region_enabled = true
+region_rect = Rect2( 8, 8, 272, 256 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="PanelArm3" type="Sprite" parent="PanelArm1/PanelArm2"]
+position = Vector2( 128, 112 )
+z_index = -1
+texture = ExtResource( 1 )
+offset = Vector2( 56, -48 )
+region_enabled = true
+region_rect = Rect2( 320, 40, 176, 160 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="PanelArm4" type="Sprite" parent="PanelArm1/PanelArm2/PanelArm3"]
+position = Vector2( 96, -88 )
+z_index = -1
+texture = ExtResource( 1 )
+offset = Vector2( -144, -124 )
+region_enabled = true
+region_rect = Rect2( 512, -8, 416, 328 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="PanelBase" type="Sprite" parent="PanelArm1/PanelArm2/PanelArm3/PanelArm4"]
+position = Vector2( -312, -248 )
+texture = ExtResource( 1 )
+offset = Vector2( 192, -44 )
+region_enabled = true
+region_rect = Rect2( 408, 328, 528, 184 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase"]
+position = Vector2( -64, -176 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="PanelLights" type="Sprite" parent="PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase"]
+material = ExtResource( 3 )
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )
+offset = Vector2( 192, -44 )
+region_enabled = true
+region_rect = Rect2( 408, 520, 528, 104 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BindPose = SubResource( 1 )
+anims/corder-90-left-out = SubResource( 2 )
+anims/corder-90-right-out = SubResource( 3 )
+anims/stairs-left-1-out = SubResource( 4 )
+anims/stairs-left-2-out = SubResource( 5 )
+anims/stairs-left-3-out = SubResource( 6 )
+anims/stairs-left-4-out = SubResource( 7 )
+anims/stairs-right-1-out = SubResource( 8 )
+anims/stairs-right-2-out = SubResource( 9 )
+anims/stairs-right-3-out = SubResource( 10 )
+anims/stairs-right-4-out = SubResource( 11 )
+anims/straight128-out = SubResource( 12 )
+anims/straight32-out = SubResource( 13 )
+anims/straight64-out = SubResource( 14 )

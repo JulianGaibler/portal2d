@@ -1,10 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://test-elements/floor-button/floor-button.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/floor-button/FloorButton.gd" type="Script" id=2]
 
-[node name="FloorButton" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 6 )
 
-[node name="PlateSprite" type="Sprite" parent="."]
+[node name="FloorButton" type="StaticBody2D"]
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 2 )
+
+[node name="ButtonCollisionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -120, 0, -88, -16, 88, -16, 120, 0 )
+
+[node name="PlateCollisionPolygon" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -72, -16, -56, -26, 56, -26, 72, -16 )
+
+[node name="PlateSprite" type="Sprite" parent="PlateCollisionPolygon"]
 position = Vector2( 0, -20 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
@@ -24,3 +38,14 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 256, 1024, 64 )
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 14
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2( 0, -22 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

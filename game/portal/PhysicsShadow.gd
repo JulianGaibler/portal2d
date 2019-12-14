@@ -17,5 +17,4 @@ func _physics_process(delta):
     for index in get_slide_count():
         var collision = get_slide_collision(index)
         if parent.is_in_group("dynamic-prop"):
-            print(matrix.multiply_vec(collision.normal) * -1500)
             parent.apply_central_impulse(matrix.multiply_vec(collision.normal) * -5500)

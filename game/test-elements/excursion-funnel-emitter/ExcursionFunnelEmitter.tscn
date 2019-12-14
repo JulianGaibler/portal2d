@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://test-elements/excursion-funnel-emitter/excursion-funnel.png" type="Texture" id=1]
+[ext_resource path="res://classes/FunnelEmitting.gd" type="Script" id=2]
+[ext_resource path="res://test-elements/excursion-funnel-emitter/ExcursionFunnelEmitter.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 68, 128 )
+
+[node name="ExcursionFunnelEmitter" type="StaticBody2D"]
+collision_layer = 15
+collision_mask = 15
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -60, 0 )
+shape = SubResource( 1 )
+
+[node name="FunnelSpriteBack" type="Sprite" parent="."]
+position = Vector2( 32, 0 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 768, 0, 256, 1024 )
+
+[node name="FunnelSpriteFront" type="Sprite" parent="."]
+position = Vector2( -32, 0 )
+scale = Vector2( 0.25, 0.25 )
+z_index = 5
+z_as_relative = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 768, 1024 )
+
+[node name="Emitter" type="Node2D" parent="."]
+script = ExtResource( 2 )

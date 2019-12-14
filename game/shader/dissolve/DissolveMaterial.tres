@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://shader/dissolve/shader.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D Mask : hint_white; 
+uniform float Clip : hint_range(0.0, 1.0, 0.005) = 1.0;
+uniform float EdgeThickness = 0.05;
+uniform vec4 EdgeColor : hint_color;
+
+void fragment() {
+    float AlphaCut = 1.0;
+    vec4 all_color = textureLod(TEXTURE, UV, 0.0);
+	vec3 color = all_color.rgb;
+    float alpha = all_color.a;
+
+    //First we color the material
+    if (texture(Mask, UV).r  < Clip) {
+        color = EdgeColor.rgb
+    }
+    //This is the transparent cut, it has to be a little above the color
+    //to get the edge
+    if (texture(Mask,UV).r +EdgeThickness < Clip) {
+        AlphaCut = 0.0;
+    }
+    COLOR = vec4(color, min(AlphaCut, alpha));
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/Clip = 0.3
+shader_param/EdgeThickness = 0.1
+shader_param/EdgeColor = Color( 0, 0, 0, 1 )
+shader_param/Mask = ExtResource( 2 )
