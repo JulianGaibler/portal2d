@@ -1,15 +1,32 @@
 extends StaticBody2D
 
-onready var area := $Area2D
-signal touch
-signal no_touch
+onready var detection_area := $DetectionArea
+onready var plate_node := $PlateCollisionPolygon
+onready var lights_sprite := $LightsSprite
+onready var tween := $Tween
+
+signal pressed
+signal released
+
+var bodies_in_area = -1
 
 func _ready():
-	area.connect("body_exited", self, "leave_area")
-	area.connect("body_entered", self, "enter_area")
+    detection_area.connect("body_exited", self, "leave_area")
+    detection_area.connect("body_entered", self, "enter_area")
 
-func enter_area(object):
-	emit_signal("touch")
-	
-func leave_area(object):
-	emit_signal("no_touch")
+func leave_area(body):
+    bodies_in_area -= 1
+    if bodies_in_area == 0:
+        tween.interpolate_property(plate_node, "position", plate_node.position, Vector2(0,0), .1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+        tween.start()
+        lights_sprite.region_rect.position.y = 256
+        emit_signal("released")
+        
+
+func enter_area(body):
+    bodies_in_area += 1
+    if bodies_in_area == 1:
+        tween.interpolate_property(plate_node, "position", plate_node.position, Vector2(0,3), .1, Tween.TRANS_LINEAR, Tween.EASE_IN)
+        tween.start()
+        lights_sprite.region_rect.position.y = 320
+        emit_signal("pressed")

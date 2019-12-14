@@ -7,7 +7,6 @@ const PORTAL_HEIGHT = preload("res://portal/Portal.gd").PORTAL_HEIGHT
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 const probing_space = 10
 
-onready var parent = get_parent()
 onready var active_end := $ActiveEnd
 
 func primary_fire():
@@ -20,9 +19,10 @@ func secondary_fire():
 func shoot_portal(type):
     var direction = (active_end.global_position - global_position).normalized()
     var space_state = get_world_2d().direct_space_state
-    var hit = space_state.intersect_ray(active_end.global_position, active_end.global_position + (direction * 3000), [parent], BinaryLayers.FLOOR)
+    var exclude = get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("portal-ignore")
+    var hit = space_state.intersect_ray(global_position, global_position + (direction * 3000), exclude, BinaryLayers.FLOOR | BinaryLayers.WHITE)
     if hit.empty(): return
-    var corrected_position = check_and_correct_placement(hit, type)
+    var corrected_position = check_and_correct_placement(hit, type, exclude)
     if (corrected_position != null):
         var deg = rad2deg(Vector2.RIGHT.angle_to(direction))
         # if we can place the portal adjust the position
@@ -45,7 +45,7 @@ func spawn_portal(hit_position: Vector2, normal: Vector2, deg: float, type):
     instance.rotation_degrees = rad2deg(atan2(normal.y, normal.x))
     instance.initiate(type, orientation)
 
-func check_and_correct_placement(hit: Dictionary, type):
+func check_and_correct_placement(hit: Dictionary, type, exclude: Array):
     # Check if hit-collider has portal-surface
     if !hit.collider.is_in_group("white_layer"): return null
     var space_state = get_world_2d().direct_space_state
@@ -54,8 +54,8 @@ func check_and_correct_placement(hit: Dictionary, type):
     var normal_up = Vector2(hit.normal.y, -hit.normal.x)  # clockwise -90
     
     # Check if the surface is continous and unobstructed
-    var below_surface_continuity = check_surface_continuity(space_state, hit, normal_up, -0.5, [hit.collider], type)
-    var above_surface_continuity = check_surface_continuity(space_state, hit, normal_up, 0.5, [parent], type)
+    var below_surface_continuity = check_surface_continuity(space_state, hit, normal_up, -0.5, [hit.collider] + exclude, type)
+    var above_surface_continuity = check_surface_continuity(space_state, hit, normal_up, 0.5, exclude, type)
     
     # These are the distances from the portal center up and down to the next collision (interruption of the surface)
     var dist_top = min(below_surface_continuity[0], above_surface_continuity[0])
@@ -85,34 +85,30 @@ func check_and_correct_placement(hit: Dictionary, type):
 
     # Checks if the start end end of the portal are the in the air.
     # If that's the case the method tries to move to portal according to dist_top and dist_btm
-    var moved_portal = probe_for_air(space_state, moved_position, hit.normal, normal_up, dist_top, dist_btm)
-    if moved_portal == null: return null
-    moved_position = moved_portal
+    var moved_portal1 = probe_for_air(space_state, moved_position, hit.normal, normal_up, dist_top, -1, exclude)
+    if moved_portal1 == null:
+        var moved_portal2 = probe_for_air(space_state, moved_position, hit.normal, normal_up, dist_btm, 1, exclude)
+        if moved_portal2 == null: return null
+        else: moved_position = moved_portal2
+    else:
+        moved_position = moved_portal1
     
     return moved_position
 
 
-func probe_for_air(space_state, position, normal, normal_up, dist_top, dist_btm):
+func probe_for_air(space_state, position, normal, normal_up, dist, direction, exclude):
     var start = position + (normal * 0.5)
     var moved_by = 0
 
     while true:
         var end_top = start + (normal_up * moved_by) + (normal_up * (PORTAL_HEIGHT))
-        var top = space_state.intersect_ray(end_top, end_top + (normal * -1), [], BinaryLayers.FLOOR)
-        if top.empty() or !top.collider.is_in_group("white_layer"):
-            dist_btm -= probing_space
-            if dist_btm - PORTAL_HEIGHT < 0: return null
-            moved_by -= probing_space
-            continue
-        break
-
-    while true:
+        var top = space_state.intersect_ray(end_top, end_top + (normal * -1), exclude, BinaryLayers.FLOOR)
         var end_btm = start + (normal_up * moved_by) + (-normal_up * (PORTAL_HEIGHT))
-        var btm = space_state.intersect_ray(end_btm, end_btm + (normal * -1), [], BinaryLayers.FLOOR)
-        if btm.empty() or !btm.collider.is_in_group("white_layer"):
-            dist_top -= probing_space
-            if dist_top - PORTAL_HEIGHT < 0: return null
-            moved_by += probing_space
+        var btm = space_state.intersect_ray(end_btm, end_btm + (normal * -1), exclude, BinaryLayers.FLOOR)
+        if top.empty() or !top.collider.is_in_group("white_layer") or btm.empty() or !btm.collider.is_in_group("white_layer"):
+            dist -= probing_space
+            if dist - PORTAL_HEIGHT < 0: return null
+            moved_by += probing_space * direction
             continue
         break
     

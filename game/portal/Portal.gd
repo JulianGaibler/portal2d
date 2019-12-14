@@ -20,6 +20,11 @@ const PORTAL_COLOR_ORANGE = Color("ff7d17")
 export(PortalType) var type = PortalType.BLUE_PORTAL
 export(PortalOrientation) var orientation = PortalOrientation.UP
 
+## Signlas ##
+##
+signal closing
+signal new_link
+
 ## Internal Variabled ##
 ##
 # Reference to colliders created by the portal
@@ -47,7 +52,7 @@ func _ready():
     animation_player.play("closed_portal")
 
 # This function has to be called after the portal has been placed in the world
-func initiate(type, orientation):
+func initiate(type, orientation, fixed = false):
     self.type = type
     self.orientation = orientation
     
@@ -87,7 +92,7 @@ func initiate(type, orientation):
         collider_polygons.append(polygon2)
     
     # Register newly created portal with the PortalManager
-    PortalManager.register_portal(self)
+    PortalManager.register_portal(self, fixed)
 
 # This function get's called by the PortalManager to link or unlink the portal
 func link_portal(new_portal):
@@ -95,7 +100,9 @@ func link_portal(new_portal):
     reset_portal()
     linked_portal = new_portal
     # If there is no new portal to link to, just stay closed
-    if (new_portal == null): return
+    if (new_portal == null):
+        emit_signal("new_link", null)
+        return
     
     # This basis transformation matrix transforms from this portals basis into the one of the linked portal.
     var from = Matrix2D.new(direction_vec.x, direction_vec.y, normal_vec.x, normal_vec.y)
@@ -152,6 +159,8 @@ func link_portal(new_portal):
         enter_outer_area(body)
         if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
     for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
+    
+    emit_signal("new_link", new_portal)
 
 #func _draw():
 #    for i in range(4):
@@ -206,6 +215,9 @@ func teleport(body):
     var body_rotation = body.global_transform.get_rotation()
     var transformed = teleport_vector(body.global_position, body.linear_velocity)
 
+    if transformed == null:
+        return
+
     # Transform velocity
     body.linear_velocity = transformed[1]
     var l = body.linear_velocity.y * linked_portal.normal_vec.y
@@ -220,7 +232,7 @@ func teleport(body):
 
 
 func teleport_vector(position, direction):
-    if (linked_portal == null): return null
+    if (linked_portal == null or transfomration_matrix == null): return null
     
     # Transform velocity
     direction = (transfomration_matrix.multiply_vec(direction)).bounce(linked_portal.normal_vec)
@@ -233,6 +245,7 @@ func teleport_vector(position, direction):
 
 
 func close_portal():
+    emit_signal("closing")
     outer_area.disconnect("body_exited", self, "leave_outer_area")
     inner_area.disconnect("body_exited", self, "leave_inner_area")
     inner_area.disconnect("body_entered", self, "enter_inner_area")
@@ -242,16 +255,16 @@ func close_portal():
     reset_portal()
     animation_player.play("close_portal")
     yield(get_tree().create_timer(0.5), "timeout")
-    free()
+    queue_free()
 
 func reset_portal():
     for collider in physics_shadows.values():
         remove_child(collider[1])
-        collider[1].free()
+        collider[1].queue_free()
     transfomration_matrix = null
     if (static_collider != null):
         remove_child(static_collider)
-        static_collider.free()
+        static_collider.queue_free()
     static_collider = null
 
 
@@ -318,7 +331,7 @@ func leave_inner_area(body):
 
 # This function adds clones of dynamic-props to the physics_shadows list
 func add_shadow_body(body):
-    if body.is_in_group("physics-shadow"): return
+    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
     
     var shapes = []
     var sprites = []
@@ -349,11 +362,11 @@ func add_shadow_body(body):
 
 # Removed physics-shadows from physics_shadows list
 func remove_shadow_body(body):
-    if body.is_in_group("physics-shadow"): return
+    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
     var collider = physics_shadows[body.get_rid()][1]
     body.remove_collision_exception_with(collider)
     remove_child(collider)
-    collider.free()
+    collider.queue_free()
     physics_shadows.erase(body.get_rid())
 
 

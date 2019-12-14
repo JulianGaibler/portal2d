@@ -13,15 +13,24 @@ static func intersect_ray(space_state: Physics2DDirectSpaceState, from: Vector2,
         # Cast a ray
         var r = space_state.intersect_ray(from, to, exclude, collision_layer | BinaryLayers.WHITE, collide_with_bodies, collide_with_areas)
         # If the ray did not hit anything: break
-        if r.empty(): break
+        if r.empty():
+            r.empty = true
+            r.from = from
+            results.append(r)
+            break
+        r.empty = false
         # Add from (because you won't know it with portals)
         r.from = from
-        # append result to array
-        results.append(r)
+
         # If this collision did not hit a portal break
-        if !r.collider.has_meta("portal_type"): break
+        if !r.collider.has_meta("portal_type"):
+            r.portal = null
+            results.append(r)
+            break
         # Otherwise, transform from and to and do it again
         else:
+            r.portal = r.collider.get_parent()
+            results.append(r)
             # Transforming
             var transformed = r.collider.get_parent().teleport_vector(r.position, to - r.position)
             if transformed == null: break

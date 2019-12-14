@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "press-button"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ButtonSprite:position")
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -80 ), Vector2( -1.291, -78.157 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "release-button"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ButtonSprite:position")
@@ -36,7 +36,7 @@ tracks/0/keys = {
 "values": [ Vector2( -1.291, -78.157 ), Vector2( 0, -80 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 12, 44 )
 
 [node name="PedestalButton" type="StaticBody2D" groups=[
@@ -47,6 +47,7 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -80 )
 shape = SubResource( 1 )
 
@@ -55,8 +56,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PedestalColliderButton"]
-anims/press-button = SubResource( 3 )
-anims/release-button = SubResource( 4 )
+anims/press-button = SubResource( 2 )
+anims/release-button = SubResource( 3 )
 
 [node name="ButtonSprite" type="Sprite" parent="PedestalColliderButton"]
 position = Vector2( 0, -80 )
@@ -73,5 +74,6 @@ region_enabled = true
 region_rect = Rect2( 0, 128, 256, 384 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PedestalColliderButton"]
+visible = false
 position = Vector2( 0, -44 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
