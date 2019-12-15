@@ -8,6 +8,7 @@ const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 var live
 const live_regeneration_rate = 5
 var _regeneration_timer = null
+var liveLabel
 
 # portal gun node detection
 onready var portalgun := $PortalGun
@@ -27,14 +28,17 @@ var deg = 0
 func _ready():    
     # Live Regeneration, every Second
     live = 100
-    _regeneration_timer = Timer.new()
-    add_child(_regeneration_timer)
-    _regeneration_timer.connect("timeout", self, "regenerate_live")
-    _regeneration_timer.set_wait_time(1.0)
-    _regeneration_timer.set_one_shot(false)
-    _regeneration_timer.start()
+#    _regeneration_timer = Timer.new()
+#    add_child(_regeneration_timer)
+#    _regeneration_timer.connect("timeout", self, "regenerate_live")
+#    _regeneration_timer.set_wait_time(1.0)
+#    _regeneration_timer.set_one_shot(false)
+#    _regeneration_timer.start()
 
 func _physics_process(delta):
+    
+    regenerate_live(delta)       
+    
     var direct_state = Physics2DServer.body_get_direct_state(get_rid())
     var gravity_vec = direct_state.total_gravity * 2.0
     var gravity_n = gravity_vec.normalized()
@@ -188,9 +192,9 @@ func take_damage(amount):
     if (live <= 0):
         die()
         
-func regenerate_live():
+func regenerate_live(delta):
 #    print("regenerating live")
-    live += live_regeneration_rate    
+    live += live_regeneration_rate * delta
     if(live > 100):
         live = 100           
        
