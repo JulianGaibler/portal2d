@@ -4,6 +4,11 @@ class_name Player
 
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
+# Player related Values
+var live
+const live_regeneration_rate = 5
+var _regeneration_timer = null
+
 # portal gun node detection
 onready var portalgun := $PortalGun
 
@@ -19,8 +24,17 @@ var held_object = null
 # portalgun orientation in degree
 var deg = 0
 
-func _physics_process(delta):
+func _ready():    
+    # Live Regeneration, every Second
+    live = 100
+    _regeneration_timer = Timer.new()
+    add_child(_regeneration_timer)
+    _regeneration_timer.connect("timeout", self, "regenerate_live")
+    _regeneration_timer.set_wait_time(1.0)
+    _regeneration_timer.set_one_shot(false)
+    _regeneration_timer.start()
 
+func _physics_process(delta):
     var direct_state = Physics2DServer.body_get_direct_state(get_rid())
     var gravity_vec = direct_state.total_gravity * 2.0
     var gravity_n = gravity_vec.normalized()
@@ -106,6 +120,10 @@ func _physics_process(delta):
         rotate(lerp(0, -rotation, y))
 
 func _input(event):
+    
+    if Input.is_action_just_pressed("take_damage"):
+        take_damage(20)
+    
     if Input.is_action_just_pressed("interact"):
         # If the player is already holding something, they let it go
         if held_object != null:
@@ -152,7 +170,7 @@ func rotate_portalgun(point_direction: Vector2)->float:
     portalgun.rotation_degrees = temp
     return temp
 
-func hold_object(collider):
+func hold_object(collider): 
     held_object = collider
     held_object.gravity_scale = 0
     held_object.connect("fizzled", self, "release_object")
@@ -162,3 +180,22 @@ func release_object():
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null
+    
+func take_damage(amount):
+#    print("taking damage: ", amount)
+    live = live - amount
+#    print("live: ", live)
+    if (live <= 0):
+        die()
+        
+func regenerate_live():
+#    print("regenerating live")
+    live += live_regeneration_rate    
+    if(live > 100):
+        live = 100           
+       
+
+func die():
+    # Not properly working yet caused by PortalManager
+    # Will be Fixed, as soon as SceneLoading ist done differently
+    get_tree().reload_current_scene()
