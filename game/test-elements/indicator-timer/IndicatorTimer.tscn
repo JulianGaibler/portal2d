@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://test-elements/indicator-timer/timer-disc.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/indicator-timer/timer-background.png" type="Texture" id=2]
+[ext_resource path="res://test-elements/indicator-timer/IndicatorTimer.gd" type="Script" id=3]
+[ext_resource path="res://textures/white.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float progress = 1.0;
+
+const float PI     = 3.1415926;
+const float TWO_PI = 6.2831852;
+
+
+float angleBetween(vec2 v1, vec2 v2) {
+        return atan( v1.x - v2.x, v1.y - v2.y ) + PI;
+}
+
+float getTargetAngle()  {
+        return clamp( progress * TWO_PI, 0.0, TWO_PI );
+}
+
+// OpenGL uses upper left as origin by default
+bool shouldDrawFragment(vec2 uv) {
+        float targetAngle = getTargetAngle();
+
+        vec2 center = vec2(0.5, 0.5);
+
+        float a = angleBetween(center, vec2(1.0-uv.x, 1.0-uv.y));
+
+        return a <= targetAngle;
+}
+
+void fragment() {
+    if (shouldDrawFragment(UV)) {
+        COLOR = texture(TEXTURE, UV);
+    } else {
+        COLOR = vec4(0,0,0,0);
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/progress = 1.0
+
+[node name="IndicatorTimer" type="Node2D"]
+z_index = -1
+z_as_relative = false
+script = ExtResource( 3 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 256, 256 )
+
+[node name="Disc" type="Sprite" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+scale = Vector2( 56, 56 )
+texture = ExtResource( 4 )
+mode = 2
+range_z_min = -1
+range_z_max = -1
