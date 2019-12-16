@@ -1,13 +1,18 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://default_env.tres" type="Environment" id=1]
 [ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=2]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=3]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textures/light.png" type="Texture" id=5]
-[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=7]
 [ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=11]
+[ext_resource path="res://test-elements/floor-button/FloorButton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1340.54, 33.6469 )
@@ -16,10 +21,10 @@ extents = Vector2( 1340.54, 33.6469 )
 extents = Vector2( 68.429, 515.513 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 73.8081, 724.341 )
+extents = Vector2( 74.9884, 724.341 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 1164.16, 89.0974 )
+extents = Vector2( 1164.16, 97.1317 )
 
 [node name="World" type="Node2D"]
 
@@ -46,7 +51,7 @@ cell_quadrant_size = 64
 format = 1
 tile_data = PoolIntArray( -1048584, 2, 0, -1048582, 2, 0, -1048580, 2, 0, -1048578, 2, 0, -1114112, 2, 0, -1114110, 2, 0, -1114108, 2, 0, -1114106, 2, 0, -1114104, 2, 0, -1114102, 2, 0, -1114100, 2, 0, -1114098, 2, 0, -1114096, 2, 0, -1114094, 2, 0, -1114092, 2, 0, -1114090, 2, 0, -1114088, 2, 0, -1114086, 2, 0, -1114084, 2, 0, -1114082, 6, 0, -1114080, 6, 0, -917512, 1, 0, -655368, 1, 0, -720872, 6, 0, -720870, 6, 0, -720868, 6, 0, -720866, 6, 0, -720864, 6, 0, -655338, 6, 0, -589804, 6, 0, -589800, 8, 0, -589799, 8, 0, -589798, 8, 0, -589797, 8, 0, -589796, 8, 0, -589795, 8, 0, -589794, 8, 0, -589793, 8, 0, -589792, 6, 0, -524266, 8, 0, -524265, 8, 0, -524264, 8, 0, -524263, 8, 0, -524262, 8, 0, -524261, 8, 0, -524260, 8, 0, -524259, 8, 0, -524258, 8, 0, -524257, 8, 0, -393224, 1, 0, -458720, 1, 0, -327686, 8, 0, -327685, 8, 0, -327684, 8, 0, -327683, 8, 0, -327682, 8, 0, -327681, 8, 0, -262150, 8, 0, -262149, 8, 0, -262148, 8, 0, -262147, 8, 0, -262146, 8, 0, -196614, 8, 0, -196613, 8, 0, -196612, 8, 0, -196611, 8, 0, -131080, 1, 0, -131078, 8, 0, -131077, 8, 0, -131076, 8, 0, -196576, 1, 0, -65542, 8, 0, -65541, 8, 0, -6, 8, 0, 131060, 8, 0, 131061, 8, 0, 131062, 5, 0, 131064, 1, 0, 131066, 6, 0, 65568, 1, 0, 196596, 8, 0, 196597, 8, 0, 262132, 6, 0, 393204, 8, 0, 393205, 8, 0, 393206, 6, 0, 327712, 1, 0, 458740, 8, 0, 458741, 8, 0, 524276, 5, 0, 655352, 2, 0, 655354, 2, 0, 655356, 0, 0, 589824, 2, 0, 589826, 2, 0, 589828, 3, 0, 589829, 4, 0, 589830, 3, 0, 589831, 4, 0, 589832, 3, 0, 589833, 4, 0, 589834, 2, 0, 589836, 0, 0, 589840, 0, 0, 589844, 0, 0, 589848, 2, 0, 589850, 2, 0, 589852, 2, 0, 589854, 2, 0, 589856, 2, 0, 655364, 4, 0, 655365, 3, 0, 655366, 4, 0, 655367, 3, 0, 655368, 4, 0, 655369, 3, 0, 786420, 6, 0, 786422, 8, 0, 786423, 8, 0, 786424, 0, 0, 720896, 0, 0, 720900, 0, 0, 720904, 0, 0, 851958, 8, 0, 851959, 8, 0, 917492, 8, 0, 917493, 8, 0, 917494, 6, 0, 917500, 2, 0, 917502, 2, 0, 983028, 5, 0, 983029, 5, 0, 983030, 5, 0, 983031, 5, 0, 983032, 5, 0, 983033, 5, 0, 983034, 5, 0, 917516, 8, 0, 917517, 8, 0, 917519, 5, 0, 917520, 5, 0, 917521, 8, 0, 917522, 8, 0, 917523, 8, 0, 1048571, 5, 0, 1048572, 5, 0, 1048573, 5, 0, 1048574, 5, 0, 1048575, 5, 0, 983040, 5, 0, 983041, 5, 0, 983042, 5, 0, 983043, 5, 0, 983044, 5, 0, 983045, 5, 0, 983046, 5, 0, 983047, 5, 0, 983048, 5, 0, 983049, 5, 0, 983050, 5, 0, 983051, 5, 0, 983052, 5, 0, 983053, 5, 0, 983054, 5, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="Player" parent="." instance=ExtResource( 9 )]
 position = Vector2( 560, 496 )
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
@@ -64,13 +69,37 @@ position = Vector2( 0, -80 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="WorldCollider" type="StaticBody2D" parent="."]
-visible = false
 z_index = 11
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WorldCollider"]
-visible = false
+polygon = PoolVector2Array( -511.86, 575.825, 2047.98, 576.012, 2048.04, -448.032, 1280.03, -448.032, 1279.99, -576.018, 1407.94, -575.874, 1408.18, -640.111, 1536.03, -639.676, 1535.73, -703.32, 2175.98, -701.063, 2640.01, -196.02, 3237.29, -208.5, 3224.61, -1000.74, 2175.24, -960.579, -383.97, -960.06, -383.389, -385.043, -0.00915527, -383.005, 0.0886078, -320.498, -63.0637, -320.76, -63.0278, -258.234, -128.058, -256.293, -127.734, -193.205, -191.05, -193.534, -189.942, -131.485, -255.315, -129.269, -253.099, -67.2192, -319.58, -63.8951, -318.472, -1.84573, -381.63, -2.95377, -383.846, 315.049, -511.269, 318.373, -1202.78, 676.223, -511.078, 307.615, -511.831, -1088.87, 2174.73, -1085.63, 3540.38, -1262.1, 3686.15, 81.5398, 2570.68, 24.4985, 2177.73, -444.508, 2176.62, 707.573, -511.869, 702.477, -1114.69, 1195.59, -1598.32, 1010.84, -1565.71, 500.046, -1402.69, 548.951, -1457.03, 902.16, -1141.86, 1070.61 )
+
+[node name="Weighted Cube" parent="." instance=ExtResource( 11 )]
+position = Vector2( 73.6067, -1473.51 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="FloorButton" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1776.97, 576.898 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="Fizzler" parent="FloorButton" instance=ExtResource( 13 )]
+position = Vector2( -353.482, -1408.14 )
+
+[node name="CubeDropper" parent="." instance=ExtResource( 4 )]
+position = Vector2( 636.583, -959.719 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+auto_drop = true
+object = ExtResource( 11 )
+
+[node name="PedestalButton" parent="." instance=ExtResource( 6 )]
+position = Vector2( -62.0095, -383.397 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
 
 [node name="WhiteLayer" type="StaticBody2D" parent="." groups=[
 "white_layer",
@@ -93,6 +122,7 @@ shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WhiteLayer"]
 position = Vector2( 759.324, -1048.86 )
+scale = Vector2( -1, 1 )
 shape = SubResource( 4 )
 
 [node name="TestchamberSign" parent="." instance=ExtResource( 8 )]
@@ -123,5 +153,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TestDoor" parent="." instance=ExtResource( 6 )]
+[node name="TestDoor" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2000.29, -703.649 )
+[connection signal="pressed" from="FloorButton" to="TestDoor" method="open"]
+[connection signal="released" from="FloorButton" to="TestDoor" method="close"]
+[connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]

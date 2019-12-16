@@ -51,3 +51,4 @@ func timed_open():
     open()
     yield(get_tree().create_timer(1.5), "timeout")
     close()
+
