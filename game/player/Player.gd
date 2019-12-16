@@ -5,6 +5,7 @@ class_name Player
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
 # Player related Values
+var state_machine
 var live
 const live_regeneration_rate = 5
 var _regeneration_timer = null
@@ -26,8 +27,10 @@ var held_object = null
 var deg = 0
 
 func _ready():
-    # Live Regeneration, every Second
-    live = 100
+	state_machine = $AnimationTree.get("parameters/playback")
+	
+	# Live Regeneration, every Second
+	live = 100
 #    _regeneration_timer = Timer.new()
 #    add_child(_regeneration_timer)
 #    _regeneration_timer.connect("timeout", self, "regenerate_live")
@@ -37,114 +40,119 @@ func _ready():
 
 func _physics_process(delta):
 
-    regenerate_live(delta)
+	regenerate_live(delta)
 
-    var direct_state = Physics2DServer.body_get_direct_state(get_rid())
-    var gravity_vec = direct_state.total_gravity * 2.0
-    var gravity_n = gravity_vec.normalized()
+	var direct_state = Physics2DServer.body_get_direct_state(get_rid())
+	var gravity_vec = direct_state.total_gravity * 2.0
+	var gravity_n = gravity_vec.normalized()
 
-    var linear_damp = 1.0 - delta * direct_state.total_linear_damp
-    if linear_damp < 0: linear_damp = 0
+	var linear_damp = 1.0 - delta * direct_state.total_linear_damp
+	if linear_damp < 0: linear_damp = 0
 
-    if portalgun != null:
-        # rotate the portal gun
-        deg = rotate_portalgun(get_global_mouse_position())
+	if portalgun != null:
+		# rotate the portal gun
+		deg = rotate_portalgun(get_global_mouse_position())
 
-    if held_object:
-        var origin = global_position
-        origin.y -= 90
-        var direction = (get_global_mouse_position() - origin).normalized()
-        var to = origin + (direction * 150)
+	if held_object:
+		var origin = global_position
+		origin.y -= 90
+		var direction = (get_global_mouse_position() - origin).normalized()
+		var to = origin + (direction * 150)
 
-        var dist = held_object.global_transform.origin.distance_to(to)
-        if dist > 200: release_object()
-        else:
-            held_object.linear_velocity = linear_velocity
-            held_object.apply_central_impulse((to - held_object.global_transform.origin).normalized() * to.distance_to(held_object.global_transform.origin) * 150)
-
-
-
-    ## Movement ##
-
-    # Apply gravity
-    linear_velocity += delta * gravity_vec
-    # Apply linear damp
-    linear_velocity *= linear_damp
-    # Move and slide
-    linear_velocity = move_and_slide(linear_velocity, -gravity_n, false, 4, 0.785398, false)
-
-    ## Physics ##
-
-    # Apply a force to every collider we touched
-    for index in get_slide_count():
-        var collision = get_slide_collision(index)
-        if collision.collider.is_in_group("dynamic-prop"):
-            collision.collider.apply_central_impulse(-collision.normal * PUSH)
-
-    # Detect if we are on floor - only works if called *after* move_and_slide
-    var on_floor = is_on_floor()
-
-    ## Control ##
+		var dist = held_object.global_transform.origin.distance_to(to)
+		if dist > 200: release_object()
+		else:
+			held_object.linear_velocity = linear_velocity
+			held_object.apply_central_impulse((to - held_object.global_transform.origin).normalized() * to.distance_to(held_object.global_transform.origin) * 150)
 
 
-    linear_velocity = linear_velocity.rotated(FLOOR_NORMAL.angle_to(-gravity_n))
 
-    # Horizontal movement
-    var target_speed = 0
-    if Input.is_action_pressed("move_left"):
-        if !target_speed == -WALK_SPEED:
-            target_speed -= 25
-    if Input.is_action_pressed("move_right"):
-        if !target_speed == WALK_SPEED:
-            target_speed += 25
+	## Movement ##
 
-    if abs(target_speed) > WALK_SPEED:
-        if target_speed < 0:
-            target_speed = -WALK_SPEED
-        else:
-            target_speed = WALK_SPEED
+	# Apply gravity
+	linear_velocity += delta * gravity_vec
+	# Apply linear damp
+	linear_velocity *= linear_damp
+	# Move and slide
+	linear_velocity = move_and_slide(linear_velocity, -gravity_n, false, 4, 0.785398, false)
 
-    target_speed *= WALK_SPEED
-    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.3 if on_floor else 0.025))
+	## Physics ##
 
-    # Jumping
-    if on_floor and Input.is_action_just_pressed("move_jump"):
-        linear_velocity.y = -JUMP_SPEED
+	# Apply a force to every collider we touched
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("dynamic-prop"):
+			collision.collider.apply_central_impulse(-collision.normal * PUSH)
 
-    linear_velocity = linear_velocity.rotated(-FLOOR_NORMAL.angle_to(-gravity_n))
+	# Detect if we are on floor - only works if called *after* move_and_slide
+	var on_floor = is_on_floor()
 
-    # Rotating
-    if (rotation_degrees == 0):
-        pass
-    elif (rotation_degrees < 1 && rotation_degrees > -1):
-        rotate(-rotation)
-    else:
-        var x = min(linear_velocity.x, 2500)/2500
-        var y = 0.147 - 0.177*x + 0.057*pow(x,2)
-        rotate(lerp(0, -rotation, y))
+	## Control ##
+
+
+	linear_velocity = linear_velocity.rotated(FLOOR_NORMAL.angle_to(-gravity_n))
+
+	# Horizontal movement
+	var target_speed = 0
+	if Input.is_action_pressed("move_left"):
+		if !target_speed == -WALK_SPEED:
+			target_speed -= 25
+	if Input.is_action_pressed("move_right"):
+		if !target_speed == WALK_SPEED:
+			target_speed += 25
+
+	if abs(target_speed) > WALK_SPEED:
+		if target_speed < 0:
+			target_speed = -WALK_SPEED
+		else:
+			target_speed = WALK_SPEED
+
+	target_speed *= WALK_SPEED
+	linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.3 if on_floor else 0.025))
+	if target_speed == 0:
+		state_machine.travel("Idle")
+	if target_speed != 0:
+		state_machine.travel("Walking")
+		
+	# Jumping
+	if on_floor and Input.is_action_just_pressed("move_jump"):
+		state_machine.travel("Jumping")
+		linear_velocity.y = -JUMP_SPEED
+
+	linear_velocity = linear_velocity.rotated(-FLOOR_NORMAL.angle_to(-gravity_n))
+
+	# Rotating
+	if (rotation_degrees == 0):
+		pass
+	elif (rotation_degrees < 1 && rotation_degrees > -1):
+		rotate(-rotation)
+	else:
+		var x = min(linear_velocity.x, 2500)/2500
+		var y = 0.147 - 0.177*x + 0.057*pow(x,2)
+		rotate(lerp(0, -rotation, y))
 
 func _input(event):
 
-    if Input.is_action_just_pressed("take_damage"):
-        take_damage(20)
+	if Input.is_action_just_pressed("take_damage"):
+		take_damage(20)
 
-    if Input.is_action_just_pressed("interact"):
-        # If the player is already holding something, they let it go
-        if held_object != null:
-            release_object()
-            return
-        # The players root is at their feet, so let's lift it to the center
-        var origin = global_position
-        origin.y -= 90
-        # Normalized direction vector from the player to the mouse pointer
-        var direction = (get_global_mouse_position() - origin).normalized()
+	if Input.is_action_just_pressed("interact"):
+		# If the player is already holding something, they let it go
+		if held_object != null:
+			release_object()
+			return
+		# The players root is at their feet, so let's lift it to the center
+		var origin = global_position
+		origin.y -= 90
+		# Normalized direction vector from the player to the mouse pointer
+		var direction = (get_global_mouse_position() - origin).normalized()
 
-        # Raycast 200 pixel from the player to the mouse pointer
-        var space_state = get_world_2d().direct_space_state
-        var result = space_state.intersect_ray(origin, origin + (direction * 200), [self], BinaryLayers.FLOOR | BinaryLayers.INTERACTION)
-        if !result.empty():
-            if result.collider.is_in_group("can-press"): result.collider.press()
-            elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
+		# Raycast 200 pixel from the player to the mouse pointer
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_ray(origin, origin + (direction * 200), [self], BinaryLayers.FLOOR | BinaryLayers.INTERACTION)
+		if !result.empty():
+			if result.collider.is_in_group("can-press"): result.collider.press()
+			elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
 
 
 # handling input for shooting
@@ -175,31 +183,33 @@ func rotate_portalgun(point_direction: Vector2)->float:
 	return temp
 
 func hold_object(collider):
-    held_object = collider
-    held_object.gravity_scale = 0
-    held_object.connect("fizzled", self, "release_object")
+	held_object = collider
+	held_object.gravity_scale = 0
+	held_object.connect("fizzled", self, "release_object")
 
 func release_object():
-    held_object.disconnect("fizzled", self, "release_object")
-    held_object.gravity_scale = 1
-    held_object.linear_velocity = linear_velocity
-    held_object = null
+	held_object.disconnect("fizzled", self, "release_object")
+	held_object.gravity_scale = 1
+	held_object.linear_velocity = linear_velocity
+	held_object = null
 
 func take_damage(amount):
 #    print("taking damage: ", amount)
-    live = live - amount
+	state_machine.travel("Damaging")
+	live = live - amount
 #    print("live: ", live)
-    if (live <= 0):
-        die()
+	if (live <= 0):
+		die()
 
 func regenerate_live(delta):
 #    print("regenerating live")
-    live += live_regeneration_rate * delta
-    if(live > 100):
-        live = 100
+	live += live_regeneration_rate * delta
+	if(live > 100):
+		live = 100
 
 
 func die():
-    # Not properly working yet caused by PortalManager
-    # Will be Fixed, as soon as SceneLoading ist done differently
-    get_tree().reload_current_scene()
+	# Not properly working yet caused by PortalManager
+	# Will be Fixed, as soon as SceneLoading ist done differently
+	state_machine.travel("Dying")
+	get_tree().reload_current_scene()
