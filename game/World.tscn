@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
@@ -6,10 +6,9 @@
 [ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=4]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
-[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=7]
+[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://test-elements/portal-spawner/PortalSpawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=9]
-[ext_resource path="res://test-elements/floor-button/FloorButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=11]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=12]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=13]
@@ -18,12 +17,10 @@
 [ext_resource path="res://classes/TextureToggle.gd" type="Script" id=16]
 [ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=17]
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=18]
-[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=19]
 [ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=20]
 [ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=21]
-[ext_resource path="res://textures/light.png" type="Texture" id=22]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=23]
-[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 32 )
@@ -50,6 +47,27 @@ extents = Vector2( 160, 32.351 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 6 )
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="GlassLightCover" parent="Lights" instance=ExtResource( 1 )]
+position = Vector2( -352, 448 )
+
+[node name="GlassLightCover2" parent="Lights" instance=ExtResource( 1 )]
+position = Vector2( -256, -224 )
+rotation = 1.5708
+
+[node name="GlassLightCover4" parent="Lights" instance=ExtResource( 1 )]
+position = Vector2( 1088, 224 )
+rotation = 1.5708
+
+[node name="GlassLightCover6" parent="Lights" instance=ExtResource( 1 )]
+position = Vector2( 640, -224 )
+rotation = 1.5708
+
+[node name="GlassLightCover7" parent="Lights" instance=ExtResource( 1 )]
+position = Vector2( 320, 288 )
+rotation = 1.5708
 
 [node name="TileMapBackground" type="TileMap" parent="."]
 modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
@@ -242,48 +260,6 @@ position = Vector2( 704, 112 )
 position = Vector2( -640, -96 )
 start_activated = true
 type = 1
-
-[node name="Lights" type="Node2D" parent="."]
-
-[node name="GlassLightCover" parent="Lights" instance=ExtResource( 1 )]
-position = Vector2( -352, 448 )
-
-[node name="GlassLightCover2" parent="Lights" instance=ExtResource( 1 )]
-position = Vector2( -256, -224 )
-rotation = 1.5708
-
-[node name="GlassLightCover4" parent="Lights" instance=ExtResource( 1 )]
-position = Vector2( 1088, 224 )
-rotation = 1.5708
-
-[node name="GlassLightCover6" parent="Lights" instance=ExtResource( 1 )]
-position = Vector2( 640, -224 )
-rotation = 1.5708
-
-[node name="Light2D" type="Light2D" parent="Lights"]
-position = Vector2( -112, -1296 )
-scale = Vector2( 2.0625, 2.0625 )
-texture = ExtResource( 22 )
-texture_scale = 5.0
-energy = 1.3
-mode = 2
-shadow_enabled = true
-shadow_gradient_length = 1.0
-shadow_filter = 5
-shadow_filter_smooth = 1.0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="TestDoor" parent="." instance=ExtResource( 24 )]
-position = Vector2( 941.135, 511.265 )
-start_open = false
-
-[node name="FloorButton" parent="." instance=ExtResource( 10 )]
-position = Vector2( 147.693, 573.788 )
 [connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]
 [connection signal="pressed" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_on"]
-[connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]
 [connection signal="released" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_off"]
-[connection signal="pressed" from="FloorButton" to="TestDoor" method="_on_FloorButton_pressed"]
-[connection signal="released" from="FloorButton" to="TestDoor" method="_on_FloorButton_released"]
