@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shader/glow/glow.shader" type="Shader" id=1]
+[ext_resource path="res://test-elements/turret/turret-laser.png" type="Texture" id=2]
+[ext_resource path="res://test-elements/turret/TurretLaser.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/bright_amount = 10.0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+next_pass = SubResource( 1 )
+blend_mode = 1
+
+[node name="TurretLaser" type="KinematicBody2D"]
+z_index = -1
+z_as_relative = false
+collision_layer = 1024
+collision_mask = 1024
+script = ExtResource( 3 )
+
+[node name="VisualLine" type="Line2D" parent="."]
+material = SubResource( 2 )
+width = 16.0
+default_color = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 2 )
+texture_mode = 1

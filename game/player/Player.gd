@@ -5,7 +5,7 @@ class_name Player
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 
 # Player related Values
-var live
+var health = 100
 const live_regeneration_rate = 5
 var _regeneration_timer = null
 var liveLabel
@@ -24,16 +24,6 @@ var held_object = null
 
 # portalgun orientation in degree
 var deg = 0
-
-func _ready():    
-    # Live Regeneration, every Second
-    live = 100
-#    _regeneration_timer = Timer.new()
-#    add_child(_regeneration_timer)
-#    _regeneration_timer.connect("timeout", self, "regenerate_live")
-#    _regeneration_timer.set_wait_time(1.0)
-#    _regeneration_timer.set_one_shot(false)
-#    _regeneration_timer.start()
 
 func _physics_process(delta):
     
@@ -177,26 +167,25 @@ func rotate_portalgun(point_direction: Vector2)->float:
 func hold_object(collider): 
     held_object = collider
     held_object.gravity_scale = 0
+    if held_object.has_method("picked_up"): held_object.picked_up(true)
     held_object.connect("fizzled", self, "release_object")
     
 func release_object():
     held_object.disconnect("fizzled", self, "release_object")
+    if held_object.has_method("picked_up"): held_object.picked_up(false)
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null
     
 func take_damage(amount):
-#    print("taking damage: ", amount)
-    live = live - amount
-#    print("live: ", live)
-    if (live <= 0):
-        die()
+    health -= amount
+    print(health)
+    if (health <= 0): die()
         
 func regenerate_live(delta):
-#    print("regenerating live")
-    live += live_regeneration_rate * delta
-    if(live > 100):
-        live = 100           
+    health += live_regeneration_rate * delta
+    if(health > 100):
+        health = 100           
        
 
 func die():

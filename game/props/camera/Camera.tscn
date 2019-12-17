@@ -54,5 +54,3 @@ visible = false
 position = Vector2( -36, -4 )
 rotation = 1.5708
 shape = SubResource( 2 )
-
-[node name="Tween" type="Tween" parent="."]

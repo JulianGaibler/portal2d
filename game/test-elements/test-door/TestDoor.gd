@@ -32,5 +32,3 @@ func open():
     door_collider.position = Vector2(0,112)
     
     lights_sprite.region_rect.position.x = 1408
-
-
