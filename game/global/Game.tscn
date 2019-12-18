@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menus/PauseMenu.tscn" type="PackedScene" id=1]
+
+[node name="Game" type="Node"]
+
+[node name="BlendLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="BlendLayer"]
+process_priority = 4
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="BlendLayer"]
+
+[node name="MenuContainer" parent="." instance=ExtResource( 1 )]

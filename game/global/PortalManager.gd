@@ -5,6 +5,8 @@ var blue_portal_fixed = false
 var orange_portal = null
 var orange_portal_fixed = false
 
+func _ready():
+    Game.connect("goto_scene", self, "reset_pointers")
 
 func register_portal(new_portal, fixed = false):
     match new_portal.type:
@@ -28,3 +30,9 @@ func close_portals():
     if (orange_portal != null and not orange_portal_fixed):
         orange_portal.close_portal()
         orange_portal = null
+
+func reset_pointers():
+    blue_portal = null
+    blue_portal_fixed = false
+    orange_portal = null
+    orange_portal_fixed = false
