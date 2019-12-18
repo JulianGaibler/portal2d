@@ -31,7 +31,7 @@ func shoot_portal(type):
 
 func spawn_portal(hit_position: Vector2, normal: Vector2, deg: float, type):
     var instance = Portal.instance()
-    get_tree().get_root().add_child(instance)
+    Game.get_scene_root().add_child(instance)
     var orientation = PortalOrientation.UP
     # getting the correct orientation
     if normal == Vector2.UP or normal == Vector2.DOWN:

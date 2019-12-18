@@ -23,6 +23,9 @@ func _deferred_ready():
     blend_tween = game_root.get_node("BlendLayer/Tween")
     blend_rect = game_root.get_node("BlendLayer/ColorRect")
 
+# Gets current route of the scene
+func get_scene_root():
+    return current_scene
 
 func goto_scene(path):
     call_deferred("_deferred_goto_scene", path)

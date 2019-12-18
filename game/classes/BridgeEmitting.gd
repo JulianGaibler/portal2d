@@ -41,7 +41,7 @@ func _physics_process(delta):
     if compare_vec.distance_to(test_vec) < 12: return
     else: test_vec = compare_vec
         
-    var root = get_tree().get_root()
+    var root = Game.get_scene_root()
     var parent = root
     var new_first = null
     

@@ -26,7 +26,7 @@ var target_zoom = 2.5
 const ZOOM_SPEED = 10
 
 # Player Object to connect signals on
-onready var Player = get_tree().get_root().get_node("World").get_node("Player")
+onready var Player = Game.get_scene_root().get_node("Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
