@@ -11,24 +11,24 @@ func _ready():
 func register_portal(new_portal, fixed = false):
     match new_portal.type:
         0:
-            if (blue_portal != null): blue_portal.close_portal()
-            blue_portal = new_portal
+            if blue_portal != null and blue_portal.get_ref(): blue_portal.get_ref().close_portal()
+            blue_portal = weakref(new_portal)
             blue_portal_fixed = fixed
         1:
-            if (orange_portal != null): orange_portal.close_portal()
-            orange_portal = new_portal
+            if orange_portal != null and orange_portal.get_ref(): orange_portal.get_ref().close_portal()
+            orange_portal = weakref(new_portal)
             orange_portal_fixed = fixed
     
-    if (blue_portal != null): blue_portal.link_portal(orange_portal)
-    if (orange_portal != null): orange_portal.link_portal(blue_portal)
+    if blue_portal != null and blue_portal.get_ref(): blue_portal.get_ref().link_portal(orange_portal)
+    if orange_portal != null and orange_portal.get_ref(): orange_portal.get_ref().link_portal(blue_portal)
     
 
 func close_portals():
-    if (blue_portal != null and not blue_portal_fixed):
-        blue_portal.close_portal()
+    if (!blue_portal_fixed and blue_portal != null and blue_portal.get_ref()):
+        blue_portal.get_ref().close_portal()
         blue_portal = null
-    if (orange_portal != null and not orange_portal_fixed):
-        orange_portal.close_portal()
+    if (!orange_portal_fixed and orange_portal != null and orange_portal.get_ref()):
+        orange_portal.get_ref().close_portal()
         orange_portal = null
 
 func reset_pointers():
