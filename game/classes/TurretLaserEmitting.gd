@@ -28,7 +28,7 @@ func _physics_process(delta):
     var direction = Vector2.RIGHT.rotated(global_rotation)
     
     var space_state = get_world_2d().direct_space_state
-    var results = PortalUtils.intersect_ray(space_state, global_position, global_position + (direction * 10000), [parent] + get_tree().get_nodes_in_group("transparent"), BinaryLayers.FLOOR)
+    var results = PortalUtils.intersect_ray(space_state, global_position, global_position + (direction * 10000), [parent] + get_tree().get_nodes_in_group("fake-white"), BinaryLayers.FLOOR)
     
     # Simple checksum to see if anything has even changed
     var compare_vec = Vector2.ZERO

@@ -24,9 +24,8 @@ position = Vector2( -2.47955e-05, 0 )
 scale = Vector2( 7.99995, 272 )
 texture = ExtResource( 2 )
 
-
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
-"transparent",
+"fake-white",
 ]]
 collision_layer = 128
 collision_mask = 0
