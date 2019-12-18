@@ -83,8 +83,7 @@ func do_shooting(delta, player):
     look_at_player(player)
     var force = max(50, 400 - player.global_position.distance_to(global_position)/2)
     player.linear_velocity += (player.global_position - global_position).normalized() * force * rand_range(.4, 1.0)
-    print(force)
-    player.take_damage(delta * force)
+    player.take_damage(2 * delta * force)
 
 func do_searching(delta, player):
     timeout -= delta
