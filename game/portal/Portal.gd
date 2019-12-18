@@ -231,6 +231,8 @@ func teleport(body):
     
     var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
     body.rotate(a1)
+    
+    remove_shadow_body(body)
 
 
 func teleport_vector(position, direction):
@@ -302,7 +304,7 @@ func leave_outer_area(body):
 func enter_inner_area(body):
     if linked_portal == null or !linked_portal.get_ref(): return
     if body.is_in_group("physics-shadow"): return
-    add_shadow_body(body)
+    call_deferred("add_shadow_body", body)
     match type:
         PortalType.BLUE_PORTAL:
             body.set_collision_layer_bit(Layers.BLUE_INNER, true)
@@ -317,7 +319,7 @@ func enter_inner_area(body):
 func leave_inner_area(body):
     if linked_portal == null or !linked_portal.get_ref(): return
     if body.is_in_group("physics-shadow"): return
-    remove_shadow_body(body)
+    call_deferred("remove_shadow_body", body)
     match type:
         PortalType.BLUE_PORTAL:
             body.set_collision_layer_bit(Layers.BLUE_INNER, false)
@@ -370,7 +372,9 @@ func add_shadow_body(body):
 # Removed physics-shadows from physics_shadows list
 func remove_shadow_body(body):
     if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
-    var collider = physics_shadows[body.get_rid()][1]
+    var collider = physics_shadows.get(body.get_rid())
+    if collider == null: return
+    collider = collider[1]
     body.remove_collision_exception_with(collider)
     remove_child(collider)
     collider.queue_free()

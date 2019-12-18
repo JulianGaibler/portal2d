@@ -4,21 +4,15 @@ var button_Resume
 var button_MainMenu
 var button_ExitApplication
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-    button_MainMenu = get_node("ButtonResume")
-    button_MainMenu.connect("pressed", self, "resume_Game")  
+    button_Resume = get_node("ButtonResume")
+    button_Resume.connect("pressed", self, "resume_Game")  
       
     button_MainMenu = get_node("ButtonMainMenu")
     button_MainMenu.connect("pressed", self, "load_MainMenu")   
      
-    button_MainMenu = get_node("ButtonExitGame")
-    button_MainMenu.connect("pressed", self, "exit_Application")
-    pass # Replace with function body.
+    button_ExitApplication = get_node("ButtonExitGame")
+    button_ExitApplication.connect("pressed", self, "exit_Application")
 
 func _input(event):
     if event.is_action_pressed("ui_cancel"):
