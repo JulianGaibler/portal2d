@@ -170,3 +170,4 @@ shoot_orange_portal={
 [physics]
 
 2d/default_gravity=980
+2d/default_linear_damp=1.0
