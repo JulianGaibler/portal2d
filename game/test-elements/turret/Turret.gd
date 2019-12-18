@@ -14,7 +14,6 @@ onready var bullet_particles = $Wing/Barrel/Bullets
 export(bool) var looks_right = true
 
 enum { IDLE, ALERT, SHOOTING, SEARCHING, HELD, DYING, DEAD }
-enum x { IDLE, ALERT, SHOOTING, SEARCHING, HELD, DYING, DEAD }
 
 var state = IDLE
 var track_player = false
@@ -56,16 +55,10 @@ func _physics_process(delta):
         SEARCHING: do_searching(delta, tracked_player)
         HELD: do_held(delta, tracked_player)
         DYING: do_dying(delta, tracked_player)
-    update()
 
 func fizzle():
     go_dead()
     .fizzle()
-
-func _draw():
-    var label = Label.new()
-    var font = label.get_font("")
-    draw_string ( font, Vector2(0, -100), "Turret is: %s"%x.keys()[state], Color.white)
 
 ### Behavior
 
@@ -81,9 +74,9 @@ func do_shooting(delta, player):
     if !can_see_player(player): go_searching()
     if !can_shoot_player(player): go_alert()
     look_at_player(player)
-    var force = max(50, 400 - player.global_position.distance_to(global_position)/2)
+    var force = max(50, 400 - player.global_position.distance_to(global_position)*2)
     player.linear_velocity += (player.global_position - global_position).normalized() * force * rand_range(.4, 1.0)
-    player.take_damage(2 * delta * force)
+    player.take_damage(100 * delta)
 
 func do_searching(delta, player):
     timeout -= delta
@@ -216,7 +209,7 @@ func can_see_player(player) -> bool:
     if !((angle <= -135 and angle >= -180) or (angle <= 180 and angle >= 125)): return false
     
     var space_state = get_world_2d().direct_space_state
-    var result = space_state.intersect_ray(laser_node.global_position, player.global_position+PLAYER_UP, [self] + get_tree().get_nodes_in_group("transparent"), BinaryLayers.FLOOR)
+    var result = space_state.intersect_ray(laser_node.global_position, player.global_position+PLAYER_UP, [self] + get_tree().get_nodes_in_group("transparent"), BinaryLayers.FLOOR | BinaryLayers.BLUE_OUTER | BinaryLayers.ORANGE_OUTER)
     
     if !result.empty() and result.collider == player: return true
     return false
@@ -225,7 +218,7 @@ func can_shoot_player(player) -> bool:
     if !track_player: return false
     
     var space_state = get_world_2d().direct_space_state
-    var result = space_state.intersect_ray(laser_node.global_position, player.global_position+PLAYER_UP, [self], BinaryLayers.FLOOR)
+    var result = space_state.intersect_ray(laser_node.global_position, player.global_position+PLAYER_UP, [self], BinaryLayers.FLOOR | BinaryLayers.BLUE_OUTER | BinaryLayers.ORANGE_OUTER)
     
     if !result.empty() and result.collider == player: return true
     return false

@@ -74,5 +74,6 @@ func _connect_player_health():
         arr[0].connect("health_changed", self, "_update_health")
 
 func _update_health(health):
-    health_rect.material.set_shader_param("light", health)
-    health_rect.material.set_shader_param("extend", 1.0-health)
+    var inv = 1.0-health
+    health_rect.material.set_shader_param("offset", 10.0*inv)
+    health_rect.material.set_shader_param("extend", inv)
