@@ -179,6 +179,8 @@ func go_dead():
     bullet_particles.emitting = false
     confused_look(0,1)
     laser_node.deactivate()
+    yield(get_tree().create_timer(1), "timeout")
+    set_process(false)
 
 ### Helpers
 

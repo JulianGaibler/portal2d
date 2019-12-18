@@ -13,7 +13,6 @@ func _ready():
     connect("body_entered", self, "enter_area")
 
 func _physics_process(delta):
-    
     var goal = quarter_rotation
     
     if tracked_player != null:
@@ -31,8 +30,10 @@ func _physics_process(delta):
 func enter_area(body):
     if tracked_player == null and body.is_in_group("player"):
         tracked_player = body
+        set_process(true)
 
 func leave_area(body):
     tracked_player = null
+    set_process(false)
 
     

@@ -4,19 +4,22 @@ onready var disc_shader: Material = $Disc.get_material()
 onready var background = $Background
 
 export(float) var time
-var remaining = null
+var remaining = 0.0
 
 signal started
 signal stopped
 
+func _ready():
+    set_process(false)
+
 func start():
     emit_signal("started")    
+    set_process(true)
     background.region_rect.position.x = 256
     remaining = time
     disc_shader.set_shader_param("progress", 0.0)  
 
 func _process(delta):
-    if remaining == null: return
     
     remaining -= delta
     if remaining <= 0.0:
@@ -47,6 +50,7 @@ func _process(delta):
 
 func stop():
     emit_signal("stopped")
+    set_process(false)
     remaining = null
     disc_shader.set_shader_param("progress", 1.0)  
     background.region_rect.position.x = 0
