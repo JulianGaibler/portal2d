@@ -27,9 +27,10 @@ const ZOOM_SPEED = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    set_zoom(Vector2 (target_zoom, target_zoom))
+    yield(get_tree().create_timer(.1), "timeout")
     self.smoothing_enabled = true
     self.smoothing_speed = 1
-    set_zoom(Vector2 (target_zoom, target_zoom))
     
     PortalManager.connect("new_portal", self, "shake_portalshot")
     
