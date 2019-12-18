@@ -25,17 +25,13 @@ var target_zoom = 2.5
 # Zoom Speed
 const ZOOM_SPEED = 10
 
-# Player Object to connect signals on
-onready var Player = Game.get_scene_root().get_node("Player")
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
     self.smoothing_enabled = true
     self.smoothing_speed = 1
     set_zoom(Vector2 (target_zoom, target_zoom))
     
-    if(Player != null):
-        Player.connect("camera_fired_portal", self, "shake_PortalShot")
+    PortalManager.connect("new_portal", self, "shake_portalshot")
     
     pass # Replace with function body.    
     

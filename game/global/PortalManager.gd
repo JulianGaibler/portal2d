@@ -1,5 +1,7 @@
 extends Node
 
+signal new_portal
+
 var blue_portal = null
 var blue_portal_fixed = false
 var orange_portal = null
@@ -21,6 +23,8 @@ func register_portal(new_portal, fixed = false):
     
     if blue_portal != null and blue_portal.get_ref(): blue_portal.get_ref().link_portal(orange_portal)
     if orange_portal != null and orange_portal.get_ref(): orange_portal.get_ref().link_portal(blue_portal)
+    
+    emit_signal("new_portal")
     
 
 func close_portals():
