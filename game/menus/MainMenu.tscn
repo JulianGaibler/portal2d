@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://menus/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://shader/menu/mainmenuBackground.jpg" type="Texture" id=2]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 513.763, 370.999, 680.999 ]
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = -1.85059
+margin_right = 1918.15
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mainmenuBackground" type="Sprite" parent="Background"]
+position = Vector2( 512.33, 89.76 )
+scale = Vector2( 0.532206, 0.532206 )
+texture = ExtResource( 2 )
+
+[node name="Button_Start" type="Button" parent="Background"]
+margin_left = 372.0
+margin_top = 290.0
+margin_right = 683.0
+margin_bottom = 315.0
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Settings" type="Button" parent="Background"]
+margin_left = 372.0
+margin_top = 340.0
+margin_right = 683.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( 39.7336, 14.4132 )
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Exit" type="Button" parent="Background"]
+margin_left = 372.0
+margin_top = 390.0
+margin_right = 684.0
+margin_bottom = 415.0
+rect_pivot_offset = Vector2( 39.7336, 14.4132 )
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 39.6114
+margin_top = 65.5789
+margin_right = 180.611
+margin_bottom = 79.5789
+text = "Welcome to Portal 2D"

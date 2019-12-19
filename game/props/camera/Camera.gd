@@ -5,7 +5,6 @@ const half_rotation = deg2rad(180)
 const quarter_rotation = deg2rad(90)
 
 onready var camera_body := $CameraSprite/StaticBody2D
-onready var tween := $Tween
 
 var tracked_player = null
 
@@ -14,7 +13,6 @@ func _ready():
     connect("body_entered", self, "enter_area")
 
 func _physics_process(delta):
-    
     var goal = quarter_rotation
     
     if tracked_player != null:
@@ -26,13 +24,16 @@ func _physics_process(delta):
     if scale.x < 0: goal *= -1
     else: goal += half_rotation
     if (goal != camera_body.rotation):
-        tween.interpolate_property(camera_body, "rotation", camera_body.rotation, goal, .3, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-        tween.start()
+        camera_body.rotation = lerp_angle(camera_body.rotation, goal, 2.0 * delta)
 
 
 func enter_area(body):
     if tracked_player == null and body.is_in_group("player"):
         tracked_player = body
+        set_process(true)
 
 func leave_area(body):
     tracked_player = null
+    set_process(false)
+
+    

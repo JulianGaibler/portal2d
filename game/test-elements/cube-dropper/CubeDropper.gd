@@ -7,13 +7,17 @@ onready var spawn_point := $SpawnPoint
 
 var current_object
 
+var first_dropped = true
+
 export(bool) var initial_drop = false # If the dropper should initially open once
 export(bool) var auto_drop = false # If the dropper should open when a new item has been spawned
 export(PackedScene) var object = null # Scene-Object that should be spawned
 export(bool) var auto_respawn = false # If destroyed objects should be respawned
 
 func _ready():
-    if object: _create_object()
+    if object:
+        _create_object()
+        first_dropped = false
     if initial_drop: timed_open()
 
 func _create_object():
@@ -29,11 +33,17 @@ func _create_object():
         current_object = instance
         add_child(instance)
 
+## Public Methods ##
+
 func spawn_new():
-    _create_object()
-    if auto_drop:
-        yield(get_tree().create_timer(0.5), "timeout")
+    if !first_dropped:
         timed_open()
+        first_dropped = true
+    else:
+        _create_object()
+        if auto_drop:
+            yield(get_tree().create_timer(0.5), "timeout")
+            timed_open()
 
 func open():
     light_sprite.region_rect.position.y = 1600
@@ -51,3 +61,4 @@ func timed_open():
     open()
     yield(get_tree().create_timer(1.5), "timeout")
     close()
+

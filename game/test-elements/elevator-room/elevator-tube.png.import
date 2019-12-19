@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/panel-pre.png-a9efdf7468762dc7bd894b0da9c24494.stex"
+path="res://.import/elevator-tube.png-4db742cbd5fd7a3a95e1b7ef080c744b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test-elements/panel/panel-pre.png"
-dest_files=[ "res://.import/panel-pre.png-a9efdf7468762dc7bd894b0da9c24494.stex" ]
+source_file="res://test-elements/elevator-room/elevator-tube.png"
+dest_files=[ "res://.import/elevator-tube.png-4db742cbd5fd7a3a95e1b7ef080c744b.stex" ]
 
 [params]
 
