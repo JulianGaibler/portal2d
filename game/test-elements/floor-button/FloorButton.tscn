@@ -51,4 +51,5 @@ shape = SubResource( 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
-volume_db = -10.0
+volume_db = -15.0
+bus = "Reverb"

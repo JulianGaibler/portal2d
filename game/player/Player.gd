@@ -12,6 +12,10 @@ const live_regeneration_rate = 50
 
 # portal gun node detection
 onready var portalgun := $PortalGun
+onready var gravitygun := $GravityGun
+onready var gravitygun_holding := $GravityGunHolding
+onready var landing := $Feet/Landing
+onready var feet := $Feet
 
 const FLOOR_NORMAL = Vector2.UP
 const WALK_SPEED = 25 # pixels/sec
@@ -25,10 +29,18 @@ var held_object = null
 var grav_gun_audio_streams = ["res://sounds/gravity-gun/lift1.wav",
                               "res://sounds/gravity-gun/lift2.wav",
                               "res://sounds/gravity-gun/lift3.wav"
-                            ]
+                             ]
+
+const collision_audio_streams = ["res://sounds/jump-landing/jump1.wav",
+                                 "res://sounds/jump-landing/jump2.wav",
+                                 "res://sounds/jump-landing/jump3.wav"
+                                ]
 
 # portalgun orientation in degree
 var deg = 0
+
+func _ready():
+    feet.connect("body_entered", self, "_on_collision")
 
 func _physics_process(delta):
     
@@ -170,9 +182,9 @@ func hold_object(collider):
     if held_object.has_method("picked_up"): held_object.picked_up(true)
     held_object.connect("fizzled", self, "release_object")
     randomize()
-    $GravityGun.set_stream(load(grav_gun_audio_streams[randi()%grav_gun_audio_streams.size()]))
-    $GravityGun.play()
-    $GravityGunHolding.play()
+    gravitygun.set_stream(load(grav_gun_audio_streams[randi()%grav_gun_audio_streams.size()]))
+    gravitygun.play()
+    gravitygun_holding.play()
     
 func release_object():
     held_object.disconnect("fizzled", self, "release_object")
@@ -180,7 +192,7 @@ func release_object():
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null
-    $GravityGunHolding.stop()
+    gravitygun_holding.stop()
     
 func take_damage(amount):
     health -= amount
@@ -190,7 +202,14 @@ func regenerate_live(delta):
     health += live_regeneration_rate * delta
     health = min(100.0, health)
     if health != 100.0: emit_signal("health_changed", health/100.0)
-       
+
+func _on_collision(body):
+    play_colliding_sound()
+
+func play_colliding_sound():
+    randomize()
+    landing.set_stream(load(collision_audio_streams[randi()%collision_audio_streams.size()]))
+    landing.play()
 
 func die():
     if dead: return

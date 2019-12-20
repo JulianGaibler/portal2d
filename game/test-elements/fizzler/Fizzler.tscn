@@ -40,3 +40,4 @@ shape = SubResource( 1 )
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -5.0
+bus = "Reverb"

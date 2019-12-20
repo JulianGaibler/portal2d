@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://shader/glow/glow.shader" type="Shader" id=1]
 [ext_resource path="res://test-elements/laser-emitter/laser.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/laser-emitter/Laser.gd" type="Script" id=3]
+[ext_resource path="res://sounds/laser/laser-on.wav" type="AudioStream" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -25,3 +26,9 @@ width = 16.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 2 )
 texture_mode = 2
+
+[node name="LaserAmbient" type="AudioStreamPlayer2D" parent="VisualLine"]
+stream = ExtResource( 4 )
+volume_db = -27.53
+autoplay = true
+bus = "Reverb"
