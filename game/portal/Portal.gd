@@ -46,7 +46,7 @@ var normal_vec
 # Direction Vector of the portal, pointing where up is in global space
 var direction_vec
 # Basis transformation matrix from this to the linked portal
-var transfomration_matrix
+var transformation_matrix
 
 const ambient_audio_streams = [
     "res://sounds/portal/background-drone1.wav",
@@ -133,14 +133,14 @@ func link_portal(new_portal):
     # This basis transformation matrix transforms from this portals basis into the one of the linked portal.
     var from = Matrix2D.new(direction_vec.x, direction_vec.y, normal_vec.x, normal_vec.y)
     var to = Matrix2D.new(lp.direction_vec.x, lp.direction_vec.y, lp.normal_vec.x, lp.normal_vec.y)
-    transfomration_matrix = to.inverse().multiply_mat(from)
+    transformation_matrix = to.inverse().multiply_mat(from)
 
     var carved_polygons = [] + collider_polygons
 
     var other_cutout = PoolVector2Array()
     other_cutout.resize(PORTAL_CUTOUT.size())
     for i in range(0, PORTAL_CUTOUT.size()):
-        var new_pos = to_local(lp.global_position) + (transfomration_matrix.multiply_vec(PORTAL_CUTOUT[i]))
+        var new_pos = to_local(lp.global_position) + (transformation_matrix.multiply_vec(PORTAL_CUTOUT[i]))
         other_cutout.set(i, new_pos)
 
     for polygon in calculate_polygon(scan_area_back):
@@ -205,11 +205,11 @@ func update_physics_shadow(collider):
     var rotation = collider[0].global_transform.get_rotation()
     # Transform position
     var po = collider[0].global_position - global_position
-    var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
+    var new_pos = linked_portal.get_ref().global_position + (transformation_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
     collider[1].global_transform = Transform2D()
     collider[1].global_transform.origin = new_pos
     
-    var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.get_ref().normal_vec))
+    var a1 = Vector2.UP.angle_to(transformation_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.get_ref().normal_vec))
     collider[1].rotate(a1)
 
 func _physics_process(delta):
@@ -255,21 +255,21 @@ func teleport(body):
     body.global_transform = Transform2D()
     body.global_transform.origin = transformed[0]
     
-    var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
+    var a1 = Vector2.UP.angle_to(transformation_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
     body.rotate(a1)
     
     remove_shadow_body(body)
 
 
 func teleport_vector(position, direction):
-    if (linked_portal == null or transfomration_matrix == null): return null
+    if (linked_portal == null or transformation_matrix == null): return null
     
     # Transform velocity
-    direction = (transfomration_matrix.multiply_vec(direction)).bounce(linked_portal.get_ref().normal_vec)
+    direction = (transformation_matrix.multiply_vec(direction)).bounce(linked_portal.get_ref().normal_vec)
     
     # Transform position
     var po = position - global_position
-    var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
+    var new_pos = linked_portal.get_ref().global_position + (transformation_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
     
     return [new_pos, direction]
 
@@ -296,7 +296,7 @@ func reset_portal():
     for collider in physics_shadows.values():
         remove_child(collider[1])
         collider[1].queue_free()
-    transfomration_matrix = null
+    transformation_matrix = null
     if (static_collider != null):
         remove_child(static_collider)
         static_collider.queue_free()
@@ -382,7 +382,7 @@ func add_shadow_body(body):
             collider.add_child(sprite)
         collider.set_script(preload("res://portal/PhysicsShadow.gd"))
         collider.parent = body
-        collider.matrix = transfomration_matrix
+        collider.matrix = transformation_matrix
         collider.linked_normal = linked_portal.get_ref().normal_vec
         collider.add_to_group("physics-shadow")
         collider.set_collision_mask(0)
@@ -443,7 +443,6 @@ func calculate_polygon(scan_area):
 
 
 #### Helpers ####
-##
 
 # Creates a static collider from an array of polygons
 func create_static_collider(polygons: Array) -> StaticBody2D:

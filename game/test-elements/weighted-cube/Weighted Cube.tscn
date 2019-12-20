@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.gd" type="Script" id=2]
+[ext_resource path="res://sounds/impacts/impact1.wav" type="AudioStream" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
@@ -9,7 +10,10 @@ friction = 0.75
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
-[node name="Weighted Cube" type="RigidBody2D" groups=[
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 46.7656, 47.9829 )
+
+[node name="WeightedCube" type="RigidBody2D" groups=[
 "can-fizzle",
 "can-pickup",
 "dynamic-prop",
@@ -31,4 +35,13 @@ region_rect = Rect2( 8, 8, 320, 320 )
 visible = false
 shape = SubResource( 2 )
 
+[node name="CollisionDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+shape = SubResource( 3 )
+
 [node name="CollisionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "Reverb"
