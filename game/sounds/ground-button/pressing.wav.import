@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pressing.wav-b1051249835ec1bd01a3e7b2c9cee23e.sample"
+
+[deps]
+
+source_file="res://sounds/ground-button/pressing.wav"
+dest_files=[ "res://.import/pressing.wav-b1051249835ec1bd01a3e7b2c9cee23e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -7,6 +7,9 @@ onready var spawn_point := $SpawnPoint
 
 var current_object
 
+var audio_streams = ["res://sounds/cube-dropper/drop1.wav",
+                     "res://sounds/cube-dropper/drop2.wav"]
+
 export(bool) var initial_drop = false # If the dropper should initially open once
 export(bool) var auto_drop = false # If the dropper should open when a new item has been spawned
 export(PackedScene) var object = null # Scene-Object that should be spawned
@@ -21,6 +24,9 @@ func _create_object():
         if current_object != null:
             if auto_respawn:
                 current_object.disconnect("tree_exiting", self, "spawn_new")
+            # TODO: stop fizzler from playing sound when no cube is visible
+            # $Sound.set_stream(load("res://sounds/fizzler/fizzle.wav"))
+            # $Sound.play()
             current_object.fizzle()
         var instance = object.instance()
         instance.set_position(spawn_point.get_position())
@@ -30,9 +36,12 @@ func _create_object():
         add_child(instance)
 
 func spawn_new():
+    randomize()
+    $Sound.set_stream(load(audio_streams[randi()%audio_streams.size()]))
+    $Sound.play()
     _create_object()
     if auto_drop:
-        yield(get_tree().create_timer(0.5), "timeout")
+        yield(get_tree().create_timer(0.7), "timeout")
         timed_open()
 
 func open():

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/releasing.wav-c2e9ff8e6a0e2db48177d2e30815fb47.sample"
+
+[deps]
+
+source_file="res://sounds/ground-button/releasing.wav"
+dest_files=[ "res://.import/releasing.wav-c2e9ff8e6a0e2db48177d2e30815fb47.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

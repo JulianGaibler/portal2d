@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/plop1.wav-d3af16ed2387a48d65c68da83819a8c2.sample"
+
+[deps]
+
+source_file="res://sounds/cube-dropper/plop1.wav"
+dest_files=[ "res://.import/plop1.wav-d3af16ed2387a48d65c68da83819a8c2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
