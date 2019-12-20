@@ -33,7 +33,7 @@ func _physics_process(delta):
     
     var direction = Vector2.RIGHT.rotated(global_rotation)
     
-    var exclude = [parent] + get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("excursion-funnel")
+    var exclude = [parent] + get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("excursion-funnel") + get_tree().get_nodes_in_group("fake-white")
 
     var space_state = get_world_2d().direct_space_state
     var results = PortalUtils.intersect_ray(space_state, global_position, global_position + (direction * 10000), exclude, BinaryLayers.FLOOR)
@@ -46,7 +46,7 @@ func _physics_process(delta):
     if compare_vec.distance_to(test_vec) < 12: return
     else: test_vec = compare_vec
         
-    var root = get_tree().get_root()
+    var root = Game.get_scene_root()
     var parent = root
     var new_first = null
     

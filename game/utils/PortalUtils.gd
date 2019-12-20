@@ -34,7 +34,7 @@ static func intersect_ray(space_state: Physics2DDirectSpaceState, from: Vector2,
             # Transforming
             var transformed = r.collider.get_parent().teleport_vector(r.position, to - r.position)
             if transformed == null: break
-            from = transformed[0] + r.collider.get_parent().linked_portal.normal_vec
+            from = transformed[0] + r.collider.get_parent().linked_portal.get_ref().normal_vec
             # The ray needs to be shortened, to be realistic and avoid endless collisions
             var shortened = transformed[1] * (1 - from.distance_to(to) / transformed[1].length())
             to = transformed[1] + from

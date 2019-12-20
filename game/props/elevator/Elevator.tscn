@@ -1,0 +1,176 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://props/elevator/elevator.png" type="Texture" id=1]
+[ext_resource path="res://textures/tall-light.png" type="Texture" id=2]
+[ext_resource path="res://props/elevator/Elevator.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 119 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "BindPose"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShapeDoor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -80, -119 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShapeDoor:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("SpriteDoorSlide:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -48, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShapeDoor:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -80, -119 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShapeDoor:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("SpriteDoorSlide:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, 0, 0, 0.4, 0, -48, -0.4, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShapeDoor:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -80, -240 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShapeDoor:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("SpriteDoorSlide:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -48, 0, 0, 0.4, 0, 0, -0.4, 0, 0, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[node name="Elevator" type="KinematicBody2D"]
+collision_layer = 14
+collision_mask = 14
+motion/sync_to_physics = true
+script = ExtResource( 3 )
+
+[node name="CollisionPolygonElevator" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -88, 0, 78, 0, 78, -238, -88, -238, -88, -350, 84, -350, 84, 50, -88, 50 )
+
+[node name="CollisionShapeDoor" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -80, -119 )
+shape = SubResource( 1 )
+
+[node name="SpriteElevator" type="Sprite" parent="."]
+position = Vector2( 16, -146 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -2
+z_as_relative = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 896, 1664 )
+
+[node name="SpriteLight" type="Sprite" parent="."]
+position = Vector2( 0, -242 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 1664, 768, 128 )
+
+[node name="SpriteDoorSlide" type="Sprite" parent="."]
+position = Vector2( -48, -114 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 896, 384, 384, 1152 )
+
+[node name="SpriteDoor" type="Sprite" parent="."]
+position = Vector2( 16, -114 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1280, 384, 640, 1152 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 5, -146 )
+scale = Vector2( 1.7361, 0.694719 )
+texture = ExtResource( 2 )
+texture_scale = 0.5
+mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BindPose = SubResource( 2 )
+anims/close = SubResource( 3 )
+anims/open = SubResource( 4 )

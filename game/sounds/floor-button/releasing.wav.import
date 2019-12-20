@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/pressing.wav-b1051249835ec1bd01a3e7b2c9cee23e.sample"
+path="res://.import/releasing.wav-3ee8d2cd9355b02fbaec923b27143ee9.sample"
 
 [deps]
 
-source_file="res://sounds/ground-button/pressing.wav"
-dest_files=[ "res://.import/pressing.wav-b1051249835ec1bd01a3e7b2c9cee23e.sample" ]
+source_file="res://sounds/floor-button/releasing.wav"
+dest_files=[ "res://.import/releasing.wav-3ee8d2cd9355b02fbaec923b27143ee9.sample" ]
 
 [params]
 

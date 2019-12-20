@@ -26,7 +26,7 @@ func leave_area(body):
         tween.interpolate_property(plate_node, "position", plate_node.position, Vector2(0,0), .1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
         tween.start()
         lights_sprite.region_rect.position.y = 256
-        play_sound("res://sounds/button/button1.wav")
+        play_sound("res://sounds/floor-button/releasing.wav")
         emit_signal("released")
 
 func enter_area(body):
@@ -35,5 +35,5 @@ func enter_area(body):
         tween.interpolate_property(plate_node, "position", plate_node.position, Vector2(0,3), .1, Tween.TRANS_LINEAR, Tween.EASE_IN)
         tween.start()
         lights_sprite.region_rect.position.y = 320
-        play_sound("res://sounds/button/button2.wav")
+        play_sound("res://sounds/floor-button/pressing.wav")
         emit_signal("pressed")

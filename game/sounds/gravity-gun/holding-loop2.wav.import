@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/holding-loop2.wav-4b7aa75d510165e4c324fe2b19ad57a0.sample"
+
+[deps]
+
+source_file="res://sounds/gravity-gun/holding-loop2.wav"
+dest_files=[ "res://.import/holding-loop2.wav-4b7aa75d510165e4c324fe2b19ad57a0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

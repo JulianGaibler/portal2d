@@ -1,8 +1,14 @@
 extends KinematicBody2D
-
 class_name Player
 
+signal health_changed
+
 const BinaryLayers = preload("res://Layers.gd").BinaryLayers
+
+# Player related Values
+var health = 100
+var dead = false
+const live_regeneration_rate = 50
 
 # portal gun node detection
 onready var portalgun := $PortalGun
@@ -16,11 +22,16 @@ var PUSH = 1000
 var linear_velocity = Vector2()
 var held_object = null
 
+var grav_gun_audio_streams = ["res://sounds/gravity-gun/lift1.wav",
+                              "res://sounds/gravity-gun/lift2.wav",
+                              "res://sounds/gravity-gun/lift3.wav"
+                            ]
+
 # portalgun orientation in degree
 var deg = 0
 
 func _physics_process(delta):
-
+    
     var direct_state = Physics2DServer.body_get_direct_state(get_rid())
     var gravity_vec = direct_state.total_gravity * 2.0
     var gravity_n = gravity_vec.normalized()
@@ -43,9 +54,7 @@ func _physics_process(delta):
         else:
             held_object.linear_velocity = linear_velocity
             held_object.apply_central_impulse((to - held_object.global_transform.origin).normalized() * to.distance_to(held_object.global_transform.origin) * 150)
-            
-            
-
+    
     ## Movement ##
     
     # Apply gravity
@@ -66,35 +75,6 @@ func _physics_process(delta):
     # Detect if we are on floor - only works if called *after* move_and_slide
     var on_floor = is_on_floor()
 
-    ## Control ##
-
-
-    linear_velocity = linear_velocity.rotated(FLOOR_NORMAL.angle_to(-gravity_n))
-
-    # Horizontal movement
-    var target_speed = 0
-    if Input.is_action_pressed("move_left"):
-        if !target_speed == -WALK_SPEED:
-            target_speed -= 25
-    if Input.is_action_pressed("move_right"):
-        if !target_speed == WALK_SPEED:
-            target_speed += 25
-    
-    if abs(target_speed) > WALK_SPEED:
-        if target_speed < 0:
-            target_speed = -WALK_SPEED
-        else:
-            target_speed = WALK_SPEED
-
-    target_speed *= WALK_SPEED
-    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.3 if on_floor else 0.025))
-
-    # Jumping
-    if on_floor and Input.is_action_just_pressed("move_jump"):
-        linear_velocity.y = -JUMP_SPEED
-
-    linear_velocity = linear_velocity.rotated(-FLOOR_NORMAL.angle_to(-gravity_n))
-
     # Rotating
     if (rotation_degrees == 0):
         pass
@@ -105,7 +85,41 @@ func _physics_process(delta):
         var y = 0.147 - 0.177*x + 0.057*pow(x,2)
         rotate(lerp(0, -rotation, y))
 
+    var target_speed = 0
+    
+    if !dead:
+        regenerate_live(delta)
+        
+        ## Control ##
+        linear_velocity = linear_velocity.rotated(FLOOR_NORMAL.angle_to(-gravity_n))
+        # Horizontal movement
+        if Input.is_action_pressed("move_left"):
+            if !target_speed == -WALK_SPEED:
+                target_speed -= 25
+        if Input.is_action_pressed("move_right"):
+            if !target_speed == WALK_SPEED:
+                target_speed += 25
+        if abs(target_speed) > WALK_SPEED:
+            if target_speed < 0:
+                target_speed = -WALK_SPEED
+            else:
+                target_speed = WALK_SPEED
+        target_speed *= WALK_SPEED
+    
+    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.2 if on_floor else 0.01))
+    
+    # Jumping
+    if !dead and on_floor and Input.is_action_just_pressed("move_jump"):
+        linear_velocity.y = -JUMP_SPEED
+
+    linear_velocity = linear_velocity.rotated(-FLOOR_NORMAL.angle_to(-gravity_n))
+
 func _input(event):
+    if dead: return
+    
+    if Input.is_action_just_pressed("take_damage"):
+        take_damage(20)
+    
     if Input.is_action_just_pressed("interact"):
         # If the player is already holding something, they let it go
         if held_object != null:
@@ -124,15 +138,13 @@ func _input(event):
             if result.collider.is_in_group("can-press"): result.collider.press()
             elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
 
-
-# handling input for shooting
-func _unhandled_input(event):
     # handling if the portal gun is shot
     if event.is_action_pressed("shoot_blue_portal"):
         portalgun.primary_fire()
     
     if event.is_action_pressed("shoot_orange_portal"):
         portalgun.secondary_fire()
+
 
 # used to rotate the portalgun (with y offset of 40 around moving player)
 func rotate_portalgun(point_direction: Vector2)->float:
@@ -152,13 +164,39 @@ func rotate_portalgun(point_direction: Vector2)->float:
     portalgun.rotation_degrees = temp
     return temp
 
-func hold_object(collider):
+func hold_object(collider): 
     held_object = collider
     held_object.gravity_scale = 0
+    if held_object.has_method("picked_up"): held_object.picked_up(true)
     held_object.connect("fizzled", self, "release_object")
+    randomize()
+    $GravityGun.set_stream(load(grav_gun_audio_streams[randi()%grav_gun_audio_streams.size()]))
+    $GravityGun.play()
+    $GravityGunHolding.play()
     
 func release_object():
     held_object.disconnect("fizzled", self, "release_object")
+    if held_object.has_method("picked_up"): held_object.picked_up(false)
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null
+    $GravityGunHolding.stop()
+    
+func take_damage(amount):
+    health -= amount
+    if (health <= 0): die()
+        
+func regenerate_live(delta):
+    health += live_regeneration_rate * delta
+    health = min(100.0, health)
+    if health != 100.0: emit_signal("health_changed", health/100.0)
+       
+
+func die():
+    if dead: return
+    if held_object != null:
+        release_object()
+    dead = true
+    regenerate_live(0)
+    yield(get_tree().create_timer(0.5), "timeout")
+    Game.reload_scene_fade()

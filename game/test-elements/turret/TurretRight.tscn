@@ -1,0 +1,216 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://test-elements/turret/turret.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/turret/Turret.gd" type="Script" id=2]
+[ext_resource path="res://classes/TurretLaserEmitting.gd" type="Script" id=3]
+[ext_resource path="res://test-elements/turret/projectile.png" type="Texture" id=4]
+[ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0
+height = 38.0
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 4.0
+flag_disable_z = true
+spread = 0.5
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 4000.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.15
+scale_random = 0.2
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 680, 552 )
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Wing:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Wing:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Wing/Barrel:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 26, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Wing:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.26, -0.25, 0, 0.25, 0, 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Wing:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.26, -0.25, 0, 0.25, 0, 0.25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Wing/Barrel:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 52, -0.25, 0, 0.25, 0, 26, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Wing:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0, 0.26, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Wing:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.25, -0.25, 0, 0.25, 0, 0.26, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Wing/Barrel:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 26, -0.25, 0, 0.25, 0, 52, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.5 )
+}
+
+[node name="TurretRight" type="RigidBody2D" groups=[
+"can-fizzle",
+"can-pickup",
+"dynamic-prop",
+]]
+position = Vector2( 0, -52 )
+collision_layer = 14
+collision_mask = 14
+mass = 10.0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 6, -25.3 )
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 0, 51.7 )
+polygon = PoolVector2Array( -48, 0.300003, -41, -56.7, -36, -66.7, -23, -70.7, -14, -68.7, -27, -53.7, -39, 0.300003 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 0, 51.7 )
+polygon = PoolVector2Array( 48, 0.300003, 39, -36.7, 30, -43, 18, -45.7, 16, -40, 28, -30.7, 40, 0.300003 )
+
+[node name="Laser" type="Node2D" parent="."]
+position = Vector2( 24, -21.5 )
+script = ExtResource( 3 )
+
+[node name="Body" type="Sprite" parent="."]
+use_parent_material = true
+position = Vector2( 0, -30 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 384, 432 )
+
+[node name="Wing" type="Sprite" parent="."]
+use_parent_material = true
+position = Vector2( 6, -19 )
+scale = Vector2( 0.25, 0.25 )
+z_index = 1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 0, 128, 296 )
+
+[node name="Barrel" type="Sprite" parent="Wing"]
+use_parent_material = true
+position = Vector2( 26, 0 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 296, 56, 56 )
+
+[node name="Bullets" type="Particles2D" parent="Wing/Barrel"]
+material = ExtResource( 5 )
+position = Vector2( 14, 4 )
+scale = Vector2( 4, 4 )
+emitting = false
+amount = 100
+lifetime = 5.0
+visibility_rect = Rect2( 0, -25, 1000, 50 )
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="Legs" type="Sprite" parent="."]
+use_parent_material = true
+position = Vector2( 0, 16 )
+scale = Vector2( 0.25, 0.25 )
+z_index = 2
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 432, 384, 288 )
+
+[node name="TrackingArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 14
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrackingArea"]
+position = Vector2( 680, -8 )
+shape = SubResource( 3 )
+
+[node name="LaserTween" type="Tween" parent="."]
+
+[node name="WingTween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BindPose = SubResource( 4 )
+anims/close = SubResource( 5 )
+anims/open = SubResource( 6 )

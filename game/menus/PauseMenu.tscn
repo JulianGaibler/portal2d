@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://menus/PausePopup.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Mark-Bold.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+
+[node name="MenuContainer" type="CanvasLayer"]
+
+[node name="PausePopup" type="Panel" parent="."]
+pause_mode = 2
+visible = false
+margin_left = 250.0
+margin_top = 200.0
+margin_right = 850.0
+margin_bottom = 500.0
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonResume" type="Button" parent="PausePopup"]
+margin_left = 100.0
+margin_top = 50.0
+margin_right = 500.0
+margin_bottom = 100.0
+text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonMainMenu" type="Button" parent="PausePopup"]
+margin_left = 100.0
+margin_top = 125.0
+margin_right = 500.0
+margin_bottom = 175.0
+text = "Back to Main Menu"
+
+[node name="ButtonExitGame" type="Button" parent="PausePopup"]
+margin_left = 100.0
+margin_top = 200.0
+margin_right = 500.0
+margin_bottom = 250.0
+text = "Close Application"

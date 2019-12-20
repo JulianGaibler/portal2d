@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/releasing.wav-c2e9ff8e6a0e2db48177d2e30815fb47.sample"
+path="res://.import/lift4.wav-7e483ce5cbe3528a082887a4c22fc098.sample"
 
 [deps]
 
-source_file="res://sounds/ground-button/releasing.wav"
-dest_files=[ "res://.import/releasing.wav-c2e9ff8e6a0e2db48177d2e30815fb47.sample" ]
+source_file="res://sounds/gravity-gun/lift4.wav"
+dest_files=[ "res://.import/lift4.wav-7e483ce5cbe3528a082887a4c22fc098.sample" ]
 
 [params]
 

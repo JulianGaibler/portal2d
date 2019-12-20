@@ -159,11 +159,13 @@ region_rect = Rect2( 0, 0, 8, 48 )
 modulate = Color( 0, 0, 0, 1 )
 margin_left = -56.0
 margin_top = 13.0
-margin_right = 56.0
+margin_right = 519.0
 margin_bottom = 56.0
 rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/normal_font = ExtResource( 6 )
+meta_underlined = false
 text = "01/02"
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

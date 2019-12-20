@@ -25,7 +25,9 @@ position = Vector2( -2.47955e-005, 0 )
 scale = Vector2( 7.99995, 272 )
 texture = ExtResource( 2 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"fake-white",
+]]
 collision_layer = 128
 collision_mask = 0
 
@@ -37,4 +39,4 @@ shape = SubResource( 1 )
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-volume_db = -15.0
+volume_db = -5.0

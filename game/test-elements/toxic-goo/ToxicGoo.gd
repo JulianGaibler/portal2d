@@ -11,4 +11,4 @@ func enter_inner_area(body):
     if body.is_in_group("can-fizzle"):
         body.fizzle()
     elif body.is_in_group("player"):
-        print("PLAYA IS DED NAO!")
+        body.take_damage(150.0)

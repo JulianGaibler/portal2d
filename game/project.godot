@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "PortalUtils",
 "language": "GDScript",
 "path": "res://utils/PortalUtils.gd"
+}, {
+"base": "Node2D",
+"class": "TurretLaserEmitting",
+"language": "GDScript",
+"path": "res://classes/TurretLaserEmitting.gd"
 } ]
 _global_script_class_icons={
 "BridgeEmitting": "",
@@ -57,19 +62,21 @@ _global_script_class_icons={
 "Matrix2D": "",
 "Player": "",
 "PolygonUtils": "",
-"PortalUtils": ""
+"PortalUtils": "",
+"TurretLaserEmitting": ""
 }
 
 [application]
 
 config/name="p2d_test"
-run/main_scene="res://World.tscn"
+run/main_scene="res://menus/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
 
-PortalManager="*res://PortalManager.gd"
+PortalManager="*res://global/PortalManager.gd"
+Game="*res://global/Game.gd"
 
 [display]
 
@@ -176,3 +183,4 @@ shoot_orange_portal={
 [physics]
 
 2d/default_gravity=980
+2d/default_linear_damp=1.0
