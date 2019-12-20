@@ -96,73 +96,73 @@ func initiate(type, orientation, fixed = false):
 
 # This function get's called by the PortalManager to link or unlink the portal
 func link_portal(new_portal):
-    # Delete all colliders and the tf-matrix
-    reset_portal()
-    linked_portal = new_portal
-    # If there is no new portal to link to, just stay closed
-    if (new_portal == null):
-        emit_signal("new_link", null)
-        return
+	# Delete all colliders and the tf-matrix
+	reset_portal()
+	linked_portal = new_portal
+	# If there is no new portal to link to, just stay closed
+	if (new_portal == null):
+		emit_signal("new_link", null)
+		return
 
-    var lp = linked_portal.get_ref()
+	var lp = linked_portal.get_ref()
 
-    # This basis transformation matrix transforms from this portals basis into the one of the linked portal.
-    var from = Matrix2D.new(direction_vec.x, direction_vec.y, normal_vec.x, normal_vec.y)
-    var to = Matrix2D.new(lp.direction_vec.x, lp.direction_vec.y, lp.normal_vec.x, lp.normal_vec.y)
-    transfomration_matrix = to.inverse().multiply_mat(from)
+	# This basis transformation matrix transforms from this portals basis into the one of the linked portal.
+	var from = Matrix2D.new(direction_vec.x, direction_vec.y, normal_vec.x, normal_vec.y)
+	var to = Matrix2D.new(lp.direction_vec.x, lp.direction_vec.y, lp.normal_vec.x, lp.normal_vec.y)
+	transfomration_matrix = to.inverse().multiply_mat(from)
 
-    var carved_polygons = [] + collider_polygons
+	var carved_polygons = [] + collider_polygons
 
-    var other_cutout = PoolVector2Array()
-    other_cutout.resize(PORTAL_CUTOUT.size())
-    for i in range(0, PORTAL_CUTOUT.size()):
-        var new_pos = to_local(lp.global_position) + (transfomration_matrix.multiply_vec(PORTAL_CUTOUT[i]))
-        other_cutout.set(i, new_pos)
+	var other_cutout = PoolVector2Array()
+	other_cutout.resize(PORTAL_CUTOUT.size())
+	for i in range(0, PORTAL_CUTOUT.size()):
+		var new_pos = to_local(lp.global_position) + (transfomration_matrix.multiply_vec(PORTAL_CUTOUT[i]))
+		other_cutout.set(i, new_pos)
 
-    for polygon in calculate_polygon(scan_area_back):
-        var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-        for new_polygon1 in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT):
-            carved_polygons.append(new_polygon1)
+	for polygon in calculate_polygon(scan_area_back):
+		var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
+		for new_polygon1 in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT):
+			carved_polygons.append(new_polygon1)
 
-    # In addition to the local colliders that are copied in front of our portal, we also want to take
-    # those from the other portal and place them behind ours in order to avoid collision glitches.
-    for polygon in lp.collider_polygons:
-        var polygon2 = PoolVector2Array()
-        polygon2.resize(polygon.size())
-        for i in range(0, polygon.size()):
-            var new_pos = polygon[i].bounce(Vector2.RIGHT)
-            if (orientation != lp.orientation):
-                new_pos = new_pos.bounce(Vector2.UP)
-            polygon2.set(i, new_pos)
-        carved_polygons.append(polygon2)
+	# In addition to the local colliders that are copied in front of our portal, we also want to take
+	# those from the other portal and place them behind ours in order to avoid collision glitches.
+	for polygon in lp.collider_polygons:
+		var polygon2 = PoolVector2Array()
+		polygon2.resize(polygon.size())
+		for i in range(0, polygon.size()):
+			var new_pos = polygon[i].bounce(Vector2.RIGHT)
+			if (orientation != lp.orientation):
+				new_pos = new_pos.bounce(Vector2.UP)
+			polygon2.set(i, new_pos)
+		carved_polygons.append(polygon2)
 
-    var polygon_new = []
+	var polygon_new = []
 
-    for polygon in carved_polygons:
-        for new_polygon2 in Geometry.clip_polygons_2d(polygon, other_cutout):
-            polygon_new.append(new_polygon2)
+	for polygon in carved_polygons:
+		for new_polygon2 in Geometry.clip_polygons_2d(polygon, other_cutout):
+			polygon_new.append(new_polygon2)
 
-    carved_polygons = polygon_new
+	carved_polygons = polygon_new
 
-    # Create new static collider from our polygons
-    var collider = create_static_collider(carved_polygons)
-    # Set collision layers of them accordingly
-    match type:
-        PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
-        PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
+	# Create new static collider from our polygons
+	var collider = create_static_collider(carved_polygons)
+	# Set collision layers of them accordingly
+	match type:
+		PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
+		PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
 
-    # Add the collider as child and keep a reference to it
-    add_child(collider)
-    static_collider = collider
+	# Add the collider as child and keep a reference to it
+	add_child(collider)
+	static_collider = collider
 
-    # The enter/exit-signals of players or objects have been ignored so far,
-    # that's why we need to call the signal-handlers manually.
-    for body in outer_area.get_overlapping_bodies():
-        enter_outer_area(body)
-        if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
-    for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
+	# The enter/exit-signals of players or objects have been ignored so far,
+	# that's why we need to call the signal-handlers manually.
+	for body in outer_area.get_overlapping_bodies():
+		enter_outer_area(body)
+		if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
+	for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
 
-    emit_signal("new_link", new_portal)
+	emit_signal("new_link", new_portal)
 
 #func _draw():
 #    for i in range(4):
@@ -178,38 +178,38 @@ func link_portal(new_portal):
 
 
 func update_physics_shadow(collider):
-    var rotation = collider[0].global_transform.get_rotation()
-    # Transform position
-    var po = collider[0].global_position - global_position
-    var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
-    collider[1].global_transform = Transform2D()
-    collider[1].global_transform.origin = new_pos
+	var rotation = collider[0].global_transform.get_rotation()
+	# Transform position
+	var po = collider[0].global_position - global_position
+	var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
+	collider[1].global_transform = Transform2D()
+	collider[1].global_transform.origin = new_pos
 
-    var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.get_ref().normal_vec))
-    collider[1].rotate(a1)
+	var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.get_ref().normal_vec))
+	collider[1].rotate(a1)
 
 func _physics_process(delta):
-    if linked_portal == null or !linked_portal.get_ref(): return
+	if linked_portal == null or !linked_portal.get_ref(): return
 
-    # Physics shadows are the copied colliders of dynamic-props or the player.
-    # Their positions needs to be updated with every physics-update
-    for collider in physics_shadows.values():
-        update_physics_shadow(collider)
+	# Physics shadows are the copied colliders of dynamic-props or the player.
+	# Their positions needs to be updated with every physics-update
+	for collider in physics_shadows.values():
+		update_physics_shadow(collider)
 
-    var overlapped_bodies = inner_area.get_overlapping_bodies()
-    if (overlapped_bodies.size() < 1): return
+	var overlapped_bodies = inner_area.get_overlapping_bodies()
+	if (overlapped_bodies.size() < 1): return
 
-    # Check the distance of every overlapping body except physics-shadows
-    for overlapped_body in overlapped_bodies:
-        if overlapped_body.is_in_group("physics-shadow"): continue
+	# Check the distance of every overlapping body except physics-shadows
+	for overlapped_body in overlapped_bodies:
+		if overlapped_body.is_in_group("physics-shadow"): continue
 
-        var a = overlapped_body.global_position
-        var d = global_position.dot(normal_vec)
-        # This is the distance from the plane of the portal to the origin of the body
-        var distance = -((d - a.dot(normal_vec)) / normal_vec.length())
-        # If player/object is behind the portal (but not too far away), teleport them/it
-        if (distance < 0 and distance > -32):
-            teleport(overlapped_body)
+		var a = overlapped_body.global_position
+		var d = global_position.dot(normal_vec)
+		# This is the distance from the plane of the portal to the origin of the body
+		var distance = -((d - a.dot(normal_vec)) / normal_vec.length())
+		# If player/object is behind the portal (but not too far away), teleport them/it
+		if (distance < 0 and distance > -32):
+			teleport(overlapped_body)
 
 
 
@@ -220,38 +220,38 @@ func teleport(body):
 	if transformed == null:
 		return
 
-    # Transform velocity
-    body.linear_velocity = transformed[1]
-    var l = body.linear_velocity.y * linked_portal.get_ref().normal_vec.y
-    if (l < 400):
-        body.linear_velocity.y += linked_portal.get_ref().normal_vec.y * (420-l)
+	# Transform velocity
+	body.linear_velocity = transformed[1]
+	var l = body.linear_velocity.y * linked_portal.get_ref().normal_vec.y
+	if (l < 400):
+		body.linear_velocity.y += linked_portal.get_ref().normal_vec.y * (420-l)
 
-    body.global_transform = Transform2D()
-    body.global_transform.origin = transformed[0]
+	body.global_transform = Transform2D()
+	body.global_transform.origin = transformed[0]
 
-    var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
-    body.rotate(a1)
+	var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
+	body.rotate(a1)
 
-    remove_shadow_body(body)
+	remove_shadow_body(body)
 
 
 func teleport_vector(position, direction):
-    if (linked_portal == null or transfomration_matrix == null): return null
+	if (linked_portal == null or transfomration_matrix == null): return null
 
-    # Transform velocity
-    direction = (transfomration_matrix.multiply_vec(direction)).bounce(linked_portal.get_ref().normal_vec)
+	# Transform velocity
+	direction = (transfomration_matrix.multiply_vec(direction)).bounce(linked_portal.get_ref().normal_vec)
 
-    # Transform position
-    var po = position - global_position
-    var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
+	# Transform position
+	var po = position - global_position
+	var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
 
-    return [new_pos, direction]
+	return [new_pos, direction]
 
 func tree_exiting():
-    outer_area.disconnect("body_exited", self, "leave_outer_area")
-    inner_area.disconnect("body_exited", self, "leave_inner_area")
-    inner_area.disconnect("body_entered", self, "enter_inner_area")
-    outer_area.disconnect("body_entered", self, "enter_outer_area")
+	outer_area.disconnect("body_exited", self, "leave_outer_area")
+	inner_area.disconnect("body_exited", self, "leave_inner_area")
+	inner_area.disconnect("body_entered", self, "enter_inner_area")
+	outer_area.disconnect("body_entered", self, "enter_outer_area")
 
 func close_portal():
 	emit_signal("closing")
@@ -278,107 +278,107 @@ func reset_portal():
 
 
 func enter_outer_area(body):
-    if linked_portal == null or !linked_portal.get_ref(): return
-    if body.is_in_group("physics-shadow"): return
-    match type:
-        PortalType.BLUE_PORTAL:
-            body.set_collision_layer_bit(Layers.BLUE_OUTER, true)
-            body.set_collision_mask_bit(Layers.BLUE_OUTER, true)
-        PortalType.ORANGE_PORTAL:
-            body.set_collision_layer_bit(Layers.ORANGE_OUTER, true)
-            body.set_collision_mask_bit(Layers.ORANGE_OUTER, true)
+	if linked_portal == null or !linked_portal.get_ref(): return
+	if body.is_in_group("physics-shadow"): return
+	match type:
+		PortalType.BLUE_PORTAL:
+			body.set_collision_layer_bit(Layers.BLUE_OUTER, true)
+			body.set_collision_mask_bit(Layers.BLUE_OUTER, true)
+		PortalType.ORANGE_PORTAL:
+			body.set_collision_layer_bit(Layers.ORANGE_OUTER, true)
+			body.set_collision_mask_bit(Layers.ORANGE_OUTER, true)
 
 
 func leave_outer_area(body):
-    if linked_portal == null or !linked_portal.get_ref(): return
-    if body.is_in_group("physics-shadow"): return
-    match type:
-        PortalType.BLUE_PORTAL:
-            body.set_collision_layer_bit(Layers.BLUE_OUTER, false)
-            body.set_collision_mask_bit(Layers.BLUE_OUTER, false)
-        PortalType.ORANGE_PORTAL:
-            body.set_collision_layer_bit(Layers.ORANGE_OUTER, false)
-            body.set_collision_mask_bit(Layers.ORANGE_OUTER, false)
+	if linked_portal == null or !linked_portal.get_ref(): return
+	if body.is_in_group("physics-shadow"): return
+	match type:
+		PortalType.BLUE_PORTAL:
+			body.set_collision_layer_bit(Layers.BLUE_OUTER, false)
+			body.set_collision_mask_bit(Layers.BLUE_OUTER, false)
+		PortalType.ORANGE_PORTAL:
+			body.set_collision_layer_bit(Layers.ORANGE_OUTER, false)
+			body.set_collision_mask_bit(Layers.ORANGE_OUTER, false)
 
 
 func enter_inner_area(body):
-    if linked_portal == null or !linked_portal.get_ref(): return
-    if body.is_in_group("physics-shadow"): return
-    call_deferred("add_shadow_body", body)
-    match type:
-        PortalType.BLUE_PORTAL:
-            body.set_collision_layer_bit(Layers.BLUE_INNER, true)
-            body.set_collision_mask_bit(Layers.BLUE_INNER, true)
-        PortalType.ORANGE_PORTAL:
-            body.set_collision_layer_bit(Layers.ORANGE_INNER, true)
-            body.set_collision_mask_bit(Layers.ORANGE_INNER, true)
-    body.set_collision_layer_bit(Layers.FLOOR, false)
-    body.set_collision_mask_bit(Layers.FLOOR, false)
+	if linked_portal == null or !linked_portal.get_ref(): return
+	if body.is_in_group("physics-shadow"): return
+	call_deferred("add_shadow_body", body)
+	match type:
+		PortalType.BLUE_PORTAL:
+			body.set_collision_layer_bit(Layers.BLUE_INNER, true)
+			body.set_collision_mask_bit(Layers.BLUE_INNER, true)
+		PortalType.ORANGE_PORTAL:
+			body.set_collision_layer_bit(Layers.ORANGE_INNER, true)
+			body.set_collision_mask_bit(Layers.ORANGE_INNER, true)
+	body.set_collision_layer_bit(Layers.FLOOR, false)
+	body.set_collision_mask_bit(Layers.FLOOR, false)
 
 
 func leave_inner_area(body):
-    if linked_portal == null or !linked_portal.get_ref(): return
-    if body.is_in_group("physics-shadow"): return
-    call_deferred("remove_shadow_body", body)
-    match type:
-        PortalType.BLUE_PORTAL:
-            body.set_collision_layer_bit(Layers.BLUE_INNER, false)
-            body.set_collision_mask_bit(Layers.BLUE_INNER, false)
-        PortalType.ORANGE_PORTAL:
-            body.set_collision_layer_bit(Layers.ORANGE_INNER, false)
-            body.set_collision_mask_bit(Layers.ORANGE_INNER, false)
-    match type:
-        PortalType.BLUE_PORTAL:
-            if body.get_collision_layer_bit(Layers.ORANGE_INNER): return
-        PortalType.ORANGE_PORTAL:
-            if body.get_collision_layer_bit(Layers.BLUE_INNER): return
-    body.set_collision_layer_bit(Layers.FLOOR, true)
-    body.set_collision_mask_bit(Layers.FLOOR, true)
+	if linked_portal == null or !linked_portal.get_ref(): return
+	if body.is_in_group("physics-shadow"): return
+	call_deferred("remove_shadow_body", body)
+	match type:
+		PortalType.BLUE_PORTAL:
+			body.set_collision_layer_bit(Layers.BLUE_INNER, false)
+			body.set_collision_mask_bit(Layers.BLUE_INNER, false)
+		PortalType.ORANGE_PORTAL:
+			body.set_collision_layer_bit(Layers.ORANGE_INNER, false)
+			body.set_collision_mask_bit(Layers.ORANGE_INNER, false)
+	match type:
+		PortalType.BLUE_PORTAL:
+			if body.get_collision_layer_bit(Layers.ORANGE_INNER): return
+		PortalType.ORANGE_PORTAL:
+			if body.get_collision_layer_bit(Layers.BLUE_INNER): return
+	body.set_collision_layer_bit(Layers.FLOOR, true)
+	body.set_collision_mask_bit(Layers.FLOOR, true)
 
 #### Inner Body Management ####
 ##
 
 # This function adds clones of dynamic-props to the physics_shadows list
 func add_shadow_body(body):
-    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
+	if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
 
-    var shapes = []
-    var sprites = []
-    for child in body.get_children():
-        if (child is CollisionShape2D):
-            shapes.append(child.duplicate())
-        if (child is Sprite):
-            sprites.append(child.duplicate())
-    if (shapes.size() > 0):
-        var collider = create_kinematic_collider(shapes)
-        collider.z_index = -1
-        for sprite in sprites:
-            collider.add_child(sprite)
-        collider.set_script(preload("res://portal/PhysicsShadow.gd"))
-        collider.parent = body
-        collider.matrix = transfomration_matrix
-        collider.linked_normal = linked_portal.get_ref().normal_vec
-        collider.add_to_group("physics-shadow")
-        collider.set_collision_mask(0)
-        match type:
-            PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
-            PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
-        body.add_collision_exception_with(collider)
-        add_child(collider)
-        var c = [body, collider]
-        physics_shadows[body.get_rid()] = c
-        update_physics_shadow(c)
+	var shapes = []
+	var sprites = []
+	for child in body.get_children():
+		if (child is CollisionShape2D):
+			shapes.append(child.duplicate())
+		if (child is Sprite):
+			sprites.append(child.duplicate())
+	if (shapes.size() > 0):
+		var collider = create_kinematic_collider(shapes)
+		collider.z_index = -1
+		for sprite in sprites:
+			collider.add_child(sprite)
+		collider.set_script(preload("res://portal/PhysicsShadow.gd"))
+		collider.parent = body
+		collider.matrix = transfomration_matrix
+		collider.linked_normal = linked_portal.get_ref().normal_vec
+		collider.add_to_group("physics-shadow")
+		collider.set_collision_mask(0)
+		match type:
+			PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
+			PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
+		body.add_collision_exception_with(collider)
+		add_child(collider)
+		var c = [body, collider]
+		physics_shadows[body.get_rid()] = c
+		update_physics_shadow(c)
 
 # Removed physics-shadows from physics_shadows list
 func remove_shadow_body(body):
-    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
-    var collider = physics_shadows.get(body.get_rid())
-    if collider == null: return
-    collider = collider[1]
-    body.remove_collision_exception_with(collider)
-    remove_child(collider)
-    collider.queue_free()
-    physics_shadows.erase(body.get_rid())
+	if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
+	var collider = physics_shadows.get(body.get_rid())
+	if collider == null: return
+	collider = collider[1]
+	body.remove_collision_exception_with(collider)
+	remove_child(collider)
+	collider.queue_free()
+	physics_shadows.erase(body.get_rid())
 
 
 # Scans the Area around the portal for static colliders and converts them into polygons

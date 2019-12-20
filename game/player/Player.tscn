@@ -1,20 +1,43 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/body.png" type="Texture" id=2]
 [ext_resource path="res://player/leg.png" type="Texture" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 30.7677
 height = 111.108
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=8]
 resource_name = "Damaging"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("body:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, 0.0 ]
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=9]
 resource_name = "Dying"
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=10]
 length = 0.5
 step = 0.03
 tracks/0/type = "value"
@@ -78,7 +101,7 @@ tracks/4/keys = {
 "values": [ Vector2( 50, 300 ), Vector2( 50, 180 ), Vector2( 50, 260 ), Vector2( 50, 270 ), Vector2( 50, 260 ), Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=11]
 resource_name = "Idle"
 length = 2.0
 loop = true
@@ -170,29 +193,9 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 50, 300 ), Vector2( 50, 180 ), Vector2( 50, 300 ) ]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.0117067 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("body:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -106, -0.25, 0, 0.226694, -6.60607, -130.409, -0.257774, -0.0401917, 0.18235, -0.0401917, -106.8, -0.243261, -6.77061, 0.25, 0 ),
-"times": PoolRealArray( 0.0117067, 0.27, 0.5 )
-}
 
-[sub_resource type="Animation" id=7]
-length = 0.5
+[sub_resource type="Animation" id=12]
+length = 0.7
 step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("body:position")
@@ -201,7 +204,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.24, 0.48 ),
+"times": PoolRealArray( 0.21, 0.45, 0.69 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -106 ), Vector2( 0, -106 ), Vector2( 0, -106 ) ]
@@ -213,7 +216,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.24, 0.48 ),
+"times": PoolRealArray( 0.21, 0.45, 0.69 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.0 ]
@@ -225,7 +228,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.24, 0.48 ),
+"times": PoolRealArray( 0.21, 0.45, 0.69 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 0.3, 0.25 ), Vector2( 0.25, 0.25 ) ]
@@ -237,7 +240,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.48 ),
+"times": PoolRealArray( 0.69 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -50, 300 ) ]
@@ -249,13 +252,13 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.48 ),
+"times": PoolRealArray( 0.69 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=13]
 length = 0.3
 loop = true
 step = 0.03
@@ -320,77 +323,102 @@ tracks/4/keys = {
 "values": [ Vector2( 50, 300 ), Vector2( 50, 300 ), Vector2( 50, 248 ), Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "Damaging"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "Dying"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Falling"
-
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Jumping"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
-animation = "Setup"
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeBlend2" id=37]
+
+[sub_resource type="AnimationNodeBlendTree" id=38]
+nodes/Animation/node = SubResource( 36 )
+nodes/Animation/position = Vector2( 100, 140 )
+"nodes/Animation 2/node" = SubResource( 35 )
+"nodes/Animation 2/position" = Vector2( 100, 240 )
+nodes/Blend2/node = SubResource( 37 )
+nodes/Blend2/position = Vector2( 340, 120 )
+nodes/output/position = Vector2( 640, 120 )
+node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Setup"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Walking"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-switch_mode = 2
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+[sub_resource type="AnimationNodeBlend2" id=18]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeBlendTree" id=19]
+nodes/Animation/node = SubResource( 17 )
+nodes/Animation/position = Vector2( 60, 80 )
+"nodes/Animation 2/node" = SubResource( 16 )
+"nodes/Animation 2/position" = Vector2( 60, 200 )
+nodes/Blend2/node = SubResource( 18 )
+nodes/Blend2/position = Vector2( 317, 87 )
+nodes/output/position = Vector2( 620, 140 )
+node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
-switch_mode = 2
-auto_advance = true
+switch_mode = 1
+xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 1
+xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+switch_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=27]
-states/Damaging/node = SubResource( 9 )
-states/Damaging/position = Vector2( 393, 357 )
-states/Dying/node = SubResource( 10 )
-states/Dying/position = Vector2( 885, 357 )
-states/Falling/node = SubResource( 11 )
-states/Falling/position = Vector2( 885, 113 )
-states/Idle/node = SubResource( 12 )
-states/Idle/position = Vector2( 641, 247 )
-states/Jumping/node = SubResource( 13 )
-states/Jumping/position = Vector2( 641, 113 )
-states/Setup/node = SubResource( 14 )
-states/Setup/position = Vector2( 217.717, 247 )
-states/Walking/node = SubResource( 15 )
-states/Walking/position = Vector2( 393, 113 )
-transitions = [ "Setup", "Idle", SubResource( 16 ), "Idle", "Walking", SubResource( 17 ), "Walking", "Idle", SubResource( 18 ), "Idle", "Dying", SubResource( 19 ), "Idle", "Damaging", SubResource( 20 ), "Damaging", "Idle", SubResource( 21 ), "Walking", "Jumping", SubResource( 22 ), "Idle", "Jumping", SubResource( 23 ), "Jumping", "Idle", SubResource( 24 ), "Idle", "Falling", SubResource( 25 ), "Falling", "Idle", SubResource( 26 ) ]
+[sub_resource type="AnimationNodeStateMachine" id=23]
+states/Damaging/node = SubResource( 34 )
+states/Damaging/position = Vector2( 418, 282 )
+states/Dying/node = SubResource( 28 )
+states/Dying/position = Vector2( 795, 252 )
+states/Idle/node = SubResource( 14 )
+states/Idle/position = Vector2( 583, 174 )
+states/Jumping/node = SubResource( 38 )
+states/Jumping/position = Vector2( 601, 54 )
+states/Setup/node = SubResource( 15 )
+states/Setup/position = Vector2( 154, 174 )
+states/Walking/node = SubResource( 19 )
+states/Walking/position = Vector2( 328, 54 )
+transitions = [ "Setup", "Idle", SubResource( 20 ), "Idle", "Walking", SubResource( 21 ), "Walking", "Idle", SubResource( 22 ), "Idle", "Dying", SubResource( 33 ), "Idle", "Jumping", SubResource( 39 ), "Jumping", "Idle", SubResource( 40 ), "Walking", "Jumping", SubResource( 41 ), "Idle", "Damaging", SubResource( 42 ), "Damaging", "Idle", SubResource( 43 ) ]
 start_node = "Setup"
 end_node = "Dying"
-graph_offset = Vector2( 59.7171, 0 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "player",
@@ -404,36 +432,38 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -86.5 )
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 __meta__ = {
 "_editor_description_": "collision for player"
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Setup"
-anims/Damaging = SubResource( 2 )
-anims/Dying = SubResource( 3 )
-anims/Falling = SubResource( 4 )
-anims/Idle = SubResource( 5 )
+anims/Damaging = SubResource( 8 )
+anims/Dying = SubResource( 9 )
+anims/Falling = SubResource( 10 )
+anims/Idle = SubResource( 11 )
 anims/Jumping = SubResource( 6 )
-anims/Setup = SubResource( 7 )
-anims/Walking = SubResource( 8 )
+anims/Setup = SubResource( 12 )
+anims/Walking = SubResource( 13 )
 
 [node name="body" type="Sprite" parent="."]
-position = Vector2( 0, -104.61 )
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 0, -106 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 2 )
 
 [node name="leg_left" type="Sprite" parent="body"]
-position = Vector2( -50, 294.207 )
+position = Vector2( -50, 300 )
 texture = ExtResource( 3 )
 
 [node name="leg_right" type="Sprite" parent="body"]
-position = Vector2( 50, 294.207 )
+position = Vector2( 50, 300 )
 texture = ExtResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 27 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 28 )
+parameters/playback = SubResource( 24 )
+parameters/Jumping/Blend2/blend_amount = 0.75
+parameters/Walking/Blend2/blend_amount = 0.5

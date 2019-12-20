@@ -30,20 +30,20 @@ func shoot_portal(type):
 
 
 func spawn_portal(hit_position: Vector2, normal: Vector2, deg: float, type):
-    var instance = Portal.instance()
-    Game.get_scene_root().add_child(instance)
-    var orientation = PortalOrientation.UP
-    # getting the correct orientation
-    if normal == Vector2.UP or normal == Vector2.DOWN:
-        if (deg < 90 and deg > 0) or (deg > -180 and deg < -90):
-            orientation = PortalOrientation.DOWN
-    else:
-        if deg < 90 and deg > -90:
-            orientation = PortalOrientation.DOWN
-    instance.position = hit_position
-    # rotating the portal to fit the white layer
-    instance.rotation_degrees = rad2deg(atan2(normal.y, normal.x))
-    instance.initiate(type, orientation)
+	var instance = Portal.instance()
+	Game.get_scene_root().add_child(instance)
+	var orientation = PortalOrientation.UP
+	# getting the correct orientation
+	if normal == Vector2.UP or normal == Vector2.DOWN:
+		if (deg < 90 and deg > 0) or (deg > -180 and deg < -90):
+			orientation = PortalOrientation.DOWN
+	else:
+		if deg < 90 and deg > -90:
+			orientation = PortalOrientation.DOWN
+	instance.position = hit_position
+	# rotating the portal to fit the white layer
+	instance.rotation_degrees = rad2deg(atan2(normal.y, normal.x))
+	instance.initiate(type, orientation)
 
 func check_and_correct_placement(hit: Dictionary, type, exclude: Array):
 	# Check if hit-collider has portal-surface
