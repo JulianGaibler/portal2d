@@ -11,15 +11,17 @@ onready var panelBase := $PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase/Posi
 export(String) var initial_animation = null
 
 func _ready():
+    call_deferred("_ready_deferred")
+
+func _ready_deferred():
     var child = get_child(get_child_count()-1)
     if child.name == "PanelTransform":
         var remote_path = RemoteTransform2D.new()
-        remote_path.remote_path = child.get_path()
         panelBase.add_child(remote_path)
         remote_path.	update_scale = false
-    
+        remote_path.remote_path = child.get_path()
     if initial_animation:
-        animationPlayer.play(initial_animation)
+        animationPlayer.play(initial_animation, -1, 0, true)
 
 func play_animation(name):
     animationPlayer.play(name)
