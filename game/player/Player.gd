@@ -19,7 +19,7 @@ onready var feet := $Feet
 
 const FLOOR_NORMAL = Vector2.UP
 const WALK_SPEED = 25 # pixels/sec
-const JUMP_SPEED = 650
+const JUMP_SPEED = 550
 const SIDING_CHANGE_SPEED = 10
 var PUSH = 1000
 
@@ -45,7 +45,7 @@ func _ready():
 func _physics_process(delta):
     
     var direct_state = Physics2DServer.body_get_direct_state(get_rid())
-    var gravity_vec = direct_state.total_gravity * 2.0
+    var gravity_vec = direct_state.total_gravity
     var gravity_n = gravity_vec.normalized()
     
     var linear_damp = 1.0 - delta * direct_state.total_linear_damp
@@ -73,6 +73,7 @@ func _physics_process(delta):
     linear_velocity += delta * gravity_vec
     # Apply linear damp
     linear_velocity *= linear_damp
+    
     # Move and slide
     linear_velocity = move_and_slide(linear_velocity, -gravity_n, false, 4, 0.785398, false)
 
@@ -118,7 +119,7 @@ func _physics_process(delta):
                 target_speed = WALK_SPEED
         target_speed *= WALK_SPEED
     
-    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.2 if on_floor else 0.01))
+    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.2 if on_floor else 0))
     
     # Jumping
     if !dead and on_floor and Input.is_action_just_pressed("move_jump"):
