@@ -4,7 +4,7 @@
 [ext_resource path="res://test-elements/floor-button/FloorButton.gd" type="Script" id=2]
 [ext_resource path="res://test-elements/floor-button/floor-button-lights.png" type="Texture" id=3]
 
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id=1]
 rough = true
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -13,7 +13,7 @@ extents = Vector2( 40, 6 )
 [node name="FloorButton" type="StaticBody2D"]
 collision_layer = 14
 collision_mask = 14
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="ButtonCollisionPolygon" type="CollisionPolygon2D" parent="."]

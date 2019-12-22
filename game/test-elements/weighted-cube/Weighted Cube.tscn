@@ -17,6 +17,7 @@ extents = Vector2( 46.7656, 47.9829 )
 [node name="WeightedCube" type="RigidBody2D" groups=[
 "can-fizzle",
 "can-pickup",
+"cube",
 "dynamic-prop",
 ]]
 collision_layer = 66

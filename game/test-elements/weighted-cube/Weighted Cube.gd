@@ -29,10 +29,10 @@ func _ready():
         light.color = COLOR_BLUE
         
 func activate():
-    sprite.region_rect.position.y = 336
+    light.color = COLOR_ORANGE
 
 func deactivate():
-    sprite.region_rect.position.y = 8
+    light.color = COLOR_PINK if companion else COLOR_BLUE
 
 # TODO: fix playing collision sound when pushing through portals / fizzler
 func _on_collision(body):
