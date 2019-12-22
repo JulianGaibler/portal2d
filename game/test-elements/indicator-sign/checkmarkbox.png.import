@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/checkmarkbox-on.png-f82a4bd8d7d5a47c47557ccfd102222e.stex"
+path="res://.import/checkmarkbox.png-a660b388dca24732a89b83a981da1bb0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test-elements/indicator-sign/checkmarkbox-on.png"
-dest_files=[ "res://.import/checkmarkbox-on.png-f82a4bd8d7d5a47c47557ccfd102222e.stex" ]
+source_file="res://test-elements/indicator-sign/checkmarkbox.png"
+dest_files=[ "res://.import/checkmarkbox.png-a660b388dca24732a89b83a981da1bb0.stex" ]
 
 [params]
 
