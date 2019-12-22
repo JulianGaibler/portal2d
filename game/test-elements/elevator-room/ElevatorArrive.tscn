@@ -13,28 +13,28 @@
 [ext_resource path="res://test-elements/elevator-room/ElevatorArrive.gd" type="Script" id=11]
 [ext_resource path="res://textures/white.png" type="Texture" id=12]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 128, 4480 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 352, 32 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 193 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 6, 192 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 340 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 159 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 32, 128 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("LiftingTube:position:x")
@@ -87,8 +87,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "down-arrive"
+[sub_resource type="Animation" id=9]
 length = 5.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("LiftingTube:position:y")
@@ -111,7 +110,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 3.6, 4.3 )
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 5.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("LiftingTube:position:y")
@@ -145,7 +144,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpaceOverride"]
-shape = SubResource( 10 )
+shape = SubResource( 1 )
 
 [node name="white" type="Sprite" parent="."]
 modulate = Color( 0.12549, 0.12549, 0.12549, 1 )
@@ -171,6 +170,8 @@ z_index = -10
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 128, 128 )
 cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
 occluder_light_mask = 0
 format = 1
 tile_data = PoolIntArray( -589839, 14, 0, -589837, 15, 0, -589835, 21, 0, -589834, 21, 0, -589833, 21, 0, -589832, 21, 0, -589831, 21, 0, -589830, 21, 0, -589829, 21, 0, -589828, 21, 0, -589827, 21, 0, -655358, 21, 0, -655357, 21, 0, -655356, 21, 0, -655355, 21, 0, -655354, 21, 0, -655353, 21, 0, -655352, 21, 0, -655351, 21, 0, -655350, 21, 0, -655349, 14, 0, -655347, 15, 0, -524299, 21, 0, -524298, 21, 0, -524297, 21, 0, -524296, 21, 0, -524295, 21, 0, -524294, 21, 0, -524293, 21, 0, -524292, 21, 0, -524291, 21, 0, -589822, 21, 0, -589821, 21, 0, -589820, 21, 0, -589819, 21, 0, -589818, 21, 0, -589817, 21, 0, -589816, 21, 0, -589815, 21, 0, -589814, 21, 0, -458767, 16, 0, -458765, 17, 0, -458763, 21, 0, -458762, 21, 0, -458761, 21, 0, -458760, 21, 0, -458759, 21, 0, -458758, 21, 0, -458757, 21, 0, -458756, 21, 0, -458755, 21, 0, -524286, 21, 0, -524285, 21, 0, -524284, 21, 0, -524283, 21, 0, -524282, 21, 0, -524281, 21, 0, -524280, 21, 0, -524279, 21, 0, -524278, 21, 0, -524277, 16, 0, -524275, 17, 0, -393227, 21, 0, -393226, 21, 0, -393225, 21, 0, -393224, 21, 0, -393223, 21, 0, -393222, 21, 0, -393221, 21, 0, -393220, 21, 0, -393219, 21, 0, -458750, 21, 0, -458749, 21, 0, -458748, 21, 0, -458747, 21, 0, -458746, 21, 0, -458745, 21, 0, -458744, 21, 0, -458743, 21, 0, -458742, 21, 0, -327695, 14, 0, -327693, 15, 0, -327691, 21, 0, -327690, 21, 0, -327689, 21, 0, -327688, 21, 0, -327687, 21, 0, -327686, 21, 0, -327685, 21, 0, -327684, 21, 0, -327683, 21, 0, -393214, 21, 0, -393213, 21, 0, -393212, 21, 0, -393211, 21, 0, -393210, 21, 0, -393209, 21, 0, -393208, 21, 0, -393207, 21, 0, -393206, 21, 0, -393205, 14, 0, -393203, 15, 0, -262155, 21, 0, -262154, 21, 0, -262153, 21, 0, -262152, 21, 0, -262151, 21, 0, -262150, 21, 0, -262149, 21, 0, -262148, 21, 0, -262147, 21, 0, -327678, 21, 0, -327677, 21, 0, -327676, 21, 0, -327675, 21, 0, -327674, 21, 0, -327673, 21, 0, -327672, 21, 0, -327671, 21, 0, -327670, 21, 0, -196623, 16, 0, -196621, 17, 0, -196619, 21, 0, -196618, 21, 0, -196617, 21, 0, -196616, 21, 0, -196615, 21, 0, -196614, 21, 0, -196613, 21, 0, -196612, 21, 0, -196611, 21, 0, -262142, 21, 0, -262141, 21, 0, -262140, 21, 0, -262139, 21, 0, -262138, 21, 0, -262137, 21, 0, -262136, 21, 0, -262135, 21, 0, -262134, 21, 0, -262133, 16, 0, -262131, 17, 0, -131083, 21, 0, -131082, 21, 0, -131081, 21, 0, -131080, 21, 0, -131079, 21, 0, -131078, 21, 0, -131077, 21, 0, -131076, 21, 0, -131075, 21, 0, -196606, 21, 0, -196605, 21, 0, -196604, 21, 0, -196603, 21, 0, -196602, 21, 0, -196601, 21, 0, -196600, 21, 0, -196599, 21, 0, -196598, 21, 0, -65551, 14, 0, -65549, 15, 0, -65547, 21, 0, -65546, 21, 0, -65545, 21, 0, -65544, 21, 0, -65543, 21, 0, -65542, 21, 0, -65541, 21, 0, -65540, 21, 0, -65539, 21, 0, -131070, 21, 0, -131069, 21, 0, -131068, 21, 0, -131067, 21, 0, -131066, 21, 0, -131065, 21, 0, -131064, 21, 0, -131063, 21, 0, -131062, 21, 0, -131061, 14, 0, -131059, 15, 0, -11, 21, 0, -10, 21, 0, -9, 21, 0, -8, 21, 0, -7, 21, 0, -6, 21, 0, -5, 21, 0, -4, 21, 0, -3, 21, 0, -65534, 21, 0, -65533, 21, 0, -65532, 21, 0, -65531, 21, 0, -65530, 21, 0, -65529, 21, 0, -65528, 21, 0, -65527, 21, 0, -65526, 21, 0, 65521, 14, 0, 65531, 21, 0, 65532, 21, 0, 65533, 21, 0, 2, 21, 0, 3, 21, 0, 4, 21, 0, 13, 15, 0, 131067, 21, 0, 131068, 21, 0, 131069, 21, 0, 65538, 21, 0, 65539, 21, 0, 65540, 21, 0, 196593, 16, 0, 196595, 17, 0, 196603, 21, 0, 196604, 21, 0, 196605, 21, 0, 131074, 21, 0, 131075, 21, 0, 131076, 21, 0, 131083, 16, 0, 131085, 17, 0, 262133, 21, 0, 262134, 21, 0, 262135, 21, 0, 262136, 21, 0, 262137, 21, 0, 262138, 21, 0, 262139, 21, 0, 262140, 21, 0, 262141, 21, 0, 196610, 21, 0, 196611, 21, 0, 196612, 21, 0, 196613, 21, 0, 196614, 21, 0, 196615, 21, 0, 196616, 21, 0, 196617, 21, 0, 196618, 21, 0, 327667, 14, 0, 327669, 22, 0, 327670, 10, 0, 327672, 11, 0, 327674, 10, 0, 327676, 11, 0, 262146, 10, 0, 262148, 11, 0, 262150, 10, 0, 262152, 11, 0, 262154, 22, 0, 262155, 15, 0, 458739, 16, 0, 458741, 22, 0, 458742, 12, 0, 458744, 13, 0, 458746, 12, 0, 458748, 13, 0, 393218, 12, 0, 393220, 13, 0, 393222, 12, 0, 393224, 13, 0, 393226, 22, 0, 393227, 15, 0 )
@@ -181,6 +182,8 @@ z_index = 10
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 128, 128 )
 cell_quadrant_size = 64
+collision_layer = 2
+collision_mask = 2
 format = 1
 tile_data = PoolIntArray( -1572874, 9, 0, -1638392, 9, 0, -1310730, 9, 0, -1376248, 9, 0, -1048586, 9, 0, -1114104, 9, 0, -786443, 8, 0, -786442, 8, 0, -786441, 8, 0, -786440, 8, 0, -851961, 8, 0, -851960, 8, 0, -851959, 8, 0, -851958, 8, 0, -720911, 6, 0, -720909, 6, 0, -720907, 6, 0, -720905, 6, 0, -720903, 6, 0, -720901, 6, 0, -720899, 22, 0, -786430, 22, 0, -786429, 6, 0, -786427, 6, 0, -786425, 6, 0, -786423, 6, 0, -786421, 6, 0, -786419, 6, 0, -327664, 25, 0, -327662, 24, 0, -262130, 25, 0, -196596, 25, 0, -131061, 23, 0, 65523, 21, 0, 65524, 21, 0, 65525, 7, 0, 65527, 8, 0, 65528, 8, 0, 65529, 8, 0, 65530, 8, 0, 5, 7, 0, 7, 8, 0, 8, 8, 0, 9, 7, 0, 11, 21, 0, 12, 21, 0, 131059, 7, 0, 131063, 8, 0, 131064, 8, 0, 131065, 7, 0, 65543, 7, 0, 65547, 7, 0, 196597, 8, 0, 196598, 8, 0, 196599, 8, 0, 196600, 8, 0, 131077, 8, 0, 131078, 8, 0, 131081, 8, 0, 131082, 8, 0 )
 
@@ -244,27 +247,27 @@ collision_mask = 2
 
 [node name="CollisionShape2D1" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( -480, 32 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( 480, 32 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( -480, -672 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( 480, -672 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( -120, -511 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="WorldCollider"]
 position = Vector2( 120, -511 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WorldCollider"]
 position = Vector2( 16, 0 )
@@ -348,7 +351,7 @@ region_rect = Rect2( 1408, 664, 256, 24 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PanelRow1"]
 visible = false
 position = Vector2( -6, 192 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="PanelRow2" type="StaticBody2D" parent="."]
 position = Vector2( -704, -640 )
@@ -470,7 +473,7 @@ region_rect = Rect2( 1408, 664, 256, 24 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PanelRow2"]
 visible = false
 position = Vector2( -6, 340 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="LiftingTube" type="KinematicBody2D" parent="."]
 position = Vector2( 0, -306 )
@@ -494,12 +497,12 @@ region_rect = Rect2( 736, 0, 1088, 1248 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LiftingTube"]
 visible = false
 position = Vector2( -120, -159 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LiftingTube"]
 visible = false
 position = Vector2( 120, -159 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CeilingLight" type="Light2D" parent="."]
 position = Vector2( -3, -991 )
@@ -524,11 +527,11 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeaveArea"]
 position = Vector2( 0, -128 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
 playback_default_blend_time = 0.2
-anims/BindPose = SubResource( 7 )
-anims/down-arrive = SubResource( 8 )
-anims/up-arrive = SubResource( 9 )
+anims/BindPose = SubResource( 8 )
+anims/down-arrive = SubResource( 9 )
+anims/up-arrive = SubResource( 10 )

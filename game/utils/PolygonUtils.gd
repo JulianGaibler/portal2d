@@ -8,6 +8,14 @@ static func transform_polygon(polygon: PoolVector2Array, tf: Transform2D) -> Poo
         newVec.set(i, tf.xform(polygon[i]))
     return newVec
 
+# Transforms polygon with given Transform2D
+static func move_polygon(polygon: PoolVector2Array, move: Vector2) -> PoolVector2Array:
+    var newVec = PoolVector2Array()
+    newVec.resize(polygon.size())
+    for i in range(0, polygon.size()):
+        newVec.set(i, polygon[i] + move)
+    return newVec
+
 static func rotate_polygon(polygon: PoolVector2Array, rad: float) -> PoolVector2Array:
     var newVec = PoolVector2Array()
     newVec.resize(polygon.size())
