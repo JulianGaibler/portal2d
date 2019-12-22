@@ -44,16 +44,13 @@ func spawn_new():
     randomize()
     $Sound.set_stream(load(audio_streams[randi()%audio_streams.size()]))
     $Sound.play()
-    _create_object()
-    if auto_drop:
-        yield(get_tree().create_timer(0.7), "timeout")
     if !first_dropped:
         timed_open()
         first_dropped = true
     else:
         _create_object()
         if auto_drop:
-            yield(get_tree().create_timer(0.5), "timeout")
+            yield(get_tree().create_timer(0.7), "timeout")
             timed_open()
 
 func open():

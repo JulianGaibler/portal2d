@@ -119,7 +119,10 @@ func _physics_process(delta):
                 target_speed = WALK_SPEED
         target_speed *= WALK_SPEED
     
-    linear_velocity.x = lerp(linear_velocity.x, target_speed, (0.2 if on_floor else 0))
+    if on_floor:
+        linear_velocity.x = lerp(linear_velocity.x, target_speed, 0.2)
+    else:
+        linear_velocity.x = lerp(linear_velocity.x, linear_velocity.x + target_speed/25, 0.2)
     
     # Jumping
     if !dead and on_floor and Input.is_action_just_pressed("move_jump"):
