@@ -156,10 +156,10 @@ func _input(event):
 
     # handling if the portal gun is shot
     if event.is_action_pressed("shoot_blue_portal"):
-        portalgun.primary_fire()
+        if portalgun: portalgun.primary_fire()
     
     if event.is_action_pressed("shoot_orange_portal"):
-        portalgun.secondary_fire()
+        if portalgun: portalgun.secondary_fire()
 
 
 # used to rotate the portalgun (with y offset of 40 around moving player)

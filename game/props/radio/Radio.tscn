@@ -10,10 +10,11 @@
 ]]
 collision_layer = 14
 collision_mask = 14
-mass = 4.0
+mass = 10.0
 script = ExtResource( 2 )
 
 [node name="RadioSprite" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 position = Vector2( 0, -46 )
 scale = Vector2( 0.25, 0.25 )
