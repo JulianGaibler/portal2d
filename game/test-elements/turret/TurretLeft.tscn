@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://test-elements/turret/turret.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/turret/Turret.gd" type="Script" id=2]
 [ext_resource path="res://classes/TurretLaserEmitting.gd" type="Script" id=3]
 [ext_resource path="res://test-elements/turret/projectile.png" type="Texture" id=4]
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=5]
+[ext_resource path="res://test-elements/turret/turret-light.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0
@@ -155,6 +156,7 @@ scale = Vector2( -1, -1 )
 script = ExtResource( 3 )
 
 [node name="Body" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 position = Vector2( 0, -30 )
 scale = Vector2( 0.25, 0.25 )
@@ -164,6 +166,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 384, 432 )
 
 [node name="Wing" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 position = Vector2( -6, -19 )
 scale = Vector2( 0.25, 0.25 )
@@ -173,6 +176,7 @@ region_enabled = true
 region_rect = Rect2( 384, 0, 128, 296 )
 
 [node name="Barrel" type="Sprite" parent="Wing"]
+light_mask = 3
 use_parent_material = true
 position = Vector2( 26, 0 )
 z_index = -1
@@ -192,6 +196,7 @@ process_material = SubResource( 2 )
 texture = ExtResource( 4 )
 
 [node name="Legs" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 position = Vector2( 0, 16 )
 scale = Vector2( 0.25, 0.25 )
@@ -218,3 +223,11 @@ shape = SubResource( 3 )
 anims/BindPose = SubResource( 4 )
 anims/close = SubResource( 5 )
 anims/open = SubResource( 6 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -24, -21 )
+rotation = 3.14159
+texture = ExtResource( 6 )
+texture_scale = 0.25
+energy = 1.1
+mode = 2

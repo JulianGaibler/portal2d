@@ -1,8 +1,11 @@
 extends StaticBody2D
 
+const COLOR_BLUE = Color("#6fa5ad")
+const COLOR_ORANGE = Color("#dcba54")
+
 onready var bottom_collider := $BottomCollider/CollisionShapeBottom
 onready var detection_area := $DetectionArea
-onready var light_sprite := $LightSprite
+onready var lights := $Light2D
 onready var spawn_point := $SpawnPoint
 
 var current_object
@@ -18,7 +21,7 @@ export(bool) var auto_respawn = false # If destroyed objects should be respawned
 
 func _ready():
     if object:
-        _create_object()
+        call_deferred("_create_object")
         first_dropped = false
     if initial_drop: timed_open()
 
@@ -54,15 +57,19 @@ func spawn_new():
             timed_open()
 
 func open():
-    light_sprite.region_rect.position.y = 1600
+    lights.color = COLOR_ORANGE
     bottom_collider.disabled = true
+    bottom_collider.scale = Vector2(0,0)
+    bottom_collider.position = Vector2(80,0)
     for body in detection_area.get_overlapping_bodies():
         if body is RigidBody2D:
             body.sleeping = false
 
 func close():
-    light_sprite.region_rect.position.y = 1536
+    lights.color = COLOR_BLUE
     bottom_collider.disabled = false
+    bottom_collider.scale = Vector2(1,1)
+    bottom_collider.position = Vector2(0,0)
 
 
 func timed_open():

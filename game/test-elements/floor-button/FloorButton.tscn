@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://test-elements/floor-button/floor-button.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/floor-button/FloorButton.gd" type="Script" id=2]
+[ext_resource path="res://test-elements/floor-button/floor-button-lights.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="PhysicsMaterial" id=3]
+rough = true
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 6 )
 
 [node name="FloorButton" type="StaticBody2D"]
 collision_layer = 14
 collision_mask = 14
+physics_material_override = SubResource( 3 )
 script = ExtResource( 2 )
 
 [node name="ButtonCollisionPolygon" type="CollisionPolygon2D" parent="."]
@@ -32,13 +37,6 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 1024, 128 )
 
-[node name="LightsSprite" type="Sprite" parent="."]
-position = Vector2( 0, -8 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 256, 1024, 64 )
-
 [node name="DetectionArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 14
@@ -46,10 +44,17 @@ collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2( 0, -22 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0
 bus = "Reverb"
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 0.25
+color = Color( 0.435294, 0.647059, 0.678431, 1 )
+energy = 1.1
+mode = 2

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.gd" type="Script" id=2]
 [ext_resource path="res://sounds/impacts/impact1.wav" type="AudioStream" id=3]
+[ext_resource path="res://test-elements/weighted-cube/cube-lights.png" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
@@ -25,6 +26,7 @@ physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="CubeSprite" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
@@ -36,6 +38,7 @@ visible = false
 shape = SubResource( 2 )
 
 [node name="CollisionDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -49,3 +52,10 @@ pitch_scale = 1.2
 max_distance = 1000.0
 attenuation = 1.56916
 bus = "Reverb"
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+texture_scale = 0.25
+color = Color( 0.435294, 0.647059, 0.678431, 1 )
+energy = 1.2
+mode = 2

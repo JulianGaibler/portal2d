@@ -1,6 +1,11 @@
 extends FizzleRigidBody2D
 
+const COLOR_BLUE = Color("#6fa5ad")
+const COLOR_PINK = Color("#d1a8ba")
+const COLOR_ORANGE = Color("#dcba54")
+
 onready var sprite := $CubeSprite
+onready var light := $Light2D
 onready var collision_detector := $CollisionDetector
 onready var collision_sound := $CollisionSound
 
@@ -18,8 +23,10 @@ func _ready():
     collision_detector.connect("body_entered", self, "_on_collision")
     if companion:
         sprite.region_rect.position.x = 336
+        light.color = COLOR_PINK
     else:
         sprite.region_rect.position.x = 8
+        light.color = COLOR_BLUE
         
 func activate():
     sprite.region_rect.position.y = 336
