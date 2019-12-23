@@ -20,7 +20,9 @@ func _ready():
             var collider = CollisionShape2D.new()
             collider.shape = polygon_shape
             
-            if tile_set.tile_get_name(cell_id)[0] == "a": white.add_child(collider)
+            var first_char = tile_set.tile_get_name(cell_id)[0]
+            
+            if first_char == "a" or first_char == "x": white.add_child(collider)
             else: normal.add_child(collider)
     
     add_child(normal)
