@@ -373,7 +373,7 @@ func add_shadow_body(body):
     for child in body.get_children():
         if (child is CollisionShape2D):
             shapes.append(child.duplicate())
-        if (child is Sprite):
+        if child is Sprite or child is Light2D:
             sprites.append(child.duplicate())
     if (shapes.size() > 0):
         var collider = create_kinematic_collider(shapes)

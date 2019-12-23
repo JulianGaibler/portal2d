@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-onready var anim = get_node("PedestalColliderButton/AnimationPlayer")
+onready var anim = $AnimationPlayer
 var timer
 
 signal pressed

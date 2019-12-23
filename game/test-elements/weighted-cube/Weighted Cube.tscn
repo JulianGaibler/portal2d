@@ -21,7 +21,7 @@ extents = Vector2( 46.7656, 47.9829 )
 "dynamic-prop",
 ]]
 collision_layer = 66
-collision_mask = 66
+collision_mask = 2
 mass = 25.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
@@ -55,8 +55,12 @@ attenuation = 1.56916
 bus = "Reverb"
 
 [node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+use_parent_material = true
 texture = ExtResource( 4 )
 texture_scale = 0.25
 color = Color( 0.435294, 0.647059, 0.678431, 1 )
 energy = 1.2
 mode = 2
+range_z_min = 0
+range_z_max = 0

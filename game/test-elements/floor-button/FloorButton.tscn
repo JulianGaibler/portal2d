@@ -8,7 +8,7 @@
 rough = true
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40, 6 )
+extents = Vector2( 40, 10 )
 
 [node name="FloorButton" type="StaticBody2D"]
 collision_layer = 14

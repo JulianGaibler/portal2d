@@ -113,12 +113,12 @@ func smoothing_behaviour(delta):
 
 # Zoom Camera OUT
 func zoom_out():
-    target_zoom += 1    
-    if(target_zoom > 5): 
-        target_zoom = 5
+    target_zoom += .5    
+    if(target_zoom > 3): 
+        target_zoom = 3
         
 # Zoom Camera IN
 func zoom_in():
-    target_zoom -= 1    
+    target_zoom -= .5    
     if(target_zoom < 1): 
         target_zoom  = 1

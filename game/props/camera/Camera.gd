@@ -22,7 +22,7 @@ func _physics_process(delta):
         if result.empty() or result.collider != tracked_player: return
         goal = (tracked_player.global_position - camera_body.global_position).angle()
     
-    if scale.x < 0: goal *= -1
+    if scale.y < 0: goal *= -1
     else: goal += half_rotation
     if (goal != camera_body.rotation):
         camera_body.rotation = lerp_angle(camera_body.rotation, goal, 2.0 * delta)
@@ -31,7 +31,7 @@ func _physics_process(delta):
 func enter_area(body):
     if tracked_player == null and body.is_in_group("player"):
         tracked_player = body
-        transparent = get_tree().get_nodes_in_group("transparent")
+        transparent = get_tree().get_nodes_in_group("transparent") + get_tree().get_nodes_in_group("dynamic-prop")
         set_process(true)
 
 func leave_area(body):

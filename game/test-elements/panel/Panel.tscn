@@ -109,7 +109,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=3]
 resource_name = "corder-90-left-out-heavy"
 length = 3.0
 tracks/0/type = "bezier"
@@ -163,7 +163,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.8, 1.7, 3 )
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
 tracks/0/interp = 1
@@ -215,7 +215,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -268,7 +268,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -321,7 +321,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -374,7 +374,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -427,7 +427,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -480,7 +480,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -533,7 +533,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 1.1
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
@@ -586,7 +586,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 1.1
 step = 0.05
 tracks/0/type = "bezier"
@@ -640,7 +640,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
 tracks/0/interp = 1
@@ -692,7 +692,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
 tracks/0/interp = 1
@@ -744,7 +744,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("PanelArm1/PanelArm2:rotation_degrees")
 tracks/0/interp = 1
@@ -874,16 +874,16 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BindPose = SubResource( 1 )
 anims/corder-90-left-out = SubResource( 2 )
-anims/corder-90-left-out-heavy = SubResource( 15 )
-anims/corder-90-right-out = SubResource( 3 )
-anims/stairs-left-1-out = SubResource( 4 )
-anims/stairs-left-2-out = SubResource( 5 )
-anims/stairs-left-3-out = SubResource( 6 )
-anims/stairs-left-4-out = SubResource( 7 )
-anims/stairs-right-1-out = SubResource( 8 )
-anims/stairs-right-2-out = SubResource( 9 )
-anims/stairs-right-3-out = SubResource( 10 )
-anims/stairs-right-4-out = SubResource( 11 )
-anims/straight128-out = SubResource( 12 )
-anims/straight32-out = SubResource( 13 )
-anims/straight64-out = SubResource( 14 )
+anims/corder-90-left-out-heavy = SubResource( 3 )
+anims/corder-90-right-out = SubResource( 4 )
+anims/stairs-left-1-out = SubResource( 5 )
+anims/stairs-left-2-out = SubResource( 6 )
+anims/stairs-left-3-out = SubResource( 7 )
+anims/stairs-left-4-out = SubResource( 8 )
+anims/stairs-right-1-out = SubResource( 9 )
+anims/stairs-right-2-out = SubResource( 10 )
+anims/stairs-right-3-out = SubResource( 11 )
+anims/stairs-right-4-out = SubResource( 12 )
+anims/straight128-out = SubResource( 13 )
+anims/straight32-out = SubResource( 14 )
+anims/straight64-out = SubResource( 15 )
