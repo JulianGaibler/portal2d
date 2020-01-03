@@ -60,4 +60,3 @@ script = ExtResource( 3 )
 
 [node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 0, -80 )
-scale = Vector2( 0.2, 0.2 )

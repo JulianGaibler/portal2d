@@ -90,7 +90,6 @@ script = ExtResource( 3 )
 
 [node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 0, -80 )
-scale = Vector2( 0.2, 0.2 )
 
 [node name="CubeDropper" parent="." instance=ExtResource( 8 )]
 position = Vector2( 384, -192 )
@@ -187,6 +186,7 @@ script = ExtResource( 16 )
 texture_on = ExtResource( 14 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="PortalSpawner" parent="." instance=ExtResource( 1 )]

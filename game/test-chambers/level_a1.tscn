@@ -1,0 +1,1182 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://props/bed.png" type="Texture" id=1]
+[ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
+[ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=3]
+[ext_resource path="res://props/radio/Radio.tscn" type="PackedScene" id=4]
+[ext_resource path="res://props/table.png" type="Texture" id=5]
+[ext_resource path="res://default_env.tres" type="Environment" id=6]
+[ext_resource path="res://test-elements/window/Window.tscn" type="PackedScene" id=7]
+[ext_resource path="res://test-elements/window/window-sticker.png" type="Texture" id=8]
+[ext_resource path="res://test-elements/window/window.png" type="Texture" id=9]
+[ext_resource path="res://test-elements/portal-spawner/PortalSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://test-elements/floor-button/FloorButton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=13]
+[ext_resource path="res://test-elements/indicator-sign/IndicatorSign.tscn" type="PackedScene" id=14]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights.png" type="Texture" id=15]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=16]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=17]
+[ext_resource path="res://classes/TextureToggle.gd" type="Script" id=18]
+[ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=19]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=20]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sounds/background/background-drone-ambient.wav" type="AudioStream" id=22]
+[ext_resource path="res://tileset/TileColliderGenerator.gd" type="Script" id=23]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner.png" type="Texture" id=24]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=25]
+[ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=26]
+[ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=27]
+[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=28]
+[ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=29]
+[ext_resource path="res://test-elements/panel/Panel.tscn" type="PackedScene" id=30]
+[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=31]
+[ext_resource path="res://props/intro-wall.png" type="Texture" id=32]
+[ext_resource path="res://tileset/tiles.png" type="Texture" id=33]
+[ext_resource path="res://test-chambers/level_a1.gd" type="Script" id=34]
+[ext_resource path="res://classes/TriggerArea.gd" type="Script" id=35]
+[ext_resource path="res://textures/light-gradient.png" type="Texture" id=36]
+[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=37]
+[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=38]
+[ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=39]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 200, 116 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 580 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 896 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 64, 192 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 128, 6 )
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 34 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 6 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="WorldEnvironment"]
+visible = false
+light_mask = 3
+color = Color( 0.0352941, 0.188235, 0.211765, 1 )
+
+[node name="Music" type="AudioStreamPlayer2D" parent="WorldEnvironment"]
+stream = ExtResource( 22 )
+volume_db = -15.0
+autoplay = true
+bus = "Panning"
+
+[node name="TileMapBackground" type="TileMap" parent="."]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -10
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 0
+format = 1
+tile_data = PoolIntArray( -262166, 1, 0, -262164, 1, 0, -262162, 1, 0, -262160, 1, 0, -262158, 1, 0, -262156, 1, 0, -262154, 1, 0, -262152, 1, 0, -262150, 1, 0, -262148, 1, 0, -262146, 1, 0, -327680, 1, 0, -327678, 1, 0, -327676, 1, 0, -327674, 1, 0, -327672, 1, 0, -327670, 1, 0, -327668, 1, 0, -22, 1, 0, -20, 1, 0, -18, 1, 0, -16, 1, 0, -14, 1, 0, -12, 1, 0, -10, 1, 0, -8, 1, 0, -6, 1, 0, -4, 1, 0, -2, 1, 0, -65536, 1, 0, -65534, 1, 0, -65532, 1, 0, -65530, 1, 0, -65528, 1, 0, -65526, 1, 0, -65524, 1, 0, -65519, 1, 0, -65517, 1, 0, -65515, 1, 0, -65513, 1, 0, -65511, 1, 0, -65509, 1, 0, -65507, 1, 0, -65505, 1, 0, 47, 1, 0, 49, 1, 0, 51, 1, 0, 53, 1, 0, 55, 1, 0, 57, 1, 0, 59, 1, 0, 61, 1, 0, 66, 1, 0, 68, 3, 0, 69, 1, 0, 71, 1, 0, 65604, 3, 0, 131086, 3, 0, 131088, 3, 0, 131105, 3, 0, 131107, 6, 0, 131109, 8, 0, 131110, 8, 0, 131111, 8, 0, 131112, 8, 0, 131113, 8, 0, 131114, 8, 0, 131115, 8, 0, 131116, 3, 0, 131117, 2, 0, 131140, 3, 0, 262122, 1, 0, 262124, 1, 0, 262126, 1, 0, 262128, 1, 0, 262130, 1, 0, 262132, 1, 0, 262134, 1, 0, 262136, 1, 0, 262138, 1, 0, 262140, 1, 0, 262142, 1, 0, 196608, 1, 0, 196610, 1, 0, 196612, 1, 0, 196614, 1, 0, 196616, 1, 0, 196618, 1, 0, 196620, 1, 0, 196622, 3, 0, 196623, 8, 0, 196624, 3, 0, 196625, 1, 0, 196627, 1, 0, 196629, 1, 0, 196631, 1, 0, 196633, 1, 0, 196635, 1, 0, 196637, 1, 0, 196639, 1, 0, 196641, 3, 0, 196642, 8, 0, 196645, 5, 0, 196649, 6, 0, 196651, 3, 0, 196652, 3, 0, 196676, 3, 0, 262158, 3, 0, 262159, 8, 0, 262160, 3, 0, 262177, 3, 0, 262178, 8, 0, 262179, 8, 0, 262180, 8, 0, 262187, 3, 0, 262188, 3, 0, 262189, 2, 0, 262191, 1, 0, 262193, 1, 0, 262195, 1, 0, 262197, 1, 0, 262199, 1, 0, 262201, 1, 0, 262203, 1, 0, 262205, 1, 0, 262210, 1, 0, 262212, 3, 0, 262213, 1, 0, 262215, 1, 0, 327694, 3, 0, 327695, 8, 0, 327696, 3, 0, 327713, 3, 0, 327714, 8, 0, 327715, 6, 0, 327721, 7, 0, 327723, 8, 0, 327724, 3, 0, 327748, 3, 0, 327762, 28, 0, 393230, 3, 0, 393231, 8, 0, 393232, 3, 0, 393249, 3, 0, 393250, 8, 0, 393259, 8, 0, 393260, 8, 0, 393261, 8, 0, 393262, 3, 0, 393284, 3, 0, 524278, 27, 0, 524279, 27, 0, 524280, 27, 0, 524281, 27, 0, 524282, 27, 0, 524283, 27, 0, 524284, 27, 0, 524285, 27, 0, 524286, 27, 0, 524287, 27, 0, 458752, 27, 0, 458753, 27, 0, 458820, 3, 0, 458826, 8, 0, 458827, 8, 0, 458828, 5, 0, 458832, 8, 0, 458833, 8, 0, 589814, 8, 0, 589815, 8, 0, 589816, 8, 0, 589817, 8, 0, 589818, 8, 0, 589819, 8, 0, 589820, 8, 0, 589821, 8, 0, 589822, 8, 0, 589823, 8, 0, 524288, 8, 0, 524289, 8, 0, 524335, 1, 0, 524337, 1, 0, 524339, 1, 0, 524341, 1, 0, 524343, 1, 0, 524345, 1, 0, 524347, 1, 0, 524349, 1, 0, 524354, 1, 0, 524356, 3, 0, 524357, 1, 0, 524359, 1, 0, 524361, 8, 0, 524362, 7, 0, 524368, 7, 0, 655336, 28, 0, 655340, 28, 0, 655344, 28, 0, 655348, 28, 0, 655352, 28, 0, 655356, 28, 0, 589824, 28, 0, 589828, 28, 0, 589832, 28, 0, 589836, 28, 0, 589892, 3, 0, 589897, 8, 0, 589906, 28, 0, 655428, 3, 0, 655433, 8, 0, 655434, 6, 0, 655440, 6, 0, 720964, 3, 0, 720969, 8, 0, 720972, 8, 0, 720973, 8, 0, 720974, 8, 0, 720975, 8, 0, 917480, 28, 0, 917484, 28, 0, 917488, 28, 0, 917492, 28, 0, 917496, 28, 0, 917500, 28, 0, 851968, 28, 0, 851972, 28, 0, 851976, 28, 0, 851980, 28, 0, 852050, 28, 0, 1048623, 3, 0, 1048624, 1, 0, 1048626, 1, 0, 1048628, 1, 0, 1048633, 3, 0, 1048634, 1, 0, 1048636, 1, 0, 1048638, 1, 0, 1179624, 28, 0, 1179628, 28, 0, 1179632, 28, 0, 1179636, 28, 0, 1179640, 28, 0, 1179644, 28, 0, 1114112, 28, 0, 1114116, 28, 0, 1114120, 28, 0, 1114124, 28, 0, 1114159, 3, 0, 1114169, 3, 0, 1114194, 14, 0, 1114196, 15, 0, 1179695, 3, 0, 1179705, 3, 0, 1245231, 3, 0, 1245241, 3, 0, 1245266, 15, 0, 1245268, 28, 0, 1310767, 3, 0, 1310768, 1, 0, 1310770, 1, 0, 1310772, 1, 0, 1310777, 3, 0, 1310778, 1, 0, 1310780, 1, 0, 1310782, 1, 0, 1376303, 3, 0, 1376313, 3, 0, 1376338, 17, 0, 1441839, 3, 0, 1441849, 3, 0, 1507375, 3, 0, 1507385, 3, 0, 1507410, 28, 0, 1507414, 28, 0 )
+
+[node name="TileMapBackground2" type="TileMap" parent="."]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 2
+format = 1
+tile_data = PoolIntArray( -14, 1, 0, -12, 1, 0, -65534, 1, 0, -65532, 1, 0, 262130, 1, 0, 262132, 1, 0, 196610, 1, 0, 196612, 1, 0 )
+
+[node name="TileMapForeground" type="TileMap" parent="."]
+scale = Vector2( 0.5, 0.5 )
+z_index = 10
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -1638388, 5, 0, -1572846, 5, 0, -1441806, 5, 0, -1507312, 6, 0, -1376266, 5, 0, -1310742, 5, 0, -1310722, 5, 0, -1376250, 5, 0, -1376246, 6, 0, -1376244, 6, 0, -1376242, 6, 0, -1376240, 6, 0, -1310702, 7, 0, -1310700, 6, 0, -1310698, 7, 0, -1310696, 5, 0, -1179674, 5, 0, -1179666, 5, 0, -1179662, 6, 0, -1179660, 8, 0, -1179659, 8, 0, -1179654, 5, 0, -1245182, 5, 0, -1245174, 6, 0, -1245172, 6, 0, -1245170, 5, 0, -1114124, 5, 0, -1114120, 7, 0, -1179630, 6, 0, -1179628, 5, 0, -1179620, 8, 0, -1179619, 8, 0, -1179618, 5, 0, -1048598, 7, 0, -1048596, 6, 0, -1048590, 6, 0, -1048578, 5, 0, -1114106, 7, 0, -1114104, 6, 0, -1114102, 5, 0, -1114084, 8, 0, -1114083, 8, 0, -1114078, 6, 0, -1114076, 6, 0, -983048, 6, 0, -1048558, 6, 0, -1048552, 6, 0, -1048550, 6, 0, -1048548, 7, 0, -1048538, 6, 0, -1048536, 8, 0, -1048535, 5, 0, -917528, 7, 0, -917526, 7, 0, -917524, 5, 0, -917520, 7, 0, -917518, 6, 0, -917510, 6, 0, -917508, 7, 0, -983038, 7, 0, -983036, 7, 0, -983034, 5, 0, -983026, 6, 0, -983024, 8, 0, -983023, 8, 0, -983006, 6, 0, -983004, 6, 0, -983000, 8, 0, -852000, 5, 0, -851996, 5, 0, -851980, 6, 0, -851978, 6, 0, -851976, 7, 0, -917488, 6, 0, -917486, 6, 0, -917484, 6, 0, -917482, 6, 0, -917480, 5, 0, -917476, 5, 0, -917472, 8, 0, -917471, 8, 0, -917466, 6, 0, -917464, 8, 0, -917459, 5, 0, -786456, 5, 0, -786448, 6, 0, -786446, 6, 0, -786438, 6, 0, -786436, 6, 0, -786434, 7, 0, -851968, 5, 0, -851964, 7, 0, -851958, 6, 0, -851956, 6, 0, -851954, 7, 0, -851936, 5, 0, -851932, 8, 0, -851931, 8, 0, -851928, 8, 0, -720908, 5, 0, -720904, 8, 0, -720903, 8, 0, -786416, 6, 0, -786414, 6, 0, -786412, 5, 0, -786396, 8, 0, -786395, 5, 0, -786391, 6, 0, -786389, 6, 0, -786383, 5, 0, -655380, 6, 0, -655378, 8, 0, -655377, 5, 0, -655373, 8, 0, -655368, 6, 0, -655366, 5, 0, -655362, 6, 0, -720892, 5, 0, -720888, 6, 0, -720886, 5, 0, -720882, 6, 0, -720860, 8, 0, -589855, 5, 0, -589851, 6, 0, -589849, 8, 0, -589842, 8, 0, -589837, 8, 0, -655344, 5, 0, -655336, 5, 0, -655332, 8, 0, -655331, 8, 0, -655330, 8, 0, -655329, 8, 0, -655324, 8, 0, -655319, 5, 0, -655315, 6, 0, -655313, 6, 0, -655307, 6, 0, -524313, 8, 0, -524312, 6, 0, -524310, 7, 0, -524308, 6, 0, -524306, 8, 0, -524301, 8, 0, -524296, 6, 0, -524290, 7, 0, -589824, 6, 0, -589822, 7, 0, -589816, 6, 0, -589810, 7, 0, -589796, 8, 0, -589795, 6, 0, -589793, 6, 0, -589791, 6, 0, -589789, 6, 0, -458779, 7, 0, -458777, 8, 0, -458770, 8, 0, -458765, 8, 0, -458764, 8, 0, -458763, 8, 0, -458762, 8, 0, -458761, 8, 0, -524268, 6, 0, -524266, 6, 0, -524260, 8, 0, -524251, 6, 0, -524249, 7, 0, -524243, 5, 0, -524239, 5, 0, -524235, 6, 0, -393241, 8, 0, -393240, 8, 0, -393239, 8, 0, -393238, 8, 0, -393237, 8, 0, -393236, 8, 0, -393235, 8, 0, -393234, 8, 0, -393233, 8, 0, -393232, 8, 0, -393231, 8, 0, -393230, 8, 0, -393229, 8, 0, -393228, 8, 0, -393227, 8, 0, -393226, 8, 0, -393225, 7, 0, -393223, 8, 0, -393222, 7, 0, -393220, 8, 0, -393219, 8, 0, -393218, 8, 0, -393217, 7, 0, -458751, 8, 0, -458750, 8, 0, -458749, 8, 0, -458748, 8, 0, -458747, 8, 0, -458746, 8, 0, -458745, 8, 0, -458744, 8, 0, -458743, 8, 0, -458742, 8, 0, -458741, 8, 0, -458740, 8, 0, -458739, 8, 0, -458738, 8, 0, -458737, 8, 0, -458724, 8, 0, -458723, 6, 0, -458721, 6, 0, -458719, 5, 0, -327710, 7, 0, -327708, 6, 0, -327706, 6, 0, -327704, 8, 0, -327703, 27, 0, -327702, 27, 0, -327701, 27, 0, -327700, 27, 0, -327699, 27, 0, -327698, 27, 0, -327697, 27, 0, -327696, 27, 0, -327695, 27, 0, -327694, 27, 0, -327693, 27, 0, -327692, 27, 0, -327691, 27, 0, -327690, 8, 0, -327687, 8, 0, -327684, 8, 0, -327683, 8, 0, -327682, 8, 0, -393215, 8, 0, -393214, 27, 0, -393213, 27, 0, -393212, 27, 0, -393211, 27, 0, -393210, 27, 0, -393209, 27, 0, -393208, 27, 0, -393207, 27, 0, -393206, 27, 0, -393205, 27, 0, -393204, 27, 0, -393203, 27, 0, -393202, 27, 0, -393201, 5, 0, -393197, 6, 0, -393195, 8, 0, -393194, 8, 0, -393193, 6, 0, -393191, 8, 0, -393190, 8, 0, -393189, 8, 0, -393188, 8, 0, -393179, 6, 0, -393177, 7, 0, -393175, 5, 0, -393163, 5, 0, -393159, 8, 0, -393158, 6, 0, -393156, 7, 0, -262168, 8, 0, -262167, 18, 0, -262154, 27, 0, -262153, 27, 0, -262152, 27, 0, -262151, 27, 0, -262150, 27, 0, -262149, 27, 0, -262148, 27, 0, -262147, 27, 0, -262146, 27, 0, -262145, 27, 0, -327680, 27, 0, -327679, 27, 0, -327666, 18, 0, -327659, 6, 0, -327655, 6, 0, -327653, 6, 0, -327651, 7, 0, -327649, 6, 0, -327623, 8, 0, -327618, 5, 0, -196637, 5, 0, -196633, 8, 0, -196632, 8, 0, -196631, 18, 65536, -262130, 18, 65536, -262125, 6, 0, -262121, 8, 0, -262120, 8, 0, -262107, 5, 0, -262099, 7, 0, -262097, 6, 0, -262095, 5, 0, -262087, 5, 0, -262083, 8, 0, -262076, 5, 0, -131103, 7, 0, -131097, 8, 0, -131096, 8, 0, -131095, 18, 65536, -196594, 18, 65536, -196587, 8, 0, -196586, 8, 0, -196585, 8, 0, -196584, 8, 0, -196583, 8, 0, -196582, 8, 0, -196581, 8, 0, -196580, 8, 0, -196579, 8, 0, -196578, 8, 0, -196577, 8, 0, -196576, 8, 0, -196575, 8, 0, -196574, 8, 0, -196573, 8, 0, -196572, 8, 0, -196547, 8, 0, -65561, 8, 0, -65560, 8, 0, -65559, 18, 65536, -131058, 18, 65536, -131057, 8, 0, -131056, 18, 0, -131055, 27, 0, -131054, 27, 0, -131053, 27, 0, -131052, 27, 0, -131051, 27, 0, -131050, 27, 0, -131049, 27, 0, -131048, 27, 0, -131047, 27, 0, -131046, 27, 0, -131045, 27, 0, -131044, 27, 0, -131043, 27, 0, -131042, 27, 0, -131041, 27, 0, -131040, 27, 0, -131039, 27, 0, -131038, 8, 0, -131037, 7, 0, -131031, 7, 0, -131029, 5, 0, -131025, 6, 0, -131019, 6, 0, -131017, 6, 0, -131011, 8, 0, -131006, 6, 0, -131000, 6, 0, -130998, 6, 0, -31, 7, 0, -25, 8, 0, -24, 8, 0, -23, 18, 65536, -65522, 18, 65536, -65521, 8, 0, -65520, 18, 65536, -65503, 18, 0, -65502, 8, 0, -65475, 8, 0, -65474, 8, 0, -65473, 8, 0, -65472, 8, 0, -65471, 8, 0, -65460, 6, 0, -65458, 5, 0, 65507, 8, 0, 65508, 8, 0, 65509, 8, 0, 65510, 8, 0, 65511, 8, 0, 65512, 8, 0, 65513, 18, 65536, 14, 18, 65536, 15, 8, 0, 16, 18, 65536, 33, 18, 65536, 34, 8, 0, 35, 6, 0, 37, 6, 0, 39, 6, 0, 41, 7, 0, 63, 6, 0, 65, 18, 0, 73, 7, 0, 75, 8, 0, 131042, 5, 0, 131046, 6, 0, 131048, 8, 0, 131049, 18, 65536, 65550, 18, 131072, 65551, 8, 0, 65552, 18, 131072, 65569, 18, 131072, 65570, 8, 0, 65601, 18, 65536, 65611, 8, 0, 65612, 7, 0, 196584, 8, 0, 196585, 18, 65536, 131087, 8, 0, 131106, 8, 0, 131135, 8, 0, 131136, 8, 0, 131137, 18, 65536, 131145, 8, 0, 131146, 8, 0, 131147, 8, 0, 262118, 6, 0, 262120, 8, 0, 262121, 18, 65536, 196671, 8, 0, 196672, 8, 0, 196673, 18, 65536, 196681, 7, 0, 196683, 8, 0, 196684, 6, 0, 196686, 5, 0, 196690, 6, 0, 196692, 6, 0, 327656, 8, 0, 327657, 18, 65536, 262207, 8, 0, 262208, 8, 0, 262209, 18, 65536, 262219, 8, 0, 393186, 7, 0, 393188, 5, 0, 393192, 8, 0, 393193, 18, 65536, 393206, 3, 0, 393207, 4, 0, 393208, 3, 0, 393209, 4, 0, 393210, 3, 0, 393211, 4, 0, 393212, 3, 0, 393213, 4, 0, 393214, 3, 0, 393215, 4, 0, 327680, 3, 0, 327681, 4, 0, 327743, 8, 0, 327744, 8, 0, 327745, 18, 65536, 327753, 6, 0, 327755, 6, 0, 327757, 8, 0, 458728, 8, 0, 458729, 18, 131072, 393279, 6, 0, 393281, 18, 65536, 393293, 8, 0, 524258, 7, 0, 524264, 8, 0, 524265, 27, 0, 524266, 27, 0, 524267, 27, 0, 524268, 27, 0, 524269, 27, 0, 524270, 27, 0, 524271, 27, 0, 524272, 27, 0, 524273, 27, 0, 524274, 27, 0, 524275, 27, 0, 524276, 27, 0, 524277, 27, 0, 458754, 27, 0, 458755, 27, 0, 458756, 27, 0, 458757, 27, 0, 458758, 27, 0, 458759, 27, 0, 458760, 27, 0, 458761, 27, 0, 458762, 27, 0, 458763, 27, 0, 458764, 27, 0, 458765, 27, 0, 458766, 27, 0, 458767, 8, 0, 458768, 27, 0, 458769, 27, 0, 458770, 27, 0, 458771, 27, 0, 458772, 27, 0, 458773, 27, 0, 458774, 27, 0, 458775, 27, 0, 458776, 27, 0, 458777, 27, 0, 458778, 27, 0, 458779, 27, 0, 458780, 27, 0, 458781, 27, 0, 458782, 27, 0, 458783, 27, 0, 458784, 27, 0, 458785, 27, 0, 458786, 8, 0, 458787, 6, 0, 458789, 6, 0, 458791, 6, 0, 458793, 5, 0, 458797, 8, 0, 458798, 18, 0, 458817, 18, 65536, 458825, 8, 0, 589800, 8, 0, 589801, 27, 0, 589802, 27, 0, 589803, 27, 0, 589804, 27, 0, 589805, 27, 0, 589806, 27, 0, 589807, 27, 0, 589808, 27, 0, 589809, 27, 0, 589810, 27, 0, 589811, 27, 0, 589812, 27, 0, 589813, 27, 0, 524290, 27, 0, 524291, 27, 0, 524292, 27, 0, 524293, 27, 0, 524294, 27, 0, 524295, 27, 0, 524296, 27, 0, 524297, 27, 0, 524298, 27, 0, 524299, 27, 0, 524300, 27, 0, 524301, 27, 0, 524302, 27, 0, 524303, 8, 0, 524304, 27, 0, 524305, 27, 0, 524306, 27, 0, 524307, 27, 0, 524308, 27, 0, 524309, 27, 0, 524310, 27, 0, 524311, 27, 0, 524312, 27, 0, 524313, 27, 0, 524314, 27, 0, 524315, 27, 0, 524316, 27, 0, 524317, 27, 0, 524318, 27, 0, 524319, 27, 0, 524320, 27, 0, 524321, 27, 0, 524322, 8, 0, 524333, 8, 0, 524334, 18, 65536, 524351, 6, 0, 524353, 18, 65536, 655330, 5, 0, 655334, 7, 0, 589839, 5, 0, 589843, 6, 0, 589845, 6, 0, 589847, 5, 0, 589851, 7, 0, 589853, 6, 0, 589855, 5, 0, 589859, 7, 0, 589861, 7, 0, 589863, 6, 0, 589869, 8, 0, 589870, 18, 65536, 589889, 18, 65536, 655405, 8, 0, 655406, 18, 65536, 655423, 7, 0, 655425, 18, 65536, 786406, 8, 0, 786407, 8, 0, 720915, 5, 0, 720923, 5, 0, 720931, 5, 0, 720935, 6, 0, 720937, 6, 0, 720939, 7, 0, 720941, 8, 0, 720942, 18, 131072, 720961, 18, 131072, 851942, 8, 0, 851943, 8, 0, 786477, 8, 0, 786478, 27, 0, 786479, 27, 0, 786480, 27, 0, 786481, 27, 0, 786482, 27, 0, 786483, 27, 0, 786484, 27, 0, 786485, 27, 0, 786486, 27, 0, 786487, 27, 0, 786488, 27, 0, 786489, 27, 0, 786490, 27, 0, 786491, 27, 0, 786492, 27, 0, 786493, 27, 0, 786494, 27, 0, 786495, 6, 0, 786497, 27, 0, 786498, 27, 0, 786499, 27, 0, 786500, 27, 0, 786501, 27, 0, 786502, 27, 0, 786503, 27, 0, 786504, 27, 0, 786505, 8, 0, 786506, 6, 0, 786508, 6, 0, 786510, 5, 0, 917474, 7, 0, 917476, 5, 0, 851983, 5, 0, 851991, 5, 0, 851999, 6, 0, 852001, 6, 0, 852007, 6, 0, 852009, 6, 0, 852011, 7, 0, 852013, 8, 0, 852014, 27, 0, 852015, 27, 0, 852016, 27, 0, 852017, 27, 0, 852018, 27, 0, 852019, 27, 0, 852020, 27, 0, 852021, 27, 0, 852022, 27, 0, 852023, 27, 0, 852024, 27, 0, 852025, 27, 0, 852026, 27, 0, 852027, 27, 0, 852028, 27, 0, 852029, 27, 0, 852030, 27, 0, 852033, 27, 0, 852034, 27, 0, 852035, 27, 0, 852036, 27, 0, 852037, 27, 0, 852038, 27, 0, 852039, 27, 0, 852040, 27, 0, 852041, 8, 0, 917549, 8, 0, 917550, 8, 0, 917551, 8, 0, 917552, 8, 0, 917553, 8, 0, 917554, 8, 0, 917555, 8, 0, 917556, 8, 0, 917557, 8, 0, 917558, 8, 0, 917559, 8, 0, 917560, 8, 0, 917561, 8, 0, 917562, 8, 0, 917563, 8, 0, 917564, 8, 0, 917565, 8, 0, 917566, 8, 0, 917567, 8, 0, 917568, 8, 0, 917569, 8, 0, 917570, 6, 0, 917572, 8, 0, 917573, 8, 0, 917574, 6, 0, 917576, 5, 0, 917580, 7, 0, 1048546, 8, 0, 1048547, 8, 0, 983059, 5, 0, 983067, 5, 0, 983071, 5, 0, 983075, 7, 0, 983077, 7, 0, 983079, 6, 0, 983081, 5, 0, 983085, 8, 0, 983086, 27, 0, 983087, 27, 0, 983088, 27, 0, 983089, 27, 0, 983090, 27, 0, 983091, 27, 0, 983092, 27, 0, 983093, 27, 0, 983094, 27, 0, 983095, 8, 0, 983096, 27, 0, 983097, 27, 0, 983098, 27, 0, 983099, 27, 0, 983100, 27, 0, 983101, 27, 0, 983102, 27, 0, 983103, 27, 0, 983104, 27, 0, 983105, 8, 0, 983108, 6, 0, 1114082, 7, 0, 1048621, 8, 0, 1048622, 18, 0, 1048630, 18, 0, 1048631, 8, 0, 1048632, 18, 0, 1048640, 18, 0, 1048641, 8, 0, 1048642, 7, 0, 1048646, 7, 0, 1048652, 5, 0, 1048656, 8, 0, 1048657, 8, 0, 1179620, 8, 0, 1179621, 8, 0, 1179622, 8, 0, 1179623, 8, 0, 1114127, 5, 0, 1114135, 7, 0, 1114137, 6, 0, 1114147, 7, 0, 1114149, 7, 0, 1114151, 6, 0, 1114157, 8, 0, 1114158, 18, 65536, 1114166, 18, 65536, 1114167, 8, 0, 1114168, 18, 65536, 1114176, 18, 65536, 1114177, 8, 0, 1114180, 8, 0, 1114181, 8, 0, 1114192, 8, 0, 1114193, 8, 0, 1245154, 8, 0, 1245155, 5, 0, 1245159, 8, 0, 1179693, 8, 0, 1179694, 18, 65536, 1179702, 18, 65536, 1179703, 8, 0, 1179704, 18, 65536, 1179712, 18, 65536, 1179713, 8, 0, 1179714, 5, 0, 1179718, 6, 0, 1179720, 7, 0, 1179722, 6, 0, 1179728, 6, 0, 1310690, 8, 0, 1310695, 8, 0, 1245203, 6, 0, 1245205, 7, 0, 1245207, 5, 0, 1245211, 7, 0, 1245213, 7, 0, 1245215, 7, 0, 1245217, 7, 0, 1245219, 5, 0, 1245223, 6, 0, 1245225, 8, 0, 1245226, 8, 0, 1245227, 8, 0, 1245228, 8, 0, 1245229, 8, 0, 1245230, 18, 65536, 1245238, 18, 65536, 1245239, 8, 0, 1245240, 18, 65536, 1245248, 18, 65536, 1245249, 8, 0, 1376226, 8, 0, 1376231, 8, 0, 1310761, 5, 0, 1310765, 8, 0, 1310766, 18, 65536, 1310774, 18, 65536, 1310775, 8, 0, 1310776, 18, 65536, 1310784, 18, 65536, 1310785, 8, 0, 1310790, 5, 0, 1310794, 7, 0, 1310796, 6, 0, 1310798, 6, 0, 1310800, 7, 0, 1441762, 8, 0, 1441767, 8, 0, 1376271, 5, 0, 1376275, 5, 0, 1376283, 5, 0, 1376287, 5, 0, 1376295, 6, 0, 1376301, 8, 0, 1376302, 18, 65536, 1376310, 18, 65536, 1376311, 8, 0, 1376312, 18, 65536, 1376320, 18, 65536, 1376321, 8, 0, 1441837, 8, 0, 1441838, 18, 65536, 1441846, 18, 65536, 1441847, 8, 0, 1441848, 18, 65536, 1441856, 18, 65536, 1441857, 8, 0, 1441858, 6, 0, 1441860, 7, 0, 1441866, 5, 0, 1441870, 6, 0, 1441872, 7, 0, 1507351, 7, 0, 1507353, 7, 0, 1507363, 6, 0, 1507365, 6, 0, 1507367, 6, 0, 1507373, 8, 0, 1507374, 18, 131072, 1507382, 18, 131072, 1507383, 8, 0, 1507384, 18, 131072, 1507392, 18, 131072, 1507393, 8, 0, 1572905, 7, 0, 1572907, 7, 0, 1572909, 8, 0, 1572910, 27, 0, 1572911, 27, 0, 1572912, 27, 0, 1572913, 27, 0, 1572914, 27, 0, 1572915, 27, 0, 1572916, 27, 0, 1572917, 27, 0, 1572918, 27, 0, 1572919, 8, 0, 1572920, 27, 0, 1572921, 27, 0, 1572922, 27, 0, 1572923, 27, 0, 1572924, 27, 0, 1572925, 27, 0, 1572926, 27, 0, 1572927, 27, 0, 1572928, 27, 0, 1572929, 8, 0, 1572930, 5, 0, 1572934, 6, 0, 1572936, 7, 0, 1572942, 6, 0, 1572944, 6, 0, 1638437, 5, 0, 1638445, 8, 0, 1638446, 6, 0, 1638448, 7, 0, 1638450, 8, 0, 1638451, 7, 0, 1638453, 6, 0, 1638455, 7, 0, 1638457, 6, 0, 1638459, 7, 0, 1638461, 6, 0, 1638463, 6, 0, 1638465, 8, 0, 1703977, 5, 0, 1703981, 8, 0, 1703986, 8, 0, 1704001, 8, 0, 1704006, 6, 0, 1704008, 6, 0, 1704010, 6, 0, 1704012, 6, 0, 1704014, 6, 0, 1704016, 6, 0, 1769517, 8, 0, 1769518, 5, 0, 1769522, 7, 0, 1769524, 7, 0, 1769526, 8, 0, 1769527, 8, 0, 1769528, 8, 0, 1769529, 8, 0, 1769530, 7, 0, 1769532, 7, 0, 1769534, 5, 0, 1835053, 8, 0, 1835062, 5, 0, 1835074, 5, 0, 1835078, 6, 0, 1900589, 8, 0, 1900594, 6, 0, 1900596, 6, 0, 1900602, 5, 0, 1966150, 6, 0, 2031666, 5, 0, 2031678, 7, 0, 2031680, 6, 0, 2097206, 8, 0, 2097207, 8, 0, 2097208, 7, 0, 2097218, 7, 0, 2097220, 5, 0, 2162742, 6, 0, 2162746, 6, 0, 2162748, 6, 0, 2162750, 5, 0, 2228280, 6, 0, 2228290, 6, 0, 2293818, 6, 0, 2293820, 6, 0 )
+script = ExtResource( 23 )
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+
+[node name="Light2D" type="Light2D" parent="Lights"]
+position = Vector2( -256, -276 )
+scale = Vector2( 4.75, 3.375 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+energy = 1.2
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D10" type="Light2D" parent="Lights"]
+position = Vector2( -256, -190 )
+scale = Vector2( 1.5, 2.0625 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+energy = 1.3
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D2" type="Light2D" parent="Lights"]
+position = Vector2( 1568, -79.9999 )
+scale = Vector2( 2.375, 3.5 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+energy = 1.2
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D3" type="Light2D" parent="Lights"]
+position = Vector2( 2560, 92 )
+scale = Vector2( 1.5, 2.875 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D5" type="Light2D" parent="Lights"]
+position = Vector2( 2560, 92 )
+scale = Vector2( 1.5, 2.875 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D6" type="Light2D" parent="Lights"]
+position = Vector2( 2560, 104 )
+scale = Vector2( 1.5, 3.25 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+energy = 1.2
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D7" type="Light2D" parent="Lights"]
+position = Vector2( 5216, 348.25 )
+scale = Vector2( 2.125, 2.88281 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D4" type="Light2D" parent="Lights"]
+position = Vector2( 3840, 48 )
+scale = Vector2( 3.5, 3.5 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+energy = 1.3
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Light2D8" type="Light2D" parent="Lights"]
+position = Vector2( 3552, 1052.25 )
+scale = Vector2( 2.375, 2.88281 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 224 )
+mode = 2
+shadow_gradient_length = 1.0
+
+[node name="Windows" type="Node2D" parent="."]
+position = Vector2( -256, 320 )
+
+[node name="Window" parent="Windows" instance=ExtResource( 7 )]
+position = Vector2( -380, -1 )
+scale = Vector2( 1, 36 )
+
+[node name="Window2" parent="Windows" instance=ExtResource( 7 )]
+position = Vector2( 380, 0 )
+scale = Vector2( 1, 36 )
+
+[node name="window" type="Sprite" parent="Windows"]
+modulate = Color( 1, 1, 1, 0.435294 )
+position = Vector2( 0, -288 )
+scale = Vector2( 29.5385, 22.1539 )
+z_index = -8
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 3, 0, 26, 26 )
+
+[node name="window-sticker3" type="Sprite" parent="Windows"]
+modulate = Color( 1, 1, 1, 0.435294 )
+position = Vector2( 0, -80 )
+scale = Vector2( 29.5385, 0.5 )
+z_index = -8
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 3, 0, 26, 64 )
+
+[node name="window-sticker2" type="Sprite" parent="Windows"]
+position = Vector2( 380, -80 )
+scale = Vector2( 0.25, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="intro-wall" type="Sprite" parent="."]
+position = Vector2( -632, 176 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 6
+texture = ExtResource( 32 )
+
+[node name="bed" type="Sprite" parent="."]
+position = Vector2( -416, 248 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+texture = ExtResource( 1 )
+
+[node name="Radio" parent="." instance=ExtResource( 4 )]
+position = Vector2( -8, 262 )
+
+[node name="table" type="Sprite" parent="."]
+position = Vector2( -8, 288 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+texture = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"transparent",
+]]
+visible = false
+position = Vector2( 48, 288 )
+scale = Vector2( 0.25, 0.25 )
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -224, 12 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -2720, -444 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1280, -1280 )
+shape = SubResource( 3 )
+
+[node name="TestDoor1" parent="." instance=ExtResource( 11 )]
+position = Vector2( 992, 448 )
+
+[node name="TestDoor2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2208, 448 )
+
+[node name="FloorButton" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1408, 448 )
+
+[node name="CubeDropper" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1792, -64 )
+object = ExtResource( 26 )
+auto_respawn = true
+
+[node name="IndicatorLights" type="Node2D" parent="."]
+position = Vector2( 1536, 448 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+script = ExtResource( 19 )
+
+[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights"]
+position = Vector2( -128, -832 )
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -640, 128, 768 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 25 )
+
+[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights"]
+position = Vector2( 0, -960 )
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 25 )
+
+[node name="indicator-lights-strip-off3" type="Sprite" parent="IndicatorLights"]
+position = Vector2( -128, -960 )
+texture = ExtResource( 16 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 20 )
+
+[node name="Light2D" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -128 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D2" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -256 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D3" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -384 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D4" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -512 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D5" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -640 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D6" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -768 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D7" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 64, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D8" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 192, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D9" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 320, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D10" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 448, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D11" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 576, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D12" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 704, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D13" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 832, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D14" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 960, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D15" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1088, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D16" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1216, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D17" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1344, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D18" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1472, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D19" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1600, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D20" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1728, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D21" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1856, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D22" type="Light2D" parent="IndicatorLights"]
+position = Vector2( 1984, -896 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D23" type="Light2D" parent="IndicatorLights"]
+position = Vector2( -64, -896 )
+texture = ExtResource( 24 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Camera2" parent="." instance=ExtResource( 31 )]
+position = Vector2( 1088, 0 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="Trigger2" type="Area2D" parent="."]
+position = Vector2( 1216, 256 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger2"]
+shape = SubResource( 4 )
+
+[node name="IndicatorSign" parent="." instance=ExtResource( 14 )]
+position = Vector2( 2080, 224 )
+
+[node name="Player" parent="." instance=ExtResource( 21 )]
+position = Vector2( 482, 354 )
+
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
+position = Vector2( -0.606995, -96 )
+current = true
+process_mode = 0
+drag_margin_left = 0.5
+drag_margin_top = 0.5
+drag_margin_right = 0.5
+drag_margin_bottom = 0.5
+script = ExtResource( 3 )
+
+[node name="Fizzler" parent="." instance=ExtResource( 28 )]
+position = Vector2( 2624, 288 )
+scale = Vector2( 1, 1.175 )
+
+[node name="fizzler" type="Sprite" parent="Fizzler"]
+position = Vector2( 0, -119.149 )
+scale = Vector2( 0.25, 0.265957 )
+texture = ExtResource( 27 )
+
+[node name="fizzler2" type="Sprite" parent="Fizzler"]
+position = Vector2( 0, 119.149 )
+scale = Vector2( 0.25, 0.265957 )
+texture = ExtResource( 27 )
+flip_v = true
+
+[node name="Fizzler2" parent="." instance=ExtResource( 28 )]
+position = Vector2( 5120, 608 )
+scale = Vector2( 1, 1.175 )
+
+[node name="fizzler" type="Sprite" parent="Fizzler2"]
+position = Vector2( 0, -119.149 )
+scale = Vector2( 0.25, 0.265957 )
+texture = ExtResource( 27 )
+
+[node name="fizzler2" type="Sprite" parent="Fizzler2"]
+position = Vector2( 0, 119.149 )
+scale = Vector2( 0.25, 0.265957 )
+texture = ExtResource( 27 )
+flip_v = true
+
+[node name="GlassLightCover" parent="." instance=ExtResource( 29 )]
+position = Vector2( -1024, -288 )
+rotation = 1.5708
+
+[node name="GlassLightCover3" parent="." instance=ExtResource( 29 )]
+position = Vector2( -768, -288 )
+rotation = 1.5708
+
+[node name="GlassLightCover6" parent="." instance=ExtResource( 29 )]
+position = Vector2( -1280, -288 )
+rotation = 1.5708
+
+[node name="GlassLightCover2" parent="." instance=ExtResource( 29 )]
+position = Vector2( 512, -288 )
+rotation = 1.5708
+
+[node name="GlassLightCover5" parent="." instance=ExtResource( 29 )]
+position = Vector2( 256, -288 )
+rotation = 1.5708
+
+[node name="GlassLightCover4" parent="." instance=ExtResource( 29 )]
+position = Vector2( 768, -288 )
+rotation = 1.5708
+
+[node name="GlassLightCover7" parent="." instance=ExtResource( 29 )]
+position = Vector2( 3040, 1152 )
+
+[node name="GlassLightCover8" parent="." instance=ExtResource( 29 )]
+position = Vector2( 3680, 1152 )
+
+[node name="GlassLightCover9" parent="." instance=ExtResource( 29 )]
+position = Vector2( 4352, 32 )
+rotation = 1.5708
+
+[node name="Camera" parent="." instance=ExtResource( 31 )]
+position = Vector2( 896, -128 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( -256, 628 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Panel" parent="Node2D" instance=ExtResource( 30 )]
+position = Vector2( 260, 0 )
+initial_animation = "straight128-out"
+
+[node name="Panel2" parent="Node2D" instance=ExtResource( 30 )]
+position = Vector2( 132, 0 )
+initial_animation = "straight128-out"
+
+[node name="Panel4" parent="Node2D" instance=ExtResource( 30 )]
+position = Vector2( 4, 0 )
+initial_animation = "straight128-out"
+
+[node name="Panel3" parent="Node2D" instance=ExtResource( 30 )]
+position = Vector2( -124, 0 )
+initial_animation = "straight128-out"
+
+[node name="Panel6" parent="Node2D" instance=ExtResource( 30 )]
+position = Vector2( -252, 0 )
+initial_animation = "straight128-out"
+
+[node name="Panel5" parent="Node2D" instance=ExtResource( 30 )]
+position = Vector2( -380, 0 )
+initial_animation = "straight128-out"
+
+[node name="PortalSpawnerOrange" parent="." instance=ExtResource( 10 )]
+position = Vector2( -624, 192 )
+type = 1
+
+[node name="SpawnerPanel" parent="." instance=ExtResource( 30 )]
+position = Vector2( 384, 448 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="KinematicBody2D" parent="SpawnerPanel"]
+z_index = 6
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="SpawnerPanel/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 33 )
+region_enabled = true
+region_rect = Rect2( 1408, 640, 256, 24 )
+
+[node name="Sprite2" type="Sprite" parent="SpawnerPanel/PanelTransform"]
+position = Vector2( 192, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 33 )
+region_enabled = true
+region_rect = Rect2( 1408, 640, 256, 24 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerPanel/PanelTransform"]
+position = Vector2( 128, 6 )
+shape = SubResource( 5 )
+
+[node name="PortalSpawnerBlue" parent="SpawnerPanel/PanelTransform" instance=ExtResource( 10 )]
+position = Vector2( 128, 0 )
+rotation = -1.5708
+scale = Vector2( 1, -1 )
+
+[node name="Trigger1" type="Area2D" parent="."]
+position = Vector2( 480, 256 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger1"]
+shape = SubResource( 4 )
+
+[node name="TestchamberSign00" parent="." instance=ExtResource( 37 )]
+position = Vector2( -1024, 64 )
+start_on = false
+icons_type = [ 0, 12, 1 ]
+icons_on = [ true, true, true ]
+
+[node name="TestchamberSign01" parent="." instance=ExtResource( 37 )]
+position = Vector2( 3264, 256 )
+start_on = false
+number = 1
+icons_type = [ 0, 12, 1 ]
+icons_on = [ false, true, false ]
+
+[node name="PedestalButton10_s1" parent="." instance=ExtResource( 38 )]
+position = Vector2( 3424, 768 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="PedestalButton10_s2" parent="." instance=ExtResource( 38 )]
+position = Vector2( 3712, 768 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="PedestalButton10_s3" parent="." instance=ExtResource( 38 )]
+position = Vector2( 4000, 768 )
+scale = Vector2( -1, 1 )
+
+[node name="FloorButton01" parent="." instance=ExtResource( 12 )]
+position = Vector2( 3968, 1536 )
+
+[node name="CubeDropper01" parent="." instance=ExtResource( 13 )]
+position = Vector2( 3328, 1024 )
+initial_drop = true
+auto_drop = true
+object = ExtResource( 26 )
+auto_respawn = true
+
+[node name="IndicatorSign01" parent="." instance=ExtResource( 14 )]
+position = Vector2( 4576, 544 )
+
+[node name="PortalSpawner01_enter" parent="." instance=ExtResource( 10 )]
+position = Vector2( 3008, 640 )
+type = 1
+
+[node name="PortalSpawner01_s1" parent="." instance=ExtResource( 10 )]
+position = Vector2( 3008, 1408 )
+
+[node name="PortalSpawner01_s2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 3648, 1408 )
+
+[node name="PortalSpawner01_s3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 4224, 640 )
+
+[node name="IndicatorLights01" type="Node2D" parent="."]
+position = Vector2( 4000, 1536 )
+scale = Vector2( 0.25, 0.25 )
+z_index = 11
+script = ExtResource( 19 )
+
+[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 1280, -1280 )
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -768, 128, 1152 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 25 )
+
+[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 384, -128 )
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 896, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 25 )
+
+[node name="indicator-lights-strip-off5" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 1408, -1408 )
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1408, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 25 )
+
+[node name="indicator-lights-strip-off3" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 1280, -128 )
+texture = ExtResource( 16 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 20 )
+
+[node name="indicator-lights-strip-off4" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 1280, -1408 )
+texture = ExtResource( 16 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 20 )
+
+[node name="indicator-lights-strip-off6" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 2816, -1408 )
+texture = ExtResource( 16 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 20 )
+
+[node name="indicator-lights-strip-off7" type="Sprite" parent="IndicatorLights01"]
+position = Vector2( 2816, -3072 )
+texture = ExtResource( 17 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -768, 128, 1664 )
+script = ExtResource( 18 )
+texture_on = ExtResource( 25 )
+
+[node name="Light2D" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 448, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D2" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 576, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D3" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 704, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D4" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 832, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D5" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 960, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D6" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1088, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D7" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1216, -64 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D8" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -64 )
+texture = ExtResource( 24 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D11" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -192 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D12" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -320 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D13" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -448 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D14" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -576 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D18" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -704 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D17" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -832 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D16" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -960 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D15" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -1088 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D19" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -1216 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D20" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1344, -1344 )
+texture = ExtResource( 24 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D21" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1472, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D22" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1600, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D23" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1728, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D27" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1856, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D26" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 1984, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D25" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2112, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D24" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2240, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D31" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2368, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D30" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2496, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D29" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2624, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D28" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2752, -1344 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D32" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -1344 )
+texture = ExtResource( 24 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D33" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -1472 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D34" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -1600 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D35" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -1728 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D36" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -1856 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D41" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -1984 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D40" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2112 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D39" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2240 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D38" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2368 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D37" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2496 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D46" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2624 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D45" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2752 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D44" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -2880 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Light2D43" type="Light2D" parent="IndicatorLights01"]
+position = Vector2( 2880, -3008 )
+texture = ExtResource( 15 )
+energy = 1.2
+mode = 2
+range_z_min = 11
+range_z_max = 11
+
+[node name="Trigger01" type="Area2D" parent="."]
+position = Vector2( 3008, 288 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger01"]
+shape = SubResource( 4 )
+
+[node name="TestDoor01" parent="." instance=ExtResource( 11 )]
+position = Vector2( 4704, 768 )
+
+[node name="ElevatorLeave" parent="." instance=ExtResource( 39 )]
+position = Vector2( 6464, 960 )
+[connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
+[connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
+[connection signal="pressed" from="FloorButton" to="TestDoor2" method="open"]
+[connection signal="released" from="FloorButton" to="IndicatorLights" method="set_off"]
+[connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
+[connection signal="released" from="FloorButton" to="TestDoor2" method="close"]
+[connection signal="enter" from="Trigger2" to="TestDoor1" method="close" flags=6]
+[connection signal="enter" from="Trigger2" to="CubeDropper" method="timed_open" flags=6]
+[connection signal="enter" from="Trigger1" to="TestDoor1" method="open" flags=6]
+[connection signal="pressed" from="PedestalButton10_s1" to="PortalSpawner01_s1" method="activate"]
+[connection signal="pressed" from="PedestalButton10_s2" to="PortalSpawner01_s2" method="activate"]
+[connection signal="pressed" from="PedestalButton10_s3" to="PortalSpawner01_s3" method="activate"]
+[connection signal="pressed" from="FloorButton01" to="IndicatorSign01" method="set_on"]
+[connection signal="pressed" from="FloorButton01" to="IndicatorLights01" method="set_on"]
+[connection signal="pressed" from="FloorButton01" to="TestDoor01" method="open"]
+[connection signal="released" from="FloorButton01" to="IndicatorSign01" method="set_off"]
+[connection signal="released" from="FloorButton01" to="IndicatorLights01" method="set_off"]
+[connection signal="released" from="FloorButton01" to="TestDoor01" method="close"]
+[connection signal="enter" from="Trigger01" to="." method="force_close_portals" flags=6]
+[connection signal="enter" from="Trigger01" to="TestDoor2" method="close" flags=6]
+[connection signal="enter" from="Trigger01" to="TestchamberSign01" method="turn_on" flags=6]
+[connection signal="leave" from="Trigger01" to="PortalSpawner01_enter" method="activate" flags=6]

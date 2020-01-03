@@ -1,31 +1,55 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://shader/goo/Goo.tres" type="Material" id=1]
 [ext_resource path="res://textures/white.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/toxic-goo/ToxicGoo.gd" type="Script" id=3]
+[ext_resource path="res://sounds/valve_sounds/ToxicGoo_loop.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/valve_sounds/Water_splash_01.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 50, 50 )
+extents = Vector2( 0.5, 0.5 )
 
 [node name="ToxicGoo" type="Area2D"]
+space_override = 3
+gravity = 280.0
+linear_damp = 3.0
 collision_layer = 0
 collision_mask = 14
 script = ExtResource( 3 )
 
 [node name="GooSprite" type="Sprite" parent="."]
 material = ExtResource( 1 )
-scale = Vector2( 100, 100 )
-z_index = 10
+position = Vector2( 32, -32 )
+scale = Vector2( 64, 64 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
+position = Vector2( 32, -32 )
+scale = Vector2( 64, 64 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 32, -32 )
+scale = Vector2( 64, 64 )
 collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+
+[node name="GooSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 32, -64 )
+stream = ExtResource( 4 )
+volume_db = -5.0
+autoplay = true
+max_distance = 1000.0
+attenuation = 1.46409
+bus = "Reverb"
+
+[node name="SplashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+max_distance = 3000.0
+attenuation = 1.36604
+bus = "Panning"

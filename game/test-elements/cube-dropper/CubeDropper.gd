@@ -37,13 +37,13 @@ func _create_object():
         var instance = object.instance()
         instance.set_position(spawn_point.get_position())
         if auto_respawn:
-            instance.connect("tree_exiting", self, "spawn_new")
+            instance.connect("tree_exiting", self, "spawn_new", [true])
         current_object = instance
         add_child(instance)
 
 ## Public Methods ##
 
-func spawn_new():
+func spawn_new(destroyed = false):
     randomize()
     $Sound.set_stream(load(audio_streams[randi()%audio_streams.size()]))
     $Sound.play()
@@ -52,9 +52,11 @@ func spawn_new():
         first_dropped = true
     else:
         _create_object()
-        if auto_drop:
+        if auto_drop or not destroyed:
             yield(get_tree().create_timer(0.7), "timeout")
             timed_open()
+        elif destroyed:
+            first_dropped = false
 
 func open():
     lights.color = COLOR_ORANGE

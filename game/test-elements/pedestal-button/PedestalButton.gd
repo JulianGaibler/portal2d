@@ -1,16 +1,19 @@
 extends StaticBody2D
 
 onready var anim = $AnimationPlayer
+onready var sound = $Sound
 var timer
 
 signal pressed
 signal released
 
-func play_sound(source):
-    randomize()
-    var stream = load(source)
-    $Sound.set_stream(stream)
-    $Sound.play()
+const activate_sound = preload("res://sounds/valve_sounds/PedestalButton_positive.wav")
+const deactivate_sound = preload("res://sounds/valve_sounds/PedestalButton_negative.wav")
+
+
+func play_sound(activate):
+    sound.set_stream(activate_sound if activate else deactivate_sound)
+    sound.play()
 
 func _ready():
     timer = Timer.new()
@@ -22,10 +25,10 @@ func press():
     if !timer.is_stopped(): return
     anim.play("press-button")
     emit_signal("pressed")
-    play_sound("res://sounds/button/button1.wav")
+    play_sound(true)
     timer.start(1.5)
 
 func release():
     anim.play("release-button")
-    play_sound("res://sounds/button/button2.wav")
+    play_sound(false)
     emit_signal("released")

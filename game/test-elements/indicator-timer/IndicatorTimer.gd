@@ -2,6 +2,7 @@ extends Node2D
 
 onready var disc_shader: Material = $Disc.get_material()
 onready var background = $Background
+onready var sound = $TickTockSound
 
 export(float) var time
 var remaining = 0.0
@@ -15,6 +16,7 @@ func _ready():
 func start():
     emit_signal("started")    
     set_process(true)
+    sound.play()
     background.region_rect.position.x = 256
     remaining = time
     disc_shader.set_shader_param("progress", 0.0)  
@@ -51,6 +53,7 @@ func _process(delta):
 func stop():
     emit_signal("stopped")
     set_process(false)
+    sound.stop()
     remaining = null
     disc_shader.set_shader_param("progress", 1.0)  
     background.region_rect.position.x = 0

@@ -29,6 +29,9 @@ onready var progress_bar := $Overlay/Progress/Bar
 onready var progress_text := $Overlay/Progress/Text
 onready var icons_node := $Overlay/Icons
 
+onready var hum_audio := $HumAudio
+onready var flicker_audio := $FlickerAudio
+
 export(bool) var start_on = true
 export(int) var number = 0
 export(int) var max_number = 19
@@ -62,4 +65,11 @@ func _ready():
         animation_player.play("BindPose")
             
 func turn_on():
+    flicker_audio.play()
     animation_player.play("flicker-on")
+    yield(get_tree().create_timer(1.65), "timeout")
+    hum_audio.play()
+
+
+func close():
+    pass # Replace with function body.

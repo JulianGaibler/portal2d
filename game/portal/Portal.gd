@@ -11,7 +11,7 @@ enum PortalOrientation {UP = 0, DOWN = 1}
 ##
 # This is the hole that gets cut into the geometry
 const PORTAL_HEIGHT = 112
-const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, PORTAL_HEIGHT), Vector2(-96, -PORTAL_HEIGHT), Vector2(1, -PORTAL_HEIGHT), Vector2(1, PORTAL_HEIGHT)])
+const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, PORTAL_HEIGHT), Vector2(-96, -PORTAL_HEIGHT), Vector2(5, -PORTAL_HEIGHT), Vector2(5, PORTAL_HEIGHT)])
 const PORTAL_COLOR_BLUE = Color("079be1")
 const PORTAL_COLOR_ORANGE = Color("ff7d17")
 
@@ -41,6 +41,7 @@ onready var outer_area := $OuterArea
 onready var inner_area := $InnerArea
 onready var scan_area_front := $ScanAreaFront
 onready var scan_area_back := $ScanAreaBack
+onready var open_close_sound := $OpenCloseSound
 # Normal vector of this portal, pointing away from the entrance in global space
 var normal_vec
 # Direction Vector of the portal, pointing where up is in global space
@@ -49,15 +50,21 @@ var direction_vec
 var transformation_matrix
 
 const ambient_audio_streams = [
-    "res://sounds/portal/background-drone1.wav",
-    "res://sounds/portal/background-drone2.wav",
-    "res://sounds/portal/background-drone3.wav"
-    ]
+    preload("res://sounds/portal/background-drone1.wav"),
+    preload("res://sounds/portal/background-drone2.wav"),
+    preload("res://sounds/portal/background-drone3.wav")
+]
 
 const transition_audio_streams = [
-    "res://sounds/portal/transition1.wav",
-    "res://sounds/portal/transition2.wav"
-    ]
+    preload("res://sounds/portal/transition1.wav"),
+    preload("res://sounds/portal/transition2.wav")
+]
+
+const portal_spawner_open_audio_stream = preload("res://sounds/valve_sounds/Portal_open1.wav")
+const portal_gun_open_audio_streams = [
+    preload("res://sounds/valve_sounds/Portal_open2.wav"),
+    preload("res://sounds/valve_sounds/Portal_open3.wav")
+]
 
 func _ready():
     animation_player.play("closed_portal")
@@ -74,6 +81,13 @@ func initiate(type, orientation, fixed = false):
     animation_player.play("open_portal")
     
     play_ambient_sound()
+    
+    match fixed:
+        true: open_close_sound.set_stream(portal_spawner_open_audio_stream)
+        false:
+            randomize()
+            open_close_sound.set_stream(portal_gun_open_audio_streams[randi()%portal_gun_open_audio_streams.size()])
+    open_close_sound.play()
     
     # Calculate direction- and normal-vector
     normal_vec = Vector2.RIGHT.rotated(global_rotation)
@@ -109,12 +123,12 @@ func initiate(type, orientation, fixed = false):
 
 func play_ambient_sound():
     randomize()
-    var stream = load(ambient_audio_streams[randi()%ambient_audio_streams.size()])
+    var stream = ambient_audio_streams[randi()%ambient_audio_streams.size()]
     $AmbientSound.set_stream(stream)
 
 func play_transition_sound():
     randomize()
-    var stream = load(transition_audio_streams[randi()%transition_audio_streams.size()])
+    var stream = transition_audio_streams[randi()%transition_audio_streams.size()]
     $TransitionSound.set_stream(stream)
     $TransitionSound.play()
 
@@ -145,8 +159,7 @@ func link_portal(new_portal):
 
     for polygon in calculate_polygon(scan_area_back):
         var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-        for new_polygon1 in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT):
-            carved_polygons.append(new_polygon1)
+        carved_polygons.append(polygon2)
 
     # In addition to the local colliders that are copied in front of our portal, we also want to take
     # those from the other portal and place them behind ours in order to avoid collision glitches.
@@ -163,8 +176,9 @@ func link_portal(new_portal):
     var polygon_new = []
 
     for polygon in carved_polygons:
-        for new_polygon2 in Geometry.clip_polygons_2d(polygon, other_cutout):
-            polygon_new.append(new_polygon2)
+        for new_polygon1 in Geometry.clip_polygons_2d(polygon, PORTAL_CUTOUT):
+            for new_polygon2 in Geometry.clip_polygons_2d(new_polygon1, other_cutout):
+                polygon_new.append(new_polygon2)
             
     carved_polygons = polygon_new
 
@@ -229,10 +243,11 @@ func _physics_process(delta):
         
         var a = overlapped_body.global_position
         var d = global_position.dot(normal_vec)
+        var dist = global_position.distance_to(a)
         # This is the distance from the plane of the portal to the origin of the body
         var distance = -((d - a.dot(normal_vec)) / normal_vec.length())
         # If player/object is behind the portal (but not too far away), teleport them/it
-        if (distance < 0 and distance > -32):
+        if (distance < 0 and distance > -32 and dist < 122):
             teleport(overlapped_body)
                 
 

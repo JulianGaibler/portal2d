@@ -44,7 +44,7 @@ func _physics_process(delta):
     var root = Game.get_scene_root()
     var parent = root
     var new_first = null
-    
+    print("new_bridge")
     for hit in results:
         var bridge = LightBridge.instance()
         parent.add_child(bridge)
