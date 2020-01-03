@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://test-elements/turret/turret.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/turret/Turret.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://test-elements/turret/projectile.png" type="Texture" id=4]
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=5]
 [ext_resource path="res://test-elements/turret/turret-light.png" type="Texture" id=6]
+[ext_resource path="res://sounds/valve_sounds/turret_floor/turret_shooting.wav" type="AudioStream" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0
@@ -231,3 +232,14 @@ texture = ExtResource( 6 )
 texture_scale = 0.25
 energy = 1.1
 mode = 2
+
+[node name="GunAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+bus = "Reverb"
+
+[node name="VoiceAudio" type="AudioStreamPlayer2D" parent="."]
+bus = "Panning"
+
+[node name="MechanicsAudio" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+bus = "Reverb"

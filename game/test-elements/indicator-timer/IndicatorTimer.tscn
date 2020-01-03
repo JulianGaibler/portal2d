@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://test-elements/indicator-timer/timer-disc.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/indicator-timer/timer-background.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/indicator-timer/IndicatorTimer.gd" type="Script" id=3]
 [ext_resource path="res://textures/white.png" type="Texture" id=4]
+[ext_resource path="res://sounds/valve_sounds/IndicatorTimer_ticktock.wav" type="AudioStream" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -68,3 +69,9 @@ texture = ExtResource( 4 )
 mode = 2
 range_z_min = -1
 range_z_max = -1
+
+[node name="TickTockSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -5.0
+max_distance = 5000.0
+bus = "Panning"

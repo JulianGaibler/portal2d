@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://test-elements/test-door/test-door.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/test-door/test-door-light.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/test-door/TestDoor.gd" type="Script" id=3]
+[ext_resource path="res://sounds/valve_sounds/TestDoor_close.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/valve_sounds/TestDoor_open.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 3 )
@@ -70,3 +72,17 @@ collision_mask = 0
 shape = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="DoorOpenAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, -128 )
+stream = ExtResource( 5 )
+max_distance = 3000.0
+attenuation = 2.0
+bus = "Panning"
+
+[node name="DoorCloseAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, -128 )
+stream = ExtResource( 4 )
+max_distance = 3000.0
+attenuation = 2.0
+bus = "Panning"

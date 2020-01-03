@@ -351,3 +351,7 @@ bus = "Panning"
 stream = ExtResource( 6 )
 volume_db = -15.0
 bus = "Reverb"
+
+[node name="OpenCloseSound" type="AudioStreamPlayer2D" parent="."]
+attenuation = 2.14355
+bus = "Panning"

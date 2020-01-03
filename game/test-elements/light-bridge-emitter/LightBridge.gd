@@ -2,12 +2,15 @@ extends StaticBody2D
 
 onready var visual_line := $VisualLine
 onready var body_area := $BodyArea
+onready var audio := $AudioPlayer
 
 var child_bridge = null
 
 func set_line(from: Vector2, direction: Vector2, length: float):
     
     var to = from + (direction * length)
+    
+    audio.global_position = from
     
     visual_line.clear_points()
     visual_line.add_point(from)

@@ -5,13 +5,14 @@
 [ext_resource path="res://test-elements/redirection-cube/reflection-cube-lens.png" type="Texture" id=3]
 [ext_resource path="res://classes/LaserEmitting.gd" type="Script" id=4]
 
-[sub_resource type="PhysicsMaterial" id=5]
+[sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
+bounce = 0.1
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 41, 41 )
 
 [sub_resource type="Shader" id=4]
@@ -39,7 +40,7 @@ void fragment() {
     }
 }"
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
 
 [node name="RedirectionCube" type="RigidBody2D" groups=[
@@ -51,12 +52,12 @@ shader = SubResource( 4 )
 collision_layer = 66
 collision_mask = 66
 mass = 25.0
-physics_material_override = SubResource( 5 )
+physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="LaserDetection" type="Area2D" parent="."]
 visible = false
@@ -64,11 +65,11 @@ collision_layer = 0
 collision_mask = 1024
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserDetection"]
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="LensSprite" type="Sprite" parent="."]
 light_mask = 3
-material = SubResource( 8 )
+material = SubResource( 5 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 8, 368, 216, 216 )

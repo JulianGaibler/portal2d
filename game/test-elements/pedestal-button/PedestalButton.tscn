@@ -44,11 +44,9 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -80 )
 shape = SubResource( 1 )
-
-[node name="Sound" type="AudioStreamPlayer2D" parent="."]
-volume_db = 5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/press-button = SubResource( 2 )
@@ -67,3 +65,6 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 128, 256, 384 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+bus = "Reverb"

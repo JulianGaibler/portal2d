@@ -1,0 +1,226 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=2]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights.png" type="Texture" id=3]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=4]
+[ext_resource path="res://classes/TextureToggle.gd" type="Script" id=5]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=6]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner.png" type="Texture" id=7]
+[ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=8]
+
+[node name="IndicatorLights" type="Node2D"]
+position = Vector2( 1536, 448 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+script = ExtResource( 8 )
+
+[node name="indicator-lights-strip-off" type="Sprite" parent="."]
+position = Vector2( -128, -832 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -640, 128, 768 )
+script = ExtResource( 5 )
+texture_on = ExtResource( 2 )
+
+[node name="indicator-lights-strip-off2" type="Sprite" parent="."]
+position = Vector2( 0, -960 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 5 )
+texture_on = ExtResource( 2 )
+
+[node name="indicator-lights-strip-off3" type="Sprite" parent="."]
+position = Vector2( -128, -960 )
+texture = ExtResource( 6 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 5 )
+texture_on = ExtResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -64, -128 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( -64, -256 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D3" type="Light2D" parent="."]
+position = Vector2( -64, -384 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D4" type="Light2D" parent="."]
+position = Vector2( -64, -512 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D5" type="Light2D" parent="."]
+position = Vector2( -64, -640 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D6" type="Light2D" parent="."]
+position = Vector2( -64, -768 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D7" type="Light2D" parent="."]
+position = Vector2( 64, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D8" type="Light2D" parent="."]
+position = Vector2( 192, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D9" type="Light2D" parent="."]
+position = Vector2( 320, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D10" type="Light2D" parent="."]
+position = Vector2( 448, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D11" type="Light2D" parent="."]
+position = Vector2( 576, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D12" type="Light2D" parent="."]
+position = Vector2( 704, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D13" type="Light2D" parent="."]
+position = Vector2( 832, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D14" type="Light2D" parent="."]
+position = Vector2( 960, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D15" type="Light2D" parent="."]
+position = Vector2( 1088, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D16" type="Light2D" parent="."]
+position = Vector2( 1216, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D17" type="Light2D" parent="."]
+position = Vector2( 1344, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D18" type="Light2D" parent="."]
+position = Vector2( 1472, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D19" type="Light2D" parent="."]
+position = Vector2( 1600, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D20" type="Light2D" parent="."]
+position = Vector2( 1728, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D21" type="Light2D" parent="."]
+position = Vector2( 1856, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D22" type="Light2D" parent="."]
+position = Vector2( 1984, -896 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5
+
+[node name="Light2D23" type="Light2D" parent="."]
+position = Vector2( -64, -896 )
+texture = ExtResource( 7 )
+energy = 1.2
+mode = 2
+range_z_min = -5
+range_z_max = -5

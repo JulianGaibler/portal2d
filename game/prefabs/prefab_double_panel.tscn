@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=1]
+[ext_resource path="res://test-elements/panel/Panel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://test-elements/panel/panel.png" type="Texture" id=3]
+[ext_resource path="res://test-elements/panel/detached-panel.png" type="Texture" id=4]
+[ext_resource path="res://tileset/tiles.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 6 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PanelStopper" parent="." instance=ExtResource( 2 )]
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="PanelStopper"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelStopper/PanelTransform"]
+position = Vector2( 128, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="PanelStopper/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="tiles2" type="Sprite" parent="PanelStopper/PanelTransform"]
+position = Vector2( 192, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="detached-panel" type="Sprite" parent="PanelStopper/PanelTransform"]
+position = Vector2( 192, 28 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="PanelLights" type="Sprite" parent="PanelStopper/PanelTransform"]
+material = ExtResource( 1 )
+position = Vector2( 240, 36 )
+rotation = -3.14159
+scale = Vector2( 0.25, -0.25 )
+texture = ExtResource( 3 )
+offset = Vector2( 192, -44 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 408, 520, 528, 104 )

@@ -12,10 +12,12 @@ const live_regeneration_rate = 50
 
 # portal gun node detection
 onready var portalgun := $PortalGun
-onready var gravitygun := $GravityGun
-onready var gravitygun_holding := $GravityGunHolding
-onready var landing := $Feet/Landing
-onready var feet := $Feet
+onready var gravitygun_sound := $GravityGunSound
+onready var gravitygun_holding_sound := $GravityGunHoldingSound
+onready var landing_sound := $LandingSound
+onready var walking_sound := $WalkingSound
+onready var falling_sound := $FallingSound
+onready var tween := $Tween
 
 const FLOOR_NORMAL = Vector2.UP
 const WALK_SPEED = 25 # pixels/sec
@@ -26,21 +28,28 @@ var PUSH = 1000
 var linear_velocity = Vector2()
 var held_object = null
 
-var grav_gun_audio_streams = ["res://sounds/gravity-gun/lift1.wav",
-                              "res://sounds/gravity-gun/lift2.wav",
-                              "res://sounds/gravity-gun/lift3.wav"
-                             ]
+var was_on_floor = true
+var walk_timer = 0.0
 
-const collision_audio_streams = ["res://sounds/jump-landing/jump1.wav",
-                                 "res://sounds/jump-landing/jump2.wav",
-                                 "res://sounds/jump-landing/jump3.wav"
-                                ]
+var grav_gun_audio_streams = [
+    preload("res://sounds/gravity-gun/lift1.wav"),
+    preload("res://sounds/gravity-gun/lift2.wav"),
+    preload("res://sounds/gravity-gun/lift3.wav")
+]
+
+const collision_audio_streams = [
+    preload("res://sounds/jump-landing/jump1.wav"),
+    preload("res://sounds/jump-landing/jump2.wav"),
+    preload("res://sounds/jump-landing/jump3.wav")
+]
+const walking_audio_streams = [
+    preload("res://sounds/valve_sounds/Player_walk_01.wav"),
+    preload("res://sounds/valve_sounds/Player_walk_02.wav"),
+    preload("res://sounds/valve_sounds/Player_walk_03.wav")
+]
 
 # portalgun orientation in degree
 var deg = 0
-
-func _ready():
-    feet.connect("body_entered", self, "_on_collision")
 
 func _physics_process(delta):
     
@@ -87,6 +96,27 @@ func _physics_process(delta):
     
     # Detect if we are on floor - only works if called *after* move_and_slide
     var on_floor = is_on_floor()
+    
+    if on_floor and !was_on_floor:
+        play_colliding_sound()
+        falling_sound.stop()
+    elif !on_floor and was_on_floor:
+        falling_sound.play()
+
+    if !on_floor:
+        # falling_sound.volume_db
+        var falling_speed = clamp(abs(linear_velocity.length()), 0, 1600)
+        var y = -40 + 0.000012*pow(falling_speed,2)
+        falling_sound.volume_db = y
+        
+    var side_speed = abs(linear_velocity.x)
+    if on_floor and side_speed > 10:
+        if walk_timer < 0.0:
+            walk_timer = 0.3
+            play_footstep_sound()
+        else:
+            walk_timer -= delta
+            
 
     # Rotating
     if (rotation_degrees == 0):
@@ -94,8 +124,8 @@ func _physics_process(delta):
     elif (rotation_degrees < 1 && rotation_degrees > -1):
         rotate(-rotation)
     else:
-        var x = min(linear_velocity.x, 2500)/2500
-        var y = 0.147 - 0.177*x + 0.057*pow(x,2)
+        var x = abs(min(linear_velocity.x, 2500)/2500)
+        var y = min(0.9, pow(x+0.94, -20) + 0.03)
         rotate(lerp(0, -rotation, y))
 
     var target_speed = 0
@@ -107,34 +137,39 @@ func _physics_process(delta):
         linear_velocity = linear_velocity.rotated(FLOOR_NORMAL.angle_to(-gravity_n))
         # Horizontal movement
         if Input.is_action_pressed("move_left"):
-            if !target_speed == -WALK_SPEED:
-                target_speed -= 25
+            if !target_speed == -1:
+                target_speed -= 1
         if Input.is_action_pressed("move_right"):
-            if !target_speed == WALK_SPEED:
-                target_speed += 25
-        if abs(target_speed) > WALK_SPEED:
+            if !target_speed == 1:
+                target_speed += 1
+        if abs(target_speed) > 1:
             if target_speed < 0:
-                target_speed = -WALK_SPEED
+                target_speed = -1
             else:
-                target_speed = WALK_SPEED
-        target_speed *= WALK_SPEED
+                target_speed = 1
     
     if on_floor:
+        target_speed *= WALK_SPEED * WALK_SPEED
         linear_velocity.x = lerp(linear_velocity.x, target_speed, 0.2)
     else:
-        linear_velocity.x = lerp(linear_velocity.x, linear_velocity.x + target_speed/25, 0.2)
+        var velocity = 275 - clamp(abs(linear_velocity.x), 0, 250)
+        linear_velocity.x = lerp(linear_velocity.x, linear_velocity.x + (target_speed * velocity), 0.2)
     
     # Jumping
     if !dead and on_floor and Input.is_action_just_pressed("move_jump"):
         linear_velocity.y = -JUMP_SPEED
 
     linear_velocity = linear_velocity.rotated(-FLOOR_NORMAL.angle_to(-gravity_n))
+    was_on_floor = on_floor
 
 func _input(event):
     if dead: return
     
-    if Input.is_action_just_pressed("take_damage"):
-        take_damage(20)
+    if Input.is_action_just_pressed("rotate"):
+        if held_object != null:
+            held_object.angular_velocity = 0.0
+            tween.interpolate_property(held_object, "rotation_degrees", held_object.rotation_degrees, held_object.rotation_degrees+90, 0.4, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+            tween.start()
     
     if Input.is_action_just_pressed("interact"):
         # If the player is already holding something, they let it go
@@ -153,6 +188,9 @@ func _input(event):
         if !result.empty():
             if result.collider.is_in_group("can-press"): result.collider.press()
             elif result.collider.is_in_group("can-pickup"): hold_object(result.collider)
+
+    if Input.is_action_just_pressed("portal_ray"):
+        if portalgun: portalgun.toggle_hint()
 
     # handling if the portal gun is shot
     if event.is_action_pressed("shoot_blue_portal"):
@@ -186,9 +224,9 @@ func hold_object(collider):
     if held_object.has_method("picked_up"): held_object.picked_up(true)
     held_object.connect("fizzled", self, "release_object")
     randomize()
-    gravitygun.set_stream(load(grav_gun_audio_streams[randi()%grav_gun_audio_streams.size()]))
-    gravitygun.play()
-    gravitygun_holding.play()
+    gravitygun_sound.set_stream(grav_gun_audio_streams[randi()%grav_gun_audio_streams.size()])
+    gravitygun_sound.play()
+    gravitygun_holding_sound.play()
     
 func release_object():
     held_object.disconnect("fizzled", self, "release_object")
@@ -196,7 +234,7 @@ func release_object():
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null
-    gravitygun_holding.stop()
+    gravitygun_holding_sound.stop()
     
 func take_damage(amount):
     health -= amount
@@ -212,8 +250,13 @@ func _on_collision(body):
 
 func play_colliding_sound():
     randomize()
-    landing.set_stream(load(collision_audio_streams[randi()%collision_audio_streams.size()]))
-    landing.play()
+    landing_sound.set_stream(collision_audio_streams[randi()%collision_audio_streams.size()])
+    landing_sound.play()
+
+func play_footstep_sound():
+    randomize()
+    walking_sound.set_stream(walking_audio_streams[randi()%walking_audio_streams.size()])
+    walking_sound.play()
 
 func die():
     if dead: return
