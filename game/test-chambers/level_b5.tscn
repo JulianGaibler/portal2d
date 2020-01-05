@@ -285,12 +285,12 @@ only_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_3"]
 shape = SubResource( 2 )
+[connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="TestDoor_2" method="open"]
 [connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
-[connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
+[connection signal="released" from="FloorButton" to="IndicatorLights" method="set_off"]
 [connection signal="released" from="FloorButton" to="TestDoor_2" method="close"]
 [connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
-[connection signal="released" from="FloorButton" to="IndicatorLights" method="set_off"]
 [connection signal="enter" from="TriggerArea_1" to="TestDoor_1" method="open" flags=6]
 [connection signal="enter" from="TriggerArea_2" to="TestchamberSign" method="turn_on" flags=6]
 [connection signal="enter" from="TriggerArea_3" to="TestDoor_1" method="close" flags=6]

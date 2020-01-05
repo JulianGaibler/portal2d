@@ -124,7 +124,7 @@ script = ExtResource( 7 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 1536, 0, 768, 1536 )
+region_rect = Rect2( 2304, 0, 768, 1536 )
 
 [node name="Overlay" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.85098 )
@@ -148,7 +148,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 192, 576 )
 
 [node name="Progress" type="Node2D" parent="Overlay"]
-visible = false
 
 [node name="Bar" type="Sprite" parent="Overlay/Progress"]
 position = Vector2( -56, 26 )
@@ -174,7 +173,6 @@ __meta__ = {
 }
 
 [node name="Icons" type="Node2D" parent="Overlay"]
-visible = false
 modulate = Color( 1, 1, 1, 0.901961 )
 position = Vector2( -56.5, 79.5 )
 scale = Vector2( 0.25, 0.25 )

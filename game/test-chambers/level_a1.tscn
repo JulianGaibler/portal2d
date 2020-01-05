@@ -518,7 +518,7 @@ shape = SubResource( 4 )
 position = Vector2( 2080, 224 )
 
 [node name="Player" parent="." instance=ExtResource( 21 )]
-position = Vector2( 482, 354 )
+position = Vector2( -149.824, 279.179 )
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 position = Vector2( -0.606995, -96 )
@@ -1158,12 +1158,12 @@ position = Vector2( 4704, 768 )
 
 [node name="ElevatorLeave" parent="." instance=ExtResource( 39 )]
 position = Vector2( 6464, 960 )
+[connection signal="pressed" from="FloorButton" to="TestDoor2" method="open"]
 [connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
-[connection signal="pressed" from="FloorButton" to="TestDoor2" method="open"]
+[connection signal="released" from="FloorButton" to="TestDoor2" method="close"]
 [connection signal="released" from="FloorButton" to="IndicatorLights" method="set_off"]
 [connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
-[connection signal="released" from="FloorButton" to="TestDoor2" method="close"]
 [connection signal="enter" from="Trigger2" to="TestDoor1" method="close" flags=6]
 [connection signal="enter" from="Trigger2" to="CubeDropper" method="timed_open" flags=6]
 [connection signal="enter" from="Trigger1" to="TestDoor1" method="open" flags=6]
