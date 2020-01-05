@@ -71,7 +71,7 @@ func _physics_process(delta):
         var to = origin + (direction * 150)
 
         var dist = held_object.global_transform.origin.distance_to(to)
-        if dist > 200: release_object()
+        if dist > 500: release_object()
         else:
             held_object.linear_velocity = linear_velocity
             held_object.apply_central_impulse((to - held_object.global_transform.origin).normalized() * to.distance_to(held_object.global_transform.origin) * 150)
@@ -168,7 +168,7 @@ func _input(event):
     if Input.is_action_just_pressed("rotate"):
         if held_object != null:
             held_object.angular_velocity = 0.0
-            tween.interpolate_property(held_object, "rotation_degrees", held_object.rotation_degrees, held_object.rotation_degrees+90, 0.4, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+            tween.interpolate_property(held_object, "rotation_degrees", held_object.rotation_degrees, held_object.rotation_degrees+90, 0.1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
             tween.start()
     
     if Input.is_action_just_pressed("interact"):
@@ -223,6 +223,8 @@ func hold_object(collider):
     held_object.gravity_scale = 0
     if held_object.has_method("picked_up"): held_object.picked_up(true)
     held_object.connect("fizzled", self, "release_object")
+    collider.add_collision_exception_with(self)
+    self.add_collision_exception_with(collider)
     randomize()
     gravitygun_sound.set_stream(grav_gun_audio_streams[randi()%grav_gun_audio_streams.size()])
     gravitygun_sound.play()
@@ -231,6 +233,8 @@ func hold_object(collider):
 func release_object():
     held_object.disconnect("fizzled", self, "release_object")
     if held_object.has_method("picked_up"): held_object.picked_up(false)
+    held_object.remove_collision_exception_with(self)
+    self.remove_collision_exception_with(held_object)
     held_object.gravity_scale = 1
     held_object.linear_velocity = linear_velocity
     held_object = null
