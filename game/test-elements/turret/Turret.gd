@@ -68,6 +68,7 @@ func _physics_process(delta):
 func fizzle():
     go_dead(false)
     play_voice_audio(audio_voice_fizzler)
+    set_process(true)
     .fizzle()
 
 func play_mechanics_audio(resource):

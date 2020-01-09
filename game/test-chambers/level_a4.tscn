@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://test-elements/toxic-goo/ToxicGoo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
@@ -40,19 +40,22 @@
 extents = Vector2( 64, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 192, 64 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 128, 6 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 30 )
 shader_param/bright_amount = 1.25
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 128, 16 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 128, 6 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 64, 128 )
 
 [node name="Level" type="Node2D"]
@@ -118,6 +121,7 @@ max_zoom = 6.0
 
 [node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 0, -80 )
+allow_secondary = false
 
 [node name="PedestalButton_1" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2208, 1792 )
@@ -161,9 +165,6 @@ position = Vector2( 4000, 1376 )
 
 [node name="Stairs" type="Node2D" parent="."]
 position = Vector2( 2688, 1792 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Panel1" parent="Stairs" instance=ExtResource( 13 )]
 
@@ -218,6 +219,15 @@ texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 1408, 664, 256, 24 )
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Stairs"]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs/StaticBody2D"]
+position = Vector2( 192, 64 )
+shape = SubResource( 2 )
+
 [node name="PanelStopper" parent="." instance=ExtResource( 13 )]
 position = Vector2( 1664, 1792 )
 scale = Vector2( -1, 1 )
@@ -228,7 +238,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PanelStopper/PanelTransform"]
 position = Vector2( 128, 6 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="tiles" type="Sprite" parent="PanelStopper/PanelTransform"]
 position = Vector2( 64, 6 )
@@ -261,7 +271,7 @@ region_enabled = true
 region_rect = Rect2( 408, 520, 528, 104 )
 
 [node name="IndicatorLights_1" type="Node2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 2176, 1792 )
 scale = Vector2( 0.25, 0.25 )
 z_index = -5
@@ -297,7 +307,7 @@ script = ExtResource( 26 )
 texture_on = ExtResource( 29 )
 
 [node name="IndicatorLights_2" type="Node2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 3232, 1600 )
 scale = Vector2( 0.25, 0.25 )
 z_index = 10
@@ -371,7 +381,7 @@ script = ExtResource( 26 )
 texture_on = ExtResource( 29 )
 
 [node name="IndicatorLights_3" type="Node2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 3456, 1472 )
 scale = Vector2( 0.25, 0.25 )
 z_index = -5
@@ -483,7 +493,7 @@ script = ExtResource( 26 )
 texture_on = ExtResource( 29 )
 
 [node name="IndicatorLights_4" type="Node2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 2592, 1792 )
 scale = Vector2( 0.25, 0.25 )
 z_index = 10
@@ -519,7 +529,7 @@ script = ExtResource( 26 )
 texture_on = ExtResource( 29 )
 
 [node name="IndicatorLights_5" type="Node2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 3872, 1568 )
 scale = Vector2( 0.25, 0.25 )
 z_index = -5
@@ -572,7 +582,7 @@ texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform_1/StaticBody2D"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Platform_1" groups=[
 "white_layer",
@@ -597,7 +607,7 @@ region_rect = Rect2( 1408, 640, 256, 24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform_1/StaticBody2D2"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Platform_2" type="Node2D" parent="."]
 position = Vector2( 2656, 1088 )
@@ -617,7 +627,7 @@ texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform_2/StaticBody2D"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Platform_2" groups=[
 "white_layer",
@@ -642,7 +652,7 @@ region_rect = Rect2( 1408, 640, 256, 24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform_2/StaticBody2D2"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="PortalSpawner" parent="Platform_2" instance=ExtResource( 8 )]
 rotation = -1.5708
@@ -673,7 +683,7 @@ __meta__ = {
 only_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="GlassLightCover" parent="." instance=ExtResource( 35 )]
 position = Vector2( 2976, 448 )
@@ -699,8 +709,8 @@ rotation = 1.5708
 [node name="GlassLightCover9" parent="." instance=ExtResource( 35 )]
 position = Vector2( 2048, 1504 )
 rotation = 1.5708
-[connection signal="pressed" from="PedestalButton_1" to="CubeDropper_1" method="spawn_new"]
 [connection signal="pressed" from="PedestalButton_1" to="IndicatorLights_1" method="set_on"]
+[connection signal="pressed" from="PedestalButton_1" to="CubeDropper_1" method="spawn_new"]
 [connection signal="released" from="PedestalButton_1" to="IndicatorLights_1" method="set_off"]
 [connection signal="pressed" from="PedestalButton_2" to="IndicatorLights_2" method="set_on"]
 [connection signal="pressed" from="PedestalButton_2" to="IndicatorTimer" method="start"]
@@ -716,11 +726,11 @@ rotation = 1.5708
 [connection signal="released" from="FloorButton_1" to="Stairs/Panel3" method="play_animation_rev" binds= [ "stairs-right-3-out" ]]
 [connection signal="released" from="FloorButton_1" to="IndicatorLights_4" method="set_off"]
 [connection signal="released" from="FloorButton_1" to="Stairs/Panel1" method="play_animation_rev" binds= [ "stairs-right-1-out" ]]
-[connection signal="pressed" from="FloorButton_2" to="IndicatorLights_5" method="set_on"]
 [connection signal="pressed" from="FloorButton_2" to="TestDoor" method="open"]
+[connection signal="pressed" from="FloorButton_2" to="IndicatorLights_5" method="set_on"]
 [connection signal="pressed" from="FloorButton_2" to="IndicatorSign" method="set_on"]
-[connection signal="released" from="FloorButton_2" to="IndicatorLights_5" method="set_off"]
 [connection signal="released" from="FloorButton_2" to="TestDoor" method="close"]
+[connection signal="released" from="FloorButton_2" to="IndicatorLights_5" method="set_off"]
 [connection signal="released" from="FloorButton_2" to="IndicatorSign" method="set_off"]
 [connection signal="started" from="IndicatorTimer" to="PanelStopper" method="play_animation" binds= [ "corder-90-left-out" ]]
 [connection signal="stopped" from="IndicatorTimer" to="PanelStopper" method="play_animation_rev" binds= [ "corder-90-left-out" ]]

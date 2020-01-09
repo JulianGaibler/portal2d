@@ -23,7 +23,7 @@ extents = Vector2( 46.7656, 47.9829 )
 ]]
 collision_layer = 66
 collision_mask = 2
-mass = 25.0
+mass = 35.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 

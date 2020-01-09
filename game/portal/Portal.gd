@@ -247,7 +247,7 @@ func _physics_process(delta):
         # This is the distance from the plane of the portal to the origin of the body
         var distance = -((d - a.dot(normal_vec)) / normal_vec.length())
         # If player/object is behind the portal (but not too far away), teleport them/it
-        if (distance < 0 and distance > -32 and dist < 122):
+        if (distance < 0 and distance > -64 and dist < 122):
             teleport(overlapped_body)
                 
 
