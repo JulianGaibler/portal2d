@@ -96,6 +96,7 @@ teleport_to_elevator = NodePath("../Player")
 
 [node name="ElevatorLeave" parent="." instance=ExtResource( 34 )]
 position = Vector2( 8000, 1344 )
+load_level = "res://test-chambers/level_b1.tscn"
 
 [node name="Player" parent="." instance=ExtResource( 21 )]
 position = Vector2( -992, 2992 )
@@ -548,13 +549,13 @@ position = Vector2( 4832, 832 )
 [connection signal="released" from="FloorButton_1" to="TestDoor_2" method="close"]
 [connection signal="released" from="FloorButton_1" to="IndicatorSign_1" method="set_off"]
 [connection signal="released" from="FloorButton_1" to="IndicatorLights_1" method="set_off"]
+[connection signal="pressed" from="FloorButton_2" to="TestDoor_4" method="open"]
 [connection signal="pressed" from="FloorButton_2" to="IndicatorSign_2" method="set_on"]
 [connection signal="pressed" from="FloorButton_2" to="PanelStopper" method="play_animation" binds= [ "corder-90-left-out" ]]
-[connection signal="pressed" from="FloorButton_2" to="TestDoor_4" method="open"]
 [connection signal="pressed" from="FloorButton_2" to="IndicatorLights_2" method="set_on"]
+[connection signal="released" from="FloorButton_2" to="TestDoor_4" method="close"]
 [connection signal="released" from="FloorButton_2" to="IndicatorSign_2" method="set_off"]
 [connection signal="released" from="FloorButton_2" to="PanelStopper" method="play_animation_rev" binds= [ "corder-90-left-out" ]]
-[connection signal="released" from="FloorButton_2" to="TestDoor_4" method="close"]
 [connection signal="released" from="FloorButton_2" to="IndicatorLights_2" method="set_off"]
 [connection signal="enter" from="Area2D_1" to="TestDoor_1" method="open" flags=6]
 [connection signal="enter" from="Area2D_2" to="PortalSpawner_1" method="activate" flags=6]
