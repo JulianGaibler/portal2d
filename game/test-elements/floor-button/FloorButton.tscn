@@ -33,6 +33,7 @@ region_rect = Rect2( 0, 0, 1024, 96 )
 [node name="ButtonSprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 scale = Vector2( 0.25, 0.25 )
+z_index = 11
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 1024, 128 )

@@ -516,18 +516,18 @@ visible = false
 position = Vector2( 0, -80 )
 allow_primary = false
 allow_secondary = false
-[connection signal="enter" from="Area2D02_a1" to="TestchamberSign02" method="turn_on" flags=6]
 [connection signal="enter" from="Area2D02_a1" to="PortalSpawner02_s1" method="activate" flags=6]
+[connection signal="enter" from="Area2D02_a1" to="TestchamberSign02" method="turn_on" flags=6]
 [connection signal="enter" from="Area2D02_a2" to="." method="activate_portalgun" flags=6]
 [connection signal="enter" from="Area2D02_a3" to="PortalSpawner02_s2" method="activate" flags=6]
-[connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel1" method="play_animation" flags=6 binds= [ "stairs-left-4-out" ]]
 [connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel4" method="play_animation" flags=6 binds= [ "stairs-left-1-out" ]]
-[connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
 [connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel2" method="play_animation" flags=6 binds= [ "stairs-left-3-out" ]]
-[connection signal="enter" from="Area2D03_a3" to="PortalSpawner03" method="activate" flags=6]
+[connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel1" method="play_animation" flags=6 binds= [ "stairs-left-4-out" ]]
+[connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
 [connection signal="enter" from="Area2D03_a3" to="TestDoor02" method="close" flags=6]
+[connection signal="enter" from="Area2D03_a3" to="PortalSpawner03" method="activate" flags=6]
 [connection signal="enter" from="Area2D03_a4" to="TestchamberSign03" method="turn_on"]
+[connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
 [connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel1" method="play_animation" flags=6 binds= [ "stairs-left-4-out" ]]
 [connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel2" method="play_animation" flags=6 binds= [ "stairs-left-3-out" ]]
-[connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
 [connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel4" method="play_animation" flags=6 binds= [ "stairs-left-1-out" ]]

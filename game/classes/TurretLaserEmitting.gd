@@ -46,7 +46,7 @@ func _physics_process(delta):
         parent.add_child(laser)
         if parent == self: new_first = laser
         parent = laser
-        if !hit.position: break
+        if hit.empty() or hit.empty: break
         var curr_direction = (hit.position - hit.from).normalized()
         var to = to_local(hit.from) + (curr_direction * 10000) if hit.empty else to_local(hit.from + (curr_direction * (hit.from.distance_to(hit.position) + 15.0)))
         laser.set_line(to_local(hit.from), to)

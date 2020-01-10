@@ -23,10 +23,10 @@ func _ready_deferred():
     if initial_animation:
         animationPlayer.play(initial_animation, -1, 0, true)
 
-func play_animation(name, delay = 0.0):
+func play_animation(name, delay = 0.0, speed = 1.0):
     if delay > 0.0:yield(get_tree().create_timer(delay), "timeout")
-    animationPlayer.play(name)
+    animationPlayer.play(name, -1, speed, false)
 
-func play_animation_rev(name, delay = 0.0):
+func play_animation_rev(name, delay = 0.0, speed = 1.0):
     if delay > 0.0:yield(get_tree().create_timer(delay), "timeout")
-    animationPlayer.play_backwards(name)
+    animationPlayer.play(name, -1, -speed, true)

@@ -985,6 +985,7 @@ position = Vector2( 191.285, -143.688 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/BindPose = SubResource( 2 )
 anims/corder-90-180-left-idle = SubResource( 3 )
 anims/corder-90-180-left-out = SubResource( 4 )
