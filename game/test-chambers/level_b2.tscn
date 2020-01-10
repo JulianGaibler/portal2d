@@ -139,6 +139,7 @@ teleport_to_elevator = NodePath("../Player")
 
 [node name="ElevatorLeave" parent="." instance=ExtResource( 16 )]
 position = Vector2( 7040, 2496 )
+load_level = "res://test-chambers/level_b3.tscn"
 
 [node name="TestDoor_1" parent="." instance=ExtResource( 24 )]
 position = Vector2( 480, 2304 )
@@ -365,14 +366,14 @@ only_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_4"]
 shape = SubResource( 3 )
-[connection signal="pressed" from="FloorButton" to="IndicatorLights_2" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
+[connection signal="pressed" from="FloorButton" to="IndicatorLights_2" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="TestDoor_2" method="open"]
-[connection signal="released" from="FloorButton" to="IndicatorLights_2" method="set_off"]
 [connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
+[connection signal="released" from="FloorButton" to="IndicatorLights_2" method="set_off"]
 [connection signal="released" from="FloorButton" to="TestDoor_2" method="close"]
-[connection signal="pressed" from="PedestalButton" to="IndicatorLights_1" method="set_on"]
 [connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]
+[connection signal="pressed" from="PedestalButton" to="IndicatorLights_1" method="set_on"]
 [connection signal="released" from="PedestalButton" to="IndicatorLights_1" method="set_off"]
 [connection signal="enter" from="TriggerArea_1" to="TestDoor_1" method="open" flags=6]
 [connection signal="enter" from="TriggerArea_2" to="TestchamberSign" method="turn_on" flags=6]

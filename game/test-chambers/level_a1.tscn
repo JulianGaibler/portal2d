@@ -1159,6 +1159,8 @@ position = Vector2( 4704, 768 )
 
 [node name="ElevatorLeave" parent="." instance=ExtResource( 39 )]
 position = Vector2( 6464, 960 )
+load_level = "res://test-chambers/level_a2.tscn"
+
 [connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="TestDoor2" method="open"]
