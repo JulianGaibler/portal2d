@@ -1,36 +1,33 @@
-extends Panel
+extends ColorRect
 
-var button_Resume
-var button_MainMenu
-var button_ExitApplication
+onready var sign_flicker_audio := $TestchamberSign/FlickerAudio
+onready var sign_animation_player := $TestchamberSign/AnimationPlayer
 
 func _ready():
-    button_Resume = get_node("ButtonResume")
-    button_Resume.connect("pressed", self, "resume_Game")  
-      
-    button_MainMenu = get_node("ButtonMainMenu")
-    button_MainMenu.connect("pressed", self, "load_MainMenu")   
-     
-    button_ExitApplication = get_node("ButtonExitGame")
-    button_ExitApplication.connect("pressed", self, "exit_Application")
+    self.hide()
 
 func _input(event):
     if event.is_action_pressed("ui_cancel"):
-        if(get_tree().paused == false):
-            get_tree().paused = true
-            self.show()
-        else:
-            get_tree().paused = false
-            self.hide()
+        if Game.is_in_main_menu(): return
+        if(get_tree().paused == false): pause_game()
+        else: resume_Game()
         
 
+func pause_game():
+    flicker_change()
+    get_tree().paused = true
+    self.show()
+
 func resume_Game():
+    sign_flicker_audio.stop()
     get_tree().paused = false
     self.hide()
-    
-func load_MainMenu():
-    get_tree().paused = false
-    Game.goto_scene("res://menus/MainMenu.tscn") 
-    
-func exit_Application():
-    get_tree().quit() 
+
+func flicker_change():
+    sign_animation_player.play("flicker_change")
+    sign_flicker_audio.play(1.0)
+
+func menu_off():
+    resume_Game()
+    sign_animation_player.play("flicker-off")
+    sign_flicker_audio.play(1.5)
