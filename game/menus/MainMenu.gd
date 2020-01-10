@@ -1,24 +1,46 @@
 extends Node2D
 
-var button_Start
-var button_Settings
-var button_Exit
+onready var sign_flicker_audio := $TestchamberSign/FlickerAudio
+onready var sign_animation_player := $TestchamberSign/AnimationPlayer
+onready var sign_hum_audio := $TestchamberSign/HumAudio
+onready var spawn_point := $ObjectSpawn
+
+var instance = null
+var next_item = 0
+const item = [
+    preload("res://test-elements/weighted-cube/Weighted Cube.tscn"),
+    preload("res://test-elements/turret/TurretLeft.tscn"),
+    preload("res://props/radio/Radio.tscn"),
+    preload("res://test-elements/redirection-cube/RedirectionCube.tscn"),
+]
 
 func _ready():
-    button_Start = get_node("Background/Button_Start")
-    button_Settings = get_node("Background/Button_Settings")    
-    button_Exit = get_node("Background/Button_Exit")    
+    randomize()
+    next_item = randi()%item.size()
+    sign_animation_player.play("BindPose")
+    object_loop()
+    yield(get_tree().create_timer(1), "timeout")
+    sign_flicker_audio.play()
+    sign_animation_player.play("flicker-on")
+    yield(get_tree().create_timer(1.65), "timeout")
+    sign_hum_audio.play()
     
-    button_Start.connect("pressed", self, "load_FirstScene")
-    button_Settings.connect("pressed", self, "show_Settings") 
-    button_Exit.connect("pressed", self, "exit_Game") 
+
+
+func object_loop():
+    instance = item[next_item].instance()
+    next_item = int(fmod(next_item + 1, item.size()))
+    add_child(instance)
+    instance.position += spawn_point.position
+    yield(get_tree().create_timer(15), "timeout")
+    instance.fizzle()
+    instance.apply_central_impulse(Vector2(0, 300))
+    object_loop()
     
-func load_FirstScene():
-    print("Loading first scene")
-    Game.goto_scene("res://World.tscn")       
+func animate_menu_flicker():
+    sign_animation_player.play("flicker_change")
+    sign_flicker_audio.play(1.0)
     
-func show_Settings():
-    print("Showing Settings") 
-    
-func exit_Game():
-    get_tree().quit() 
+func animate_menu_off():
+    sign_animation_player.play("flicker-off")
+    sign_flicker_audio.play(1.5)

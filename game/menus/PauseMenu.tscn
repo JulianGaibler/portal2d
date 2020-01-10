@@ -11,10 +11,14 @@ default_font = ExtResource( 2 )
 [node name="PausePopup" type="Panel" parent="."]
 pause_mode = 2
 visible = false
-margin_left = 250.0
-margin_top = 200.0
-margin_right = 850.0
-margin_bottom = 500.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -150.0
+margin_right = 300.0
+margin_bottom = 150.0
 theme = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -44,3 +48,6 @@ margin_top = 200.0
 margin_right = 500.0
 margin_bottom = 250.0
 text = "Close Application"
+__meta__ = {
+"_edit_use_anchors_": false
+}
