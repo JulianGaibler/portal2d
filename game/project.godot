@@ -68,10 +68,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="p2d_test"
+config/name="Portal 2D"
 run/main_scene="res://menus/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
+config/macos_native_icon="res://icon_mac.icns"
+config/windows_native_icon="res://icon_windows.ico"
 
 [autoload]
 
@@ -84,8 +86,11 @@ shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.254902 )
 
 [display]
 
+window/size/width=1920
+window/size/height=1080
+mouse_cursor/custom_image="res://textures/pointer.png"
 window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [importer_defaults]
 
