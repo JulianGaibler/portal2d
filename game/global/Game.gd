@@ -51,6 +51,10 @@ func goto_scene_fade(path, fade_time: float = 0.75):
     fade_tween.interpolate_property(fade_rect, "color:a", 1.0, 0.0, fade_time, Tween.TRANS_LINEAR, Tween.EASE_IN)
     fade_tween.start()
 
+# Returns bool if game is currently in Main Menu
+func is_in_main_menu() -> bool:
+    return current_scene.filename == "res://menus/MainMenu.tscn"
+
 ## Private Methods ##
 
 func _deferred_goto_scene(path):

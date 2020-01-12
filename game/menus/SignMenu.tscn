@@ -525,6 +525,7 @@ __meta__ = {
 }
 
 [node name="Main" type="Control" parent="."]
+visible = false
 margin_right = 384.0
 margin_bottom = 768.0
 __meta__ = {
@@ -572,6 +573,59 @@ margin_top = 195.0
 margin_right = 288.0
 margin_bottom = 246.0
 text = "Exit"
+align = 0
+
+[node name="Pause" type="Control" parent="."]
+margin_right = 384.0
+margin_bottom = 768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Pause"]
+margin_right = 769.0
+margin_bottom = 1536.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
+margin_left = 80.0
+margin_top = 448.0
+margin_right = 368.0
+margin_bottom = 810.0
+custom_constants/separation = 14
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Button1" type="Button" parent="Pause/VBoxContainer"]
+margin_right = 288.0
+margin_bottom = 51.0
+text = "Resume Game"
+align = 0
+
+[node name="Button2" type="Button" parent="Pause/VBoxContainer"]
+margin_top = 65.0
+margin_right = 288.0
+margin_bottom = 116.0
+text = "Reload Level"
+align = 0
+
+[node name="Button3" type="Button" parent="Pause/VBoxContainer"]
+margin_top = 130.0
+margin_right = 288.0
+margin_bottom = 181.0
+text = "Settings"
+align = 0
+
+[node name="Button4" type="Button" parent="Pause/VBoxContainer"]
+margin_top = 195.0
+margin_right = 288.0
+margin_bottom = 246.0
+text = "Exit to Main Menu"
 align = 0
 
 [node name="Levels" type="MarginContainer" parent="."]
@@ -628,118 +682,12 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="Levels/HBoxContainer/Control/ScrollContainer"]
 margin_right = 288.0
-margin_bottom = 821.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer"]
 margin_right = 283.0
-margin_bottom = 821.0
 size_flags_horizontal = 3
-
-[node name="Button13" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_right = 271.0
-margin_bottom = 51.0
-text = "Momentum & Velocity"
-align = 0
-
-[node name="Button2" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 55.0
-margin_right = 271.0
-margin_bottom = 106.0
-text = "Other.."
-align = 0
-
-[node name="Button3" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 110.0
-margin_right = 271.0
-margin_bottom = 161.0
-text = "Other and so on.."
-align = 0
-
-[node name="Button4" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 165.0
-margin_right = 271.0
-margin_bottom = 216.0
-text = "Dual Portal Device"
-align = 0
-
-[node name="Button8" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 220.0
-margin_right = 271.0
-margin_bottom = 271.0
-text = "Momentum & Velocity"
-align = 0
-
-[node name="Button7" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 275.0
-margin_right = 271.0
-margin_bottom = 326.0
-text = "Other.."
-align = 0
-
-[node name="Button6" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 330.0
-margin_right = 271.0
-margin_bottom = 381.0
-text = "Other and so on.."
-align = 0
-
-[node name="Button5" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 385.0
-margin_right = 271.0
-margin_bottom = 436.0
-text = "Dual Portal Device"
-align = 0
-
-[node name="Button12" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 440.0
-margin_right = 271.0
-margin_bottom = 491.0
-text = "Momentum & Velocity"
-align = 0
-
-[node name="Button11" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 495.0
-margin_right = 271.0
-margin_bottom = 546.0
-text = "Other.."
-align = 0
-
-[node name="Button10" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 550.0
-margin_right = 271.0
-margin_bottom = 601.0
-text = "Other and so on.."
-align = 0
-
-[node name="Button9" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 605.0
-margin_right = 271.0
-margin_bottom = 656.0
-text = "Dual Portal Device"
-align = 0
-
-[node name="Button16" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 660.0
-margin_right = 271.0
-margin_bottom = 711.0
-text = "Momentum & Velocity"
-align = 0
-
-[node name="Button15" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 715.0
-margin_right = 271.0
-margin_bottom = 766.0
-text = "Other.."
-align = 0
-
-[node name="Button14" type="Button" parent="Levels/HBoxContainer/Control/ScrollContainer/MarginContainer/VBoxContainer"]
-margin_top = 770.0
-margin_right = 271.0
-margin_bottom = 821.0
-text = "Other and so on.."
-align = 0
 
 [node name="Settings" type="MarginContainer" parent="."]
 visible = false
@@ -818,6 +766,7 @@ __meta__ = {
 }
 
 [node name="testchamber-sign" type="Sprite" parent="."]
+visible = false
 position = Vector2( 192, 384 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -6

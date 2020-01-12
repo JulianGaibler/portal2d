@@ -29,6 +29,11 @@ func _ready():
 
 func object_loop():
     instance = item[next_item].instance()
+    match next_item:
+        0:
+            randomize()
+            instance.companion = randf() > 0.8
+        1: instance.has_seen_player = true
     next_item = int(fmod(next_item + 1, item.size()))
     add_child(instance)
     instance.position += spawn_point.position

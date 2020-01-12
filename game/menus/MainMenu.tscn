@@ -49,7 +49,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "flicker-off"
 length = 2.5
 step = 0.05
@@ -78,7 +78,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 2.5
 step = 0.05
 tracks/0/type = "value"
@@ -135,7 +135,7 @@ tracks/1/keys = {
 "values": [ false, true, false, true ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 64, 256 )
 
 [node name="MainMenu" type="Node2D"]
@@ -145,11 +145,9 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0.313726, 0.313726, 0.313726, 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
 position = Vector2( 256, 320 )
 scale = Vector2( 3.25, 2.75 )
 texture = ExtResource( 24 )
@@ -194,7 +192,7 @@ z_index = -1
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 3072, 0, 768, 1536 )
+region_rect = Rect2( 0, 0, 768, 1536 )
 
 [node name="Overlay" type="Node2D" parent="TestchamberSign"]
 visible = false
@@ -209,8 +207,8 @@ rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TestchamberSign"]
 anims/BindPose = SubResource( 1 )
-anims/flicker-off = SubResource( 5 )
-anims/flicker-on = SubResource( 2 )
+anims/flicker-off = SubResource( 2 )
+anims/flicker-on = SubResource( 3 )
 anims/flicker_change = SubResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="TestchamberSign"]
@@ -246,7 +244,7 @@ rotation = -5.07036e-06
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
 "fake-white",
 ]]
-position = Vector2( 256, 384 )
+position = Vector2( -256, 384 )
 collision_layer = 2
 collision_mask = 2
 __meta__ = {
@@ -254,7 +252,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." groups=[
 "player",
@@ -267,7 +265,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="IndicatorLights" type="Node2D" parent="."]
 position = Vector2( 512, 624 )
