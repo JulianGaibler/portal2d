@@ -22,13 +22,11 @@ func _ready():
 
 func start():
     stop()
-    print("connect")
     timer.connect("timeout", self, "_pause_ended")
     waypoint_index = fmod(waypoint_index + 1, len(line.points))
     call_deferred("move_to_waypoint")
 
 func stop():
-    print("stop")
     timer.disconnect("timeout", self, "_pause_ended")
     tween.stop_all()
     timer.stop()
@@ -45,12 +43,10 @@ func go_to_first():
     
 
 func move_to_waypoint():
-    print("a : ", waypoint_index)
-    tween.interpolate_property(self, "global_position", global_position, line.to_global(line.points[waypoint_index]), duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+    tween.interpolate_property(self, "global_position", global_position, line.to_global(line.points[waypoint_index]), duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     tween.start()
     timer.start()
 
 func _pause_ended():
-    print("ended2")
     waypoint_index = fmod(waypoint_index + 1, len(line.points))
     if waypoint_index != 0 or loop: move_to_waypoint()
