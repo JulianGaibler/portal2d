@@ -16,6 +16,7 @@ blend_mode = 1
 [node name="LightBridge" type="StaticBody2D" groups=[
 "light-bridge",
 "portal-ignore",
+"transparent",
 ]]
 z_index = -1
 z_as_relative = false

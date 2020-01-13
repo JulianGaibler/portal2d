@@ -20,7 +20,7 @@ const SHAKE_AMPLITUDE_PORTALSHOT = 10
 
 # Smooth Zoom Behaviour related Variables
 var smooth_zoom = 2.0
-export(float) var target_zoom = 1.5
+export(float) var target_zoom = 0.75
 export(float) var min_zoom = 0.5
 export(float) var max_zoom = 1.5
 
@@ -124,3 +124,12 @@ func zoom_in():
     target_zoom -= .25    
     if(target_zoom < min_zoom): 
         target_zoom  = min_zoom
+
+
+## Public functions
+
+func set_min_zoom(val: float):
+    min_zoom = val
+
+func set_max_zoom(val: float):
+    max_zoom = val
