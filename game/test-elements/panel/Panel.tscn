@@ -1003,3 +1003,7 @@ anims/stairs-right-4-out = SubResource( 15 )
 anims/straight128-out = SubResource( 16 )
 anims/straight32-out = SubResource( 17 )
 anims/straight64-out = SubResource( 18 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+bus = "Reverb"
