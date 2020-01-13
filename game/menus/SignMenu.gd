@@ -12,16 +12,19 @@ signal exit_menu
 signal resume_game
 
 var levels = {
-    "Introduction": "res://test-chambers/level_a1.tscn",
-    "Portal Gun": "res://test-chambers/level_a2.tscn",
-    "Cubes & Portals": "res://test-chambers/level_a3.tscn",
-    "Cube Momentum": "res://test-chambers/level_a4.tscn",
-    "Player Momentum": "res://test-chambers/level_a5.tscn",
-    "Laser Intro": "res://test-chambers/level_b1.tscn",
-    "Catapult Intro": "res://test-chambers/level_b2.tscn",
-    "Bridge Intro": "res://test-chambers/level_b3.tscn",
-    "Turret Intro": "res://test-chambers/level_b4.tscn",
-    "Funnel Intro": "res://test-chambers/level_b5.tscn",
+    "00 & 01 Introduction": "res://test-chambers/level_a1.tscn",
+    "02 & 03 Portal Gun": "res://test-chambers/level_a2.tscn",
+    "04 & 05 Cubes & Portals": "res://test-chambers/level_a3.tscn",
+    "06 Cube Momentum": "res://test-chambers/level_a4.tscn",
+    "07 Player Momentum": "res://test-chambers/level_a5.tscn",
+    "08 Catapult Intro": "res://test-chambers/level_a6.tscn",
+    "09 Dual Portal Gun": "res://test-chambers/level_b1.tscn",
+    "10 & 11 Laser Intro": "res://test-chambers/level_b2.tscn",
+    "12 Bridge Intro": "res://test-chambers/level_b3.tscn",
+    "13 Turret Intro": "res://test-chambers/level_b4.tscn",
+    "14 Funnel Intro": "res://test-chambers/level_b5.tscn",
+    "15 Fizzler Intro": "res://test-chambers/level_b6.tscn",
+    "16 Pull the Rug": "res://test-chambers/level_b7.tscn",
 }
 
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://test-elements/elevator-room/ElevatorArrive.tscn" type="PackedScene" id=30]
 [ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=31]
 [ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=32]
+[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 6 )
@@ -1201,6 +1202,12 @@ position = Vector2( 1248, -320 )
 [node name="GlassLightCover04_2" parent="." instance=ExtResource( 32 )]
 position = Vector2( 1312, 448 )
 
+[node name="GlassLightCover04_4" parent="." instance=ExtResource( 32 )]
+position = Vector2( 352, -64 )
+
+[node name="GlassLightCover04_5" parent="." instance=ExtResource( 32 )]
+position = Vector2( 288, -64 )
+
 [node name="GlassLightCover04_3" parent="." instance=ExtResource( 32 )]
 position = Vector2( 1632, 448 )
 
@@ -1218,6 +1225,9 @@ position = Vector2( 4768, 832 )
 [node name="GlassLightCover05_4" parent="." instance=ExtResource( 32 )]
 position = Vector2( 3712, 480 )
 rotation = 1.5708
+
+[node name="Camera" parent="." instance=ExtResource( 33 )]
+position = Vector2( 2816, 96 )
 [connection signal="pressed" from="FloorButton05_1" to="IndicatorLights05_1" method="set_on"]
 [connection signal="pressed" from="FloorButton05_1" to="IndicatorSign05_1" method="set_on"]
 [connection signal="pressed" from="FloorButton05_1" to="AND05" method="set_a" binds= [ true ]]
@@ -1230,17 +1240,17 @@ rotation = 1.5708
 [connection signal="released" from="FloorButton05_2" to="IndicatorLights05_2" method="set_off"]
 [connection signal="released" from="FloorButton05_2" to="IndicatorSign05_2" method="set_off"]
 [connection signal="released" from="FloorButton05_2" to="AND05" method="set_b" binds= [ false ]]
-[connection signal="pressed" from="FloorButton04" to="TestDoor04_1" method="open"]
 [connection signal="pressed" from="FloorButton04" to="IndicatorLights04" method="set_on"]
 [connection signal="pressed" from="FloorButton04" to="IndicatorSign04" method="set_on"]
-[connection signal="released" from="FloorButton04" to="TestDoor04_1" method="close"]
+[connection signal="pressed" from="FloorButton04" to="TestDoor04_1" method="open"]
 [connection signal="released" from="FloorButton04" to="IndicatorLights04" method="set_off"]
 [connection signal="released" from="FloorButton04" to="IndicatorSign04" method="set_off"]
+[connection signal="released" from="FloorButton04" to="TestDoor04_1" method="close"]
 [connection signal="activate" from="AND05" to="TestDoor05" method="open"]
 [connection signal="deactivate" from="AND05" to="TestDoor05" method="close"]
+[connection signal="enter" from="Area04" to="CubeDropper04" method="timed_open" flags=6]
 [connection signal="enter" from="Area04" to="PortalSpawner04" method="activate" flags=6]
 [connection signal="enter" from="Area04" to="TestchamberSign04" method="turn_on" flags=6]
-[connection signal="enter" from="Area04" to="CubeDropper04" method="timed_open" flags=6]
 [connection signal="enter" from="Area05_1" to="PortalSpawner05" method="activate" flags=6]
 [connection signal="enter" from="Area05_1" to="TestDoor04_1" method="close" flags=6]
 [connection signal="enter" from="Area05_2" to="TestchamberSign05" method="turn_on" flags=6]

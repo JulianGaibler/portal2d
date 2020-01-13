@@ -199,3 +199,13 @@ func check_surface_continuity(space_state, hit, normal_up, distance, exclude, ty
     var dist_btm = 999 if cont_area_btm.empty() else cont_area_start.distance_to(cont_area_btm.position)
 
     return [dist_top, dist_btm]
+
+## Public methods:
+
+func change_visibility(to: bool):
+    visible = to
+
+func change_shooting(nr: int, to: bool):
+    match nr:
+        1: allow_primary = to
+        2: allow_secondary = to

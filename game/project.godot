@@ -202,3 +202,7 @@ rotate={
 [physics]
 
 2d/default_gravity=1304
+
+[rendering]
+
+environment/default_clear_color=Color( 0, 0, 0, 1 )

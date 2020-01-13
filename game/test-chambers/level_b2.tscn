@@ -1,44 +1,61 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=41 format=2]
 
-[ext_resource path="res://test-elements/faith-plate/FaithPlate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=3]
-[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=4]
-[ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=5]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=4]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
 [ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=7]
-[ext_resource path="res://test-elements/toxic-goo/ToxicGoo.tscn" type="PackedScene" id=8]
-[ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=9]
-[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=10]
-[ext_resource path="res://test-elements/floor-button/FloorButton.tscn" type="PackedScene" id=11]
-[ext_resource path="res://test-elements/elevator-room/ElevatorArrive.tscn" type="PackedScene" id=12]
-[ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=13]
-[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=14]
+[ext_resource path="res://test-elements/panel/Panel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://test-elements/laser-catcher/LaserCatcher.tscn" type="PackedScene" id=9]
+[ext_resource path="res://shader/glow/glow.shader" type="Shader" id=10]
+[ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=11]
+[ext_resource path="res://tileset/tiles.png" type="Texture" id=12]
+[ext_resource path="res://test-elements/laser-emitter/LaserEmitter.tscn" type="PackedScene" id=13]
+[ext_resource path="res://classes/TextureToggle.gd" type="Script" id=14]
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=15]
-[ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=16]
-[ext_resource path="res://classes/TextureToggle.gd" type="Script" id=17]
-[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=18]
-[ext_resource path="res://shader/glow/glow.shader" type="Shader" id=19]
-[ext_resource path="res://test-elements/indicator-sign/IndicatorSign.tscn" type="PackedScene" id=20]
+[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=16]
+[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=17]
+[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=18]
+[ext_resource path="res://test-elements/indicator-sign/IndicatorSign.tscn" type="PackedScene" id=19]
+[ext_resource path="res://test-elements/elevator-room/ElevatorArrive.tscn" type="PackedScene" id=20]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sounds/background/background-drone-ambient.wav" type="AudioStream" id=22]
 [ext_resource path="res://tileset/TileColliderGenerator.gd" type="Script" id=23]
-[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=24]
-[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=25]
-[ext_resource path="res://classes/AutoGrabArea.gd" type="Script" id=26]
-[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=27]
-[ext_resource path="res://classes/TriggerArea.gd" type="Script" id=28]
-[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=29]
+[ext_resource path="res://test-elements/redirection-cube/RedirectionCube.tscn" type="PackedScene" id=24]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=25]
+[ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=26]
+[ext_resource path="res://test-elements/floor-button/FloorButton.tscn" type="PackedScene" id=27]
+[ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=28]
+[ext_resource path="res://classes/TriggerArea.gd" type="Script" id=29]
+[ext_resource path="res://test-elements/moving-platform/MovingPlatform.tscn" type="PackedScene" id=30]
+[ext_resource path="res://props/platform-arm.png" type="Texture" id=31]
+[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=32]
+[ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=33]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 19 )
-shader_param/bright_amount = 1.3
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 224, 128 )
+extents = Vector2( 256, 64 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 32, 192 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
+shader_param/bright_amount = 1.3
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 10 )
+shader_param/bright_amount = 1.3
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 128 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32, 256 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 128, 160 )
 
 [node name="Level" type="Node2D"]
 
@@ -66,7 +83,7 @@ collision_layer = 0
 collision_mask = 0
 occluder_light_mask = 0
 format = 1
-tile_data = PoolIntArray( 655400, 2, 0, 655402, 3, 0, 655403, 2, 0, 720938, 3, 0, 786440, 8, 0, 786441, 6, 0, 786443, 6, 0, 786445, 1, 0, 786447, 1, 0, 786449, 1, 0, 786451, 1, 0, 786453, 1, 0, 786455, 1, 0, 786457, 1, 0, 786459, 1, 0, 786461, 1, 0, 786463, 1, 0, 786465, 1, 0, 786467, 1, 0, 786469, 1, 0, 786471, 1, 0, 786473, 1, 0, 786475, 1, 0, 786477, 1, 0, 786479, 1, 0, 786481, 1, 0, 786483, 1, 0, 786485, 1, 0, 786487, 1, 0, 786489, 1, 0, 786491, 1, 0, 786493, 1, 0, 786495, 1, 0, 786497, 1, 0, 786499, 1, 0, 786501, 1, 0, 786503, 1, 0, 786505, 1, 0, 786507, 1, 0, 786509, 1, 0, 786511, 1, 0, 786513, 1, 0, 851976, 8, 0, 917512, 6, 0, 917514, 8, 0, 917515, 6, 0, 983050, 8, 0, 1048584, 6, 0, 1048586, 8, 0, 1048587, 6, 0, 1048589, 6, 0, 1048591, 1, 0, 1048593, 1, 0, 1048595, 1, 0, 1048597, 1, 0, 1048599, 1, 0, 1048601, 1, 0, 1048603, 1, 0, 1048605, 1, 0, 1048607, 1, 0, 1048609, 1, 0, 1048611, 1, 0, 1048613, 1, 0, 1048615, 1, 0, 1048617, 1, 0, 1048619, 1, 0, 1048621, 1, 0, 1048623, 1, 0, 1048625, 1, 0, 1048627, 1, 0, 1048629, 1, 0, 1048631, 1, 0, 1048633, 1, 0, 1048635, 1, 0, 1048637, 1, 0, 1048639, 1, 0, 1048641, 1, 0, 1048643, 1, 0, 1048645, 1, 0, 1048647, 1, 0, 1048649, 1, 0, 1048651, 1, 0, 1048653, 1, 0, 1048655, 1, 0, 1048657, 1, 0, 1114122, 8, 0, 1179656, 8, 0, 1179657, 6, 0, 1179659, 6, 0, 1179661, 6, 0, 1245192, 8, 0, 1310728, 6, 0, 1310730, 8, 0, 1310731, 1, 0, 1310733, 1, 0, 1310735, 1, 0, 1310737, 1, 0, 1310739, 1, 0, 1310741, 1, 0, 1310743, 1, 0, 1310745, 1, 0, 1310747, 1, 0, 1310749, 1, 0, 1310751, 1, 0, 1310753, 1, 0, 1310755, 1, 0, 1310757, 1, 0, 1310759, 1, 0, 1310761, 1, 0, 1310763, 1, 0, 1310765, 1, 0, 1310767, 1, 0, 1310769, 1, 0, 1310771, 1, 0, 1310773, 1, 0, 1310775, 1, 0, 1310777, 1, 0, 1310779, 1, 0, 1310781, 1, 0, 1310783, 1, 0, 1310785, 1, 0, 1310787, 1, 0, 1310789, 1, 0, 1310791, 1, 0, 1310793, 1, 0, 1310795, 1, 0, 1310797, 1, 0, 1310799, 1, 0, 1310801, 1, 0, 1376266, 8, 0, 1441800, 8, 0, 1441801, 6, 0, 1507336, 8, 0, 1572872, 8, 0, 1572873, 1, 0, 1572875, 1, 0, 1572877, 1, 0, 1572879, 1, 0, 1572881, 1, 0, 1572883, 1, 0, 1572885, 1, 0, 1572887, 1, 0, 1572889, 1, 0, 1572891, 1, 0, 1572893, 1, 0, 1572895, 1, 0, 1572897, 1, 0, 1572899, 1, 0, 1572901, 1, 0, 1572903, 1, 0, 1572905, 1, 0, 1572907, 1, 0, 1572909, 1, 0, 1572911, 1, 0, 1572913, 1, 0, 1572915, 1, 0, 1572917, 1, 0, 1572919, 1, 0, 1572921, 1, 0, 1572923, 1, 0, 1572925, 1, 0, 1572927, 1, 0, 1572929, 1, 0, 1572931, 1, 0, 1572933, 1, 0, 1572935, 1, 0, 1572937, 1, 0, 1572939, 1, 0, 1572941, 1, 0, 1572943, 1, 0, 1572945, 1, 0, 1638408, 8, 0, 1703944, 8, 0, 1769480, 8, 0, 1835016, 5, 0, 1835020, 5, 0, 1835024, 5, 0, 1835028, 5, 0, 1835032, 5, 0, 1835036, 5, 0, 1835040, 5, 0, 1835044, 5, 0, 1835048, 6, 0, 1835050, 8, 0, 1835051, 6, 0, 1835053, 5, 0, 1835057, 5, 0, 1835061, 5, 0, 1835065, 5, 0, 1835069, 5, 0, 1835073, 5, 0, 1835077, 5, 0, 1835081, 5, 0, 1835085, 5, 0, 1835089, 6, 0, 1966076, 28, 0, 1900586, 8, 0, 1900635, 28, 0, 1966120, 6, 0, 1966122, 6, 0, 1966124, 8, 0, 1966161, 6, 0, 2031660, 8, 0, 2097152, 6, 0, 2097154, 7, 0, 2097156, 6, 0, 2097158, 8, 0, 2097159, 21, 0, 2097160, 5, 0, 2097164, 5, 0, 2097168, 5, 0, 2097172, 5, 0, 2097176, 5, 0, 2097180, 5, 0, 2097184, 5, 0, 2097188, 5, 0, 2097192, 8, 0, 2097193, 6, 0, 2097195, 6, 0, 2097197, 5, 0, 2097201, 5, 0, 2097205, 5, 0, 2097209, 5, 0, 2097213, 5, 0, 2097217, 5, 0, 2097221, 5, 0, 2097225, 5, 0, 2097229, 5, 0, 2097233, 6, 0, 2097235, 21, 0, 2097236, 7, 0, 2097238, 6, 0, 2097240, 8, 0, 2097241, 6, 0, 2228220, 28, 0, 2162694, 8, 0, 2162695, 21, 0, 2162728, 8, 0, 2162771, 21, 0, 2162776, 8, 0, 2162779, 28, 0, 2228224, 6, 0, 2228226, 6, 0, 2228228, 8, 0, 2228229, 7, 0, 2228231, 21, 0, 2228264, 6, 0, 2228266, 8, 0, 2228267, 6, 0, 2228305, 6, 0, 2228307, 21, 0, 2228308, 6, 0, 2228310, 8, 0, 2228311, 6, 0, 2228313, 6, 0, 2293764, 8, 0, 2293767, 21, 0, 2293802, 8, 0, 2293843, 21, 0, 2293846, 8, 0, 2359315, 8, 0, 2359316, 5, 0, 2359320, 5, 0, 2359324, 5, 0, 2359328, 5, 0, 2359332, 5, 0, 2359336, 8, 0, 2359340, 8, 0, 2359341, 5, 0, 2359345, 5, 0, 2359349, 5, 0, 2359353, 6, 0, 2359355, 6, 0, 2359357, 5, 0, 2359361, 8, 0, 2490364, 28, 0, 2424848, 8, 0, 2424849, 8, 0, 2424850, 8, 0, 2424851, 8, 0, 2424872, 8, 0, 2424873, 8, 0, 2424874, 8, 0, 2424875, 8, 0, 2424876, 8, 0, 2424897, 8, 0, 2424898, 8, 0, 2424899, 8, 0, 2424900, 8, 0, 2424923, 28, 0, 2490384, 6, 0, 2490386, 6, 0, 2490408, 6, 0, 2490410, 8, 0, 2490411, 6, 0, 2490425, 6, 0, 2490427, 6, 0, 2490433, 6, 0, 2490435, 6, 0, 2555946, 8, 0, 2621456, 5, 0, 2621460, 5, 0, 2621464, 7, 0, 2621466, 6, 0, 2621468, 5, 0, 2621472, 5, 0, 2621476, 6, 0, 2621478, 6, 0, 2621480, 6, 0, 2621482, 8, 0, 2621483, 6, 0, 2621485, 5, 0, 2621489, 6, 0, 2621491, 6, 0, 2621493, 5, 0, 2621497, 6, 0, 2621499, 6, 0, 2621501, 5, 0, 2621505, 5, 0, 2752508, 28, 0, 2687018, 8, 0, 2687067, 28, 0, 2752536, 7, 0, 2752538, 6, 0, 2752548, 6, 0, 2752550, 7, 0, 2752552, 6, 0, 2752554, 8, 0, 2752555, 6, 0, 2752561, 6, 0, 2752563, 6, 0, 2752569, 6, 0, 2752571, 6, 0, 2818090, 8, 0, 2883600, 5, 0, 2883604, 5, 0, 2883608, 5, 0, 2883612, 5, 0, 2883616, 6, 0, 2883618, 6, 0, 2883620, 5, 0, 2883624, 6, 0, 2883626, 8, 0, 2883627, 6, 0, 2883629, 5, 0, 2883633, 5, 0, 2883637, 5, 0, 2883641, 6, 0, 2883643, 6, 0, 2883645, 5, 0, 2883649, 5, 0, 3014650, 15, 0, 3014652, 14, 0, 3014654, 15, 0, 2949162, 8, 0, 2949211, 14, 0, 2949213, 15, 0, 2949215, 14, 0, 3014688, 7, 0, 3014690, 6, 0, 3014696, 6, 0, 3014698, 8, 0, 3014699, 6, 0, 3014713, 6, 0, 3014715, 6, 0, 3080234, 8, 0, 3145744, 5, 0, 3145748, 5, 0, 3145752, 5, 0, 3145756, 5, 0, 3145760, 5, 0, 3145764, 5, 0, 3145768, 6, 0, 3145770, 8, 0, 3145771, 6, 0, 3145773, 5, 0, 3145777, 5, 0, 3145781, 5, 0, 3145785, 5, 0, 3145789, 5, 0, 3145793, 5, 0, 3211306, 8, 0, 3276840, 6, 0, 3276842, 8, 0, 3276843, 6, 0, 3342378, 8, 0 )
+tile_data = PoolIntArray( 65610, 6, 0, 65612, 6, 0, 65640, 28, 0, 65644, 28, 0, 131138, 6, 0, 131140, 6, 0, 131142, 6, 0, 131144, 6, 0, 196662, 5, 0, 196667, 21, 0, 196668, 21, 0, 196670, 5, 0, 196682, 8, 0, 196683, 8, 0, 196684, 6, 0, 196686, 6, 0, 196688, 6, 0, 262194, 6, 0, 262196, 6, 0, 262202, 5, 0, 262210, 6, 0, 262212, 6, 0, 262214, 6, 0, 262216, 6, 0, 262218, 6, 0, 262226, 6, 0, 262228, 6, 0, 262230, 6, 0, 262232, 6, 0, 262234, 6, 0, 262236, 6, 0, 262238, 6, 0, 262240, 6, 0, 327756, 6, 0, 327758, 8, 0, 327759, 8, 0, 327760, 8, 0, 327761, 8, 0, 327784, 28, 0, 393266, 6, 0, 393268, 6, 0, 393282, 6, 0, 393284, 6, 0, 393286, 6, 0, 393288, 6, 0, 393290, 6, 0, 393294, 7, 0, 393296, 6, 0, 393298, 6, 0, 393300, 6, 0, 393302, 6, 0, 393304, 5, 0, 393308, 6, 0, 393310, 6, 0, 393312, 6, 0, 393318, 7, 0, 458773, 21, 0, 458774, 21, 0, 458806, 5, 0, 458814, 6, 0, 458816, 6, 0, 458828, 6, 0, 524296, 6, 0, 524298, 6, 0, 524300, 6, 0, 524302, 6, 0, 524304, 6, 0, 524306, 6, 0, 524308, 6, 0, 524310, 6, 0, 524312, 6, 0, 524314, 6, 0, 524316, 5, 0, 524320, 6, 0, 524338, 6, 0, 524340, 8, 0, 524341, 8, 0, 524346, 8, 0, 524347, 8, 0, 524348, 8, 0, 524349, 8, 0, 524354, 6, 0, 524356, 6, 0, 524358, 6, 0, 524360, 6, 0, 524362, 6, 0, 524366, 6, 0, 524368, 6, 0, 524370, 6, 0, 524372, 6, 0, 524374, 6, 0, 524380, 5, 0, 524384, 6, 0, 524386, 21, 0, 524387, 7, 0, 524389, 6, 0, 524391, 8, 0, 655354, 28, 0, 655358, 28, 0, 589826, 14, 0, 589876, 6, 0, 589882, 5, 0, 589886, 6, 0, 589888, 6, 0, 589900, 8, 0, 589901, 8, 0, 589922, 21, 0, 589927, 8, 0, 589928, 28, 0, 655368, 6, 0, 655370, 6, 0, 655372, 6, 0, 655374, 6, 0, 655376, 6, 0, 655378, 6, 0, 655380, 6, 0, 655382, 6, 0, 655384, 6, 0, 655386, 6, 0, 655392, 6, 0, 655426, 6, 0, 655428, 8, 0, 655429, 8, 0, 655430, 6, 0, 655432, 6, 0, 655434, 6, 0, 655436, 6, 0, 655438, 6, 0, 655440, 6, 0, 655442, 6, 0, 655444, 6, 0, 655446, 6, 0, 655448, 6, 0, 655450, 6, 0, 655456, 6, 0, 655458, 21, 0, 655459, 6, 0, 655461, 8, 0, 655462, 6, 0, 720898, 16, 0, 720946, 1, 0, 720948, 1, 0, 720950, 1, 0, 720952, 6, 0, 720958, 6, 0, 720960, 6, 0, 720964, 6, 0, 720994, 21, 0, 720997, 8, 0, 786440, 1, 0, 786442, 1, 0, 786444, 1, 0, 786446, 3, 0, 786447, 8, 0, 786448, 5, 0, 786452, 5, 0, 786456, 1, 0, 786458, 8, 0, 786459, 8, 0, 786460, 6, 0, 786462, 6, 0, 786464, 6, 0, 786466, 8, 0, 786467, 6, 0, 786469, 21, 0, 786470, 6, 0, 786472, 6, 0, 786474, 7, 0, 786476, 8, 0, 786477, 5, 0, 786481, 21, 0, 786498, 6, 0, 786502, 8, 0, 786503, 8, 0, 786504, 6, 0, 786506, 6, 0, 786508, 6, 0, 786510, 6, 0, 786512, 6, 0, 917502, 28, 0, 851970, 14, 0, 851982, 8, 0, 851983, 8, 0, 851994, 3, 0, 851995, 8, 0, 852002, 8, 0, 852005, 21, 0, 852012, 8, 0, 852017, 21, 0, 852024, 6, 0, 852026, 6, 0, 852028, 6, 0, 852030, 5, 0, 852036, 5, 0, 852072, 28, 0, 917518, 2, 0, 917530, 2, 0, 917532, 6, 0, 917534, 6, 0, 917536, 6, 0, 917538, 6, 0, 917540, 8, 0, 917541, 21, 0, 917542, 6, 0, 917544, 7, 0, 917546, 8, 0, 917547, 6, 0, 917553, 21, 0, 917570, 6, 0, 917576, 6, 0, 917578, 6, 0, 917580, 6, 0, 917582, 6, 0, 917584, 6, 0, 983076, 8, 0, 983077, 21, 0, 983082, 8, 0, 983089, 21, 0, 983090, 3, 0, 983091, 3, 0, 983092, 1, 0, 983094, 1, 0, 983096, 1, 0, 983098, 1, 0, 983100, 1, 0, 1048578, 6, 0, 1048580, 21, 0, 1048581, 6, 0, 1048583, 8, 0, 1048584, 6, 0, 1048586, 6, 0, 1048588, 6, 0, 1048590, 6, 0, 1048592, 6, 0, 1048594, 6, 0, 1048596, 6, 0, 1048598, 6, 0, 1048600, 6, 0, 1048602, 6, 0, 1048604, 6, 0, 1048606, 6, 0, 1048608, 6, 0, 1048642, 8, 0, 1048643, 8, 0, 1048650, 29, 0, 1048654, 29, 0, 1179646, 28, 0, 1114116, 21, 0, 1114119, 8, 0, 1114163, 4, 0, 1114174, 2, 0, 1114176, 6, 0, 1114178, 7, 0, 1114180, 8, 0, 1114216, 28, 0, 1179650, 7, 0, 1179652, 21, 0, 1179653, 8, 0, 1179654, 6, 0, 1179656, 7, 0, 1179658, 8, 0, 1179659, 7, 0, 1179661, 7, 0, 1179663, 8, 0, 1179664, 8, 0, 1179665, 7, 0, 1179667, 8, 0, 1179668, 7, 0, 1179670, 8, 0, 1179671, 8, 0, 1179672, 7, 0, 1179674, 8, 0, 1179675, 7, 0, 1179677, 7, 0, 1179679, 8, 0, 1179680, 8, 0, 1179681, 8, 0, 1179699, 4, 0, 1245188, 21, 0, 1245189, 8, 0, 1245194, 8, 0, 1245199, 8, 0, 1245200, 8, 0, 1245203, 8, 0, 1245206, 8, 0, 1245207, 8, 0, 1245210, 8, 0, 1245215, 8, 0, 1245216, 8, 0, 1245217, 8, 0, 1310737, 21, 0, 1310738, 21, 0, 1310750, 29, 0, 1441790, 28, 0, 1376360, 28, 0, 1376364, 28, 0, 1507330, 16, 0, 1703934, 28, 0, 1638402, 14, 0, 1769474, 16, 0, 1966074, 28, 0, 1966078, 28, 0, 1900546, 14, 0, 2031618, 16, 0 )
 
 [node name="TileMapForeground" type="TileMap" parent="."]
 scale = Vector2( 0.5, 0.5 )
@@ -77,11 +94,11 @@ cell_quadrant_size = 64
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 262146, 6, 0, 262148, 6, 0, 262150, 6, 0, 262152, 5, 0, 262156, 5, 0, 262160, 5, 0, 262164, 5, 0, 262168, 5, 0, 262172, 5, 0, 262176, 5, 0, 262180, 6, 0, 262182, 6, 0, 262184, 6, 0, 262186, 8, 0, 262187, 6, 0, 262189, 5, 0, 262193, 5, 0, 262197, 6, 0, 262199, 5, 0, 262203, 5, 0, 262207, 5, 0, 262211, 5, 0, 262215, 5, 0, 262219, 5, 0, 262223, 5, 0, 262227, 5, 0, 327722, 8, 0, 393218, 6, 0, 393220, 6, 0, 393222, 6, 0, 393252, 6, 0, 393254, 6, 0, 393256, 6, 0, 393258, 6, 0, 393260, 8, 0, 393269, 6, 0, 458796, 8, 0, 524290, 6, 0, 524292, 5, 0, 524296, 5, 0, 524300, 5, 0, 524304, 6, 0, 524306, 6, 0, 524308, 5, 0, 524312, 5, 0, 524316, 6, 0, 524318, 6, 0, 524320, 8, 0, 524321, 7, 0, 524323, 8, 0, 524324, 5, 0, 524328, 8, 0, 524329, 8, 0, 524330, 8, 0, 524331, 8, 0, 524332, 8, 0, 524333, 5, 0, 524337, 5, 0, 524341, 7, 0, 524343, 6, 0, 524345, 5, 0, 524349, 6, 0, 524351, 6, 0, 524353, 6, 0, 524355, 5, 0, 524359, 5, 0, 524363, 6, 0, 524365, 6, 0, 524367, 5, 0, 524371, 5, 0, 524375, 6, 0, 589856, 8, 0, 589859, 8, 0, 589864, 8, 0, 589865, 8, 0, 589866, 8, 0, 589867, 8, 0, 589868, 8, 0, 655360, 6, 0, 655362, 6, 0, 655376, 6, 0, 655378, 6, 0, 655388, 6, 0, 655390, 7, 0, 655392, 6, 0, 655394, 6, 0, 655413, 6, 0, 655415, 6, 0, 655421, 6, 0, 655423, 6, 0, 655425, 6, 0, 655435, 6, 0, 655436, 6, 0, 655437, 6, 0, 655447, 6, 0, 655449, 6, 0, 786432, 5, 0, 786436, 5, 0, 786515, 5, 0, 786519, 5, 0, 1048576, 6, 0, 1048578, 6, 0, 1048580, 5, 0, 1048659, 5, 0, 1048663, 5, 0, 1179648, 6, 0, 1179650, 6, 0, 1310720, 5, 0, 1310724, 5, 0, 1310803, 6, 0, 1310805, 6, 0, 1310807, 5, 0, 1441875, 6, 0, 1441877, 6, 0, 1572864, 5, 0, 1572868, 5, 0, 1572947, 5, 0, 1572951, 5, 0, 1835008, 6, 0, 1835010, 6, 0, 1835012, 6, 0, 1835014, 6, 0, 1835091, 5, 0, 1835095, 8, 0, 1835096, 6, 0, 1835098, 8, 0, 1900631, 8, 0, 1900634, 8, 0, 1966080, 6, 0, 1966082, 6, 0, 1966084, 6, 0, 1966086, 6, 0, 1966167, 6, 0, 1966169, 7, 0, 2359296, 5, 0, 2359300, 6, 0, 2359302, 7, 0, 2359304, 6, 0, 2359306, 5, 0, 2359310, 6, 0, 2359315, 8, 0, 2359336, 8, 0, 2359340, 8, 0, 2359361, 8, 0, 2359365, 8, 0, 2359366, 5, 0, 2359370, 8, 0, 2359371, 5, 0, 2359375, 5, 0, 2359379, 6, 0, 2359381, 7, 0, 2359383, 5, 0, 2424848, 8, 0, 2424849, 8, 0, 2424850, 8, 0, 2424851, 8, 0, 2424872, 6, 0, 2424874, 8, 0, 2424875, 8, 0, 2424876, 8, 0, 2424897, 6, 0, 2424899, 8, 0, 2424900, 8, 0, 2424901, 8, 0, 2424906, 8, 0, 2490372, 6, 0, 2490374, 6, 0, 2490376, 6, 0, 2490382, 8, 0, 2490383, 6, 0, 2490385, 8, 0, 2490386, 6, 0, 2490410, 8, 0, 2490411, 6, 0, 2490435, 8, 0, 2490436, 6, 0, 2490442, 8, 0, 2490451, 6, 0, 2490453, 6, 0, 2555918, 8, 0, 2555921, 8, 0, 2555944, 8, 0, 2555945, 8, 0, 2555946, 8, 0, 2555969, 8, 0, 2555970, 8, 0, 2555971, 8, 0, 2555978, 8, 0, 2621440, 5, 0, 2621444, 5, 0, 2621448, 5, 0, 2621452, 6, 0, 2621454, 6, 0, 2621456, 5, 0, 2621480, 5, 0, 2621484, 8, 0, 2621505, 5, 0, 2621509, 5, 0, 2621513, 5, 0, 2621517, 6, 0, 2621519, 5, 0, 2621523, 5, 0, 2621527, 5, 0, 2687020, 8, 0, 2752524, 6, 0, 2752526, 7, 0, 2752556, 8, 0, 2752589, 6, 0, 2818092, 8, 0, 2883584, 5, 0, 2883588, 6, 0, 2883590, 6, 0, 2883592, 5, 0, 2883596, 5, 0, 2883600, 5, 0, 2883624, 8, 0, 2883625, 5, 0, 2883649, 5, 0, 2883653, 6, 0, 2883655, 7, 0, 2883657, 5, 0, 2883661, 5, 0, 2883665, 6, 0, 2883667, 5, 0, 2883671, 5, 0, 2949160, 8, 0, 2949165, 8, 0, 3014660, 6, 0, 3014662, 6, 0, 3014695, 7, 0, 3014701, 6, 0, 3014725, 6, 0, 3014727, 6, 0, 3014737, 6, 0, 3145734, 6, 0, 3145736, 5, 0, 3145740, 5, 0, 3145744, 5, 0, 3145748, 6, 0, 3145750, 6, 0, 3145752, 5, 0, 3145756, 6, 0, 3145758, 6, 0, 3145760, 5, 0, 3145764, 5, 0, 3145768, 5, 0, 3145772, 8, 0, 3145773, 5, 0, 3145777, 5, 0, 3145781, 5, 0, 3145785, 5, 0, 3145789, 6, 0, 3145791, 6, 0, 3145793, 5, 0, 3145797, 5, 0, 3145801, 5, 0, 3145805, 6, 0, 3145807, 6, 0, 3211308, 8, 0, 3276820, 6, 0, 3276822, 7, 0, 3276828, 6, 0, 3276830, 6, 0, 3276844, 8, 0, 3276861, 6, 0, 3276863, 6, 0, 3276877, 6, 0, 3342380, 8, 0, 3407880, 6, 0, 3407882, 6, 0, 3407884, 5, 0, 3407888, 5, 0, 3407892, 5, 0, 3407896, 5, 0, 3407900, 5, 0, 3407904, 6, 0, 3407906, 8, 0, 3407907, 6, 0, 3407909, 5, 0, 3407913, 5, 0, 3407917, 5, 0, 3407921, 6, 0, 3407923, 6, 0, 3407925, 5, 0, 3407929, 5, 0, 3407933, 5, 0, 3407937, 5, 0, 3407941, 5, 0, 3407945, 6, 0, 3407947, 6, 0, 3407949, 6, 0, 3473442, 8, 0, 3538954, 6, 0, 3538976, 6, 0, 3538978, 7, 0, 3538980, 8, 0, 3538993, 6, 0, 3538995, 6, 0, 3539017, 6, 0, 3539019, 6, 0, 3604516, 8, 0 )
+tile_data = PoolIntArray( -196534, 5, 0, -131014, 5, 0, -131006, 5, 0, -131002, 5, 0, -65482, 5, 0, -65474, 6, 0, -65472, 6, 0, -65458, 5, 0, 44, 5, 0, 48, 6, 0, 50, 5, 0, 82, 5, 0, 86, 5, 0, 90, 6, 0, 92, 6, 0, 94, 5, 0, 65598, 6, 0, 65600, 6, 0, 131106, 5, 0, 131112, 5, 0, 131120, 6, 0, 131130, 8, 0, 131131, 8, 0, 131132, 8, 0, 131133, 8, 0, 131162, 6, 0, 131164, 6, 0, 131170, 6, 0, 131172, 5, 0, 196666, 8, 0, 196669, 8, 0, 262148, 5, 0, 262152, 5, 0, 262156, 5, 0, 262160, 6, 0, 262162, 6, 0, 262164, 6, 0, 262166, 6, 0, 262168, 5, 0, 262172, 6, 0, 262174, 5, 0, 262182, 6, 0, 262188, 6, 0, 262190, 6, 0, 262192, 6, 0, 262242, 6, 0, 393232, 4, 0, 393233, 3, 0, 393234, 4, 0, 393235, 3, 0, 393236, 8, 0, 393237, 8, 0, 393238, 8, 0, 393239, 8, 0, 393244, 6, 0, 393250, 6, 0, 393252, 5, 0, 393256, 7, 0, 393258, 5, 0, 393262, 7, 0, 393264, 6, 0, 393314, 6, 0, 393316, 6, 0, 458768, 3, 0, 458769, 4, 0, 458770, 3, 0, 458771, 4, 0, 458772, 8, 0, 458775, 8, 0, 524292, 6, 0, 524294, 6, 0, 524322, 6, 0, 524328, 6, 0, 524334, 5, 0, 655364, 6, 0, 655366, 6, 0, 655394, 6, 0, 655396, 6, 0, 655398, 6, 0, 655400, 6, 0, 655402, 6, 0, 655404, 6, 0, 786436, 5, 0, 786514, 3, 0, 786515, 3, 0, 786516, 2, 0, 786518, 0, 0, 786522, 2, 0, 786524, 1, 0, 786526, 0, 0, 786530, 6, 0, 786532, 5, 0, 852050, 8, 0, 852051, 3, 0, 917506, 6, 0, 917586, 7, 0, 917588, 2, 0, 917594, 2, 0, 917602, 6, 0, 1048610, 6, 0, 1048612, 6, 0, 1048614, 6, 0, 1048616, 5, 0, 1048620, 6, 0, 1048622, 5, 0, 1048626, 3, 0, 1048627, 3, 0, 1048648, 6, 0, 1048658, 6, 0, 1048660, 6, 0, 1048662, 7, 0, 1048664, 6, 0, 1048666, 6, 0, 1048668, 5, 0, 1048672, 5, 0, 1114162, 3, 0, 1114181, 6, 0, 1114183, 8, 0, 1114193, 8, 0, 1179682, 8, 0, 1179683, 8, 0, 1179684, 7, 0, 1179686, 6, 0, 1179692, 6, 0, 1179698, 3, 0, 1179716, 8, 0, 1179719, 6, 0, 1179721, 7, 0, 1179725, 8, 0, 1179726, 8, 0, 1179728, 6, 0, 1179730, 6, 0, 1179732, 6, 0, 1179734, 5, 0, 1179738, 6, 0, 1245218, 8, 0, 1245219, 8, 0, 1245234, 2, 0, 1245236, 27, 0, 1245237, 27, 0, 1245238, 27, 0, 1245239, 27, 0, 1245240, 27, 0, 1245241, 27, 0, 1245242, 4, 0, 1245243, 4, 0, 1245244, 4, 0, 1245245, 4, 0, 1245246, 27, 0, 1245247, 27, 0, 1245248, 27, 0, 1245249, 27, 0, 1245250, 27, 0, 1245251, 27, 0, 1245252, 8, 0, 1245253, 8, 0, 1245254, 8, 0, 1245259, 8, 0, 1245260, 6, 0, 1245262, 7, 0, 1310722, 6, 0, 1310724, 5, 0, 1310728, 2, 0, 1310730, 2, 0, 1310732, 3, 0, 1310733, 3, 0, 1310734, 2, 0, 1310736, 8, 0, 1310739, 8, 0, 1310740, 4, 0, 1310741, 3, 0, 1310742, 4, 0, 1310743, 3, 0, 1310744, 6, 0, 1310746, 6, 0, 1310748, 6, 0, 1310754, 5, 0, 1310758, 6, 0, 1310760, 6, 0, 1310762, 6, 0, 1310764, 5, 0, 1310768, 6, 0, 1310772, 27, 0, 1310773, 27, 0, 1310774, 27, 0, 1310775, 27, 0, 1310776, 27, 0, 1310777, 27, 0, 1310778, 2, 0, 1310780, 0, 0, 1310784, 3, 0, 1310785, 3, 0, 1310786, 2, 0, 1310788, 6, 0, 1310790, 6, 0, 1310792, 5, 0, 1310800, 6, 0, 1310802, 7, 0, 1310804, 6, 0, 1310810, 5, 0, 1376268, 2, 0, 1376272, 8, 0, 1376273, 8, 0, 1376274, 8, 0, 1376275, 8, 0, 1376276, 3, 0, 1376277, 4, 0, 1376278, 3, 0, 1376279, 4, 0, 1376286, 8, 0, 1376287, 8, 0, 1376288, 6, 0, 1376306, 8, 0, 1376307, 8, 0, 1376308, 6, 0, 1376310, 5, 0, 1376320, 3, 0, 1376321, 3, 0, 1376332, 5, 0, 1441794, 6, 0, 1441800, 5, 0, 1441806, 2, 0, 1441808, 6, 0, 1441810, 6, 0, 1441812, 6, 0, 1441814, 6, 0, 1441816, 6, 0, 1441818, 6, 0, 1441820, 6, 0, 1441822, 6, 0, 1441830, 5, 0, 1441834, 6, 0, 1441840, 6, 0, 1441842, 6, 0, 1441850, 6, 0, 1441856, 2, 0, 1441858, 5, 0, 1441862, 6, 0, 1441872, 6, 0, 1441874, 5, 0, 1441878, 6, 0, 1441880, 6, 0, 1507340, 3, 0, 1507341, 3, 0, 1507360, 8, 0, 1507361, 8, 0, 1507380, 7, 0, 1572868, 7, 0, 1572870, 6, 0, 1572876, 6, 0, 1572878, 6, 0, 1572880, 5, 0, 1572884, 6, 0, 1572886, 5, 0, 1572890, 6, 0, 1572892, 6, 0, 1572894, 6, 0, 1572896, 5, 0, 1572900, 6, 0, 1572906, 6, 0, 1572908, 7, 0, 1572910, 6, 0, 1572912, 5, 0, 1572922, 6, 0, 1572924, 6, 0, 1572926, 7, 0, 1572928, 6, 0, 1572934, 6, 0, 1572936, 6, 0, 1572938, 6, 0, 1572944, 6, 0, 1638452, 6, 0, 1638454, 6, 0, 1638456, 6, 0, 1638476, 8, 0, 1638477, 8, 0, 1638478, 6, 0, 1703942, 6, 0, 1703944, 6, 0, 1703946, 6, 0, 1703948, 6, 0, 1703950, 7, 0, 1703956, 6, 0, 1703962, 5, 0, 1703972, 6, 0, 1703974, 6, 0, 1703976, 6, 0, 1703982, 6, 0, 1704000, 6, 0, 1704002, 5, 0, 1704010, 5, 0, 1835018, 6, 0, 1835020, 6, 0, 1835022, 6, 0, 1835026, 6, 0, 1835028, 6, 0, 1835030, 6, 0, 1835044, 6, 0, 1835046, 6, 0, 1835048, 6, 0, 1835056, 6, 0, 1835058, 6, 0 )
 script = ExtResource( 23 )
 
 [node name="Player" parent="." instance=ExtResource( 21 )]
-position = Vector2( -992, 2480 )
+position = Vector2( -864, 1456 )
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 position = Vector2( -0.606995, -96 )
@@ -92,290 +109,544 @@ drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
 script = ExtResource( 3 )
-max_zoom = 5.0
 
 [node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 0, -80 )
 
-[node name="FaithPlate" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1024, 2304 )
-goal_node = NodePath("Position2D")
-height = 1152
+[node name="LaserEmitter_1" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1408, 512 )
+rotation = 1.5708
+start_active = false
 
-[node name="Position2D" type="Position2D" parent="FaithPlate"]
-position = Vector2( 3712, 0 )
+[node name="LaserCatcher_1" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1152, 1280 )
+rotation = -1.5708
 
-[node name="FaithPlate2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2624, 2304 )
-z_index = 1
-animation_direction = 1
-goal_node = NodePath("Position2D")
-height = 1152
+[node name="LaserEmitter_2" parent="." instance=ExtResource( 13 )]
+position = Vector2( 3840, 256 )
+rotation = 1.5708
+start_active = false
 
-[node name="Position2D" type="Position2D" parent="FaithPlate2"]
-position = Vector2( 96, -1152 )
+[node name="LaserCatcher_2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 3328, 1152 )
 
-[node name="FaithPlate3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 4224, 2304 )
-animation_direction = 0
-goal_node = NodePath("Position2D")
-height = 1152
+[node name="TestDoor_1" parent="." instance=ExtResource( 16 )]
+position = Vector2( 288, 1280 )
 
-[node name="Position2D" type="Position2D" parent="FaithPlate3"]
-position = Vector2( -3520, 0 )
+[node name="TestDoor_2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 2400, 1024 )
 
-[node name="CubeDropper" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2720, 640 )
-object = ExtResource( 5 )
+[node name="TestDoor_3" parent="." instance=ExtResource( 16 )]
+position = Vector2( 3168, 1024 )
+
+[node name="TestDoor_4" parent="." instance=ExtResource( 16 )]
+position = Vector2( 6304, 768 )
+
+[node name="CubeDropper" parent="." instance=ExtResource( 25 )]
+position = Vector2( 4864, 64 )
+auto_drop = true
+object = ExtResource( 24 )
 auto_respawn = true
 
-[node name="ToxicGoo" parent="." instance=ExtResource( 8 )]
-position = Vector2( 1280, 3072 )
-scale = Vector2( 45, 11.5 )
+[node name="FloorButton" parent="." instance=ExtResource( 27 )]
+position = Vector2( 5888, 768 )
 
-[node name="ElevatorArrive" parent="." instance=ExtResource( 12 )]
-position = Vector2( -1216, 2496 )
-teleport_to_elevator = NodePath("../Player")
+[node name="IndicatorSign" parent="." instance=ExtResource( 19 )]
+position = Vector2( 6176, 544 )
 
-[node name="ElevatorLeave" parent="." instance=ExtResource( 16 )]
-position = Vector2( 7040, 2496 )
-load_level = "res://test-chambers/level_b3.tscn"
+[node name="TestchamberSign_1" parent="." instance=ExtResource( 17 )]
+position = Vector2( 704, 1024 )
+start_on = false
+number = 10
+icons_type = [ 3, 2, 0 ]
+icons_on = [ true, false, false ]
 
-[node name="TestDoor_1" parent="." instance=ExtResource( 24 )]
-position = Vector2( 480, 2304 )
+[node name="TestchamberSign_2" parent="." instance=ExtResource( 17 )]
+position = Vector2( 3424, 768 )
+start_on = false
+number = 11
+icons_type = [ 0, 12, 1, 11, 7, 3, 2 ]
+icons_on = [ true, true, true, false, false, true, true ]
 
-[node name="TestDoor_2" parent="." instance=ExtResource( 24 )]
-position = Vector2( 5344, 2304 )
+[node name="Stairs_2" type="Node2D" parent="."]
+position = Vector2( 4736, 1024 )
 
-[node name="FloorButton" parent="." instance=ExtResource( 11 )]
-position = Vector2( 5056, 2304 )
+[node name="Panel1" parent="Stairs_2" instance=ExtResource( 8 )]
 
-[node name="PedestalButton" parent="." instance=ExtResource( 27 )]
-position = Vector2( 4768, 2304 )
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel1"]
+collision_layer = 2
+collision_mask = 2
 
-[node name="Fizzler" parent="." instance=ExtResource( 25 )]
-position = Vector2( 5696, 2176 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel1/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
 
-[node name="fizzler_1" type="Sprite" parent="Fizzler"]
-position = Vector2( 0, -112 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 13 )
-
-[node name="fizzler_2" type="Sprite" parent="Fizzler"]
-position = Vector2( 0, 112 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 13 )
-flip_v = true
-
-[node name="IndicatorSign" parent="." instance=ExtResource( 20 )]
-position = Vector2( 5216, 2080 )
-
-[node name="IndicatorLights_1" type="Node2D" parent="."]
-position = Vector2( 4736, 2304 )
-scale = Vector2( 0.25, 0.25 )
-z_index = -5
-script = ExtResource( 9 )
-
-[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -128, -3712 )
-texture = ExtResource( 10 )
-centered = false
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel1/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
 region_enabled = true
-region_rect = Rect2( 0, -2048, 128, 3712 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
+region_rect = Rect2( 1408, 664, 256, 24 )
 
-[node name="indicator-lights-strip-off5" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -3584, -4480 )
-texture = ExtResource( 10 )
-centered = false
+[node name="Panel2" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 128, 0 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel2"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel2/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel2/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
 region_enabled = true
-region_rect = Rect2( 0, -640, 128, 640 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
+region_rect = Rect2( 1408, 664, 256, 24 )
 
-[node name="indicator-lights-strip-off9" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -7808, -5888 )
-texture = ExtResource( 10 )
-centered = false
+[node name="Panel3" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 256, 0 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel3/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel3/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
 region_enabled = true
-region_rect = Rect2( 0, -1152, 128, 1280 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
+region_rect = Rect2( 1408, 664, 256, 24 )
 
-[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -3456, -3840 )
-texture = ExtResource( 10 )
-centered = false
+[node name="Panel4" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 384, 0 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel4"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel4/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel4/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 3328, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
+region_rect = Rect2( 1408, 664, 256, 24 )
 
-[node name="indicator-lights-strip-off8" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -7680, -4608 )
-texture = ExtResource( 10 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 4096, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
+[node name="StaticBody2D" type="StaticBody2D" parent="Stairs_2"]
+visible = false
+collision_layer = 2
+collision_mask = 2
 
-[node name="indicator-lights-strip-off3" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -128, -3840 )
-texture = ExtResource( 15 )
-centered = false
-region_rect = Rect2( 0, 0, 2048, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 18 )
-
-[node name="indicator-lights-strip-off4" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -3584, -3840 )
-texture = ExtResource( 15 )
-centered = false
-region_rect = Rect2( 0, 0, 2048, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 18 )
-
-[node name="indicator-lights-strip-off6" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -3584, -4608 )
-texture = ExtResource( 15 )
-centered = false
-region_rect = Rect2( 0, 0, 2048, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 18 )
-
-[node name="indicator-lights-strip-off7" type="Sprite" parent="IndicatorLights_1"]
-material = SubResource( 1 )
-position = Vector2( -7808, -4608 )
-texture = ExtResource( 15 )
-centered = false
-region_rect = Rect2( 0, 0, 2048, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 18 )
-
-[node name="IndicatorLights_2" type="Node2D" parent="."]
-position = Vector2( 5024, 2272 )
-scale = Vector2( 0.25, 0.25 )
-z_index = -5
-script = ExtResource( 9 )
-
-[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights_2"]
-material = SubResource( 1 )
-position = Vector2( -128, -768 )
-texture = ExtResource( 10 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, -640, 128, 768 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
-
-[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights_2"]
-material = SubResource( 1 )
-position = Vector2( 0, -896 )
-texture = ExtResource( 10 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 640, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 14 )
-
-[node name="indicator-lights-strip-off3" type="Sprite" parent="IndicatorLights_2"]
-material = SubResource( 1 )
-position = Vector2( -128, -896 )
-texture = ExtResource( 15 )
-centered = false
-region_rect = Rect2( 0, 0, 2048, 128 )
-script = ExtResource( 17 )
-texture_on = ExtResource( 18 )
-
-[node name="GrabArea" type="Area2D" parent="."]
-position = Vector2( 2720, 1152 )
-collision_layer = 14
-collision_mask = 14
-script = ExtResource( 26 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/StaticBody2D"]
+position = Vector2( 256, 64 )
 shape = SubResource( 2 )
 
-[node name="TestchamberSign" parent="." instance=ExtResource( 29 )]
-position = Vector2( 768, 2048 )
-start_on = false
-icons_type = [ 0, 12, 1, 11, 7, 4, 5, 14 ]
-icons_on = [ true, true, true, false, true, false, false, true ]
+[node name="IndicatorLights_1" type="Node2D" parent="."]
+material = SubResource( 3 )
+position = Vector2( 1216, 1344 )
+scale = Vector2( 0.25, 0.25 )
+z_index = 10
+script = ExtResource( 11 )
 
-[node name="TriggerArea_1" type="Area2D" parent="."]
-position = Vector2( -224, 2240 )
+[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( -128, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -384, 128, 512 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off5" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 2816, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -384, 128, 512 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 0, 512 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2816, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off3" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( -128, 512 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-strip-off4" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 2816, 512 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="Fizzler_1" parent="." instance=ExtResource( 18 )]
+position = Vector2( 2496, 896 )
+
+[node name="fizzler" type="Sprite" parent="Fizzler_1"]
+position = Vector2( 0, -112 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 26 )
+
+[node name="fizzler2" type="Sprite" parent="Fizzler_1"]
+position = Vector2( 0, 112 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 26 )
+flip_v = true
+
+[node name="Fizzler_2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 3072, 896 )
+
+[node name="fizzler" type="Sprite" parent="Fizzler_2"]
+position = Vector2( 0, -112 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 26 )
+
+[node name="fizzler2" type="Sprite" parent="Fizzler_2"]
+position = Vector2( 0, 112 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 26 )
+flip_v = true
+
+[node name="Fizzler_3" parent="." instance=ExtResource( 18 )]
+position = Vector2( 6400, 640 )
+
+[node name="fizzler" type="Sprite" parent="Fizzler_3"]
+position = Vector2( 0, -112 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 26 )
+
+[node name="fizzler2" type="Sprite" parent="Fizzler_3"]
+position = Vector2( 0, 112 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 26 )
+flip_v = true
+
+[node name="IndicatorLights_2" type="Node2D" parent="."]
+material = SubResource( 4 )
+position = Vector2( 3360, 1120 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+script = ExtResource( 11 )
+
+[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1920, -640 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -384, 128, 512 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off7" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 5504, -640 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -128, 128, 256 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 2048, -768 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 3456, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off4" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( -128, -128 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off3" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1920, -128 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-strip-off5" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1920, -768 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-strip-off6" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 5504, -768 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="IndicatorLights_3" type="Node2D" parent="."]
+material = SubResource( 4 )
+position = Vector2( 5824, 736 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+script = ExtResource( 11 )
+
+[node name="indicator-lights-strip-off" type="Sprite" parent="IndicatorLights_3"]
+use_parent_material = true
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -512, 128, 640 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off2" type="Sprite" parent="IndicatorLights_3"]
+use_parent_material = true
+position = Vector2( 128, -768 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1152, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-off5" type="Sprite" parent="IndicatorLights_3"]
+use_parent_material = true
+position = Vector2( 0, -768 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="ElevatorArrive" parent="." instance=ExtResource( 20 )]
+position = Vector2( -1088, 1472 )
+teleport_to_elevator = NodePath("../Player")
+
+[node name="ElevatorLeave" parent="." instance=ExtResource( 28 )]
+position = Vector2( 7872, 960 )
+load_level = "res://test-chambers/level_b3.tscn"
+
+[node name="Area2D_1" type="Area2D" parent="."]
+position = Vector2( -96, 1248 )
 collision_layer = 14
 collision_mask = 14
-script = ExtResource( 28 )
+script = ExtResource( 29 )
 __meta__ = {
 "_edit_group_": true
 }
 only_player = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_1"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_1"]
+shape = SubResource( 5 )
 
-[node name="TriggerArea_2" type="Area2D" parent="."]
-position = Vector2( 672, 2112 )
+[node name="Area2D_2" type="Area2D" parent="."]
+position = Vector2( 544, 1152 )
 collision_layer = 14
 collision_mask = 14
-script = ExtResource( 28 )
+script = ExtResource( 29 )
 __meta__ = {
 "_edit_group_": true
 }
 only_player = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_2"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_2"]
+shape = SubResource( 5 )
 
-[node name="TriggerArea_3" type="Area2D" parent="."]
-position = Vector2( 1312, 1856 )
+[node name="Area2D_3" type="Area2D" parent="."]
+position = Vector2( 2272, 896 )
 collision_layer = 14
 collision_mask = 14
-script = ExtResource( 28 )
+script = ExtResource( 29 )
 __meta__ = {
 "_edit_group_": true
 }
 only_player = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_3"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_3"]
+shape = SubResource( 5 )
 
-[node name="TriggerArea_4" type="Area2D" parent="."]
-position = Vector2( 5728, 2176 )
+[node name="Area2D_4" type="Area2D" parent="."]
+position = Vector2( 2784, 896 )
 collision_layer = 14
 collision_mask = 14
-script = ExtResource( 28 )
+script = ExtResource( 29 )
 __meta__ = {
 "_edit_group_": true
 }
 only_player = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_4"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_4"]
+shape = SubResource( 5 )
+
+[node name="Area2D_5" type="Area2D" parent="."]
+position = Vector2( 3296, 896 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_5"]
+shape = SubResource( 5 )
+
+[node name="Area2D_6" type="Area2D" parent="."]
+position = Vector2( 3616, 960 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_6"]
+shape = SubResource( 6 )
+
+[node name="Area2D_7" type="Area2D" parent="."]
+position = Vector2( 6624, 640 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_7"]
+shape = SubResource( 5 )
+
+[node name="MovingPlatform" parent="." instance=ExtResource( 30 )]
+position = Vector2( 2048, 1280 )
+line_path = NodePath("../Line2D")
+
+[node name="platform-arm" type="Sprite" parent="MovingPlatform"]
+position = Vector2( 0, 200 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -1
+texture = ExtResource( 31 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MovingPlatform"]
+position = Vector2( 0, 160 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform/StaticBody2D"]
+shape = SubResource( 7 )
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 2048, 1280 )
+points = PoolVector2Array( 0, 0, 0, -256 )
+width = 0.0
+default_color = Color( 0.4, 0.501961, 1, 1 )
+
+[node name="Camera" parent="." instance=ExtResource( 32 )]
+position = Vector2( 2176, 640 )
+
+[node name="Camera2" parent="." instance=ExtResource( 32 )]
+position = Vector2( 5248, 224 )
+
+[node name="Camera3" parent="." instance=ExtResource( 32 )]
+position = Vector2( 3200, 448 )
+scale = Vector2( -1, 1 )
+
+[node name="GlassLightCover" parent="." instance=ExtResource( 33 )]
+position = Vector2( 2272, 896 )
+
+[node name="GlassLightCover2" parent="." instance=ExtResource( 33 )]
+position = Vector2( 2144, 1152 )
+
+[node name="GlassLightCover3" parent="." instance=ExtResource( 33 )]
+position = Vector2( 3584, 224 )
+rotation = 1.5708
+
+[node name="GlassLightCover4" parent="." instance=ExtResource( 33 )]
+position = Vector2( 4352, 160 )
+rotation = 1.5708
+
+[node name="GlassLightCover5" parent="." instance=ExtResource( 33 )]
+position = Vector2( 4608, 160 )
+rotation = 1.5708
+
+[node name="GlassLightCover6" parent="." instance=ExtResource( 33 )]
+position = Vector2( 5632, 288 )
+rotation = 1.5708
+
+[node name="GlassLightCover7" parent="." instance=ExtResource( 33 )]
+position = Vector2( 4224, 1184 )
+rotation = 1.5708
+[connection signal="activated" from="LaserCatcher_1" to="IndicatorLights_1" method="set_on"]
+[connection signal="activated" from="LaserCatcher_1" to="MovingPlatform" method="go_to_last"]
+[connection signal="deactivated" from="LaserCatcher_1" to="IndicatorLights_1" method="set_off"]
+[connection signal="deactivated" from="LaserCatcher_1" to="MovingPlatform" method="go_to_first"]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel4" method="play_animation" binds= [ "stairs-right-4-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel1" method="play_animation" binds= [ "stairs-right-1-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="IndicatorLights_2" method="set_on"]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel3" method="play_animation" binds= [ "stairs-right-3-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel2" method="play_animation" binds= [ "stairs-right-2-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel4" method="play_animation_rev" binds= [ "stairs-right-4-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel1" method="play_animation_rev" binds= [ "stairs-right-1-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="IndicatorLights_2" method="set_off"]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel3" method="play_animation_rev" binds= [ "stairs-right-3-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel2" method="play_animation_rev" binds= [ "stairs-right-2-out" ]]
+[connection signal="pressed" from="FloorButton" to="IndicatorLights_3" method="set_on"]
+[connection signal="pressed" from="FloorButton" to="TestDoor_4" method="open"]
 [connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
-[connection signal="pressed" from="FloorButton" to="IndicatorLights_2" method="set_on"]
-[connection signal="pressed" from="FloorButton" to="TestDoor_2" method="open"]
+[connection signal="released" from="FloorButton" to="IndicatorLights_3" method="set_off"]
+[connection signal="released" from="FloorButton" to="TestDoor_4" method="close"]
 [connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
-[connection signal="released" from="FloorButton" to="IndicatorLights_2" method="set_off"]
-[connection signal="released" from="FloorButton" to="TestDoor_2" method="close"]
-[connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]
-[connection signal="pressed" from="PedestalButton" to="IndicatorLights_1" method="set_on"]
-[connection signal="released" from="PedestalButton" to="IndicatorLights_1" method="set_off"]
-[connection signal="enter" from="TriggerArea_1" to="TestDoor_1" method="open" flags=6]
-[connection signal="enter" from="TriggerArea_2" to="TestchamberSign" method="turn_on" flags=6]
-[connection signal="enter" from="TriggerArea_3" to="TestDoor_1" method="close" flags=6]
-[connection signal="enter" from="TriggerArea_4" to="TestDoor_2" method="close" flags=6]
+[connection signal="enter" from="Area2D_1" to="TestDoor_1" method="open" flags=6]
+[connection signal="enter" from="Area2D_2" to="TestchamberSign_1" method="turn_on" flags=6]
+[connection signal="enter" from="Area2D_2" to="TestDoor_1" method="close" flags=6]
+[connection signal="enter" from="Area2D_2" to="LaserEmitter_1" method="activate" flags=6]
+[connection signal="enter" from="Area2D_3" to="TestDoor_2" method="open" flags=6]
+[connection signal="enter" from="Area2D_4" to="LaserEmitter_2" method="activate" flags=6]
+[connection signal="enter" from="Area2D_4" to="TestDoor_3" method="open" flags=6]
+[connection signal="enter" from="Area2D_4" to="TestDoor_2" method="close" flags=6]
+[connection signal="enter" from="Area2D_4" to="LaserEmitter_1" method="deactivate" flags=6]
+[connection signal="enter" from="Area2D_5" to="TestchamberSign_2" method="turn_on" flags=6]
+[connection signal="enter" from="Area2D_5" to="CubeDropper" method="spawn_new" flags=6]
+[connection signal="enter" from="Area2D_6" to="TestDoor_3" method="close" flags=6]
+[connection signal="enter" from="Area2D_7" to="LaserEmitter_2" method="deactivate" flags=6]
+[connection signal="enter" from="Area2D_7" to="TestDoor_4" method="close" flags=6]
