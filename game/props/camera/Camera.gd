@@ -22,7 +22,7 @@ func _physics_process(delta):
         if result.empty() or result.collider != tracked_player: return
         goal = (tracked_player.global_position - camera_body.global_position).angle()
     
-    if scale.y < 0: goal *= -1
+    if scale.x < 0: goal *= -1
     else: goal += half_rotation
     if (goal != camera_body.rotation):
         camera_body.rotation = lerp_angle(camera_body.rotation, goal, 2.0 * delta)

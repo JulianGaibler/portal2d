@@ -498,8 +498,7 @@ range_z_max = -5
 
 [node name="Camera2" parent="." instance=ExtResource( 31 )]
 position = Vector2( 1088, 0 )
-rotation = -3.14159
-scale = Vector2( 1, -1 )
+scale = Vector2( -1, 1 )
 
 [node name="Trigger2" type="Area2D" parent="."]
 position = Vector2( 1216, 256 )
@@ -597,6 +596,9 @@ rotation = 1.5708
 
 [node name="Camera" parent="." instance=ExtResource( 31 )]
 position = Vector2( 896, -128 )
+
+[node name="Camera3" parent="." instance=ExtResource( 31 )]
+position = Vector2( 4030, 160 )
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( -256, 628 )
@@ -1160,26 +1162,25 @@ position = Vector2( 4704, 768 )
 [node name="ElevatorLeave" parent="." instance=ExtResource( 39 )]
 position = Vector2( 6464, 960 )
 load_level = "res://test-chambers/level_a2.tscn"
-
-[connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
-[connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="TestDoor2" method="open"]
-[connection signal="released" from="FloorButton" to="IndicatorLights" method="set_off"]
-[connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
+[connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
+[connection signal="pressed" from="FloorButton" to="IndicatorLights" method="set_on"]
 [connection signal="released" from="FloorButton" to="TestDoor2" method="close"]
-[connection signal="enter" from="Trigger2" to="CubeDropper" method="timed_open" flags=6]
+[connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
+[connection signal="released" from="FloorButton" to="IndicatorLights" method="set_off"]
 [connection signal="enter" from="Trigger2" to="TestDoor1" method="close" flags=6]
+[connection signal="enter" from="Trigger2" to="CubeDropper" method="timed_open" flags=6]
 [connection signal="enter" from="Trigger1" to="TestDoor1" method="open" flags=6]
 [connection signal="pressed" from="PedestalButton10_s1" to="PortalSpawner01_s1" method="activate"]
 [connection signal="pressed" from="PedestalButton10_s2" to="PortalSpawner01_s2" method="activate"]
 [connection signal="pressed" from="PedestalButton10_s3" to="PortalSpawner01_s3" method="activate"]
-[connection signal="pressed" from="FloorButton01" to="IndicatorSign01" method="set_on"]
 [connection signal="pressed" from="FloorButton01" to="TestDoor01" method="open"]
+[connection signal="pressed" from="FloorButton01" to="IndicatorSign01" method="set_on"]
 [connection signal="pressed" from="FloorButton01" to="IndicatorLights01" method="set_on"]
-[connection signal="released" from="FloorButton01" to="IndicatorSign01" method="set_off"]
 [connection signal="released" from="FloorButton01" to="TestDoor01" method="close"]
+[connection signal="released" from="FloorButton01" to="IndicatorSign01" method="set_off"]
 [connection signal="released" from="FloorButton01" to="IndicatorLights01" method="set_off"]
-[connection signal="enter" from="Trigger01" to="." method="force_close_portals" flags=6]
 [connection signal="enter" from="Trigger01" to="TestDoor2" method="close" flags=6]
 [connection signal="enter" from="Trigger01" to="TestchamberSign01" method="turn_on" flags=6]
+[connection signal="enter" from="Trigger01" to="." method="force_close_portals" flags=6]
 [connection signal="leave" from="Trigger01" to="PortalSpawner01_enter" method="activate" flags=6]
