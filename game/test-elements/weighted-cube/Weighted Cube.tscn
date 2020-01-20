@@ -1,26 +1,34 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://test-elements/weighted-cube/weigthed-cubes.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/weighted-cube/Weighted Cube.gd" type="Script" id=2]
+[ext_resource path="res://sounds/impacts/impact1.wav" type="AudioStream" id=3]
+[ext_resource path="res://test-elements/weighted-cube/cube-lights.png" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
+bounce = 0.1
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
-[node name="Weighted Cube" type="RigidBody2D" groups=[
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 46.7656, 47.9829 )
+
+[node name="WeightedCube" type="RigidBody2D" groups=[
 "can-fizzle",
 "can-pickup",
+"cube",
 "dynamic-prop",
 ]]
 collision_layer = 66
-collision_mask = 66
-mass = 25.0
+collision_mask = 2
+mass = 35.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="CubeSprite" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
@@ -30,3 +38,30 @@ region_rect = Rect2( 8, 8, 320, 320 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 2 )
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+shape = SubResource( 3 )
+
+[node name="CollisionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+pitch_scale = 1.2
+max_distance = 1000.0
+attenuation = 1.56916
+bus = "Reverb"
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+use_parent_material = true
+texture = ExtResource( 4 )
+texture_scale = 0.25
+color = Color( 0.435294, 0.647059, 0.678431, 1 )
+energy = 1.2
+mode = 2
+range_z_min = 0
+range_z_max = 0

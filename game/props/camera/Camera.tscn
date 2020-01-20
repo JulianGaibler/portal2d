@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://shader/glow/GlowMaterial.tres" type="Material" id=1]
 [ext_resource path="res://props/camera/camera.png" type="Texture" id=2]
 [ext_resource path="res://props/camera/Camera.gd" type="Script" id=3]
+[ext_resource path="res://props/camera/camera-lights.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 1516.26
@@ -39,7 +40,7 @@ collision_mask = 0
 texture = ExtResource( 2 )
 offset = Vector2( -32, -4 )
 region_enabled = true
-region_rect = Rect2( 120, 368, 256, 200 )
+region_rect = Rect2( 112, 368, 264, 200 )
 
 [node name="LensSprite" type="Sprite" parent="CameraSprite/StaticBody2D/BodySprite"]
 material = ExtResource( 1 )
@@ -48,6 +49,15 @@ z_index = -1
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 16, 416, 24, 104 )
+
+[node name="Light2D" type="Light2D" parent="CameraSprite/StaticBody2D/BodySprite"]
+position = Vector2( -164, -4.00061 )
+rotation = 3.57628e-06
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+texture_scale = 0.25
+energy = 1.2
+mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSprite/StaticBody2D"]
 visible = false

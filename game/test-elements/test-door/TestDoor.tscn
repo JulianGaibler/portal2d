@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://test-elements/test-door/test-door.png" type="Texture" id=1]
+[ext_resource path="res://test-elements/test-door/test-door-light.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/test-door/TestDoor.gd" type="Script" id=3]
+[ext_resource path="res://sounds/valve_sounds/TestDoor_close.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/valve_sounds/TestDoor_open.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 3 )
@@ -15,49 +18,53 @@ collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="DoorBackSprite" type="Sprite" parent="."]
-position = Vector2( 0, -128 )
+position = Vector2( 0, -144 )
 scale = Vector2( 0.25, 0.25 )
 z_index = -1
+texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 512, 0, 512, 1024 )
+region_rect = Rect2( 512, 0, 512, 1152 )
 
 [node name="DoorSprite" type="Sprite" parent="."]
-position = Vector2( 0, -112 )
+position = Vector2( 0, -128 )
 scale = Vector2( 0.25, 0.25 )
 z_index = 2
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 1024, 192, 128, 768 )
+region_rect = Rect2( 1024, 192, 128, 896 )
 
 [node name="DoorFrontSprite" type="Sprite" parent="."]
-position = Vector2( 0, -128 )
+position = Vector2( 0, -144 )
 scale = Vector2( 0.25, 0.25 )
 z_index = 3
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 512, 1024 )
+region_rect = Rect2( 0, 0, 512, 1152 )
 
-[node name="DoorLightSprite" type="Sprite" parent="."]
+[node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -128 )
-scale = Vector2( 0.25, 0.25 )
-z_index = 4
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 1152, 0, 256, 1024 )
+texture = ExtResource( 2 )
+texture_scale = 0.25
+color = Color( 0.435294, 0.647059, 0.678431, 1 )
+energy = 1.1
+mode = 2
 
 [node name="CollisionShape2DBottom" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 3 )
+z_index = 4
 shape = SubResource( 1 )
 
 [node name="CollisionShape2DTop" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, -221 )
+position = Vector2( 0, -253 )
+z_index = 4
 shape = SubResource( 1 )
 
 [node name="DoorBody" type="StaticBody2D" parent="."]
 visible = false
-position = Vector2( 0, -112 )
+position = Vector2( 0, -128 )
+z_index = 3
 collision_layer = 14
 collision_mask = 0
 
@@ -65,3 +72,17 @@ collision_mask = 0
 shape = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="DoorOpenAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, -128 )
+stream = ExtResource( 5 )
+max_distance = 3000.0
+attenuation = 2.0
+bus = "Panning"
+
+[node name="DoorCloseAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, -128 )
+stream = ExtResource( 4 )
+max_distance = 3000.0
+attenuation = 2.0
+bus = "Panning"

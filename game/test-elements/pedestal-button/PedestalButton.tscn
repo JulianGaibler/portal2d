@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://test-elements/pedestal-button/pedestal-button.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/pedestal-button/PedestalButton.gd" type="Script" id=2]
@@ -36,9 +36,6 @@ tracks/0/keys = {
 "values": [ Vector2( -1.291, -78.157 ), Vector2( 0, -80 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 12, 44 )
-
 [node name="PedestalButton" type="StaticBody2D" groups=[
 "can-press",
 ]]
@@ -51,29 +48,23 @@ visible = false
 position = Vector2( 0, -80 )
 shape = SubResource( 1 )
 
-[node name="PedestalColliderButton" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PedestalColliderButton"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/press-button = SubResource( 2 )
 anims/release-button = SubResource( 3 )
 
-[node name="ButtonSprite" type="Sprite" parent="PedestalColliderButton"]
+[node name="ButtonSprite" type="Sprite" parent="."]
 position = Vector2( 0, -80 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 128 )
 
-[node name="PedestalSprite" type="Sprite" parent="PedestalColliderButton"]
+[node name="PedestalSprite" type="Sprite" parent="."]
 position = Vector2( 0, -48 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 128, 256, 384 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PedestalColliderButton"]
-visible = false
-position = Vector2( 0, -44 )
-shape = SubResource( 4 )
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+bus = "Reverb"

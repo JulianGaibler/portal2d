@@ -6,6 +6,9 @@ onready var animation_player = $AnimationPlayer
 onready var elevator = $Elevator
 onready var leave_area = $LeaveArea
 onready var ceiling_light = $CeilingLight
+onready var door_audio = $DoorAudio
+onready var chime_audio = $ChimeAudio
+onready var lift_audio = $Elevator/LiftAudio
 
 export(Direction) var arrives_from = Direction.ABOVE
 export (NodePath) var teleport_to_elevator = null
@@ -16,12 +19,16 @@ func _ready():
     match arrives_from:
         Direction.ABOVE: animation_player.play("down-arrive")
         Direction.BELOW: animation_player.play("up-arrive")
+    lift_audio.play(0.5)
     
     if teleport_to_elevator != null: call_deferred("_teleport")
     
     yield(get_tree().create_timer(4.4), "timeout")
+    door_audio.play()
     elevator.open()
     leave_area.connect("body_entered", self, "leaves_room")
+    yield(get_tree().create_timer(0.5), "timeout")
+    chime_audio.play()
 
 func _teleport():
     yield(get_tree(), "physics_frame")

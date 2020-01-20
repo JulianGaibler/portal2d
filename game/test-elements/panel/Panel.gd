@@ -5,21 +5,36 @@ extends Node2D
 # it will be transformed with the panel
 
 onready var animationPlayer := $AnimationPlayer
+onready var audio_player := $AudioStreamPlayer2D
 onready var panelBase := $PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase/Position2D
+
+const sound_open = preload("res://sounds/valve_sounds/Panel_open.wav")
+const sound_close = preload("res://sounds/valve_sounds/Panel_close.wav")
 
 # Animation played when the panel gets created
 export(String) var initial_animation = null
 
 func _ready():
+    call_deferred("_ready_deferred")
+
+func _ready_deferred():
     var child = get_child(get_child_count()-1)
     if child.name == "PanelTransform":
         var remote_path = RemoteTransform2D.new()
-        remote_path.remote_path = child.get_path()
         panelBase.add_child(remote_path)
         remote_path.	update_scale = false
-    
+        remote_path.remote_path = child.get_path()
     if initial_animation:
-        animationPlayer.play(initial_animation)
+        animationPlayer.play(initial_animation, -1, 0, true)
 
-func play_animation(name):
-    animationPlayer.play(name)
+func play_animation(name, delay = 0.0, speed = 1.0):
+    if delay > 0.0:yield(get_tree().create_timer(delay), "timeout")
+    audio_player.set_stream(sound_open)
+    audio_player.play()
+    animationPlayer.play(name, -1, speed, false)
+
+func play_animation_rev(name, delay = 0.0, speed = 1.0):
+    if delay > 0.0:yield(get_tree().create_timer(delay), "timeout")
+    audio_player.set_stream(sound_close)
+    audio_player.play()
+    animationPlayer.play(name, -1, -speed, true)

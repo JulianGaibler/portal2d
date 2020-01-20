@@ -7,6 +7,7 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.75
+bounce = 0.1
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
@@ -45,11 +46,12 @@ shader = SubResource( 4 )
 [node name="RedirectionCube" type="RigidBody2D" groups=[
 "can-fizzle",
 "can-pickup",
+"cube",
 "dynamic-prop",
 ]]
 collision_layer = 66
 collision_mask = 66
-mass = 25.0
+mass = 35.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
 
@@ -66,12 +68,14 @@ collision_mask = 1024
 shape = SubResource( 3 )
 
 [node name="LensSprite" type="Sprite" parent="."]
+light_mask = 3
 material = SubResource( 5 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 8, 368, 216, 216 )
 
 [node name="CubeSprite" type="Sprite" parent="."]
+light_mask = 3
 use_parent_material = true
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )

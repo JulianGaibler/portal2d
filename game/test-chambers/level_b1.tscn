@@ -1,0 +1,721 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=1]
+[ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
+[ext_resource path="res://camera/PlayerCamera.gd" type="Script" id=3]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-on.png" type="Texture" id=4]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-on.png" type="Texture" id=5]
+[ext_resource path="res://default_env.tres" type="Environment" id=6]
+[ext_resource path="res://portal-gun/PortalGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://test-elements/panel/Panel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://props/portalgun-pedestal.png" type="Texture" id=9]
+[ext_resource path="res://portal-gun/portal-gun.png" type="Texture" id=10]
+[ext_resource path="res://classes/TextureToggleNode.gd" type="Script" id=11]
+[ext_resource path="res://tileset/tiles.png" type="Texture" id=12]
+[ext_resource path="res://test-elements/toxic-goo/ToxicGoo.tscn" type="PackedScene" id=13]
+[ext_resource path="res://classes/TextureToggle.gd" type="Script" id=14]
+[ext_resource path="res://test-elements/indicator-lights/indicator-lights-corner-off.png" type="Texture" id=15]
+[ext_resource path="res://test-elements/test-door/TestDoor.tscn" type="PackedScene" id=16]
+[ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.tscn" type="PackedScene" id=17]
+[ext_resource path="res://textures/light-gradient.png" type="Texture" id=18]
+[ext_resource path="res://test-elements/indicator-sign/IndicatorSign.tscn" type="PackedScene" id=19]
+[ext_resource path="res://test-elements/portal-spawner/PortalSpawner.tscn" type="PackedScene" id=20]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sounds/background/background-drone-ambient.wav" type="AudioStream" id=22]
+[ext_resource path="res://tileset/TileColliderGenerator.gd" type="Script" id=23]
+[ext_resource path="res://shader/glow/glow.shader" type="Shader" id=24]
+[ext_resource path="res://test-elements/cube-dropper/CubeDropper.tscn" type="PackedScene" id=25]
+[ext_resource path="res://test-elements/weighted-cube/Weighted Cube.tscn" type="PackedScene" id=26]
+[ext_resource path="res://test-elements/floor-button/FloorButton.tscn" type="PackedScene" id=27]
+[ext_resource path="res://test-elements/faith-plate/FaithPlate.tscn" type="PackedScene" id=28]
+[ext_resource path="res://test-elements/pedestal-button/PedestalButton.tscn" type="PackedScene" id=29]
+[ext_resource path="res://sounds/valve_sounds/PortalGun_powerup1.wav" type="AudioStream" id=30]
+[ext_resource path="res://classes/TriggerArea.gd" type="Script" id=31]
+[ext_resource path="res://classes/UpgradePedestal.gd" type="Script" id=32]
+[ext_resource path="res://test-elements/fizzler/fizzler.png" type="Texture" id=33]
+[ext_resource path="res://test-elements/fizzler/Fizzler.tscn" type="PackedScene" id=34]
+[ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=35]
+[ext_resource path="res://test-elements/elevator-room/ElevatorArrive.tscn" type="PackedScene" id=36]
+[ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=37]
+[ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=38]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 6 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 24 )
+shader_param/bright_amount = 1.3
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 32, 192 )
+
+[node name="Level" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 6 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="WorldEnvironment"]
+visible = false
+color = Color( 0, 0, 0, 1 )
+
+[node name="Music" type="AudioStreamPlayer2D" parent="WorldEnvironment"]
+stream = ExtResource( 22 )
+volume_db = -15.0
+autoplay = true
+bus = "Panning"
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 3712, 0 )
+texture = ExtResource( 18 )
+offset = Vector2( 0, 1792 )
+texture_scale = 7.0
+energy = 1.5
+mode = 2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 0.5
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TileMapBackground" type="TileMap" parent="."]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -10
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 0
+format = 1
+tile_data = PoolIntArray( -262124, 28, 0, -262120, 28, 0, -262116, 28, 0, -262112, 28, 0, -262108, 28, 0, -262104, 28, 0, -262100, 28, 0, -262096, 28, 0, -262092, 28, 0, -262088, 28, 0, -262084, 28, 0, -262080, 28, 0, -262076, 28, 0, -262072, 28, 0, -262068, 28, 0, -262064, 28, 0, -262060, 28, 0, -262056, 28, 0, -262052, 28, 0, 16, 28, 0, 20, 28, 0, 56, 5, 0, 92, 28, 0, 96, 28, 0, 262160, 28, 0, 262172, 5, 0, 262176, 5, 0, 262180, 5, 0, 262184, 5, 0, 262188, 5, 0, 262200, 6, 0, 262202, 6, 0, 262212, 5, 0, 262216, 5, 0, 262220, 5, 0, 262224, 5, 0, 262228, 5, 0, 262240, 28, 0, 393272, 5, 0, 393290, 6, 0, 393292, 6, 0, 524304, 28, 0, 524316, 6, 0, 524318, 6, 0, 524320, 6, 0, 524322, 6, 0, 524324, 6, 0, 524326, 6, 0, 524328, 6, 0, 524330, 6, 0, 524332, 6, 0, 524334, 6, 0, 524336, 6, 0, 524354, 6, 0, 524356, 6, 0, 524358, 6, 0, 524360, 6, 0, 524362, 6, 0, 524364, 6, 0, 524366, 6, 0, 524368, 5, 0, 524372, 5, 0, 524384, 28, 0, 655388, 5, 0, 655392, 5, 0, 655396, 5, 0, 655400, 5, 0, 655404, 5, 0, 655408, 6, 0, 655410, 6, 0, 655414, 6, 0, 655416, 5, 0, 655420, 6, 0, 655424, 6, 0, 655426, 6, 0, 655428, 5, 0, 655432, 5, 0, 655436, 5, 0, 786444, 28, 0, 786448, 28, 0, 786480, 6, 0, 786482, 6, 0, 786484, 5, 0, 786492, 5, 0, 786496, 6, 0, 786498, 6, 0, 786512, 5, 0, 786516, 5, 0, 786528, 28, 0, 786532, 28, 0, 917532, 5, 0, 917536, 5, 0, 917540, 5, 0, 917544, 5, 0, 917548, 5, 0, 917552, 6, 0, 917554, 7, 0, 917560, 5, 0, 917568, 6, 0, 917570, 6, 0, 917572, 5, 0, 917576, 6, 0, 917578, 7, 0, 917580, 5, 0, 1048588, 28, 0, 1048624, 6, 0, 1048626, 6, 0, 1048628, 6, 0, 1048630, 6, 0, 1048636, 6, 0, 1048638, 6, 0, 1048640, 6, 0, 1048642, 6, 0, 1048648, 6, 0, 1048650, 6, 0, 1048656, 6, 0, 1048658, 6, 0, 1048660, 6, 0, 1048662, 6, 0, 1048676, 28, 0, 1179682, 6, 0, 1179684, 5, 0, 1179688, 6, 0, 1179690, 6, 0, 1179692, 5, 0, 1179696, 5, 0, 1179700, 5, 0, 1179704, 5, 0, 1179708, 6, 0, 1179710, 7, 0, 1179712, 6, 0, 1179714, 6, 0, 1179716, 5, 0, 1179720, 5, 0, 1179724, 5, 0, 1179728, 6, 0, 1310728, 28, 0, 1310732, 28, 0, 1310740, 1, 0, 1310742, 1, 0, 1310744, 1, 0, 1310746, 1, 0, 1310748, 1, 0, 1310750, 1, 0, 1310752, 1, 0, 1310754, 1, 0, 1310760, 6, 0, 1310762, 7, 0, 1310780, 6, 0, 1310782, 6, 0, 1310784, 6, 0, 1310786, 7, 0, 1310800, 1, 0, 1310802, 1, 0, 1310804, 1, 0, 1310806, 1, 0, 1310808, 1, 0, 1310810, 1, 0, 1310812, 1, 0, 1310814, 1, 0, 1310820, 28, 0, 1310824, 14, 0, 1310826, 15, 0, 1441828, 6, 0, 1441830, 6, 0, 1441832, 5, 0, 1441836, 6, 0, 1441838, 7, 0, 1441840, 5, 0, 1441844, 6, 0, 1441846, 6, 0, 1441848, 6, 0, 1441850, 6, 0, 1441852, 5, 0, 1441856, 5, 0, 1441860, 6, 0, 1441862, 7, 0, 1441864, 5, 0, 1441868, 6, 0, 1441870, 6, 0, 1441896, 16, 0, 1441898, 17, 0, 1572872, 10, 0, 1572874, 11, 0, 1572884, 1, 0, 1572886, 1, 0, 1572888, 1, 0, 1572890, 1, 0, 1572892, 1, 0, 1572894, 1, 0, 1572896, 1, 0, 1572898, 1, 0, 1572900, 1, 0, 1572902, 1, 0, 1572908, 6, 0, 1572910, 6, 0, 1572916, 6, 0, 1572918, 7, 0, 1572920, 6, 0, 1572922, 6, 0, 1572932, 6, 0, 1572934, 6, 0, 1572940, 1, 0, 1572942, 1, 0, 1572944, 1, 0, 1572946, 1, 0, 1572948, 1, 0, 1572950, 1, 0, 1572952, 1, 0, 1572954, 1, 0, 1572956, 1, 0, 1572958, 1, 0, 1572968, 10, 0, 1572970, 11, 0, 1703944, 16, 0, 1703946, 17, 0, 1703976, 6, 0, 1703978, 6, 0, 1703980, 5, 0, 1703984, 5, 0, 1703988, 5, 0, 1703992, 5, 0, 1703996, 5, 0, 1704000, 5, 0, 1704004, 5, 0, 1704008, 6, 0, 1704010, 6, 0, 1704040, 16, 0, 1704042, 13, 0, 1835016, 14, 0, 1835018, 15, 0, 1835020, 6, 0, 1835022, 6, 0, 1835024, 7, 0, 1835026, 8, 0, 1835027, 21, 0, 1835028, 1, 0, 1835030, 1, 0, 1835032, 1, 0, 1835034, 1, 0, 1835036, 1, 0, 1835038, 1, 0, 1835040, 1, 0, 1835042, 1, 0, 1835044, 1, 0, 1835046, 1, 0, 1835048, 1, 0, 1835050, 1, 0, 1835080, 1, 0, 1835082, 1, 0, 1835084, 1, 0, 1835086, 1, 0, 1835088, 1, 0, 1835090, 1, 0, 1835092, 1, 0, 1835094, 1, 0, 1835096, 1, 0, 1835098, 1, 0, 1835100, 1, 0, 1835102, 1, 0, 1835104, 21, 0, 1835105, 7, 0, 1835107, 8, 0, 1835108, 6, 0, 1835110, 6, 0, 1835112, 14, 0, 1835114, 15, 0, 1900562, 8, 0, 1900563, 21, 0, 1900640, 21, 0, 1900643, 8, 0, 1966088, 16, 0, 1966090, 17, 0, 1966092, 6, 0, 1966094, 6, 0, 1966096, 8, 0, 1966097, 7, 0, 1966099, 21, 0, 1966124, 5, 0, 1966128, 5, 0, 1966132, 5, 0, 1966136, 5, 0, 1966140, 6, 0, 1966142, 7, 0, 1966144, 5, 0, 1966148, 5, 0, 1966176, 21, 0, 1966177, 8, 0, 1966178, 7, 0, 1966180, 6, 0, 1966182, 6, 0, 1966184, 12, 0, 1966186, 17, 0, 2031632, 8, 0, 2031635, 21, 0, 2031712, 21, 0, 2031713, 8, 0, 2097160, 14, 0, 2097162, 11, 0, 2097192, 5, 0, 2097212, 6, 0, 2097214, 6, 0, 2097224, 6, 0, 2097226, 6, 0, 2097256, 14, 0, 2097258, 15, 0, 2228232, 12, 0, 2228234, 17, 0, 2228268, 5, 0, 2228272, 6, 0, 2228274, 7, 0, 2228276, 6, 0, 2228278, 6, 0, 2228280, 5, 0, 2228284, 5, 0, 2228288, 5, 0, 2228292, 5, 0, 2228296, 6, 0, 2228298, 7, 0, 2228328, 12, 0, 2228330, 13, 0, 2359304, 14, 0, 2359306, 15, 0, 2359308, 14, 0, 2359310, 15, 0, 2359336, 6, 0, 2359338, 6, 0, 2359344, 6, 0, 2359346, 6, 0, 2359348, 6, 0, 2359350, 7, 0, 2359368, 6, 0, 2359370, 6, 0, 2359396, 14, 0, 2359398, 15, 0, 2359400, 14, 0, 2359402, 15, 0, 2490376, 12, 0, 2490378, 13, 0, 2490380, 12, 0, 2490382, 17, 0, 2490408, 6, 0, 2490410, 6, 0, 2490412, 5, 0, 2490416, 5, 0, 2490420, 5, 0, 2490424, 6, 0, 2490426, 7, 0, 2490428, 5, 0, 2490432, 6, 0, 2490434, 6, 0, 2490436, 5, 0, 2490440, 5, 0, 2490468, 16, 0, 2490470, 17, 0, 2490472, 12, 0, 2490474, 17, 0, 2621448, 28, 0, 2621452, 28, 0, 2621456, 28, 0, 2621460, 28, 0, 2621464, 28, 0, 2621468, 28, 0, 2621472, 28, 0, 2621476, 28, 0, 2621480, 6, 0, 2621482, 7, 0, 2621496, 6, 0, 2621498, 6, 0, 2621504, 6, 0, 2621506, 7, 0, 2621516, 28, 0, 2621520, 28, 0, 2621524, 28, 0, 2621528, 28, 0, 2621532, 28, 0, 2621536, 28, 0, 2621540, 28, 0, 2621544, 28, 0, 2686982, 15, 0, 2687084, 14, 0, 2752552, 7, 0, 2752554, 7, 0, 2752556, 6, 0, 2752558, 7, 0, 2752560, 6, 0, 2752562, 6, 0, 2752564, 6, 0, 2752566, 6, 0, 2752568, 6, 0, 2752570, 6, 0, 2752572, 6, 0, 2752574, 7, 0, 2752576, 6, 0, 2752578, 6, 0, 2752580, 6, 0, 2752582, 7, 0, 2752584, 6, 0, 2752586, 6, 0, 2883620, 28, 0, 2883624, 28, 0, 2883628, 28, 0, 2883632, 28, 0, 2883636, 28, 0, 2883640, 28, 0, 2883644, 28, 0, 2883648, 28, 0, 2883652, 28, 0, 2883656, 28, 0, 2883660, 28, 0, 2883664, 28, 0, 3145780, 28, 0, 3145784, 28, 0, 3145788, 28, 0 )
+
+[node name="TileMapForeground" type="TileMap" parent="."]
+scale = Vector2( 0.5, 0.5 )
+z_index = 10
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -786416, 9, 0, -786334, 9, 0, -524272, 9, 0, -524190, 9, 0, -262128, 9, 0, -262046, 9, 0, 16, 9, 0, 24, 5, 0, 28, 5, 0, 32, 5, 0, 36, 5, 0, 40, 5, 0, 44, 5, 0, 48, 5, 0, 52, 5, 0, 60, 5, 0, 64, 5, 0, 68, 5, 0, 72, 5, 0, 76, 5, 0, 80, 5, 0, 84, 5, 0, 88, 5, 0, 98, 9, 0, 262160, 9, 0, 262164, 5, 0, 262168, 5, 0, 262192, 5, 0, 262196, 5, 0, 262204, 5, 0, 262208, 5, 0, 262232, 5, 0, 262236, 5, 0, 262242, 9, 0, 524304, 9, 0, 524308, 5, 0, 524312, 5, 0, 524338, 6, 0, 524340, 6, 0, 524342, 6, 0, 524348, 6, 0, 524350, 6, 0, 524352, 6, 0, 524376, 5, 0, 524380, 6, 0, 524382, 6, 0, 524386, 9, 0, 655411, 18, 0, 655412, 6, 0, 655422, 6, 0, 655424, 18, 0, 655452, 6, 0, 655454, 6, 0, 720947, 18, 65536, 720960, 18, 65536, 786448, 9, 0, 786452, 5, 0, 786456, 6, 0, 786458, 6, 0, 786483, 18, 65536, 786484, 6, 0, 786494, 6, 0, 786496, 18, 65536, 786520, 5, 0, 786524, 5, 0, 786530, 9, 0, 852019, 18, 65536, 852032, 18, 65536, 917528, 6, 0, 917530, 6, 0, 917555, 18, 131072, 917556, 6, 0, 917566, 6, 0, 917568, 18, 131072, 1048592, 5, 0, 1048596, 5, 0, 1048600, 6, 0, 1048602, 7, 0, 1048664, 6, 0, 1048666, 8, 0, 1048667, 8, 0, 1048668, 6, 0, 1048670, 6, 0, 1048672, 5, 0, 1114140, 6, 0, 1114142, 6, 0, 1114144, 6, 0, 1114194, 6, 0, 1114196, 6, 0, 1114198, 6, 0, 1114202, 2, 0, 1179672, 6, 0, 1179674, 8, 0, 1179675, 8, 0, 1179736, 8, 0, 1179737, 8, 0, 1179740, 2, 0, 1179742, 2, 0, 1245210, 8, 0, 1245211, 19, 0, 1245212, 19, 1, 1245213, 19, 1, 1245214, 19, 1, 1245215, 19, 2, 1245216, 8, 0, 1245217, 8, 0, 1245266, 8, 0, 1245267, 8, 0, 1245268, 19, 0, 1245269, 19, 1, 1245270, 19, 1, 1245271, 19, 1, 1245272, 19, 1, 1245273, 19, 1, 1245274, 19, 1, 1245275, 19, 2, 1310736, 6, 0, 1310738, 1, 0, 1310816, 1, 0, 1310818, 6, 0, 1441808, 6, 0, 1441890, 6, 0, 1572876, 5, 0, 1572880, 6, 0, 1572882, 1, 0, 1572960, 1, 0, 1572962, 6, 0, 1572964, 5, 0, 1703952, 6, 0, 1704034, 6, 0, 1966136, 5, 0, 2097164, 5, 0, 2097168, 5, 0, 2097172, 0, 0, 2097176, 2, 0, 2097178, 3, 0, 2097179, 8, 0, 2097183, 8, 0, 2097184, 0, 0, 2097188, 0, 0, 2097192, 2, 0, 2097194, 6, 0, 2097224, 6, 0, 2097226, 3, 0, 2097227, 3, 0, 2097228, 0, 0, 2097232, 2, 0, 2097234, 2, 0, 2097236, 0, 0, 2097240, 0, 0, 2097244, 0, 0, 2097248, 5, 0, 2097252, 5, 0, 2162714, 3, 0, 2162715, 8, 0, 2162716, 8, 0, 2162717, 8, 0, 2162718, 8, 0, 2162719, 8, 0, 2162762, 3, 0, 2162763, 3, 0, 2228248, 2, 0, 2228250, 2, 0, 2228252, 2, 0, 2228254, 2, 0, 2228264, 5, 0, 2228280, 6, 0, 2228282, 6, 0, 2228296, 6, 0, 2228298, 6, 0, 2228304, 2, 0, 2228306, 2, 0, 2293814, 8, 0, 2293815, 8, 0, 2293820, 6, 0, 2359312, 5, 0, 2359316, 5, 0, 2359320, 5, 0, 2359324, 6, 0, 2359326, 6, 0, 2359328, 5, 0, 2359332, 5, 0, 2359349, 8, 0, 2359350, 5, 0, 2359354, 6, 0, 2359358, 8, 0, 2359368, 5, 0, 2359372, 5, 0, 2359376, 5, 0, 2359380, 5, 0, 2359384, 6, 0, 2359386, 6, 0, 2359388, 5, 0, 2359392, 5, 0, 2424876, 8, 0, 2424877, 8, 0, 2424878, 8, 0, 2424879, 8, 0, 2424880, 8, 0, 2424881, 8, 0, 2424882, 8, 0, 2424883, 8, 0, 2424884, 8, 0, 2424885, 8, 0, 2424892, 8, 0, 2424893, 8, 0, 2424894, 8, 0, 2424895, 8, 0, 2424896, 8, 0, 2424897, 8, 0, 2424898, 8, 0, 2424899, 8, 0, 2424900, 8, 0, 2424901, 8, 0, 2424902, 8, 0, 2424903, 8, 0, 2490396, 6, 0, 2490398, 6, 0, 2490408, 6, 0, 2490410, 6, 0, 2490412, 6, 0, 2490414, 7, 0, 2490416, 5, 0, 2490420, 6, 0, 2490426, 7, 0, 2490428, 5, 0, 2490432, 7, 0, 2490434, 7, 0, 2490436, 6, 0, 2490438, 7, 0, 2490456, 6, 0, 2490458, 6, 0, 2621460, 9, 0, 2621480, 5, 0, 2621484, 5, 0, 2621492, 5, 0, 2621496, 5, 0, 2621504, 5, 0, 2621508, 5, 0, 2621512, 5, 0, 2621534, 9, 0, 2752560, 6, 0, 2752562, 6, 0, 2752572, 6, 0, 2752574, 6, 0, 2883604, 9, 0, 2883626, 9, 0, 2883654, 9, 0, 2883678, 9, 0, 3145748, 9, 0, 3145770, 9, 0, 3145798, 9, 0, 3145822, 9, 0, 3407892, 9, 0, 3407914, 9, 0, 3407942, 9, 0, 3407966, 9, 0, 3670036, 9, 0, 3670058, 9, 0, 3670086, 9, 0, 3670110, 9, 0, 3932180, 9, 0, 3932202, 9, 0, 3932230, 9, 0, 3932254, 9, 0, 4194324, 9, 0, 4194346, 9, 0, 4194374, 9, 0, 4194398, 9, 0, 4456490, 9, 0, 4456518, 9, 0 )
+script = ExtResource( 23 )
+
+[node name="Player" parent="." instance=ExtResource( 21 )]
+position = Vector2( -224, 2224 )
+
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
+position = Vector2( -0.606995, -96 )
+current = true
+process_mode = 0
+drag_margin_left = 0.5
+drag_margin_top = 0.5
+drag_margin_right = 0.5
+drag_margin_bottom = 0.5
+script = ExtResource( 3 )
+max_zoom = 3.5
+
+[node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
+position = Vector2( 0, -80 )
+allow_secondary = false
+
+[node name="ToxicGoo" parent="." instance=ExtResource( 13 )]
+position = Vector2( 2816, 2432 )
+scale = Vector2( 12, 5.5 )
+z_index = 5
+
+[node name="ToxicGoo2" parent="." instance=ExtResource( 13 )]
+position = Vector2( 3840, 2432 )
+scale = Vector2( 12, 5.5 )
+z_index = 5
+
+[node name="CubeDropper" parent="." instance=ExtResource( 25 )]
+position = Vector2( 1920, 256 )
+initial_drop = true
+auto_drop = true
+object = ExtResource( 26 )
+auto_respawn = true
+
+[node name="FloorButton_2" parent="." instance=ExtResource( 27 )]
+position = Vector2( 5440, 1088 )
+
+[node name="TestDoor_1" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1248, 2048 )
+
+[node name="TestDoor_2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 6176, 2048 )
+
+[node name="IndicatorSign" parent="." instance=ExtResource( 19 )]
+position = Vector2( 6048, 1824 )
+
+[node name="TestchamberSign" parent="." instance=ExtResource( 17 )]
+position = Vector2( 1536, 1792 )
+start_on = false
+number = 9
+icons_type = [ 0, 12, 1, 11, 7, 3, 14 ]
+icons_on = [ true, false, true, false, false, false, true ]
+
+[node name="PortalSpawner" parent="." instance=ExtResource( 20 )]
+position = Vector2( 3264, 800 )
+rotation = 3.14159
+start_activated = true
+type = 1
+orientation = 1
+
+[node name="portalgun-pedestal" type="Sprite" parent="."]
+position = Vector2( 3712, 1864 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 9 )
+script = ExtResource( 32 )
+portal_gun = NodePath("../Player/PortalGun")
+sprite = NodePath("portal-gun")
+sound = NodePath("PortalActivateTrigger")
+
+[node name="portal-gun" type="Sprite" parent="portalgun-pedestal"]
+position = Vector2( 0, -196 )
+texture = ExtResource( 10 )
+
+[node name="PortalActivateTrigger" type="AudioStreamPlayer2D" parent="portalgun-pedestal"]
+position = Vector2( 0, -288 )
+scale = Vector2( 4, 4 )
+stream = ExtResource( 30 )
+
+[node name="Stairs_1" type="Node2D" parent="."]
+position = Vector2( 2816, 2304 )
+
+[node name="Panel1" parent="Stairs_1" instance=ExtResource( 8 )]
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_1/Panel1"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_1/Panel1/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_1/Panel1/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel2" parent="Stairs_1" instance=ExtResource( 8 )]
+position = Vector2( 128, 0 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_1/Panel2"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_1/Panel2/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_1/Panel2/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel3" parent="Stairs_1" instance=ExtResource( 8 )]
+position = Vector2( 256, 0 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_1/Panel3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_1/Panel3/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_1/Panel3/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel4" parent="Stairs_1" instance=ExtResource( 8 )]
+position = Vector2( 384, 0 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_1/Panel4"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_1/Panel4/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_1/Panel4/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel5" parent="Stairs_1" instance=ExtResource( 8 )]
+position = Vector2( 512, -64 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_1/Panel5"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_1/Panel5/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_1/Panel5/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel6" parent="Stairs_1" instance=ExtResource( 8 )]
+position = Vector2( 640, -128 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_1/Panel6"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_1/Panel6/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_1/Panel6/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Stairs_2" type="Node2D" parent="."]
+position = Vector2( 2816, 2304 )
+
+[node name="Panel1" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 1152, -128 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel1"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel1/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel1/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel2" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 1280, -64 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel2"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel2/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel2/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel3" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 1408, 0 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel3/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel3/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel4" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 1536, 0 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel4"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel4/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel4/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel5" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 1664, 0 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel5"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel5/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel5/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="Panel6" parent="Stairs_2" instance=ExtResource( 8 )]
+position = Vector2( 1792, 0 )
+scale = Vector2( -1, 1 )
+
+[node name="PanelTransform" type="StaticBody2D" parent="Stairs_2/Panel6"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_2/Panel6/PanelTransform"]
+position = Vector2( 64, 6 )
+shape = SubResource( 1 )
+
+[node name="tiles" type="Sprite" parent="Stairs_2/Panel6/PanelTransform"]
+position = Vector2( 64, 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 1408, 664, 256, 24 )
+
+[node name="IndicatorLights_1" type="Node2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( 2176, 1088 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+script = ExtResource( 11 )
+
+[node name="indicator-lights-strip-v_1" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 2176, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -3072, 128, 3200 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-h_1" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 0, -128 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2176, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-h_2" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 2304, 3200 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 3328, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-corner" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 2176, -128 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-corner2" type="Sprite" parent="IndicatorLights_1"]
+use_parent_material = true
+position = Vector2( 2176, 3200 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="IndicatorLights_2" type="Node2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( 5328, 1088 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -5
+script = ExtResource( 11 )
+
+[node name="indicator-lights-strip-v_1" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( -1088, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -1792, 128, 1920 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-v_2" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1344, 2048 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -640, 128, 768 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-h_1" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( -960, -128 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-h_2" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( -960, 1920 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2304, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-strip-h_3" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1472, 2816 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 4 )
+
+[node name="indicator-lights-corner" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( -1088, -128 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-corner2" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( -1088, 1920 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-corner3" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1344, 1920 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="indicator-lights-corner4" type="Sprite" parent="IndicatorLights_2"]
+use_parent_material = true
+position = Vector2( 1344, 2816 )
+texture = ExtResource( 15 )
+centered = false
+region_rect = Rect2( 0, 0, 2048, 128 )
+script = ExtResource( 14 )
+texture_on = ExtResource( 5 )
+
+[node name="FaithPlate" parent="." instance=ExtResource( 28 )]
+position = Vector2( 1792, 2048 )
+goal_node = NodePath("Position2D")
+height = 2000
+
+[node name="Position2D" type="Position2D" parent="FaithPlate"]
+position = Vector2( 96, -1536 )
+
+[node name="PedestalButton" parent="." instance=ExtResource( 29 )]
+position = Vector2( 2144, 1088 )
+scale = Vector2( -1, 1 )
+
+[node name="TriggerArea_1" type="Area2D" parent="."]
+position = Vector2( 3712, 1808 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_1"]
+shape = SubResource( 3 )
+
+[node name="TriggerArea_2" type="Area2D" parent="."]
+position = Vector2( 832, 1920 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_2"]
+shape = SubResource( 4 )
+
+[node name="TriggerArea_3" type="Area2D" parent="."]
+position = Vector2( 6752, 1920 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_3"]
+shape = SubResource( 4 )
+
+[node name="TriggerArea_4" type="Area2D" parent="."]
+position = Vector2( 1440, 1856 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_4"]
+shape = SubResource( 4 )
+
+[node name="TriggerArea_5" type="Area2D" parent="."]
+position = Vector2( 1888, 1312 )
+rotation = 1.5708
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea_5"]
+shape = SubResource( 4 )
+
+[node name="Fizzler" parent="." instance=ExtResource( 34 )]
+position = Vector2( 6528, 1920 )
+scale = Vector2( 1, 0.942 )
+
+[node name="fizzler" type="Sprite" parent="Fizzler"]
+position = Vector2( 0, -118.896 )
+scale = Vector2( 0.25, 0.265393 )
+texture = ExtResource( 33 )
+
+[node name="fizzler2" type="Sprite" parent="Fizzler"]
+position = Vector2( 0, 118.896 )
+scale = Vector2( 0.25, 0.265393 )
+texture = ExtResource( 33 )
+flip_v = true
+
+[node name="ElevatorArrive" parent="." instance=ExtResource( 36 )]
+position = Vector2( -448, 2240 )
+teleport_to_elevator = NodePath("../Player")
+
+[node name="ElevatorLeave" parent="." instance=ExtResource( 35 )]
+position = Vector2( 7872, 2240 )
+load_level = "res://test-chambers/level_b2.tscn"
+
+[node name="Camera" parent="." instance=ExtResource( 38 )]
+position = Vector2( 3072, 384 )
+
+[node name="Camera2" parent="." instance=ExtResource( 38 )]
+position = Vector2( 5632, 576 )
+
+[node name="GlassLightCover" parent="." instance=ExtResource( 37 )]
+position = Vector2( 1824, 896 )
+
+[node name="GlassLightCover2" parent="." instance=ExtResource( 37 )]
+position = Vector2( 1824, 640 )
+
+[node name="GlassLightCover3" parent="." instance=ExtResource( 37 )]
+position = Vector2( 5600, 896 )
+
+[node name="GlassLightCover4" parent="." instance=ExtResource( 37 )]
+position = Vector2( 5600, 640 )
+
+[node name="GlassLightCover5" parent="." instance=ExtResource( 37 )]
+position = Vector2( 1408, 1312 )
+rotation = 1.5708
+
+[node name="GlassLightCover6" parent="." instance=ExtResource( 37 )]
+position = Vector2( 6016, 1312 )
+rotation = 1.5708
+
+[node name="GlassLightCover7" parent="." instance=ExtResource( 37 )]
+position = Vector2( 4736, 288 )
+rotation = 1.5708
+
+[node name="GlassLightCover8" parent="." instance=ExtResource( 37 )]
+position = Vector2( 2688, 288 )
+rotation = 1.5708
+[connection signal="pressed" from="FloorButton_2" to="TestDoor_2" method="open"]
+[connection signal="pressed" from="FloorButton_2" to="IndicatorSign" method="set_on"]
+[connection signal="pressed" from="FloorButton_2" to="IndicatorLights_2" method="set_on"]
+[connection signal="released" from="FloorButton_2" to="TestDoor_2" method="close"]
+[connection signal="released" from="FloorButton_2" to="IndicatorSign" method="set_off"]
+[connection signal="released" from="FloorButton_2" to="IndicatorLights_2" method="set_off"]
+[connection signal="pressed" from="PedestalButton" to="Stairs_1/Panel5" method="play_animation" flags=6 binds= [ "stairs-right-4-out", 0.5 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_1/Panel2" method="play_animation" flags=6 binds= [ "straight128-out", 0.2 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_1/Panel1" method="play_animation" flags=6 binds= [ "straight128-out", 0.1 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_1/Panel6" method="play_animation" flags=6 binds= [ "stairs-right-4-out", 0.6 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_2/Panel1" method="play_animation" flags=6 binds= [ "stairs-right-4-out", 0.6 ]]
+[connection signal="pressed" from="PedestalButton" to="IndicatorLights_1" method="set_on"]
+[connection signal="pressed" from="PedestalButton" to="Stairs_2/Panel3" method="play_animation" flags=6 binds= [ "straight128-out", 0.4 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_2/Panel2" method="play_animation" flags=6 binds= [ "stairs-right-4-out", 0.5 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_1/Panel3" method="play_animation" flags=6 binds= [ "straight128-out", 0.3 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_2/Panel4" method="play_animation" flags=6 binds= [ "straight128-out", 0.3 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_1/Panel4" method="play_animation" flags=6 binds= [ "straight128-out", 0.4 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_2/Panel6" method="play_animation" flags=6 binds= [ "straight128-out", 0.1 ]]
+[connection signal="pressed" from="PedestalButton" to="Stairs_2/Panel5" method="play_animation" flags=6 binds= [ "straight128-out", 0.2 ]]
+[connection signal="released" from="PedestalButton" to="IndicatorLights_1" method="set_off"]
+[connection signal="enter" from="TriggerArea_1" to="portalgun-pedestal" method="upgrade_portalgun" flags=6]
+[connection signal="enter" from="TriggerArea_2" to="TestDoor_1" method="open" flags=6]
+[connection signal="enter" from="TriggerArea_3" to="TestDoor_2" method="close" flags=6]
+[connection signal="enter" from="TriggerArea_4" to="TestchamberSign" method="turn_on" flags=6]
+[connection signal="enter" from="TriggerArea_5" to="TestDoor_1" method="close" flags=6]

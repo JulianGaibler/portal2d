@@ -1,15 +1,449 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://portal-gun/portal-gun.png" type="Texture" id=1]
+[ext_resource path="res://portal-gun/portalgun-parts.png" type="Texture" id=1]
 [ext_resource path="res://portal-gun/PortalGun.gd" type="Script" id=2]
+[ext_resource path="res://sounds/portal-gun/gun1.wav" type="AudioStream" id=3]
+[ext_resource path="res://textures/white.png" type="Texture" id=4]
+[ext_resource path="res://sounds/valve_sounds/Portal_invalid_surface_01.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "BindTwo"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Polygons/Polygon2D3:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 94.781, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Polygons/Polygon2D3:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Polygons/Polygon2D4:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 94.4555, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Polygons/Polygon2D4:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Polygons/Polygon2D:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 20.5401, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Polygons/Polygon2D:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -329.022, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Polygons/Polygon2D/Polygon2D5:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Polygons/Polygon2D/Polygon2D6:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "grab-end"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Polygons/Polygon2D3:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 94.781, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Polygons/Polygon2D3:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Polygons/Polygon2D4:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 94.4555, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Polygons/Polygon2D4:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Polygons/Polygon2D:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 20.5401, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Polygons/Polygon2D:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -329.022, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Polygons/Polygon2D/Polygon2D5:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, 0, -0.4, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Polygons/Polygon2D/Polygon2D6:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 0, -0.4, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "grab-start"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Polygons/Polygon2D3:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 94.781, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Polygons/Polygon2D3:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Polygons/Polygon2D4:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 94.4555, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Polygons/Polygon2D4:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Polygons/Polygon2D:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 20.5401, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Polygons/Polygon2D:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -329.022, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Polygons/Polygon2D/Polygon2D5:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -10, -0.4, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Polygons/Polygon2D/Polygon2D6:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 10, -0.4, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.7
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Polygons/Polygon2D3:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 94.781, -0.25, 0, 0, 0, 100.821, -0.1, 0, 0.4, 0, 94.781, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Polygons/Polygon2D3:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0, 0, 0.849006, -0.1, 0, 0.4, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.7 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Polygons/Polygon2D4:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 94.4555, -0.25, 0, 0, 0, 112.369, -0.1, 0, 0.4, 0, 94.4555, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Polygons/Polygon2D4:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0, 0, 0.796438, -0.1, 0, 0.4, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Polygons/Polygon2D:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 20.5401, -0.25, 0, 0, 0, -9.45986, -0.1, 0, 0.4, 0, 20.5401, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.7 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Polygons/Polygon2D:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -329.022, -0.25, 0, 0, 0, -329.022, -0.1, 0, 0.4, 0, -329.022, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.7 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Polygons/Polygon2D/Polygon2D5:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0, 0, -15, -0.1, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Polygons/Polygon2D/Polygon2D6:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0, 0, 15, -0.1, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.6 )
+}
 
 [node name="PortalGun" type="Node2D"]
 position = Vector2( -1.10803, -1.10803 )
+z_as_relative = false
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 260, 0 )
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -3.0
+bus = "Reverb"
+
+[node name="InvalidSurface" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+max_distance = 4000.0
+bus = "Panning"
+
+[node name="Polygons" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Polygon2D8" type="Polygon2D" parent="Polygons"]
+position = Vector2( -122.408, -554.446 )
+z_index = 1
 texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 288, 528, 288, 592, 408, 592, 408, 528 )
+uv = PoolVector2Array( 288, 528, 288, 592, 408, 592, 408, 528 )
+bones = [ NodePath("Bone2D2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D"), PoolRealArray( 0, 0, 0.5, 0 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Light2D" type="Light2D" parent="Polygons/Polygon2D8"]
+position = Vector2( 357.903, 551.569 )
+scale = Vector2( 73.8431, 33.8065 )
+texture = ExtResource( 4 )
+color = Color( 0.380392, 0.380392, 0.380392, 1 )
+mode = 2
+range_z_min = 1
+range_z_max = 1
+
+[node name="Polygon2D7" type="Polygon2D" parent="Polygons"]
+position = Vector2( 100.364, -554.241 )
+z_index = 2
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 40, 552, 184, 552, 184, 608, 40, 608 )
+uv = PoolVector2Array( 40, 552, 184, 552, 184, 608, 40, 608 )
+bones = [ NodePath("Bone2D2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygons"]
+position = Vector2( 20.5401, -329.022 )
+z_index = 2
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 216, 408, 376, 408, 376, 280, 216, 280 )
+uv = PoolVector2Array( 216, 408, 376, 408, 376, 280, 216, 280 )
+bones = [ NodePath("Bone2D2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Polygon2D5" type="Polygon2D" parent="Polygons/Polygon2D"]
+position = Vector2( 307.634, 287.169 )
+z_index = 2
+offset = Vector2( -306.355, -64.6986 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 312, 72, 360, 32, 408, 48, 408, 64, 432, 64, 432, 16, 360, 8, 296, 56 )
+uv = PoolVector2Array( 312, 72, 360, 32, 408, 48, 408, 64, 432, 64, 432, 16, 360, 8, 296, 56 )
+bones = [ NodePath("Bone2D2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D3/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D2/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Polygon2D6" type="Polygon2D" parent="Polygons/Polygon2D"]
+position = Vector2( 305.695, 386.042 )
+z_index = 2
+offset = Vector2( -304.477, -163.666 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 304, 184, 360, 232, 432, 208, 432, 160, 408, 160, 408, 176, 368, 192, 304, 144 )
+uv = PoolVector2Array( 304, 184, 360, 232, 432, 208, 432, 160, 408, 160, 408, 176, 368, 192, 304, 144 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="Polygons"]
+position = Vector2( 20.7932, -330.219 )
+z_index = 2
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 208, 408, 208, 256, 16, 256, 16, 408 )
+uv = PoolVector2Array( 208, 408, 208, 256, 16, 256, 16, 408 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Polygons"]
+position = Vector2( 94.781, -107.496 )
+z_index = 2
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 40, 128, 184, 176, 248, 128, 248, 184, 184, 216, 40, 168 )
+uv = PoolVector2Array( 40, 128, 184, 176, 248, 128, 248, 184, 184, 216, 40, 168 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="Polygons"]
+position = Vector2( 94.4555, -107.073 )
+z_index = 2
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 88, 72, 176, 32, 248, 56, 248, 88, 176, 64, 88, 104 )
+uv = PoolVector2Array( 88, 72, 176, 32, 248, 56, 248, 88, 176, 64, 88, 104 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BindTwo = SubResource( 1 )
+anims/grab-end = SubResource( 2 )
+anims/grab-start = SubResource( 3 )
+anims/shoot = SubResource( 4 )
 
 [node name="ActiveEnd" type="Position2D" parent="."]
-position = Vector2( 401.108, 1.10803 )
+position = Vector2( 78.108, 1.10803 )

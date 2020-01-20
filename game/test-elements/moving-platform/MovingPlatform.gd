@@ -1,96 +1,52 @@
 extends Node2D
 
-# NodePaths are just things that are already in the scene. You can safely assume that they all have the global_position property.
-# You can add nodes by placing the MovingPlatform Scene in the world and add Nodes to the array via the inspector.
-# Also I suggest you have a look at the "Tween" Node for moving the platform!
-#
-# Don't worry, this will probably take less than an hour. Thanks for doing it!
+onready var tween = get_node("Tween")
+onready var timer = get_node("Timer")
 
-export(bool) var is_active = false
-export(bool) var autostart = true
+export(bool) var autostart = false
 export(bool) var loop = false
-export (bool) var move_to_start = false
-export (int) var duration = 3
-export var wait_duration = 1
-export (NodePath) var positions_points = NodePath()
-var positions = []
-var start_position
-onready var TweenNode = get_node("Tween")
-onready var DurationTimer = get_node("Timer")
+export(float) var duration = 3
+export(float) var wait_duration = 1
+export(NodePath) onready var line_path
+export(int) var start_index = 0
 
-var waypoint_index = 1
+var waypoint_index = 0
+var line
 
 func _ready():
-    start_position = position
-    if autostart:
-        start()
+    line = get_node(line_path)
+    waypoint_index = start_index
+    global_position = line.to_global(line.points[waypoint_index])
+    timer.set_wait_time(duration + wait_duration)
+    if autostart: start()
 
 func start():
-    is_active = true
-    var waypoints = get_node(positions_points).get_children()
-    positions = []    
-    for i in range(len(waypoints) + 1):
-        if i == 0:
-            positions.append(position)
-        else:
-            positions.append(waypoints[i-1].position)
-    if waypoint_index == 1:
-        next_move(positions)
-    DurationTimer.set_wait_time(duration)
-    DurationTimer.connect("timeout",self, "_on_Timer_timeout", [positions])
-    DurationTimer.start()
-    
-
-func next_move(positions):
-    if (waypoint_index == len(positions)):
-        positions.invert()
-        waypoint_index = 0
-        if loop:
-            is_active = true
-        else:
-            stop()
-            return
-    move(position, positions[waypoint_index])
-    waypoint_index += 1
-    
-func stop():
-    if move_to_start:
-        move_to_start()
-    TweenNode.stop(TweenNode)
-    DurationTimer.stop()
-    is_active = false
-
-func move_to_start():
-    TweenNode.interpolate_property(self, "position", position, start_position, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-    TweenNode.start()
-
-func move_to_end():
-    TweenNode.interpolate_property(self, "position", position, positions[len(positions)-1], duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-    TweenNode.start()    
-
-func move(from, to):
-    TweenNode.interpolate_property(self, "position", from, to, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-    TweenNode.start()
-
-
-func toggle():
-    if not is_active:
-        activate()
-    else:
-        deactivate()
-        
-func deactivate():
     stop()
+    timer.connect("timeout", self, "_pause_ended")
+    waypoint_index = fmod(waypoint_index + 1, len(line.points))
+    call_deferred("move_to_waypoint")
 
-func activate():
-    start()
+func stop():
+    timer.disconnect("timeout", self, "_pause_ended")
+    tween.stop_all()
+    timer.stop()
 
-func _on_Timer_timeout(positions):
-    next_move(positions)
+func go_to_last():
+    stop()
+    waypoint_index = len(line.points) - 1
+    move_to_waypoint()
 
+func go_to_first():
+    stop()
+    waypoint_index = 0
+    move_to_waypoint()
+    
 
-func _on_PedestalButton_pressed():
-    if not is_active:
-        start()
-    else:
-        stop()
+func move_to_waypoint():
+    tween.interpolate_property(self, "global_position", global_position, line.to_global(line.points[waypoint_index]), duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+    tween.start()
+    timer.start()
+
+func _pause_ended():
+    waypoint_index = fmod(waypoint_index + 1, len(line.points))
+    if waypoint_index != 0 or loop: move_to_waypoint()

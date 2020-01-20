@@ -5,6 +5,7 @@ onready var visual_line_back := $VisualLineBack
 onready var upper_area := $UpperArea
 onready var lower_area := $LowerArea
 onready var center_area := $CenterArea
+onready var audio := $AudioPlayer
 
 const blue_low = Color("#24a8ff")
 const blue_high = Color("#6f7ae9")
@@ -17,7 +18,15 @@ var direction = Vector2.ZERO
 var inverse = false
 var child_beam = null
 
+var player_count = 0
+
 func _ready():
+    upper_area.connect("body_entered", self, "object_entered")
+    lower_area.connect("body_entered", self, "object_entered")
+    center_area.connect("body_entered", self, "object_entered")
+    upper_area.connect("body_exited", self, "object_left")
+    lower_area.connect("body_exited", self, "object_left")
+    center_area.connect("body_exited", self, "object_left")
     visual_line_front.material = visual_line_front.material.duplicate()
     visual_line_back.material = visual_line_back.material.duplicate()
 
@@ -28,6 +37,8 @@ func set_line(from: Vector2, direction: Vector2, length: float):
     update_gravity()
     
     var to = from + (direction * length)
+    
+    audio.global_position = from + (direction * (length/2))
     
     visual_line_front.clear_points()
     visual_line_front.add_point(from)
@@ -84,3 +95,12 @@ func delete_now():
             body.sleeping = false
     queue_free()
 
+func object_entered(object):
+    if object.is_in_group("player"):
+        player_count += 1
+        if player_count == 1: audio.play()
+
+func object_left(object):
+    if object.is_in_group("player"):
+        player_count -= 1
+        if player_count == 0: audio.stop()

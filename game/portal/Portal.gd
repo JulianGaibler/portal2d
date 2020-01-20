@@ -11,7 +11,7 @@ enum PortalOrientation {UP = 0, DOWN = 1}
 ##
 # This is the hole that gets cut into the geometry
 const PORTAL_HEIGHT = 112
-const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, PORTAL_HEIGHT), Vector2(-96, -PORTAL_HEIGHT), Vector2(1, -PORTAL_HEIGHT), Vector2(1, PORTAL_HEIGHT)])
+const PORTAL_CUTOUT = PoolVector2Array([Vector2(-96, PORTAL_HEIGHT), Vector2(-96, -PORTAL_HEIGHT), Vector2(5, -PORTAL_HEIGHT), Vector2(5, PORTAL_HEIGHT)])
 const PORTAL_COLOR_BLUE = Color("079be1")
 const PORTAL_COLOR_ORANGE = Color("ff7d17")
 
@@ -41,128 +41,166 @@ onready var outer_area := $OuterArea
 onready var inner_area := $InnerArea
 onready var scan_area_front := $ScanAreaFront
 onready var scan_area_back := $ScanAreaBack
+onready var open_close_sound := $OpenCloseSound
 # Normal vector of this portal, pointing away from the entrance in global space
 var normal_vec
 # Direction Vector of the portal, pointing where up is in global space
 var direction_vec
 # Basis transformation matrix from this to the linked portal
-var transfomration_matrix
+var transformation_matrix
+
+const ambient_audio_streams = [
+    preload("res://sounds/portal/background-drone1.wav"),
+    preload("res://sounds/portal/background-drone2.wav"),
+    preload("res://sounds/portal/background-drone3.wav")
+]
+
+const transition_audio_streams = [
+    preload("res://sounds/portal/transition1.wav"),
+    preload("res://sounds/portal/transition2.wav")
+]
+
+const portal_spawner_open_audio_stream = preload("res://sounds/valve_sounds/Portal_open1.wav")
+const portal_gun_open_audio_streams = [
+    preload("res://sounds/valve_sounds/Portal_open2.wav"),
+    preload("res://sounds/valve_sounds/Portal_open3.wav")
+]
 
 func _ready():
 	animation_player.play("closed_portal")
 
 # This function has to be called after the portal has been placed in the world
 func initiate(type, orientation, fixed = false):
-	self.type = type
-	self.orientation = orientation
+    self.type = type
+    self.orientation = orientation
+    
+    match type:
+        PortalType.BLUE_PORTAL: color_node.modulate = PORTAL_COLOR_BLUE
+        PortalType.ORANGE_PORTAL: color_node.modulate = PORTAL_COLOR_ORANGE
+    
+    animation_player.play("open_portal")
+    
+    play_ambient_sound()
+    
+    match fixed:
+        true: open_close_sound.set_stream(portal_spawner_open_audio_stream)
+        false:
+            randomize()
+            open_close_sound.set_stream(portal_gun_open_audio_streams[randi()%portal_gun_open_audio_streams.size()])
+    open_close_sound.play()
+    
+    # Calculate direction- and normal-vector
+    normal_vec = Vector2.RIGHT.rotated(global_rotation)
+    direction_vec = (Vector2.UP if orientation == PortalOrientation.UP else Vector2.DOWN).rotated(global_rotation)
+    
+    # This will let portal-aware raycasts know they collided with a portal
+    $PortalLine.set_meta("portal_type",type)
+    
+    match type:
+        PortalType.BLUE_PORTAL:
+            $DetectionArea.set_collision_layer_bit(Layers.BLUE_PORTAL, true)
+        PortalType.ORANGE_PORTAL:
+            $DetectionArea.set_collision_layer_bit(Layers.ORANGE_PORTAL, true)
+    
+    # Hook up signals from the trigger-areas with functions
+    outer_area.connect("body_exited", self, "leave_outer_area")
+    inner_area.connect("body_exited", self, "leave_inner_area")
+    inner_area.connect("body_entered", self, "enter_inner_area")
+    outer_area.connect("body_entered", self, "enter_outer_area")
 
-	match type:
-		PortalType.BLUE_PORTAL: color_node.modulate = PORTAL_COLOR_BLUE
-		PortalType.ORANGE_PORTAL: color_node.modulate = PORTAL_COLOR_ORANGE
+    # Wait (twice for some reason) until all collisions have been calculated
+    yield( get_tree(), "idle_frame" )
+    yield( get_tree(), "idle_frame" )
 
-	animation_player.play("open_portal")
+    # Get all static colliders within ScanArea as polygons,
+    # put them into local coordinates and carve a hole for the portal
+    for polygon in calculate_polygon(scan_area_front):
+        var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
+        collider_polygons.append(polygon2)
+    
+    # Register newly created portal with the PortalManager
+    PortalManager.register_portal(self, fixed)
 
-	# Calculate direction- and normal-vector
-	normal_vec = Vector2.RIGHT.rotated(global_rotation)
-	direction_vec = (Vector2.UP if orientation == PortalOrientation.UP else Vector2.DOWN).rotated(global_rotation)
+func play_ambient_sound():
+    randomize()
+    var stream = ambient_audio_streams[randi()%ambient_audio_streams.size()]
+    $AmbientSound.set_stream(stream)
 
-	# This will let portal-aware raycasts know they collided with a portal
-	$PortalLine.set_meta("portal_type",type)
-
-	match type:
-		PortalType.BLUE_PORTAL:
-			$DetectionArea.set_collision_layer_bit(Layers.BLUE_PORTAL, true)
-		PortalType.ORANGE_PORTAL:
-			$DetectionArea.set_collision_layer_bit(Layers.ORANGE_PORTAL, true)
-
-	# Hook up signals from the trigger-areas with functions
-	outer_area.connect("body_exited", self, "leave_outer_area")
-	inner_area.connect("body_exited", self, "leave_inner_area")
-	inner_area.connect("body_entered", self, "enter_inner_area")
-	outer_area.connect("body_entered", self, "enter_outer_area")
-
-	# Wait (twice for some reason) until all collisions have been calculated
-	yield( get_tree(), "idle_frame" )
-	yield( get_tree(), "idle_frame" )
-
-	# Get all static colliders within ScanArea as polygons,
-	# put them into local coordinates and carve a hole for the portal
-	for polygon in calculate_polygon(scan_area_front):
-		var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-		collider_polygons.append(polygon2)
-
-	# Register newly created portal with the PortalManager
-	PortalManager.register_portal(self, fixed)
+func play_transition_sound():
+    randomize()
+    var stream = transition_audio_streams[randi()%transition_audio_streams.size()]
+    $TransitionSound.set_stream(stream)
+    $TransitionSound.play()
 
 # This function get's called by the PortalManager to link or unlink the portal
 func link_portal(new_portal):
-	# Delete all colliders and the tf-matrix
-	reset_portal()
-	linked_portal = new_portal
-	# If there is no new portal to link to, just stay closed
-	if (new_portal == null):
-		emit_signal("new_link", null)
-		return
+    # Delete all colliders and the tf-matrix
+    reset_portal()
+    linked_portal = new_portal
+    # If there is no new portal to link to, just stay closed
+    if (new_portal == null):
+        emit_signal("new_link", null)
+        return
+    
+    var lp = linked_portal.get_ref()
+    
+    # This basis transformation matrix transforms from this portals basis into the one of the linked portal.
+    var from = Matrix2D.new(direction_vec.x, direction_vec.y, normal_vec.x, normal_vec.y)
+    var to = Matrix2D.new(lp.direction_vec.x, lp.direction_vec.y, lp.normal_vec.x, lp.normal_vec.y)
+    transformation_matrix = to.inverse().multiply_mat(from)
 
-	var lp = linked_portal.get_ref()
+    var carved_polygons = [] + collider_polygons
 
-	# This basis transformation matrix transforms from this portals basis into the one of the linked portal.
-	var from = Matrix2D.new(direction_vec.x, direction_vec.y, normal_vec.x, normal_vec.y)
-	var to = Matrix2D.new(lp.direction_vec.x, lp.direction_vec.y, lp.normal_vec.x, lp.normal_vec.y)
-	transfomration_matrix = to.inverse().multiply_mat(from)
+    var other_cutout = PoolVector2Array()
+    other_cutout.resize(PORTAL_CUTOUT.size())
+    for i in range(0, PORTAL_CUTOUT.size()):
+        var new_pos = to_local(lp.global_position) + (transformation_matrix.multiply_vec(PORTAL_CUTOUT[i]))
+        other_cutout.set(i, new_pos)
 
-	var carved_polygons = [] + collider_polygons
+    for polygon in calculate_polygon(scan_area_back):
+        var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
+        carved_polygons.append(polygon2)
 
-	var other_cutout = PoolVector2Array()
-	other_cutout.resize(PORTAL_CUTOUT.size())
-	for i in range(0, PORTAL_CUTOUT.size()):
-		var new_pos = to_local(lp.global_position) + (transfomration_matrix.multiply_vec(PORTAL_CUTOUT[i]))
-		other_cutout.set(i, new_pos)
+    # In addition to the local colliders that are copied in front of our portal, we also want to take
+    # those from the other portal and place them behind ours in order to avoid collision glitches.
+    for polygon in lp.collider_polygons:
+        var polygon2 = PoolVector2Array()
+        polygon2.resize(polygon.size())
+        for i in range(0, polygon.size()):
+            var new_pos = polygon[i].bounce(Vector2.RIGHT)
+            if (orientation != lp.orientation):
+                new_pos = new_pos.bounce(Vector2.UP)
+            polygon2.set(i, new_pos)
+        carved_polygons.append(polygon2)
 
-	for polygon in calculate_polygon(scan_area_back):
-		var polygon2 = PolygonUtils.transform_polygon(polygon, global_transform.inverse())
-		for new_polygon1 in Geometry.clip_polygons_2d(polygon2, PORTAL_CUTOUT):
-			carved_polygons.append(new_polygon1)
+    var polygon_new = []
 
-	# In addition to the local colliders that are copied in front of our portal, we also want to take
-	# those from the other portal and place them behind ours in order to avoid collision glitches.
-	for polygon in lp.collider_polygons:
-		var polygon2 = PoolVector2Array()
-		polygon2.resize(polygon.size())
-		for i in range(0, polygon.size()):
-			var new_pos = polygon[i].bounce(Vector2.RIGHT)
-			if (orientation != lp.orientation):
-				new_pos = new_pos.bounce(Vector2.UP)
-			polygon2.set(i, new_pos)
-		carved_polygons.append(polygon2)
+    for polygon in carved_polygons:
+        for new_polygon1 in Geometry.clip_polygons_2d(polygon, PORTAL_CUTOUT):
+            for new_polygon2 in Geometry.clip_polygons_2d(new_polygon1, other_cutout):
+                polygon_new.append(new_polygon2)
+            
+    carved_polygons = polygon_new
 
-	var polygon_new = []
-
-	for polygon in carved_polygons:
-		for new_polygon2 in Geometry.clip_polygons_2d(polygon, other_cutout):
-			polygon_new.append(new_polygon2)
-
-	carved_polygons = polygon_new
-
-	# Create new static collider from our polygons
-	var collider = create_static_collider(carved_polygons)
-	# Set collision layers of them accordingly
-	match type:
-		PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
-		PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
-
-	# Add the collider as child and keep a reference to it
-	add_child(collider)
-	static_collider = collider
-
-	# The enter/exit-signals of players or objects have been ignored so far,
-	# that's why we need to call the signal-handlers manually.
-	for body in outer_area.get_overlapping_bodies():
-		enter_outer_area(body)
-		if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
-	for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
-
-	emit_signal("new_link", new_portal)
+    # Create new static collider from our polygons
+    var collider = create_static_collider(carved_polygons)
+    # Set collision layers of them accordingly
+    match type:
+        PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
+        PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
+    
+    # Add the collider as child and keep a reference to it
+    add_child(collider)
+    static_collider = collider
+    
+    # The enter/exit-signals of players or objects have been ignored so far,
+    # that's why we need to call the signal-handlers manually.
+    for body in outer_area.get_overlapping_bodies():
+        enter_outer_area(body)
+        if body is RigidBody2D: body.apply_central_impulse (Vector2.UP)
+    for body in inner_area.get_overlapping_bodies(): enter_inner_area(body)
+    
+    emit_signal("new_link", new_portal)
 
 #func _draw():
 #    for i in range(4):
@@ -178,74 +216,77 @@ func link_portal(new_portal):
 
 
 func update_physics_shadow(collider):
-	var rotation = collider[0].global_transform.get_rotation()
-	# Transform position
-	var po = collider[0].global_position - global_position
-	var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
-	collider[1].global_transform = Transform2D()
-	collider[1].global_transform.origin = new_pos
-
-	var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.get_ref().normal_vec))
-	collider[1].rotate(a1)
+    var rotation = collider[0].global_transform.get_rotation()
+    # Transform position
+    var po = collider[0].global_position - global_position
+    var new_pos = linked_portal.get_ref().global_position + (transformation_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
+    collider[1].global_transform = Transform2D()
+    collider[1].global_transform.origin = new_pos
+    
+    var a1 = Vector2.UP.angle_to(transformation_matrix.multiply_vec(Vector2.UP.rotated(rotation)).bounce(linked_portal.get_ref().normal_vec))
+    collider[1].rotate(a1)
 
 func _physics_process(delta):
-	if linked_portal == null or !linked_portal.get_ref(): return
-
-	# Physics shadows are the copied colliders of dynamic-props or the player.
-	# Their positions needs to be updated with every physics-update
-	for collider in physics_shadows.values():
-		update_physics_shadow(collider)
-
-	var overlapped_bodies = inner_area.get_overlapping_bodies()
-	if (overlapped_bodies.size() < 1): return
-
-	# Check the distance of every overlapping body except physics-shadows
-	for overlapped_body in overlapped_bodies:
-		if overlapped_body.is_in_group("physics-shadow"): continue
-
-		var a = overlapped_body.global_position
-		var d = global_position.dot(normal_vec)
-		# This is the distance from the plane of the portal to the origin of the body
-		var distance = -((d - a.dot(normal_vec)) / normal_vec.length())
-		# If player/object is behind the portal (but not too far away), teleport them/it
-		if (distance < 0 and distance > -32):
-			teleport(overlapped_body)
-
+    if linked_portal == null or !linked_portal.get_ref(): return
+    
+    # Physics shadows are the copied colliders of dynamic-props or the player.
+    # Their positions needs to be updated with every physics-update
+    for collider in physics_shadows.values():
+        update_physics_shadow(collider)
+    
+    var overlapped_bodies = inner_area.get_overlapping_bodies()
+    if (overlapped_bodies.size() < 1): return
+    
+    # Check the distance of every overlapping body except physics-shadows
+    for overlapped_body in overlapped_bodies:
+        if overlapped_body.is_in_group("physics-shadow"): continue
+        
+        var a = overlapped_body.global_position
+        var d = global_position.dot(normal_vec)
+        var dist = global_position.distance_to(a)
+        # This is the distance from the plane of the portal to the origin of the body
+        var distance = -((d - a.dot(normal_vec)) / normal_vec.length())
+        # If player/object is behind the portal (but not too far away), teleport them/it
+        if (distance < 0 and distance > -64 and dist < 122):
+            teleport(overlapped_body)
+                
 
 
 func teleport(body):
-	var body_rotation = body.global_transform.get_rotation()
-	var transformed = teleport_vector(body.global_position, body.linear_velocity)
+    play_transition_sound()
+    
+    var body_rotation = body.global_transform.get_rotation()
+    var transformed = teleport_vector(body.global_position, body.linear_velocity)
 
-	if transformed == null:
-		return
+    if transformed == null:
+        return
 
-	# Transform velocity
-	body.linear_velocity = transformed[1]
-	var l = body.linear_velocity.y * linked_portal.get_ref().normal_vec.y
-	if (l < 400):
-		body.linear_velocity.y += linked_portal.get_ref().normal_vec.y * (420-l)
-
-	body.global_transform = Transform2D()
-	body.global_transform.origin = transformed[0]
-
-	var a1 = Vector2.UP.angle_to(transfomration_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
-	body.rotate(a1)
-
-	remove_shadow_body(body)
+    # Transform velocity
+    body.linear_velocity = transformed[1]
+    var l = body.linear_velocity.y * linked_portal.get_ref().normal_vec.y
+    if (l < 400):
+        body.linear_velocity.y += linked_portal.get_ref().normal_vec.y * (420-l)
+    
+    body.global_transform = Transform2D()
+    body.global_transform.origin = transformed[0]
+    
+    var a1 = Vector2.UP.angle_to(transformation_matrix.multiply_vec(Vector2.UP.rotated(body_rotation)).bounce(linked_portal.get_ref().normal_vec))
+    body.rotate(a1)
+    
+    remove_shadow_body(body)
 
 
 func teleport_vector(position, direction):
-	if (linked_portal == null or transfomration_matrix == null): return null
-
-	# Transform velocity
-	direction = (transfomration_matrix.multiply_vec(direction)).bounce(linked_portal.get_ref().normal_vec)
-
-	# Transform position
-	var po = position - global_position
-	var new_pos = linked_portal.get_ref().global_position + (transfomration_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
-
-	return [new_pos, direction]
+    if (linked_portal == null or transformation_matrix == null): return null
+    
+    # Transform velocity
+    direction = (transformation_matrix.multiply_vec(direction)).bounce(linked_portal.get_ref().normal_vec)
+    
+    # Transform position
+    var po = position - global_position
+    var new_pos = linked_portal.get_ref().global_position + (transformation_matrix.multiply_vec(po).bounce(linked_portal.get_ref().normal_vec))
+    
+    return [new_pos, direction]
 
 func tree_exiting():
 	outer_area.disconnect("body_exited", self, "leave_outer_area")
@@ -267,14 +308,14 @@ func close_portal():
 	queue_free()
 
 func reset_portal():
-	for collider in physics_shadows.values():
-		remove_child(collider[1])
-		collider[1].queue_free()
-	transfomration_matrix = null
-	if (static_collider != null):
-		remove_child(static_collider)
-		static_collider.queue_free()
-	static_collider = null
+    for collider in physics_shadows.values():
+        remove_child(collider[1])
+        collider[1].queue_free()
+    transformation_matrix = null
+    if (static_collider != null):
+        remove_child(static_collider)
+        static_collider.queue_free()
+    static_collider = null
 
 
 func enter_outer_area(body):
@@ -340,34 +381,34 @@ func leave_inner_area(body):
 
 # This function adds clones of dynamic-props to the physics_shadows list
 func add_shadow_body(body):
-	if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
-
-	var shapes = []
-	var sprites = []
-	for child in body.get_children():
-		if (child is CollisionShape2D):
-			shapes.append(child.duplicate())
-		if (child is Sprite):
-			sprites.append(child.duplicate())
-	if (shapes.size() > 0):
-		var collider = create_kinematic_collider(shapes)
-		collider.z_index = -1
-		for sprite in sprites:
-			collider.add_child(sprite)
-		collider.set_script(preload("res://portal/PhysicsShadow.gd"))
-		collider.parent = body
-		collider.matrix = transfomration_matrix
-		collider.linked_normal = linked_portal.get_ref().normal_vec
-		collider.add_to_group("physics-shadow")
-		collider.set_collision_mask(0)
-		match type:
-			PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
-			PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
-		body.add_collision_exception_with(collider)
-		add_child(collider)
-		var c = [body, collider]
-		physics_shadows[body.get_rid()] = c
-		update_physics_shadow(c)
+    if body.is_in_group("physics-shadow") or body.is_in_group("portal-ignore"): return
+    
+    var shapes = []
+    var sprites = []
+    for child in body.get_children():
+        if (child is CollisionShape2D):
+            shapes.append(child.duplicate())
+        if child is Sprite or child is Light2D:
+            sprites.append(child.duplicate())
+    if (shapes.size() > 0):
+        var collider = create_kinematic_collider(shapes)
+        collider.z_index = -1
+        for sprite in sprites:
+            collider.add_child(sprite)
+        collider.set_script(preload("res://portal/PhysicsShadow.gd"))
+        collider.parent = body
+        collider.matrix = transformation_matrix
+        collider.linked_normal = linked_portal.get_ref().normal_vec
+        collider.add_to_group("physics-shadow")
+        collider.set_collision_mask(0)
+        match type:
+            PortalType.BLUE_PORTAL: collider.set_collision_layer(BinaryLayers.ORANGE_INNER)
+            PortalType.ORANGE_PORTAL: collider.set_collision_layer(BinaryLayers.BLUE_INNER)
+        body.add_collision_exception_with(collider)
+        add_child(collider)
+        var c = [body, collider]
+        physics_shadows[body.get_rid()] = c
+        update_physics_shadow(c)
 
 # Removed physics-shadows from physics_shadows list
 func remove_shadow_body(body):
@@ -417,7 +458,6 @@ func calculate_polygon(scan_area):
 
 
 #### Helpers ####
-##
 
 # Creates a static collider from an array of polygons
 func create_static_collider(polygons: Array) -> StaticBody2D:

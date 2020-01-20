@@ -1,46 +1,188 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://menus/PausePopup.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Mark-Bold.tres" type="DynamicFont" id=2]
+[ext_resource path="res://sounds/valve_sounds/TestchamberSign_flicker.wav" type="AudioStream" id=4]
+[ext_resource path="res://menus/SignMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://test-elements/testchamber-sign/testchamber-sign.png" type="Texture" id=6]
 
-[sub_resource type="Theme" id=1]
+[sub_resource type="Theme" id=5]
 default_font = ExtResource( 2 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "BindPose"
+length = 0.001
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("testchamber-sign:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 768, 1536 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "flicker-off"
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("testchamber-sign:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 3072, 0, 768, 1536 ), Rect2( 1536, 0, 768, 1536 ), Rect2( 2304, 0, 768, 1536 ), Rect2( 0, 0, 768, 1536 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("testchamber-sign:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.4, 0.75, 0.8, 1.65, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 768, 1536 ), Rect2( 2304, 0, 768, 1536 ), Rect2( 1536, 0, 768, 1536 ), Rect2( 3072, 0, 768, 1536 ), Rect2( 768, 0, 768, 1536 ), Rect2( 1536, 0, 768, 1536 ), Rect2( 3072, 0, 768, 1536 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.75, 0.8, 1.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "flicker_change"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("testchamber-sign:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.2, 0.55, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 768, 1536 ), Rect2( 3072, 0, 768, 1536 ), Rect2( 768, 0, 768, 1536 ), Rect2( 1536, 0, 768, 1536 ), Rect2( 3072, 0, 768, 1536 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Overlay:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.2, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ false, true, false, true ]
+}
 
 [node name="MenuContainer" type="CanvasLayer"]
 
-[node name="PausePopup" type="Panel" parent="."]
+[node name="PausePopup" type="ColorRect" parent="."]
 pause_mode = 2
-visible = false
-margin_left = 250.0
-margin_top = 200.0
-margin_right = 850.0
-margin_bottom = 500.0
-theme = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 5 )
+color = Color( 0, 0, 0, 0.498039 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonResume" type="Button" parent="PausePopup"]
-margin_left = 100.0
-margin_top = 50.0
-margin_right = 500.0
-margin_bottom = 100.0
-text = "Resume"
+[node name="TestchamberSign" type="Control" parent="PausePopup"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 256.0
+margin_top = -384.0
+margin_right = 640.0
+margin_bottom = 384.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonMainMenu" type="Button" parent="PausePopup"]
-margin_left = 100.0
-margin_top = 125.0
-margin_right = 500.0
-margin_bottom = 175.0
-text = "Back to Main Menu"
+[node name="testchamber-sign" type="Sprite" parent="PausePopup/TestchamberSign"]
+position = Vector2( 192, 384 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 768, 1536 )
 
-[node name="ButtonExitGame" type="Button" parent="PausePopup"]
-margin_left = 100.0
-margin_top = 200.0
-margin_right = 500.0
-margin_bottom = 250.0
-text = "Close Application"
+[node name="Overlay" type="Control" parent="PausePopup/TestchamberSign"]
+visible = false
+modulate = Color( 1, 1, 1, 0.85098 )
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 192.0
+margin_bottom = 384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SignMenu" parent="PausePopup/TestchamberSign/Overlay" instance=ExtResource( 5 )]
+margin_left = -192.0
+margin_top = -384.0
+margin_right = 192.0
+margin_bottom = 384.0
+pause_menu = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PausePopup/TestchamberSign"]
+anims/BindPose = SubResource( 1 )
+anims/flicker-off = SubResource( 6 )
+anims/flicker-on = SubResource( 7 )
+anims/flicker_change = SubResource( 4 )
+
+[node name="FlickerAudio" type="AudioStreamPlayer2D" parent="PausePopup/TestchamberSign"]
+position = Vector2( 0, 96 )
+stream = ExtResource( 4 )
+attenuation = 3.36359
+[connection signal="change_menu" from="PausePopup/TestchamberSign/Overlay/SignMenu" to="PausePopup" method="flicker_change"]
+[connection signal="exit_menu" from="PausePopup/TestchamberSign/Overlay/SignMenu" to="PausePopup" method="menu_off"]
+[connection signal="resume_game" from="PausePopup/TestchamberSign/Overlay/SignMenu" to="PausePopup" method="resume_Game"]

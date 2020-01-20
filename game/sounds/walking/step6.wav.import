@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/step6.wav-cc1751c1fb67a3a274e5029ab1741651.sample"
+
+[deps]
+
+source_file="res://sounds/walking/step6.wav"
+dest_files=[ "res://.import/step6.wav-cc1751c1fb67a3a274e5029ab1741651.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

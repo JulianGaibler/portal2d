@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://test-elements/fizzler/Fizzler.gd" type="Script" id=1]
 [ext_resource path="res://textures/white.png" type="Texture" id=2]
 [ext_resource path="res://shader/fizzler/FizzlerMaterial.tres" type="Material" id=3]
+[ext_resource path="res://sounds/fizzler/fizzle.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.499992, 0.5 )
@@ -35,3 +36,15 @@ visible = false
 position = Vector2( -2.47955e-05, 0 )
 scale = Vector2( 7.99995, 272 )
 shape = SubResource( 1 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -5.0
+bus = "Reverb"
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, 7.62939e-06 )
+scale = Vector2( 8, 272 )
+texture = ExtResource( 2 )
+energy = 1.1
+mode = 2

@@ -19,8 +19,10 @@ const SHAKE_FREQUENCY_PORTALSHOT = 30
 const SHAKE_AMPLITUDE_PORTALSHOT = 10
 
 # Smooth Zoom Behaviour related Variables
-var smooth_zoom = 2.5
-var target_zoom = 2.5
+var smooth_zoom = 2.0
+export(float) var target_zoom = 0.75
+export(float) var min_zoom = 0.5
+export(float) var max_zoom = 1.5
 
 # Zoom Speed
 const ZOOM_SPEED = 10
@@ -113,12 +115,21 @@ func smoothing_behaviour(delta):
 
 # Zoom Camera OUT
 func zoom_out():
-    target_zoom += 1    
-    if(target_zoom > 5): 
-        target_zoom = 5
+    target_zoom += .25    
+    if(target_zoom > max_zoom): 
+        target_zoom = max_zoom
         
 # Zoom Camera IN
 func zoom_in():
-    target_zoom -= 1    
-    if(target_zoom < 1): 
-        target_zoom  = 1
+    target_zoom -= .25    
+    if(target_zoom < min_zoom): 
+        target_zoom  = min_zoom
+
+
+## Public functions
+
+func set_min_zoom(val: float):
+    min_zoom = val
+
+func set_max_zoom(val: float):
+    max_zoom = val

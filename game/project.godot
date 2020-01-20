@@ -68,20 +68,42 @@ _global_script_class_icons={
 
 [application]
 
-config/name="p2d_test"
+config/name="Portal 2D"
 run/main_scene="res://menus/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
+config/macos_native_icon="res://icon_mac.icns"
+config/windows_native_icon="res://icon_windows.ico"
 
 [autoload]
 
 PortalManager="*res://global/PortalManager.gd"
 Game="*res://global/Game.gd"
 
+[debug]
+
+shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.254902 )
+
 [display]
 
+window/size/width=1920
+window/size/height=1080
+mouse_cursor/custom_image="res://textures/pointer.png"
 window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
+
+[importer_defaults]
+
+wav={
+"compress/mode": 0,
+"edit/loop": false,
+"edit/normalize": false,
+"edit/trim": false,
+"force/8_bit": false,
+"force/max_rate": false,
+"force/max_rate_hz": 44100,
+"force/mono": false
+}
 
 [input]
 
@@ -152,6 +174,16 @@ shoot_orange_portal={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+portal_ray={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rotate={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -169,5 +201,8 @@ shoot_orange_portal={
 
 [physics]
 
-2d/default_gravity=980
-2d/default_linear_damp=1.0
+2d/default_gravity=1304
+
+[rendering]
+
+environment/default_clear_color=Color( 0, 0, 0, 1 )

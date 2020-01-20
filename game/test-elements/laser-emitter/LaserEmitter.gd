@@ -2,6 +2,8 @@ extends StaticBody2D
 
 onready var sprite := $Sprite
 onready var emitter := $Emitter
+onready var activate_sound := $ActivateSound
+onready var deactivate_sound := $DeactivateSound
 
 enum Orientation {UP, CENTER, DOWN}
 
@@ -9,9 +11,13 @@ export(bool) var start_active = true
 export(Orientation) var laser_position = Orientation.CENTER
 
 func activate():
+    deactivate_sound.stop()
+    activate_sound.play()
     emitter.activate()
         
 func deactivate():
+    activate_sound.stop()
+    deactivate_sound.play()
     emitter.deactivate()
 
 func _ready():

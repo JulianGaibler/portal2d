@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://textures/white.png" type="Texture" id=1]
 [ext_resource path="res://test-elements/testchamber-sign/testchamber-sign.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-icons.png" type="Texture" id=5]
 [ext_resource path="res://fonts/Mark-Bold.tres" type="DynamicFont" id=6]
 [ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.gd" type="Script" id=7]
+[ext_resource path="res://sounds/valve_sounds/TestchamberSign_hum.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/valve_sounds/TestchamberSign_flicker.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BindPose"
@@ -189,7 +191,7 @@ position = Vector2( 117, 0 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 112, 0, 112, 112 )
+region_rect = Rect2( 1344, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon03" type="Sprite" parent="Overlay/Icons"]
@@ -198,7 +200,7 @@ position = Vector2( 234, 0 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 560, 0, 112, 112 )
+region_rect = Rect2( 112, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon04" type="Sprite" parent="Overlay/Icons"]
@@ -207,7 +209,7 @@ position = Vector2( 351, 0 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 896, 0, 112, 112 )
+region_rect = Rect2( 1232, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon05" type="Sprite" parent="Overlay/Icons"]
@@ -216,7 +218,7 @@ position = Vector2( 468, 0 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 448, 0, 112, 112 )
+region_rect = Rect2( 784, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon06" type="Sprite" parent="Overlay/Icons"]
@@ -225,7 +227,7 @@ position = Vector2( 0, 117 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 224, 0, 112, 112 )
+region_rect = Rect2( 448, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon07" type="Sprite" parent="Overlay/Icons"]
@@ -234,7 +236,7 @@ position = Vector2( 117, 117 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 672, 0, 112, 112 )
+region_rect = Rect2( 560, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon08" type="Sprite" parent="Overlay/Icons"]
@@ -243,7 +245,7 @@ position = Vector2( 234, 117 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 784, 0, 112, 112 )
+region_rect = Rect2( 896, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon09" type="Sprite" parent="Overlay/Icons"]
@@ -252,7 +254,7 @@ position = Vector2( 351, 117 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 336, 0, 112, 112 )
+region_rect = Rect2( 672, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="testchamber-sign-icon10" type="Sprite" parent="Overlay/Icons"]
@@ -261,7 +263,7 @@ position = Vector2( 468, 117 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 1568, 0, 112, 112 )
+region_rect = Rect2( 224, 0, 112, 112 )
 region_filter_clip = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -273,6 +275,19 @@ position = Vector2( 1.90735e-05, 0.277405 )
 scale = Vector2( 185.187, 375.476 )
 texture = ExtResource( 1 )
 color = Color( 1, 1, 1, 0.333333 )
+energy = 1.3
 mode = 2
 range_z_min = -1
 range_z_max = -1
+
+[node name="HumAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, 96 )
+stream = ExtResource( 8 )
+volume_db = -8.0
+attenuation = 8.2821
+bus = "Panning"
+
+[node name="FlickerAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, 96 )
+stream = ExtResource( 9 )
+attenuation = 3.36359

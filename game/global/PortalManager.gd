@@ -35,6 +35,14 @@ func close_portals():
         orange_portal.get_ref().close_portal()
         orange_portal = null
 
+func force_close_portals():
+    if (blue_portal != null and blue_portal.get_ref()):
+        blue_portal.get_ref().close_portal()
+        blue_portal = null
+    if (orange_portal != null and orange_portal.get_ref()):
+        orange_portal.get_ref().close_portal()
+        orange_portal = null
+
 func reset_pointers():
     blue_portal = null
     blue_portal_fixed = false

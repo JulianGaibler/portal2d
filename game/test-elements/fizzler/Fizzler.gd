@@ -18,6 +18,7 @@ func _ready():
 
 func enter_inner_area(body):
     if body.is_in_group("can-fizzle"):
+        $Sound.play()
         body.fizzle()
     elif body.is_in_group("player"):
         player_tracked = true
