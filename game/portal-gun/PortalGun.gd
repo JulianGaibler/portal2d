@@ -11,18 +11,18 @@ const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 const probing_space = 10
 
 const audio_shoot = [
-    "res://sounds/portal-gun/gun1.wav",
-    "res://sounds/portal-gun/gun2.wav",
-    "res://sounds/portal-gun/gun3.wav",
-    "res://sounds/portal-gun/gun4.wav",
-    "res://sounds/portal-gun/gun5.wav"
-    ]
+	"res://sounds/portal-gun/gun1.wav",
+	"res://sounds/portal-gun/gun2.wav",
+	"res://sounds/portal-gun/gun3.wav",
+	"res://sounds/portal-gun/gun4.wav",
+	"res://sounds/portal-gun/gun5.wav"
+	]
 const audio_invalid = [
-    "res://sounds/valve_sounds/Portal_invalid_surface_01.wav",
-    "res://sounds/valve_sounds/Portal_invalid_surface_02.wav",
-    "res://sounds/valve_sounds/Portal_invalid_surface_03.wav",
-    "res://sounds/valve_sounds/Portal_invalid_surface_04.wav"
-    ]
+	"res://sounds/valve_sounds/Portal_invalid_surface_01.wav",
+	"res://sounds/valve_sounds/Portal_invalid_surface_02.wav",
+	"res://sounds/valve_sounds/Portal_invalid_surface_03.wav",
+	"res://sounds/valve_sounds/Portal_invalid_surface_04.wav"
+	]
 export(bool) var allow_primary = true
 export(bool) var allow_secondary = true
 var show_hint = false
@@ -36,67 +36,67 @@ onready var player_invalid := $InvalidSurface
 var exclude = []
 
 func _ready():
-    set_process(false)
+	set_process(false)
 
 func refresh_exclude_array():
-    exclude = get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("portal-ignore")
+	exclude = get_tree().get_nodes_in_group("player") + get_tree().get_nodes_in_group("dynamic-prop") + get_tree().get_nodes_in_group("portal-ignore")
 
 func toggle_hint():
-    show_hint = !show_hint
-    if show_hint:
-        refresh_exclude_array()
-        set_process(true)
+	show_hint = !show_hint
+	if show_hint:
+		refresh_exclude_array()
+		set_process(true)
 
 func play_sound_shoot():
-    randomize()
-    player_shoot.set_stream(load(audio_shoot[randi()%audio_shoot.size()]))
-    player_shoot.play()
+	randomize()
+	player_shoot.set_stream(load(audio_shoot[randi()%audio_shoot.size()]))
+	player_shoot.play()
 
 func play_sound_invalid():
-    randomize()
-    player_invalid.set_stream(load(audio_invalid[randi()%audio_invalid.size()]))
-    player_invalid.play()
+	randomize()
+	player_invalid.set_stream(load(audio_invalid[randi()%audio_invalid.size()]))
+	player_invalid.play()
 
 func _process(delta):
-    update()
+	update()
 
 func _draw():
-    if show_hint:
-        var ray = cast_ray()[0]
-        if ray.empty(): return
-        draw_line(active_end.position, to_local(ray.position), Color(1,1,1,0.05), 2.0, true)
-    else:
-        set_process(false)
+	if show_hint:
+		var ray = cast_ray()[0]
+		if ray.empty(): return
+		draw_line(active_end.position, to_local(ray.position), Color(1,1,1,0.05), 2.0, true)
+	else:
+		set_process(false)
 
 func primary_fire():
-    if allow_primary:
-        light.color = COLOR_BLUE
-        shoot_portal(PortalType.BLUE_PORTAL)
+	if allow_primary:
+		light.color = COLOR_BLUE
+		shoot_portal(PortalType.BLUE_PORTAL)
 
 func secondary_fire():
-    if allow_secondary:
-        light.color = COLOR_ORANGE    
-        shoot_portal(PortalType.ORANGE_PORTAL)
+	if allow_secondary:
+		light.color = COLOR_ORANGE	
+		shoot_portal(PortalType.ORANGE_PORTAL)
 
 func cast_ray():
-    var direction = (active_end.global_position - global_position).normalized()
-    var space_state = get_world_2d().direct_space_state
-    var hit = space_state.intersect_ray(global_position, global_position + (direction * 3000), exclude, BinaryLayers.FLOOR | BinaryLayers.WHITE)
-    return [hit, direction]
+	var direction = (active_end.global_position - global_position).normalized()
+	var space_state = get_world_2d().direct_space_state
+	var hit = space_state.intersect_ray(global_position, global_position + (direction * 3000), exclude, BinaryLayers.FLOOR | BinaryLayers.WHITE)
+	return [hit, direction]
 
 func shoot_portal(type):
-    refresh_exclude_array()
-    animation_player.play("shoot")
-    play_sound_shoot()
-    var data = cast_ray()
-    if data[0].empty(): return
-    var corrected_position = check_and_correct_placement(data[0], type, exclude)
-    if (corrected_position != null):
-        var deg = rad2deg(Vector2.RIGHT.angle_to(data[1]))
-        # if we can place the portal adjust the position
-        spawn_portal(corrected_position, data[0].normal, deg, type)
-    else:
-        play_sound_invalid()
+	refresh_exclude_array()
+	animation_player.play("shoot")
+	play_sound_shoot()
+	var data = cast_ray()
+	if data[0].empty(): return
+	var corrected_position = check_and_correct_placement(data[0], type, exclude)
+	if (corrected_position != null):
+		var deg = rad2deg(Vector2.RIGHT.angle_to(data[1]))
+		# if we can place the portal adjust the position
+		spawn_portal(corrected_position, data[0].normal, deg, type)
+	else:
+		play_sound_invalid()
 
 
 func spawn_portal(hit_position: Vector2, normal: Vector2, deg: float, type):
@@ -193,15 +193,18 @@ func check_surface_continuity(space_state, hit, normal_up, distance, exclude, ty
 
 	var cont_area_top = space_state.intersect_ray(cont_area_start, clear_ray_end_top, exclude, BinaryLayers.FLOOR | other_portal)
 	var cont_area_btm = space_state.intersect_ray(cont_area_start, clear_ray_end_btm, exclude, BinaryLayers.FLOOR | other_portal)
-
-    return [dist_top, dist_btm]
+	
+	var dist_top = 999 if cont_area_top.empty() else cont_area_start.distance_to(cont_area_top.position)
+	var dist_btm = 999 if cont_area_btm.empty() else cont_area_start.distance_to(cont_area_btm.position)
+	
+	return [dist_top, dist_btm]
 
 ## Public methods:
 
 func change_visibility(to: bool):
-    visible = to
+	visible = to
 
 func change_shooting(nr: int, to: bool):
-    match nr:
-        1: allow_primary = to
-        2: allow_secondary = to
+	match nr:
+		1: allow_primary = to
+		2: allow_secondary = to

@@ -1,17 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/body.png" type="Texture" id=2]
 [ext_resource path="res://player/leg.png" type="Texture" id=3]
 [ext_resource path="res://sounds/gravity-gun/holding-loop2.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/jump-landing/jump1.wav" type="AudioStream" id=5]
-[ext_resource path="res://sounds/valve_sounds/Player_falling.wav" type="AudioStream" id=6]
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 30.7677
 height = 111.108
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=2]
 resource_name = "Damaging"
 length = 0.2
 tracks/0/type = "bezier"
@@ -37,10 +36,10 @@ tracks/1/keys = {
 "values": [ 0.0, 2.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "Dying"
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=4]
 length = 0.5
 step = 0.03
 tracks/0/type = "value"
@@ -104,7 +103,7 @@ tracks/4/keys = {
 "values": [ Vector2( 50, 300 ), Vector2( 50, 180 ), Vector2( 50, 260 ), Vector2( 50, 270 ), Vector2( 50, 260 ), Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=5]
 resource_name = "Idle"
 length = 2.0
 loop = true
@@ -197,7 +196,7 @@ tracks/1/keys = {
 "values": [ Vector2( 50, 300 ), Vector2( 50, 180 ), Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=7]
 length = 0.7
 step = 0.03
 tracks/0/type = "value"
@@ -261,7 +260,7 @@ tracks/4/keys = {
 "values": [ Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=8]
 length = 0.3
 loop = true
 step = 0.03
@@ -326,102 +325,102 @@ tracks/4/keys = {
 "values": [ Vector2( 50, 300 ), Vector2( 50, 300 ), Vector2( 50, 248 ), Vector2( 50, 300 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Damaging"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Dying"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Jumping"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeBlend2" id=37]
+[sub_resource type="AnimationNodeBlend2" id=14]
 
-[sub_resource type="AnimationNodeBlendTree" id=38]
-nodes/Animation/node = SubResource( 36 )
+[sub_resource type="AnimationNodeBlendTree" id=15]
+nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( 100, 140 )
-"nodes/Animation 2/node" = SubResource( 35 )
+"nodes/Animation 2/node" = SubResource( 12 )
 "nodes/Animation 2/position" = Vector2( 100, 240 )
-nodes/Blend2/node = SubResource( 37 )
+nodes/Blend2/node = SubResource( 14 )
 nodes/Blend2/position = Vector2( 340, 120 )
 nodes/output/position = Vector2( 640, 120 )
 node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Setup"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Walking"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeBlend2" id=18]
+[sub_resource type="AnimationNodeBlend2" id=19]
 
-[sub_resource type="AnimationNodeBlendTree" id=19]
-nodes/Animation/node = SubResource( 17 )
+[sub_resource type="AnimationNodeBlendTree" id=20]
+nodes/Animation/node = SubResource( 18 )
 nodes/Animation/position = Vector2( 60, 80 )
-"nodes/Animation 2/node" = SubResource( 16 )
+"nodes/Animation 2/node" = SubResource( 17 )
 "nodes/Animation 2/position" = Vector2( 60, 200 )
-nodes/Blend2/node = SubResource( 18 )
+nodes/Blend2/node = SubResource( 19 )
 nodes/Blend2/position = Vector2( 317, 87 )
 nodes/output/position = Vector2( 620, 140 )
 node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
 auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
-switch_mode = 1
-xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 switch_mode = 1
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 1
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 switch_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=23]
-states/Damaging/node = SubResource( 34 )
+[sub_resource type="AnimationNodeStateMachine" id=30]
+states/Damaging/node = SubResource( 9 )
 states/Damaging/position = Vector2( 418, 282 )
-states/Dying/node = SubResource( 28 )
+states/Dying/node = SubResource( 10 )
 states/Dying/position = Vector2( 795, 252 )
-states/Idle/node = SubResource( 14 )
+states/Idle/node = SubResource( 11 )
 states/Idle/position = Vector2( 583, 174 )
-states/Jumping/node = SubResource( 38 )
+states/Jumping/node = SubResource( 15 )
 states/Jumping/position = Vector2( 601, 54 )
-states/Setup/node = SubResource( 15 )
+states/Setup/node = SubResource( 16 )
 states/Setup/position = Vector2( 154, 174 )
-states/Walking/node = SubResource( 19 )
+states/Walking/node = SubResource( 20 )
 states/Walking/position = Vector2( 328, 54 )
-transitions = [ "Setup", "Idle", SubResource( 20 ), "Idle", "Walking", SubResource( 21 ), "Walking", "Idle", SubResource( 22 ), "Idle", "Dying", SubResource( 33 ), "Idle", "Jumping", SubResource( 39 ), "Jumping", "Idle", SubResource( 40 ), "Walking", "Jumping", SubResource( 41 ), "Idle", "Damaging", SubResource( 42 ), "Damaging", "Idle", SubResource( 43 ) ]
+transitions = [ "Setup", "Idle", SubResource( 21 ), "Idle", "Walking", SubResource( 22 ), "Walking", "Idle", SubResource( 23 ), "Idle", "Dying", SubResource( 24 ), "Idle", "Jumping", SubResource( 25 ), "Jumping", "Idle", SubResource( 26 ), "Walking", "Jumping", SubResource( 27 ), "Idle", "Damaging", SubResource( 28 ), "Damaging", "Idle", SubResource( 29 ) ]
 start_node = "Setup"
 end_node = "Dying"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=31]
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "player",
@@ -435,50 +434,43 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -86.5 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 __meta__ = {
 "_editor_description_": "collision for player"
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Setup"
-anims/Damaging = SubResource( 8 )
-anims/Dying = SubResource( 9 )
-anims/Falling = SubResource( 10 )
-anims/Idle = SubResource( 11 )
+anims/Damaging = SubResource( 2 )
+anims/Dying = SubResource( 3 )
+anims/Falling = SubResource( 4 )
+anims/Idle = SubResource( 5 )
 anims/Jumping = SubResource( 6 )
-anims/Setup = SubResource( 12 )
-anims/Walking = SubResource( 13 )
+anims/Setup = SubResource( 7 )
+anims/Walking = SubResource( 8 )
 
 [node name="body" type="Sprite" parent="."]
-position = Vector2( 0, -106 )
-scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 2 )
-
-[node name="leg_left" type="Sprite" parent="body"]
-position = Vector2( -50, 300 )
-texture = ExtResource( 3 )
-
-[node name="leg_right" type="Sprite" parent="body"]
-position = Vector2( 50, 300 )
-texture = ExtResource( 3 )
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 23 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 24 )
-parameters/Jumping/Blend2/blend_amount = 0.75
-parameters/Walking/Blend2/blend_amount = 0.5
-
-[node name="Sprite" type="Sprite" parent="."]
-light_mask = 3
-position = Vector2( 0, -73 )
+position = Vector2( 0, -104.129 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
+[node name="leg_left" type="Sprite" parent="body"]
+position = Vector2( -50, 292.202 )
+texture = ExtResource( 3 )
+
+[node name="leg_right" type="Sprite" parent="body"]
+position = Vector2( 50, 292.202 )
+texture = ExtResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 30 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 31 )
+parameters/Jumping/Blend2/blend_amount = 0.75
+parameters/Walking/Blend2/blend_amount = 0.5
+
 [node name="GravityGunHoldingSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
 volume_db = -25.0
 attenuation = 0.0253829
 bus = "Panning"
