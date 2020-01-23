@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://test-elements/indicator-lights/indicator-lights-strip-off.png" type="Texture" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://props/platform-arm.png" type="Texture" id=31]
 [ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=32]
 [ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=33]
+[ext_resource path="res://menus/Tooltip.tscn" type="PackedScene" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 6 )
@@ -544,6 +545,19 @@ only_player = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_6"]
 shape = SubResource( 6 )
 
+[node name="Area2D_8" type="Area2D" parent="."]
+position = Vector2( 4768, 768 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_8"]
+shape = SubResource( 6 )
+
 [node name="Area2D_7" type="Area2D" parent="."]
 position = Vector2( 6624, 640 )
 collision_layer = 14
@@ -616,37 +630,41 @@ rotation = 1.5708
 [node name="GlassLightCover7" parent="." instance=ExtResource( 33 )]
 position = Vector2( 4224, 1184 )
 rotation = 1.5708
+
+[node name="ToolTip_1" parent="." instance=ExtResource( 34 )]
+message = "You can rotate Objects you're holding by pressing [R]."
 [connection signal="activated" from="LaserCatcher_1" to="IndicatorLights_1" method="set_on"]
 [connection signal="activated" from="LaserCatcher_1" to="MovingPlatform" method="go_to_last"]
 [connection signal="deactivated" from="LaserCatcher_1" to="IndicatorLights_1" method="set_off"]
 [connection signal="deactivated" from="LaserCatcher_1" to="MovingPlatform" method="go_to_first"]
-[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel4" method="play_animation" binds= [ "stairs-right-4-out" ]]
-[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel1" method="play_animation" binds= [ "stairs-right-1-out" ]]
-[connection signal="activated" from="LaserCatcher_2" to="IndicatorLights_2" method="set_on"]
-[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel3" method="play_animation" binds= [ "stairs-right-3-out" ]]
 [connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel2" method="play_animation" binds= [ "stairs-right-2-out" ]]
-[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel4" method="play_animation_rev" binds= [ "stairs-right-4-out" ]]
-[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel1" method="play_animation_rev" binds= [ "stairs-right-1-out" ]]
-[connection signal="deactivated" from="LaserCatcher_2" to="IndicatorLights_2" method="set_off"]
-[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel3" method="play_animation_rev" binds= [ "stairs-right-3-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel3" method="play_animation" binds= [ "stairs-right-3-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel1" method="play_animation" binds= [ "stairs-right-1-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="Stairs_2/Panel4" method="play_animation" binds= [ "stairs-right-4-out" ]]
+[connection signal="activated" from="LaserCatcher_2" to="IndicatorLights_2" method="set_on"]
 [connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel2" method="play_animation_rev" binds= [ "stairs-right-2-out" ]]
-[connection signal="pressed" from="FloorButton" to="IndicatorLights_3" method="set_on"]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel3" method="play_animation_rev" binds= [ "stairs-right-3-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel1" method="play_animation_rev" binds= [ "stairs-right-1-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="Stairs_2/Panel4" method="play_animation_rev" binds= [ "stairs-right-4-out" ]]
+[connection signal="deactivated" from="LaserCatcher_2" to="IndicatorLights_2" method="set_off"]
 [connection signal="pressed" from="FloorButton" to="TestDoor_4" method="open"]
+[connection signal="pressed" from="FloorButton" to="IndicatorLights_3" method="set_on"]
 [connection signal="pressed" from="FloorButton" to="IndicatorSign" method="set_on"]
-[connection signal="released" from="FloorButton" to="IndicatorLights_3" method="set_off"]
 [connection signal="released" from="FloorButton" to="TestDoor_4" method="close"]
+[connection signal="released" from="FloorButton" to="IndicatorLights_3" method="set_off"]
 [connection signal="released" from="FloorButton" to="IndicatorSign" method="set_off"]
 [connection signal="enter" from="Area2D_1" to="TestDoor_1" method="open" flags=6]
+[connection signal="enter" from="Area2D_2" to="LaserEmitter_1" method="activate" flags=6]
 [connection signal="enter" from="Area2D_2" to="TestchamberSign_1" method="turn_on" flags=6]
 [connection signal="enter" from="Area2D_2" to="TestDoor_1" method="close" flags=6]
-[connection signal="enter" from="Area2D_2" to="LaserEmitter_1" method="activate" flags=6]
 [connection signal="enter" from="Area2D_3" to="TestDoor_2" method="open" flags=6]
-[connection signal="enter" from="Area2D_4" to="LaserEmitter_2" method="activate" flags=6]
-[connection signal="enter" from="Area2D_4" to="TestDoor_3" method="open" flags=6]
-[connection signal="enter" from="Area2D_4" to="TestDoor_2" method="close" flags=6]
 [connection signal="enter" from="Area2D_4" to="LaserEmitter_1" method="deactivate" flags=6]
+[connection signal="enter" from="Area2D_4" to="LaserEmitter_2" method="activate" flags=6]
+[connection signal="enter" from="Area2D_4" to="TestDoor_2" method="close" flags=6]
+[connection signal="enter" from="Area2D_4" to="TestDoor_3" method="open" flags=6]
 [connection signal="enter" from="Area2D_5" to="TestchamberSign_2" method="turn_on" flags=6]
 [connection signal="enter" from="Area2D_5" to="CubeDropper" method="spawn_new" flags=6]
 [connection signal="enter" from="Area2D_6" to="TestDoor_3" method="close" flags=6]
-[connection signal="enter" from="Area2D_7" to="LaserEmitter_2" method="deactivate" flags=6]
+[connection signal="enter" from="Area2D_8" to="ToolTip_1" method="show_message" flags=6]
 [connection signal="enter" from="Area2D_7" to="TestDoor_4" method="close" flags=6]
+[connection signal="enter" from="Area2D_7" to="LaserEmitter_2" method="deactivate" flags=6]

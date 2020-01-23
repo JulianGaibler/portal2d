@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://test-elements/toxic-goo/ToxicGoo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://classes/TriggerArea.gd" type="Script" id=34]
 [ext_resource path="res://props/glass-lightcover/GlassLightCover.tscn" type="PackedScene" id=35]
 [ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=36]
+[ext_resource path="res://menus/Tooltip.tscn" type="PackedScene" id=37]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 6 )
@@ -674,7 +675,7 @@ number = 6
 icons_type = [ 0, 12, 1, 11, 7 ]
 icons_on = [ true, true, true, false, true ]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D_1" type="Area2D" parent="."]
 position = Vector2( 960, -256 )
 collision_layer = 14
 collision_mask = 14
@@ -684,7 +685,20 @@ __meta__ = {
 }
 only_player = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_1"]
+shape = SubResource( 7 )
+
+[node name="Area2D_2" type="Area2D" parent="."]
+position = Vector2( 3328, 1472 )
+collision_layer = 14
+collision_mask = 14
+script = ExtResource( 34 )
+__meta__ = {
+"_edit_group_": true
+}
+only_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_2"]
 shape = SubResource( 7 )
 
 [node name="GlassLightCover" parent="." instance=ExtResource( 35 )]
@@ -707,6 +721,12 @@ rotation = 1.5708
 [node name="Camera" parent="." instance=ExtResource( 36 )]
 position = Vector2( 3200, 1120 )
 scale = Vector2( -1, 1 )
+
+[node name="Tooltip_1" parent="." instance=ExtResource( 37 )]
+message = "Rember to use the mousewheel or [ALT]+[+] or [ALT]+[-] to zoom in and out."
+
+[node name="Tooltip_2" parent="." instance=ExtResource( 37 )]
+message = "You can press [Q] to toggle aim-help."
 [connection signal="pressed" from="PedestalButton_1" to="IndicatorLights_1" method="set_on"]
 [connection signal="pressed" from="PedestalButton_1" to="CubeDropper_1" method="spawn_new"]
 [connection signal="released" from="PedestalButton_1" to="IndicatorLights_1" method="set_off"]
@@ -718,18 +738,20 @@ scale = Vector2( -1, 1 )
 [connection signal="released" from="PedestalButton_3" to="IndicatorLights_3" method="set_off"]
 [connection signal="pressed" from="FloorButton_1" to="Stairs/Panel1" method="play_animation" binds= [ "stairs-right-1-out" ]]
 [connection signal="pressed" from="FloorButton_1" to="Stairs/Panel2" method="play_animation" binds= [ "stairs-right-2-out" ]]
-[connection signal="pressed" from="FloorButton_1" to="IndicatorLights_4" method="set_on"]
 [connection signal="pressed" from="FloorButton_1" to="Stairs/Panel3" method="play_animation" binds= [ "stairs-right-3-out" ]]
+[connection signal="pressed" from="FloorButton_1" to="IndicatorLights_4" method="set_on"]
 [connection signal="released" from="FloorButton_1" to="Stairs/Panel1" method="play_animation_rev" binds= [ "stairs-right-1-out" ]]
 [connection signal="released" from="FloorButton_1" to="Stairs/Panel2" method="play_animation_rev" binds= [ "stairs-right-2-out" ]]
-[connection signal="released" from="FloorButton_1" to="IndicatorLights_4" method="set_off"]
 [connection signal="released" from="FloorButton_1" to="Stairs/Panel3" method="play_animation_rev" binds= [ "stairs-right-3-out" ]]
-[connection signal="pressed" from="FloorButton_2" to="IndicatorSign" method="set_on"]
-[connection signal="pressed" from="FloorButton_2" to="TestDoor" method="open"]
+[connection signal="released" from="FloorButton_1" to="IndicatorLights_4" method="set_off"]
 [connection signal="pressed" from="FloorButton_2" to="IndicatorLights_5" method="set_on"]
-[connection signal="released" from="FloorButton_2" to="IndicatorSign" method="set_off"]
-[connection signal="released" from="FloorButton_2" to="TestDoor" method="close"]
+[connection signal="pressed" from="FloorButton_2" to="TestDoor" method="open"]
+[connection signal="pressed" from="FloorButton_2" to="IndicatorSign" method="set_on"]
 [connection signal="released" from="FloorButton_2" to="IndicatorLights_5" method="set_off"]
+[connection signal="released" from="FloorButton_2" to="TestDoor" method="close"]
+[connection signal="released" from="FloorButton_2" to="IndicatorSign" method="set_off"]
 [connection signal="started" from="IndicatorTimer" to="PanelStopper" method="play_animation" binds= [ "corder-90-left-out" ]]
 [connection signal="stopped" from="IndicatorTimer" to="PanelStopper" method="play_animation_rev" binds= [ "corder-90-left-out" ]]
-[connection signal="enter" from="Area2D" to="TestchamberSign" method="turn_on" flags=6]
+[connection signal="enter" from="Area2D_1" to="TestchamberSign" method="turn_on" flags=6]
+[connection signal="enter" from="Area2D_1" to="Tooltip_1" method="show_message" flags=6]
+[connection signal="enter" from="Area2D_2" to="Tooltip_2" method="show_message" flags=6]
