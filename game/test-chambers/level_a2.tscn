@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://test-elements/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset/tiles.tres" type="TileSet" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sounds/valve_sounds/PortalGun_powerup1.wav" type="AudioStream" id=25]
 [ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=26]
+[ext_resource path="res://menus/Tooltip.tscn" type="PackedScene" id=27]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 6 )
@@ -535,18 +536,26 @@ scale = Vector2( -1, 1 )
 [node name="Camera2" parent="." instance=ExtResource( 26 )]
 position = Vector2( 5888, -384 )
 scale = Vector2( -1, 1 )
-[connection signal="enter" from="Area2D02_a1" to="TestchamberSign02" method="turn_on" flags=6]
+
+[node name="Tooltip_1" parent="." instance=ExtResource( 27 )]
+message = "Point at a white wall and press [LMB] to fire the blue portal."
+
+[node name="Tooltip_2" parent="." instance=ExtResource( 27 )]
+message = "Press [SPACE] to jump."
 [connection signal="enter" from="Area2D02_a1" to="PortalSpawner02_s1" method="activate" flags=6]
+[connection signal="enter" from="Area2D02_a1" to="TestchamberSign02" method="turn_on" flags=6]
+[connection signal="enter" from="Area2D02_a2" to="Tooltip_1" method="show_message" flags=6]
 [connection signal="enter" from="Area2D02_a2" to="portalgun-pedestal" method="activate_portalgun" flags=6]
 [connection signal="enter" from="Area2D02_a3" to="PortalSpawner02_s2" method="activate" flags=6]
+[connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel1" method="play_animation" flags=6 binds= [ "stairs-left-4-out" ]]
 [connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
 [connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel4" method="play_animation" flags=6 binds= [ "stairs-left-1-out" ]]
 [connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel2" method="play_animation" flags=6 binds= [ "stairs-left-3-out" ]]
-[connection signal="enter" from="Area2D03_a1" to="Stairs03_s1/Panel1" method="play_animation" flags=6 binds= [ "stairs-left-4-out" ]]
-[connection signal="enter" from="Area2D03_a3" to="PortalSpawner03" method="activate" flags=6]
 [connection signal="enter" from="Area2D03_a3" to="TestDoor02" method="close" flags=6]
+[connection signal="enter" from="Area2D03_a3" to="PortalSpawner03" method="activate" flags=6]
 [connection signal="enter" from="Area2D03_a4" to="TestchamberSign03" method="turn_on"]
+[connection signal="enter" from="Area2D03_a4" to="Tooltip_2" method="show_message" flags=6]
+[connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
+[connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel4" method="play_animation" flags=6 binds= [ "stairs-left-1-out" ]]
 [connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel1" method="play_animation" flags=6 binds= [ "stairs-left-4-out" ]]
 [connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel2" method="play_animation" flags=6 binds= [ "stairs-left-3-out" ]]
-[connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel4" method="play_animation" flags=6 binds= [ "stairs-left-1-out" ]]
-[connection signal="enter" from="Area2D03_a2" to="Stairs03_s2/Panel3" method="play_animation" flags=6 binds= [ "stairs-left-2-out" ]]
