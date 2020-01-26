@@ -86,7 +86,7 @@ drag_margin_left = 0.5
 drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 
 [node name="PortalGun" parent="Player" instance=ExtResource( 7 )]
 position = Vector2( 0, -80 )
@@ -203,5 +203,7 @@ volume_db = -15.0
 autoplay = true
 bus = "Panning"
 [connection signal="pressed" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_on"]
+
 [connection signal="pressed" from="PedestalButton" to="CubeDropper" method="spawn_new"]
+
 [connection signal="released" from="PedestalButton" to="IndicatorLightsCubeDropper" method="set_off"]
