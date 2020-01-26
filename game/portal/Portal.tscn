@@ -358,8 +358,8 @@ attenuation = 2.14355
 bus = "Panning"
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0, -6.67572e-06 )
-scale = Vector2( 0.693333, 288 )
+position = Vector2( -31.75, -2.86102e-06 )
+scale = Vector2( 0.427152, 240 )
 texture = ExtResource( 8 )
 mode = 3
 range_item_cull_mask = 2

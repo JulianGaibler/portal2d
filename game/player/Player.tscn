@@ -350,7 +350,7 @@ nodes/Animation/position = Vector2( 100, 140 )
 nodes/Blend2/node = SubResource( 14 )
 nodes/Blend2/position = Vector2( 340, 120 )
 nodes/output/position = Vector2( 640, 120 )
-node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
+node_connections = [ "Blend2", 0, "Animation", "Blend2", 1, "Animation 2", "output", 0, "Blend2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Setup"
@@ -371,7 +371,7 @@ nodes/Animation/position = Vector2( 60, 80 )
 nodes/Blend2/node = SubResource( 19 )
 nodes/Blend2/position = Vector2( 317, 87 )
 nodes/output/position = Vector2( 620, 140 )
-node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
+node_connections = [ "Blend2", 0, "Animation", "Blend2", 1, "Animation 2", "output", 0, "Blend2" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
@@ -450,16 +450,19 @@ anims/Setup = SubResource( 7 )
 anims/Walking = SubResource( 8 )
 
 [node name="body" type="Sprite" parent="."]
-position = Vector2( 0, -104.129 )
+light_mask = 2
+position = Vector2( 0, -103.075 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="leg_left" type="Sprite" parent="body"]
-position = Vector2( -50, 292.202 )
+light_mask = 2
+position = Vector2( -50, 287.811 )
 texture = ExtResource( 3 )
 
 [node name="leg_right" type="Sprite" parent="body"]
-position = Vector2( 50, 292.202 )
+light_mask = 2
+position = Vector2( 50, 287.811 )
 texture = ExtResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
