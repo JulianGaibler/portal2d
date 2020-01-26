@@ -152,6 +152,9 @@ func _physics_process(delta):
             else:
                 target_speed = 1
     
+    var grav_rot = rad2deg(Vector2.DOWN.angle_to(gravity_n))
+    if grav_rot > 120 or grav_rot < -120: target_speed *= -1
+    
     if on_floor:
         target_speed *= WALK_SPEED * WALK_SPEED
         linear_velocity.x = lerp(linear_velocity.x, target_speed, 0.2)
