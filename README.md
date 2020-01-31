@@ -10,7 +10,7 @@ In dem Spiel löst man Rätsel mithilfe von Portalen. Durch geschicktes lösen v
 
 #### Engine
 
-Current Engine version is: [Godot v3.2-rc3](https://downloads.tuxfamily.org/godotengine/3.2/rc3/)
+Current Engine version is: [Godot v3.2](https://downloads.tuxfamily.org/godotengine/3.2/)
 
 #### Links
 
