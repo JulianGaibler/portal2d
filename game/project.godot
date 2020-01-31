@@ -70,7 +70,8 @@ _global_script_class_icons={
 
 config/name="Portal 2D"
 run/main_scene="res://menus/MainMenu.tscn"
-boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+boot_splash/image="res://boot-splash.png"
+boot_splash/bg_color=Color( 0.694118, 0.694118, 0.694118, 1 )
 config/icon="res://icon.png"
 config/macos_native_icon="res://icon_mac.icns"
 config/windows_native_icon="res://icon_windows.ico"
