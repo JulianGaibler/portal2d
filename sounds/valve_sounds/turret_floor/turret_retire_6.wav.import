@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/turret_retire_6.wav-a82f192333ec27efeae76a50f1649b6b.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/turret_floor/turret_retire_6.wav"
+dest_files=[ "res://.import/turret_retire_6.wav-a82f192333ec27efeae76a50f1649b6b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

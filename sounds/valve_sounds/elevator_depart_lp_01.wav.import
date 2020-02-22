@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/elevator_depart_lp_01.wav-38e5e3fdbcdb4b8a85ee95525a68fd19.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/elevator_depart_lp_01.wav"
+dest_files=[ "res://.import/elevator_depart_lp_01.wav-38e5e3fdbcdb4b8a85ee95525a68fd19.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/elevator_door_open_01.wav-9ec5c8c1d689c178d48033b236c80c0f.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/elevator_door_open_01.wav"
+dest_files=[ "res://.import/elevator_door_open_01.wav-9ec5c8c1d689c178d48033b236c80c0f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

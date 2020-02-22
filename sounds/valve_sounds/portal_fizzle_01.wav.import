@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/portal_fizzle_01.wav-a6fa57b3768f2c4cfda3214a1cb617fa.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/portal_fizzle_01.wav"
+dest_files=[ "res://.import/portal_fizzle_01.wav-a6fa57b3768f2c4cfda3214a1cb617fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

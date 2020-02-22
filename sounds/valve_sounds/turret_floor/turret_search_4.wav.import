@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/turret_search_4.wav-7e9d26aea94e2fa747f0687b7edb4aa8.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/turret_floor/turret_search_4.wav"
+dest_files=[ "res://.import/turret_search_4.wav-7e9d26aea94e2fa747f0687b7edb4aa8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

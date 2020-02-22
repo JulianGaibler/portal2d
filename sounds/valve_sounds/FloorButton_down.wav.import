@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FloorButton_down.wav-778d52677227f1851ed93a4d11286bd9.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/FloorButton_down.wav"
+dest_files=[ "res://.import/FloorButton_down.wav-778d52677227f1851ed93a4d11286bd9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

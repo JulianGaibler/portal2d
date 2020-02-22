@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/turret_deploy_3.wav-f30c466abd83762d763fdb888b097d64.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/turret_floor/turret_deploy_3.wav"
+dest_files=[ "res://.import/turret_deploy_3.wav-f30c466abd83762d763fdb888b097d64.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

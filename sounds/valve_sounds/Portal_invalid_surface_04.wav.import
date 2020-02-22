@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Portal_invalid_surface_04.wav-2386189bbaddae8ac01b33e52f473d98.sample"
+
+[deps]
+
+source_file="res://sounds/valve_sounds/Portal_invalid_surface_04.wav"
+dest_files=[ "res://.import/Portal_invalid_surface_04.wav-2386189bbaddae8ac01b33e52f473d98.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

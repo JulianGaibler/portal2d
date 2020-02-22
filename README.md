@@ -1,62 +1,17 @@
-<p align="center">
-  <img alt="Portal2D" title="Portal2D" src="./game/icon.png" height="150">
+![Portal 2D](http://qvieo.com/githubimg/banner_p2d.png)
 
-<h1 align="center"> Portal2D </h1> <br>
-<p align="center">
-   Portal2D ist ein 2D remake des Spieleklassikers Portal und dessen Nachfolger Portal2.
-In dem Spiel löst man Rätsel mithilfe von Portalen. Durch geschicktes lösen von Rätseln navigiert man "Bendy" durch die athmosphärischen Testkammern von Aperture Science. 
-</p>
+## Introduction
 
+Portal 2D is based on the video puzzle-platform games Portal (2007) and Portal 2 (2011) developed Valve
 
-#### Engine
+The game is made in the [Godot Game-Engine](https://godotengine.org/) and was developed for Version 3.2.
 
-Current Engine version is: [Godot v3.2](https://downloads.tuxfamily.org/godotengine/3.2/)
+## Contributions
 
-#### Links
+Contributions for new levels, test-elements, modes, graphics and especially sounds are very much welcome. 
 
-* [Link zum Slack-Channel](https://beuth-projekt-ws19.slack.com/messages/CPDPXGGKF/)
-* [Link zu Gitmoji](https://gitmoji.carloscuesta.me/)
+The game was originally created as a university project and has been made available open-source. While the graphics and code are completely created by us, the first prototype contained sounds from the original game that had to be removed for the open-source release. If you're interested in creating sounds for the game but don't have a lot of experience with coding, please don't hesitate to reach out anyway!
 
-#### 🎓 Contribution Guide
+## Commits
 
-##### Technik
-
--  **Godot 3.2** Spieleengine
-- Godot Scriptsprache (GDScript)
-- Zielplattformen: **Linux**, **MacOS**, **Windows**
-
-##### Get started
-
-- Fork this Project
-- Git clone
-- open Project in Godot
-- make changes to code
-- Update the Wiki
-- Pull request
-
-##### Build Project
-
-* open Godot 
-* Projekt - Exportieren
-* Hinzufügen...
-
-<img alt="Portal2D" title="Portal2D" src="./concept/screenshots/export.png" height="275">
-
-* Projekt exportieren
-
-
-
-#### Screenshots
-
-| <img alt="Portal2D" title="Portal2D" src="./concept/screenshots/main-menu.png" height="175"> | <img alt="Portal2D" title="Portal2D" src="./concept/screenshots/chamber1.png" height="200"> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img alt="Portal2D" title="Portal2D" src="./concept/screenshots/elevator.png" height="200"> | <img alt="Portal2D" title="Portal2D" src="./concept/screenshots/chamber5.png" height="200"> |
-
-
-
-
-
-
-
-
-
+Using [gitmoji](https://gitmoji.carloscuesta.me/) for all future commits.
