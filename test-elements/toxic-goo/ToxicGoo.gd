@@ -4,11 +4,11 @@ onready var goo = $GooSprite
 onready var splash_sound = $SplashSound
 
 const splash_audio_streams = [
-    preload("res://sounds/valve_sounds/Water_splash_01.wav"),
-    preload("res://sounds/valve_sounds/Water_splash_02.wav"),
-    preload("res://sounds/valve_sounds/Water_splash_03.wav"),
-    preload("res://sounds/valve_sounds/Water_splash_04.wav"),
-    preload("res://sounds/valve_sounds/Water_splash_05.wav"),
+    preload("res://sounds/goo/splash_01.wav"),
+    preload("res://sounds/goo/splash_02.wav"),
+    preload("res://sounds/goo/splash_03.wav"),
+    preload("res://sounds/goo/splash_04.wav"),
+    preload("res://sounds/goo/splash_05.wav"),
 ]
 
 func _ready():

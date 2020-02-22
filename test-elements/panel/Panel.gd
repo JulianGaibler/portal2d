@@ -8,8 +8,8 @@ onready var animationPlayer := $AnimationPlayer
 onready var audio_player := $AudioStreamPlayer2D
 onready var panelBase := $PanelArm1/PanelArm2/PanelArm3/PanelArm4/PanelBase/Position2D
 
-const sound_open = preload("res://sounds/valve_sounds/Panel_open.wav")
-const sound_close = preload("res://sounds/valve_sounds/Panel_close.wav")
+const sound_open = preload("res://sounds/empty.wav")
+const sound_close = preload("res://sounds/empty.wav")
 
 # Animation played when the panel gets created
 export(String) var initial_animation = null

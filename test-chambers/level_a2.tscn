@@ -24,7 +24,7 @@
 [ext_resource path="res://sounds/background/background-drone-ambient.wav" type="AudioStream" id=22]
 [ext_resource path="res://tileset/TileColliderGenerator.gd" type="Script" id=23]
 [ext_resource path="res://test-elements/elevator-room/ElevatorLeave.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sounds/valve_sounds/PortalGun_powerup1.wav" type="AudioStream" id=25]
+[ext_resource path="res://sounds/empty.wav" type="AudioStream" id=25]
 [ext_resource path="res://props/camera/Camera.tscn" type="PackedScene" id=26]
 [ext_resource path="res://menus/Tooltip.tscn" type="PackedScene" id=27]
 

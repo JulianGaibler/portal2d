@@ -2,10 +2,10 @@ extends Node2D
 
 enum Direction { UP, DOWN }
 
-const audio_lift_arrive = preload("res://sounds/valve_sounds/elevator_arrive_01.wav")
-const audio_lift_depart = preload("res://sounds/valve_sounds/elevator_depart_lp_01.wav")
-const audio_door_open = preload("res://sounds/valve_sounds/elevator_door_open_01.wav")
-const audio_door_close = preload("res://sounds/valve_sounds/elevator_door_close_01.wav")
+const audio_lift_arrive = preload("res://sounds/empty.wav")
+const audio_lift_depart = preload("res://sounds/empty.wav")
+const audio_door_open = preload("res://sounds/empty.wav")
+const audio_door_close = preload("res://sounds/empty.wav")
 
 onready var animation_player = $AnimationPlayer
 onready var elevator = $Elevator

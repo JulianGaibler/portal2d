@@ -4,7 +4,7 @@
 [ext_resource path="res://portal-gun/PortalGun.gd" type="Script" id=2]
 [ext_resource path="res://sounds/portal-gun/gun1.wav" type="AudioStream" id=3]
 [ext_resource path="res://textures/white.png" type="Texture" id=4]
-[ext_resource path="res://sounds/valve_sounds/Portal_invalid_surface_01.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/empty.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BindTwo"

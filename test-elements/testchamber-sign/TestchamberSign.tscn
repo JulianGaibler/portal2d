@@ -7,8 +7,8 @@
 [ext_resource path="res://test-elements/testchamber-sign/testchamber-sign-icons.png" type="Texture" id=5]
 [ext_resource path="res://fonts/Mark-Bold.tres" type="DynamicFont" id=6]
 [ext_resource path="res://test-elements/testchamber-sign/TestchamberSign.gd" type="Script" id=7]
-[ext_resource path="res://sounds/valve_sounds/TestchamberSign_hum.wav" type="AudioStream" id=8]
-[ext_resource path="res://sounds/valve_sounds/TestchamberSign_flicker.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/chamber-sign/hum.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/chamber-sign/flicker.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BindPose"

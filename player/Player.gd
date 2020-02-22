@@ -44,9 +44,9 @@ const collision_audio_streams = [
     preload("res://sounds/jump-landing/jump3.wav")
 ]
 const walking_audio_streams = [
-    preload("res://sounds/valve_sounds/Player_walk_01.wav"),
-    preload("res://sounds/valve_sounds/Player_walk_02.wav"),
-    preload("res://sounds/valve_sounds/Player_walk_03.wav")
+    preload("res://sounds/player/walk_01.wav"),
+    preload("res://sounds/player/walk_02.wav"),
+    preload("res://sounds/player/walk_03.wav")
 ]
 
 # portalgun orientation in degree

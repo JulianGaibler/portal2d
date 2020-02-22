@@ -11,17 +11,17 @@ const BinaryLayers = preload("res://Layers.gd").BinaryLayers
 const probing_space = 10
 
 const audio_shoot = [
-    "res://sounds/portal-gun/gun1.wav",
-    "res://sounds/portal-gun/gun2.wav",
-    "res://sounds/portal-gun/gun3.wav",
-    "res://sounds/portal-gun/gun4.wav",
-    "res://sounds/portal-gun/gun5.wav"
+    preload("res://sounds/portal-gun/gun1.wav"),
+    preload("res://sounds/portal-gun/gun2.wav"),
+    preload("res://sounds/portal-gun/gun3.wav"),
+    preload("res://sounds/portal-gun/gun4.wav"),
+    preload("res://sounds/portal-gun/gun5.wav"),
     ]
 const audio_invalid = [
-    "res://sounds/valve_sounds/Portal_invalid_surface_01.wav",
-    "res://sounds/valve_sounds/Portal_invalid_surface_02.wav",
-    "res://sounds/valve_sounds/Portal_invalid_surface_03.wav",
-    "res://sounds/valve_sounds/Portal_invalid_surface_04.wav"
+    preload("res://sounds/empty.wav"), # formerly: Portal_invalid_surface_01.wav
+    preload("res://sounds/empty.wav"), # formerly: Portal_invalid_surface_02.wav
+    preload("res://sounds/empty.wav"), # formerly: Portal_invalid_surface_03.wav
+    preload("res://sounds/empty.wav"), # formerly: Portal_invalid_surface_04.wav
     ]
 export(bool) var allow_primary = true
 export(bool) var allow_secondary = true
@@ -49,12 +49,12 @@ func toggle_hint():
 
 func play_sound_shoot():
     randomize()
-    player_shoot.set_stream(load(audio_shoot[randi()%audio_shoot.size()]))
+    player_shoot.set_stream(audio_shoot[randi()%audio_shoot.size()])
     player_shoot.play()
 
 func play_sound_invalid():
     randomize()
-    player_invalid.set_stream(load(audio_invalid[randi()%audio_invalid.size()]))
+    player_invalid.set_stream(audio_invalid[randi()%audio_invalid.size()])
     player_invalid.play()
 
 func _process(delta):

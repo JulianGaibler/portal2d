@@ -2,7 +2,7 @@
 
 [ext_resource path="res://props/radio/radio.png" type="Texture" id=1]
 [ext_resource path="res://props/radio/Radio.gd" type="Script" id=2]
-[ext_resource path="res://sounds/valve_sounds/Radio_loop.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/empty.wav" type="AudioStream" id=3]
 
 [node name="Radio" type="RigidBody2D" groups=[
 "can-fizzle",

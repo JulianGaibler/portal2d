@@ -282,72 +282,72 @@ func can_shoot_player(player) -> bool:
 # SOUNDS #
 
 # Mechanics
-const audio_mechanics_active = preload("res://sounds/valve_sounds/turret_floor/active.wav")
-const audio_mechanics_alert = preload("res://sounds/valve_sounds/turret_floor/alert.wav")
-const audio_mechanics_die = preload("res://sounds/valve_sounds/turret_floor/die.wav")
-const audio_mechanics_ping = preload("res://sounds/valve_sounds/turret_floor/ping.wav")
-const audio_mechanics_retract = preload("res://sounds/valve_sounds/turret_floor/retract.wav")
+const audio_mechanics_active = preload("res://sounds/turret-floor/active.wav")
+const audio_mechanics_alert = preload("res://sounds/turret-floor/alert.wav")
+const audio_mechanics_die = preload("res://sounds/turret-floor/die.wav")
+const audio_mechanics_ping = preload("res://sounds/turret-floor/ping.wav")
+const audio_mechanics_retract = preload("res://sounds/turret-floor/retract.wav")
 
 # Voice
 const audio_voice_fizzler = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_fizzler.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_fizzler.wav
 ]
 
 const audio_voice_active = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_3.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_4.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_5.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_6.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_7.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_active_8.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_deploy_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_deploy_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_deploy_3.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_deploy_4.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_deploy_5.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_3.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_4.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_5.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_6.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_7.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_active_8.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_deploy_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_deploy_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_deploy_3.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_deploy_4.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_deploy_5.wav
 ]
 
 const audio_voice_disabled = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_3.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_4.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_5.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_6.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_7.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_disabled_8.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_3.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_4.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_5.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_6.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_7.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_disabled_8.wav
 ]
 
 const audio_voice_idlechat = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_idlechat_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_idlechat_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_idlechat_3.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_idlechat_4.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_idlechat_5.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_idlechat_6.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_idlechat_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_idlechat_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_idlechat_3.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_idlechat_4.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_idlechat_5.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_idlechat_6.wav
 ]
 
 const audio_voice_pickup = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_pickup_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_pickup_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_pickup_3.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_pickup_4.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_pickup_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_pickup_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_pickup_3.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_pickup_4.wav
 ]
 
 const audio_voice_retire = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_retire_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_retire_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_retire_4.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_retire_5.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_retire_6.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_retire_7.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_retire_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_retire_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_retire_4.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_retire_5.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_retire_6.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_retire_7.wav
 ]
 
 const audio_voice_search = [
-    preload("res://sounds/valve_sounds/turret_floor/turret_search_1.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_search_2.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_search_3.wav"),
-    preload("res://sounds/valve_sounds/turret_floor/turret_search_4.wav"),
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_search_1.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_search_2.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_search_3.wav
+    preload("res://sounds/empty.wav"), # formerly: turret_floor/turret_search_4.wav
 ]

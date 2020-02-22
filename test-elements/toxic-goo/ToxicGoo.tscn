@@ -3,8 +3,8 @@
 [ext_resource path="res://shader/goo/Goo.tres" type="Material" id=1]
 [ext_resource path="res://textures/white.png" type="Texture" id=2]
 [ext_resource path="res://test-elements/toxic-goo/ToxicGoo.gd" type="Script" id=3]
-[ext_resource path="res://sounds/valve_sounds/ToxicGoo_loop.wav" type="AudioStream" id=4]
-[ext_resource path="res://sounds/valve_sounds/Water_splash_01.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/goo/loop.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/goo/splash_01.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.5, 0.5 )

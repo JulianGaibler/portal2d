@@ -60,10 +60,10 @@ const transition_audio_streams = [
     preload("res://sounds/portal/transition2.wav")
 ]
 
-const portal_spawner_open_audio_stream = preload("res://sounds/valve_sounds/Portal_open1.wav")
+const portal_spawner_open_audio_stream = preload("res://sounds/empty.wav")
 const portal_gun_open_audio_streams = [
-    preload("res://sounds/valve_sounds/Portal_open2.wav"),
-    preload("res://sounds/valve_sounds/Portal_open3.wav")
+    preload("res://sounds/empty.wav"),
+    preload("res://sounds/empty.wav"),
 ]
 
 func _ready():

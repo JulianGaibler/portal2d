@@ -7,8 +7,8 @@ var timer
 signal pressed
 signal released
 
-const activate_sound = preload("res://sounds/valve_sounds/PedestalButton_positive.wav")
-const deactivate_sound = preload("res://sounds/valve_sounds/PedestalButton_negative.wav")
+const activate_sound = preload("res://sounds/pedestal-button/positive.wav")
+const deactivate_sound = preload("res://sounds/pedestal-button/negative.wav")
 
 
 func play_sound(activate):

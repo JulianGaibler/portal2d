@@ -12,9 +12,9 @@
 [ext_resource path="res://textures/light.png" type="Texture" id=10]
 [ext_resource path="res://test-elements/elevator-room/ElevatorArrive.gd" type="Script" id=11]
 [ext_resource path="res://textures/white.png" type="Texture" id=12]
-[ext_resource path="res://sounds/valve_sounds/door_open_chime_01.wav" type="AudioStream" id=13]
-[ext_resource path="res://sounds/valve_sounds/elevator_arrive_01.wav" type="AudioStream" id=14]
-[ext_resource path="res://sounds/valve_sounds/elevator_door_open_01.wav" type="AudioStream" id=15]
+[ext_resource path="res://sounds/empty.wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/empty.wav" type="AudioStream" id=14]
+[ext_resource path="res://sounds/empty.wav" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 128, 4480 )
