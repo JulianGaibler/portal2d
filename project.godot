@@ -83,6 +83,7 @@ Game="*res://global/Game.gd"
 
 [debug]
 
+settings/fps/force_fps=60
 shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.254902 )
 
 [display]
