@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/active.wav-21a3e3a0d39fb56f70fbd036ec8b4825.sample"
+
+[deps]
+
+source_file="res://sounds/turret-floor/active.wav"
+dest_files=[ "res://.import/active.wav-21a3e3a0d39fb56f70fbd036ec8b4825.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

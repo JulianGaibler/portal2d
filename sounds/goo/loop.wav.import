@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/loop.wav-584048bb5e714d7907b0f41d29272db8.sample"
+
+[deps]
+
+source_file="res://sounds/goo/loop.wav"
+dest_files=[ "res://.import/loop.wav-584048bb5e714d7907b0f41d29272db8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

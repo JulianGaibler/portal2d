@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shooting.wav-7fef50f299d1de6c0cdb31976533a8df.sample"
+
+[deps]
+
+source_file="res://sounds/turret-floor/shooting.wav"
+dest_files=[ "res://.import/shooting.wav-7fef50f299d1de6c0cdb31976533a8df.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/flicker.wav-aeca0e6050725efff9f5c1d5c2cbd415.sample"
+
+[deps]
+
+source_file="res://sounds/chamber-sign/flicker.wav"
+dest_files=[ "res://.import/flicker.wav-aeca0e6050725efff9f5c1d5c2cbd415.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
