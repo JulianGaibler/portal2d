@@ -427,7 +427,8 @@ func remove_shadow_body(body):
 func calculate_polygon(scan_area):
     var polygons = []
 
-    for overlapped_body in scan_area.get_overlapping_bodies():
+#    for overlapped_body in scan_area.get_overlapping_bodies():
+    for overlapped_body in Game.get_scene_root().get_node("TileMapForeground").get_children():
         if !(overlapped_body is StaticBody2D): continue
         if overlapped_body.name == "PortalLine": continue
         var overlapped_body_rid = overlapped_body.get_rid()
